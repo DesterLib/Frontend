@@ -1,0 +1,7 @@
+.season-container {
+    display: flex;
+}
+
+.season-single {
+    margin-left: 10px;
+}

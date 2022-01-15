@@ -1,0 +1,12 @@
+.SortMenu {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+  gap: 10px;
+}
+
+.sort__container {
+  margin: 10px;
+  width: 210px;
+  max-width: 43%;
+}

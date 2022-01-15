@@ -1,0 +1,29 @@
+.search-wrapper {
+    padding: 20px;
+}
+
+.sugoi-search-bar span {
+    background-color: var(--s-bg-2);
+    border: none;
+    width: 50px;
+}
+
+.sugoi-search-bar span .gg-search {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.sugoi-search-bar input {
+    background-color: var(--s-bg-2);
+    border: none;
+    height: 50px;
+    color: var(--s-white) !important;
+}
+
+.sugoi-search-bar input::placeholder {
+    color: var(--s-white-8);
+}
+
+.sugoi-search-bar input:focus {
+    background-color: #14426d;
+}
