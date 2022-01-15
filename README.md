@@ -12,6 +12,9 @@
   </a>
 </p>
 <p align="center">
+  <a href="https://github.com/Dester-Alken">
+    <img src="https://raw.githubusercontent.com/Dester-Alken/Dester-Web-Libdrive/0980ccdb8fc8ed3ddb894be97fd4b5155a3653fe/src/assets/logo-full.svg?token=AXDLWYSJ4BA365NWJJ434TDB4ML3C" width="200" />
+  </a>
   <a href="https://heroku.com/deploy?template=https://github.com/libDrive/heroku">
     <img src="https://img.shields.io/badge/Deploy%20To%20Heroku-blueviolet?style=for-the-badge&logo=heroku" width="200" />
   </a>
