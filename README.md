@@ -1,3 +1,8 @@
+<a href="https://github.com/Dester-Alken">
+  <h3 align="center">
+    <img src="https://raw.githubusercontent.com/Dester-Alken/Dester-Web-Libdrive/0980ccdb8fc8ed3ddb894be97fd4b5155a3653fe/src/assets/logo-full.svg?token=AXDLWYSJ4BA365NWJJ434TDB4ML3C" width="600px" />
+  </h3>
+</a>
 <a href="#">
   <h3 align="center">
     <img src="https://i.ibb.co/HVB5Dw1/lib-Drive-Header.png" width="600px" />
