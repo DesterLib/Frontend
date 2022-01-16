@@ -16,7 +16,6 @@
     "artplayer": "^4.2.3",
     "axios": "^0.24.0",
     "bootstrap": "5.1.3",
-    "libdrive-player": "git+https://github.com/libDrive/player.git#v0.4.3",
     "react-bootstrap": "^2.1.1",
     "react-router-dom": "^5.2.0",
     "react-smooth-dnd": "^0.11.1",
@@ -34,7 +33,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/libDrive/web.git"
+    "url": "git+https://github.com/Dester-Alken/Dester-Libdrive-Web.git"
   },
   "author": "Elias Benbourenane <me@elias.eu.org> (https://elias.eu.org)",
   "funding": [
