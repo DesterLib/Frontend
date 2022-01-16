@@ -12,7 +12,7 @@
   </a>
 </p>
 <p align="center">
-  <a href="https://heroku.com/deploy?template=https://github.com/libDrive/heroku">
+  <a href="https://heroku.com/deploy?template=https://github.com/Dester-Alken/Dester-Libdrive-Heroku">
     <img src="https://img.shields.io/badge/Deploy%20To%20Heroku-blueviolet?style=for-the-badge&logo=heroku" width="200" />
   </a>
 </p>
@@ -26,15 +26,13 @@
 
 This is a Dester theme for libDrive which is a Google Drive media library manager and indexer, similar to Plex, that organizes Google Drive media to offer an intuitive and user-friendly experience.
 
-I decided to create this project to, of course, organize my Google Drive library, but also develop my coding skills, and learn JavaScript in the process.
-
 This repository (<https://github.com/libDrive/cloudflare>) stores the source code for the Dester - Libdrive web frontend.
 
 ## Source code
 
 - [libDrive/libDrive](https://github.com/libDrive/libDrive)
 - [libDrive/server](https://github.com/libDrive/server)
-- [libDrive/web](https://github.com/libDrive/web)
+- [Dester-libDrive/web](https://github.com/libDrive/web)
 - [libDrive/cloudflare](https://github.com/libDrive/cloudflare)
-- [libDrive/heroku](https://github.com/libDrive/heroku)
+- [Dester-libDrive/heroku](https://github.com/libDrive/heroku)
 - [libDrive/config](https://github.com/libDrive/config)
