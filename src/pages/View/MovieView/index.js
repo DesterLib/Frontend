@@ -6,16 +6,12 @@ import {
   Chip,
   ClickAwayListener,
   Divider,
-  IconButton,
   Menu,
   MenuItem,
   Tooltip,
   Typography,
 } from "@material-ui/core";
 import { Rating } from "@material-ui/lab";
-import StarIcon from "@material-ui/icons/Star";
-import StarBorderIcon from "@material-ui/icons/StarBorder";
-import SubtitlesOutlinedIcon from "@material-ui/icons/SubtitlesOutlined";
 import Artplayer from "artplayer/examples/react/Artplayer";
 import { default as toWebVTT } from "srt-webvtt";
 
@@ -226,6 +222,8 @@ export default class MovieView extends Component {
       trailer,
     } = this.state;
 
+    console.log(metadata)
+    
     if (file) {
       tracks = [{ name: fileName, url: file }];
     }

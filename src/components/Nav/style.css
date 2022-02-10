@@ -8,6 +8,10 @@
   --bs-breadcrumb-divider: '>';
 }
 
+.AccountMenu {
+  margin-right: 20px;
+}
+
 @media screen and (max-width: 680px) {
   .breadcrumb {
     font-size: 14px;

@@ -112,7 +112,7 @@ class NavUI extends Component {
           <Container fluid className="d-container">
               <Navbar.Brand as={Link} to="/">
                   <img src={APP_LOGO_FULL} width="180" className="logo-full d-inline-block align-top" alt="Dester Logo-Full"/>
-                  <Badge pill bg="primary">v1</Badge>
+                  <Badge key={guid()} pill bg="primary">v1</Badge>
               </Navbar.Brand>
               <Navbar.Toggle aria-controls="basic-navbar-nav" />
               <Navbar.Collapse id="basic-navbar-nav">

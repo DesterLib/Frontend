@@ -2,8 +2,6 @@ import React, { Component } from "react";
 
 import { Redirect } from "react-router-dom";
 
-import { CircularProgress } from "@material-ui/core";
-
 import { guid } from "../../components";
 import SkeletonEpisodePage from "../Skeleton/EpisodePage";
 

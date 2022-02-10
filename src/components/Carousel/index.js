@@ -248,6 +248,10 @@ export default class Carousel extends Component {
       star,
     } = this.state;
 
+    const CarouselItems = () => {
+
+    }
+
     SwiperCore.use([Autoplay, Navigation, A11y]);
 
     return star ? (
@@ -475,7 +479,7 @@ export default class Carousel extends Component {
     ) : (
       <div className="Carousel">
         {metadata.length
-          ? metadata.map((category, n) =>
+          ? metadata.map((category) =>
               category.children.length || !hide ? (
                 <div className="carousel__category" key={guid()}>
                   <div

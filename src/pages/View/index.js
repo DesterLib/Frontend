@@ -226,6 +226,9 @@ export default class View extends Component {
           metadata.children[q].name
         )}&t=${metadata.children[q].type}&server=${encodeURIComponent(server)}`;
 
+
+        console.log(req_path + req_args)
+
         response2 = await axios.get(req_path + req_args).catch((error) => {
           console.error(error);
           if (error.response) {

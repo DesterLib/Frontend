@@ -123,7 +123,6 @@ export default class Browse extends Component {
 
   render() {
     let { isLoaded, metadata } = this.state;
-    console.log(metadata);
 
     return isLoaded ? (
       <div className="Browse">

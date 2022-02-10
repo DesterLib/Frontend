@@ -175,7 +175,6 @@ export class TVBView extends Component {
         <div className="backdrop-img"><img src={metadata.backdropPath} alt={metadata.title + "[backdrop]"}/></div>
         <div className="item-details-content">
             <div className="row">
-              {console.log(metadata.children)}
                     <div className="col-lg-3">
                         <div className="item-details-content-poster"> 
                         <img className="img-fluid rounded" src={metadata.posterPath} alt={metadata.title + "[poster]"} />
@@ -232,7 +231,7 @@ export class TVBView extends Component {
                                 <div className="row">
                                     <div className="col">
                                     <ul>
-                                        <li><span>Type:</span>{" "}Movie</li>
+                                        <li><span>Type:</span>{" "}T.V Serie</li>
                                         <li><span>Release Date:</span>{" "}
                                         {metadata.language
                                               ? `${this.prettyDate()} (${metadata.language.toUpperCase()})`

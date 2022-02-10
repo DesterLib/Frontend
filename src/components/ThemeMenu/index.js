@@ -1,8 +1,6 @@
 import React, { Component } from "react";
-
-import { Divider, IconButton, Menu, MenuItem } from "@material-ui/core";
-import Brightness6Icon from "@material-ui/icons/Brightness6";
-import { Dropdown, DropdownButton, ListGroup } from "react-bootstrap";
+import { Dropdown } from "react-bootstrap";
+import Brightness6Icon from '@material-ui/icons/Brightness6';
 
 export default class ThemeMenu extends Component {
   constructor(props) {
@@ -42,30 +40,6 @@ export default class ThemeMenu extends Component {
 
     return (
       <div className="ThemeMenu">
-        {/* <IconButton
-          aria-label="more"
-          aria-controls="theme-menu"
-          aria-haspopup="true"
-          onClick={this.handleClick}
-        >
-          <Brightness6Icon />
-        </IconButton> */}
-        {/* <Menu
-          id="theme-menu"
-          anchorEl={menuAnchor}
-          anchorOrigin={{ vertical: "top", horizontal: "center" }}
-          transformOrigin={{ vertical: "top", horizontal: "center" }}
-          keepMounted
-          open={Boolean(menuAnchor)}
-          onClose={this.handleClose}
-        >
-          <MenuItem onClick={() => this.handleTheme("light")}>Light</MenuItem>
-          <MenuItem onClick={() => this.handleTheme("dark")}>Dark</MenuItem>
-          <MenuItem onClick={() => this.handleTheme("dracula")}>
-            Dracula
-          </MenuItem>
-          <MenuItem onClick={() => this.handleTheme("nord")}>Nord</MenuItem>
-        </Menu> */}
         <Dropdown>
           <Dropdown.Toggle id="dropdown-basic">
             <Brightness6Icon />

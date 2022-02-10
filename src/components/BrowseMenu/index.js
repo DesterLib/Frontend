@@ -43,13 +43,19 @@ export default class BrowseMenu extends Component {
           aria-haspopup="true"
           onClick={this.handleClick}
         >
-          Browse
+        Browse &nbsp;<i class="bi bi-caret-down-fill"></i>
         </Button>
         <Menu
           id="browse-menu"
+          PaperProps={{
+            style: {
+              marginTop: "10px",
+            }
+          }}
           anchorEl={this.state.menuAnchor}
           keepMounted
-          anchorOrigin={{ vertical: "top", horizontal: "center" }}
+          getContentAnchorEl={null}
+          anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
           transformOrigin={{ vertical: "top", horizontal: "center" }}
           open={Boolean(this.state.menuAnchor)}
           onClose={this.handleClose}
