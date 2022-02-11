@@ -1,0 +1,128 @@
+.collection-bg-image {
+  border-radius: 10px;
+}
+
+.category-name {
+  margin: 7px;
+  padding: 3px 20px;
+  font-size: 24px;
+  border-radius: 10px;
+  background: var(--textGradiant);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.category-name:hover {
+  text-shadow: 3px 3px var(--lightAccent);
+}
+
+.category-name i {
+  padding-right: 10px;
+}
+
+.tooltip {
+  padding-top: 10px;
+}
+
+.tooltip-inner{
+  border-radius: 10px !important;
+  text-align: left !important;
+  background-color: var(--bgSecondary);
+  width: fit-content;
+  max-width: 300px;
+  box-shadow: var(--tShadow);
+}
+
+.tooltip.show {
+    opacity: 1;
+}
+
+.tooltip-arrow  {
+  display: none !important;
+}
+
+.hover-overview .title {
+  padding: 10px;
+  text-align: left;
+  color: var(--text);
+  font-size: large;
+  font-weight: bold;
+}
+
+.hover-overview .extra-info {
+  padding: 0px 10px;
+  text-align: left;
+  color: var(--comp1);
+  font-weight: bold;
+}
+
+.genre-badge-container {
+  margin: 10px;
+  display: inline-block;
+  width: auto;
+}
+
+.genre-badge {
+  margin: 2px;
+  padding: 5px 10px;
+}
+
+.figure-caption {
+  font-size: 13px;
+  color: var(--text2);
+}
+
+@media screen and (min-width: 992px) {
+  .category-name {
+    padding: 0px 50px;
+    font-size: 24px;
+  }
+
+  .swiper-container {
+    padding: 10px 35px !important;
+  }
+
+  .figure-caption {
+    font-size: 1rem;
+  }
+}
+
+.slider-figure img {
+  box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
+}
+
+.sslider-landscape .swiper-button-prev,.sslider-landscape .swiper-button-next {
+  top: 40%;
+}
+
+.sslider-portrait .swiper-button-prev,.sslider-portrait .swiper-button-next {
+  top: 47%;
+}
+
+.card-rating {
+  z-index: 500;
+  position: absolute;
+  left: 0;
+  padding: 5px;
+  max-width: 50px;
+  overflow: auto;
+}
+
+.swiper-button-prev, .swiper-button-next {
+  padding: 25px;
+  border-radius: 50%;
+  height: 15px;
+  width: 15px;
+  background-color: #141414b3;
+  backdrop-filter: blur(10px);
+}
+
+@media only screen and (max-width: 740px) {
+  .hide-navigation > .swiper-button-prev {
+    display: none;
+  }
+  .hide-navigation > .swiper-button-next {
+    display: none;
+  }
+}

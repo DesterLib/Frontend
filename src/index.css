@@ -1,62 +1,134 @@
 @import url('https://fonts.googleapis.com/css2?family=Readex+Pro:wght@200;400&display=swap');
 
 :root {
-  --s-color-1: #14dca0;
-  --s-color-1-7: #28daa4;
-  --s-color-1-5: #3cd4a7;
-  --s-color-1-2: #3baf8a;
-  --s-color-2: #0084ff;
-  --s-color-2-7: #1482dc;
-  --s-color-2-5: #2585d4;
-  --s-color-2-2: #3385c9;
-  --s-color-3: #3e00cf;
-  --s-color-3-7: #fc7d7d;
-  --s-white: #ffffff;
-  --s-white-9: #ffffffe6;
-  --s-white-8: #ffffffcc;
-  --s-white-7: #ffffffb3;
-  --s-white-6: #ffffff99;
-  --s-white-5: #ffffff80;
-  --s-white-4: #ffffff66;
-  --s-white-3: #ffffff4d;
-  --s-white-2: #ffffff33;
-  --s-white-1: #ffffff1a;
-  --s-black: #000000;
-  --s-transparent: #00000000;
-  --s-bg-1: #071018;
-  --s-bg-2: #162B45;
-  --s-bg-3: #232f57;
-  --plyr-color-main: var(--s-color-1);
-  --swiper-theme-color: var(--s-white) !important;
-  --swiper-navigation-size: 20px !important;
-}
-
-body {
-  margin: 0;
-  background-color: #111;
-  font-family: 'Readex Pro', sans-serif !important;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-html {
-  position: relative;
-  min-height: 100vh;
+    --primary-color: #14dca0;
+    --text-color: #072241;
+    --swiper-navigation-size: 20px !important;
+    --swiper-theme-color: #ffffff !important;
+    --balloon-font-size: 14px !important
 }
 
 * {
-  margin: 0;
-  scroll-behavior: smooth;
-  scrollbar-color: #202324 #454a4d;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
-h4 {
-  color: var(--s-white-8);
+.selectable {
+  -webkit-touch-callout: text !important;
+  -webkit-user-select: text !important;
+  -khtml-user-select: text !important;
+  -moz-user-select: text !important;
+  -ms-user-select: text !important;
+  user-select: text !important;
+}
+
+.home-alert {
+  background-color: var(--text);
+  border: none;
+}
+
+.logo-start-text{
+  fill: var(--logoStart);
+}
+
+.logo-end-text {
+  fill: var(--logoEnd);
+}
+
+.logo-face {
+  fill: var(--logoFace);
+}
+
+.logo-goggle {
+  fill: var(--logoGoggle);
+  filter: var(--logoShadow);
+}
+
+.logo-mouth {
+  fill: var(--logoMouth);
+}
+
+.logo-shine {
+  fill: var(--logoShine);
+}
+
+* {
+  transition: var(--transistion);
+}
+
+html, body {
+  overflow-x: hidden;
+}
+
+body {
+    background: var(--bgPrimary);
+    margin: 0;
+    font-family: 'Readex Pro', sans-serif !important;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    margin-bottom: 70px;
+}
+
+.tooltip {
+    font-family: 'Readex Pro', sans-serif !important;
+}
+
+#nprogress .bar {
+  background: var(--accent) !important;
+  height: 10px;
+}
+
+#nprogress .peg {
+  box-shadow: 0 0 10px var(--accent), 0 0 5px var(--accent) !important;
+}
+
+#nprogress .spinner-icon {
+  border-top-color: var(--accent) !important;
+  border-left-color: var(--accent) !important;
 }
 
 a {
-  text-decoration: none;
-  color: var(--s-color-1);
+  text-decoration: none !important;
+}
+
+.non-anchor {
+    text-decoration: none;
+}
+
+.non-anchor:hover {
+    text-decoration: none;
+    color: var(--accent);
+}
+
+.page-bottom-margin {
+  margin-bottom: 20px;
+}
+
+@media screen and (min-width: 992px) {
+  body {
+    margin-bottom: none;
+  }
+  .mobile-display {
+      display: none !important;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .desktop-display {
+      display: none !important;
+  }
+  .page-bottom-margin {
+    margin-bottom: 90px;
+  }
+  .tooltip {
+    display: none !important;
+}
 }
 
 ::-webkit-scrollbar {
@@ -64,115 +136,40 @@ a {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--s-bg-2); 
+  background: var(--bgPrimary); 
 }
   
 ::-webkit-scrollbar-thumb {
-  background: var(--s-color-1); 
+  background: var(--accent); 
 }
 
 ::-webkit-scrollbar-thumb:hover {
   background: #555; 
 }
 
-.no_decoration_link {
-  text-decoration: inherit;
-  color: inherit;
+.primary-button {
+  background-color: var(--accent) !important;
+  border-color: var(--accent) !important;
 }
 
-.Loading {
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.primary-button:hover {
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px var(--accent);
 }
 
-.d-container {
-  margin: 0;
-  margin: 0px 10%;
+.primary-button:focus {
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px var(--accent);
+  outline: none !important;
 }
 
-.video-top {
-  display: flex;
-  align-items: center;
-  background-color: var(--s-bg-2);
-  padding: 10px;
-  border-radius: 10px 10px 0px 0px;
+.secondary-button:hover {
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px var(--bgPrimary);
 }
 
-.video-title {
-  font-size: 20px;
-  margin-right: 20px;
+.secondary-button:focus {
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px var(--bgPrimary);
+  outline: none !important;
 }
 
-.break {
-  padding-left: 10px;
-  padding-right: 10px;
-  color: var(--s-color-1);
-  font-size: 20px;
-}
-
-@media (max-width: 768px) {
-  .video-title {
-      font-size: 16px;
-      width: 100%;
-  }
-  .video-description {
-      font-size: 12px;
-  }
-}
-
-@media screen and (max-width: 420px) {
-  .NewsMenu {
-    margin: 0;
-    display: none;
-    width: 0;
-    height: 0;
-  }
-}
-
-@media screen and (max-width: 370px) {
-  .ThemeMenu {
-    margin: 0;
-    display: none;
-    width: 0;
-    height: 0;
-  }
-}
-
-#footer__container {
-  position: absolute;
-  left: 0;
-  bottom: 0;
-}
-
-.footer__text {
-  margin-left: 10px;
-}
-
-.footer__github {
-  display: flex;
-  align-items: center;
-  margin: 5px;
-}
-
-@media screen and (max-width: 320px) {
-  #footer__container {
-    display: none;
-  }
-}
-
-@media screen and (max-width: 385px) {
-  .footer__github {
-    display: none;
-  }
-  .footer__text {
-    margin: 0;
-  }
-}
-
-@media screen and (max-width: 505px) {
-  .gallery__select {
-    display: none;
-  }
+.btn-primary:hover {
+  background-color: var(--accent);
 }

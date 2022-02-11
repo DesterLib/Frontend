@@ -1,113 +1,21 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Auth0Provider } from "@auth0/auth0-react"
+import './index.css';
+import App from './App';
 
-import { CssBaseline } from "@material-ui/core";
-import { ThemeProvider } from "@material-ui/core/styles";
-
-import {
-  App,
-  Browse,
-  CategoryBrowse,
-  Genres,
-  Login,
-  Logout,
-  NotFound,
-  Search,
-  SearchMain,
-  Settings,
-  SettingsLoginForm,
-  StarredLists,
-  theme,
-  guid,
-  View,
-  ScrollToTop,
-} from "./components";
-import "./index.css";
+const domain = process.env.REACT_APP_AUTH0_DOMAIN;
+const client_id = process.env.REACT_APP_AUTH0_CLIENT_ID;
 
 ReactDOM.render(
-  <ScrollToTop>
-  <BrowserRouter>
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <Switch>
-        <Route
-          exact
-          path={"/"}
-          render={(props) => <App key={guid()} {...props} />}
-        />
-        <Route
-          exact
-          path={"/browse"}
-          render={(props) => <Browse key={guid()} {...props} />}
-        />
-        <Route
-          exact
-          path={"/browse/:category"}
-          render={(props) => <CategoryBrowse key={guid()} {...props} />}
-        />
-        <Route
-          exact
-          path={"/starred"}
-          render={(props) => <StarredLists key={guid()} {...props} />}
-        />
-        <Route
-          exact
-          path={"/genres"}
-          render={(props) => <Genres key={guid()} {...props} />}
-        />
-        <Route
-          exact
-          path={"/login"}
-          render={(props) => <Login key={guid()} {...props} />}
-        />
-        <Route
-          exact
-          path={"/logout"}
-          render={(props) => <Logout key={guid()} {...props} />}
-        />
-        <Route
-          exact
-          path={"/search"}
-          render={(props) => <SearchMain key={guid()} {...props} />}
-        />
-        <Route
-          exact
-          path={"/search/:q"}
-          render={(props) => <Search key={guid()} {...props} />}
-        />
-        <Route
-          exact
-          path={"/settings"}
-          render={(props) => <Settings key={guid()} {...props} />}
-        />
-        <Route
-          exact
-          path={"/settings/login"}
-          render={(props) => <SettingsLoginForm key={guid()} {...props} />}
-        />
-        <Route
-          exact
-          path={"/view/m/:id"}
-          render={(props) => <View key={guid()} type={"m"} {...props} />}
-        />
-        <Route
-          exact
-          path={"/view/tb/:id"}
-          render={(props) => <View key={guid()} type={"tb"} {...props} />}
-        />
-        <Route
-          exact
-          path={"/view/ts/:id"}
-          render={(props) => <View key={guid()} type={"ts"} {...props} />}
-        />
-        <Route
-          path={""}
-          render={(props) => <NotFound key={guid()} {...props} />}
-        />
-      </Switch>
-    </ThemeProvider>
-  </BrowserRouter>
-  </ScrollToTop>,
-  document.getElementById("root")
+  <Auth0Provider
+    domain={domain}
+    clientId={client_id}
+    redirectUri={window.location.origin}
+    audience={"https://" + domain + "/api/v2/"}
+    scope="read:current_user"
+  >
+    <App />
+  </Auth0Provider>,
+  document.getElementById('root')
 );

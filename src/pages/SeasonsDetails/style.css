@@ -1,0 +1,58 @@
+.season-info-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 50px;
+    background-color: rgb(0, 0, 0);
+    color: #ffffff;
+    padding-top: 80px;
+    position: relative;
+    padding-bottom: 80px;
+}
+
+.season-info-container > div > span {
+    padding-top: 20px;
+}
+
+.season-info-container div div div img {
+    margin-bottom: 0px;
+}
+
+.item-season-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.season-buttons {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 20px 30px;
+}
+
+.season-buttons button {
+    background-color: var(--glass);
+    border: 1px solid rgba(43, 43, 43, 0.459);
+}
+
+.season-buttons button:hover {
+    background-color: #ffffff;
+    color: #000000;
+    border: 1px solid rgba(255, 255, 255, 0.459);
+    box-shadow: var(--nShadow);
+}
+
+.item-season-overview {
+    margin-bottom: 20px;
+}
+
+.season-btn-container .season-btn {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+}
+
+.season-btn-container .season-btn:first-child {
+    color: #000;
+}

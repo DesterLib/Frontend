@@ -1,0 +1,49 @@
+.three-side-rounded {
+    border-radius: 0px 10px 10px 10px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.card-img {
+    position: relative !important;
+}
+
+.three-side-rounded-badge {
+    border-radius: 10px !important;
+    padding: 7px 15px;
+    margin: 5px;
+    position: absolute;
+    z-index: 10;
+    background: var(--glass) !important;
+}
+
+.additional-info-button {
+    font-size: 24px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 40px !important;
+    width: 40px !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--glass);
+    border: none;
+    color: var(--accent);
+    border-radius: 50% !important;
+    margin: 10px;
+    cursor: pointer;
+}
+
+.dropdown-toggle::after {
+    display: none;
+}
+
+.additional-info-button .bi {
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.figure-img {
+    margin-bottom: 0px !important;
+}

@@ -1,170 +1,59 @@
-import { createTheme } from "@material-ui/core/styles";
+const colors = {
+    light: {
+        logoStart: "#14dca0",
+        logoEnd: "#262E31",
+        logoFace: "#14dca0",
+        logoGoggle: "#262E31",
+        logoMouth: "#ffffff",
+        logoShine: "#565c5e",
+        logoShadow: "drop-shadow( 0px 0px 20px rgba(0, 0, 0, .2))",
+        accent: "#14dca0",
+        primary: "#14dca0",
+        secondary: "#021f2b",
+        glass: "#071a29d2",
+        text: "#000000",
+        text2: "#454545",
+        contrast: "#ffffff",
+        comp1: "#ff6347",
+        bgPrimary: "#fafafa",
+        bgSecondary: "#ffffff",
+        carouselText: "#ffffff",
+        loadingBg: "#162B45",
+        loadingShine: "#2c5b94",
+        carouselBg: "#001025e6",
+        transistion: "0.3s ease-out",
+        textGradiant: "linear-gradient(to right, #14dca0 0%, #008cff 100%)",
+        nShadow: "rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset, rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px",
+        tShadow: "rgba(17, 17, 26, 0.1) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 48px",
+    },
+    dark: {
+        logoStart: "#14dca0",
+        logoEnd: "#ffffff",
+        logoFace: "#14dca0",
+        logoGoggle: "#ffffff",
+        logoMouth: "#ffffff",
+        logoShine: "#c5c5c5",
+        logoShadow: "drop-shadow( 0px 0px 0px rgba(0, 0, 0, .1))",
+        accent: "#14dca0",
+        lightAccent: "rgba(20, 220, 160, 0.3)",
+        primary: "#14dca0",
+        secondary: "#79fcd5",
+        glass: "#061624cc",
+        text: "#ffffff",
+        text2: "#c2c2c2",
+        contrast: "#000000",
+        comp1: "#ff6347",
+        bgPrimary: "#031016",
+        bgSecondary: "#0b2536",
+        carouselText: "#ffffff",
+        loadingBg: "#162B45",
+        loadingShine: "#2c5b94",
+        carouselBg: "#031016",
+        transistion: "0.3s ease-out",
+        textGradiant: "linear-gradient(to right, #14dca0 0%, #008cff 100%)",
+        nShadow: "rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px",
+        tShadow: "rgba(17, 17, 26, 0.1) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 48px",
+    }
+};
 
-const lightTheme = createTheme({
-  palette: {
-    type: "light",
-    primary: {
-      main: "#14dca0",
-    },
-    secondary: {
-      main: "#68a0e5",
-    },
-    error: {
-      main: "#d32f2f",
-    },
-    warning: {
-      main: "#ff9800",
-    },
-    success: {
-      main: "#4caf50",
-    },
-    background: {
-      default: "#fafafa",
-      paper: "#e8e8e8",
-    },
-    text: {
-      primary: "#0f0f0f",
-    },
-    common: {
-      main: "#000000",
-    },
-  },
-});
-
-const darkTheme = createTheme({
-  palette: {
-    type: "dark",
-    primary: {
-      main: "#14dca0",
-    },
-    secondary: {
-      main: "#68a0e5",
-    },
-    error: {
-      main: "#d32f2f",
-    },
-    warning: {
-      main: "#ff9800",
-    },
-    success: {
-      main: "#4caf50",
-    },
-    background: {
-      default: "#071018",
-      paper: "#162B45",
-    },
-    text: {
-      primary: "#e8e6e3",
-    },
-    common: {
-      main: "#ffffff",
-    },
-  },
-});
-
-const draculaTheme = createTheme({
-  palette: {
-    type: "dark",
-    primary: {
-      main: "#6272a4",
-    },
-    secondary: {
-      main: "#44475a",
-    },
-    error: {
-      main: "#ffb86c",
-    },
-    warning: {
-      main: "#ff5555",
-    },
-    success: {
-      main: "#50fa7b",
-    },
-    background: {
-      default: "#282a36",
-      paper: "#242630",
-    },
-    text: {
-      primary: "#f8f8f2",
-    },
-    common: {
-      main: "#6272a4",
-    },
-  },
-});
-
-const nordTheme = createTheme({
-  palette: {
-    type: "dark",
-    primary: {
-      main: "#5E81AC",
-    },
-    secondary: {
-      main: "#88C0D0",
-    },
-    error: {
-      main: "#BF616A",
-    },
-    warning: {
-      main: "#EBCB8B",
-    },
-    success: {
-      main: "#A3BE8C",
-    },
-    background: {
-      default: "#2E3440",
-      paper: "#3B4252",
-    },
-    text: {
-      primary: "#ECEFF4",
-    },
-    common: {
-      main: "#81A1C1",
-    },
-  },
-});
-
-const ui_config = JSON.parse(
-  window.localStorage.getItem("ui_config") ||
-    window.sessionStorage.getItem("ui_config") ||
-    "{}"
-);
-var customTheme;
-if (ui_config.custom_theme) {
-  customTheme = createTheme(ui_config.custom_theme);
-}
-
-var theme;
-
-if (
-  window.localStorage.getItem("theme") === "light" ||
-  window.sessionStorage.getItem("theme") === "light"
-) {
-  theme = lightTheme;
-} else if (
-  window.localStorage.getItem("theme") === "dark" ||
-  window.sessionStorage.getItem("theme") === "dark"
-) {
-  theme = darkTheme;
-} else if (
-  window.localStorage.getItem("theme") === "dracula" ||
-  window.sessionStorage.getItem("theme") === "dracula"
-) {
-  theme = draculaTheme;
-} else if (
-  window.localStorage.getItem("theme") === "nord" ||
-  window.sessionStorage.getItem("theme") === "nord"
-) {
-  theme = nordTheme;
-} else if (
-  window.localStorage.getItem("theme") === "custom" ||
-  window.sessionStorage.getItem("theme") === "custom"
-) {
-  theme = customTheme;
-} else {
-  theme = darkTheme;
-  window.localStorage.setItem("theme", "dark");
-  window.sessionStorage.setItem("theme", "dark");
-}
-
-export default theme;
+export default colors;

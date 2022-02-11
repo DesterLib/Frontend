@@ -1,0 +1,8 @@
+.error-container {
+    font-size: 40px;
+    color: var(--text);
+    text-align: center;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin: 100px 20px;
+}

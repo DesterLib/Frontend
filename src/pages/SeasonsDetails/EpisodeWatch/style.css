@@ -1,0 +1,91 @@
+.episode-watch-video {
+    background-color: #000000;
+}
+
+.episode-watch-info {
+    color: var(--text);
+}
+
+.episode-watch-info .episode-watch-overview {
+    color: rgb(185, 185, 185);
+}
+
+.episode-figure {
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 15px;
+}
+
+.next-episode-figure {
+    position: absolute;
+    bottom: 100px;
+    display: none !important;
+    padding: 10px;
+    border-radius: 10px;
+    background: var(--bgSecondary);
+}
+
+.next-episode-control:hover > .next-episode-figure{
+    display: flex !important;
+}
+
+.next-episode-figure .figure-img {
+    border-radius: 10px;
+}
+
+.next-episode-figure figcaption{
+    text-align: left;
+}
+
+.next-episode-figure figcaption span{
+    padding-bottom: 10px;
+    font-weight: bold;
+}
+
+.art-control-prev:empty,.art-control-next:empty {
+    display: none !important;
+}
+
+.episode-figure {
+    border: 2px solid transparent;
+}
+
+.episode-figure:hover {
+    background: var(--bgSecondary);
+    border: 2px solid rgb(230, 230, 230);
+}
+
+.episode-figure .figure-img {
+    border-radius: 10px;
+}
+
+.episode-figure figcaption .badge,.next-episode-figure figcaption .badge {
+    width: fit-content;
+    padding: 5px;
+    margin-top: 10px;
+}
+
+.video-full-height {
+    height: 100%;
+}
+
+.video-ratio {
+    height: fit-content;
+    overflow: hidden;
+}
+
+.plain-button {
+    background-color: transparent;
+    border: none;
+}
+
+.plain-button:hover {
+    background: transparent;
+    border: none;
+}
+
+@media screen and (max-width: 1025px) {
+    .episode-container .ratio-21x9{
+        --bs-aspect-ratio: 66.25% !important;
+    }
+}

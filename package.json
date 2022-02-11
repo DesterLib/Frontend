@@ -1,50 +1,43 @@
 {
-  "name": "dester",
-  "version": "1",
-  "description": "This is a Dester theme for libDrive which is a Google Drive media library manager and indexer, similar to Plex, that organizes Google Drive media to offer an intuitive and user-friendly experience.",
+  "name": "dester-lib-web",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@auth0/auth0-react": "^1.9.0",
+    "@chiragrupani/fullscreen-react": "^1.1.1",
+    "@testing-library/jest-dom": "^5.16.1",
+    "@testing-library/react": "^12.1.2",
+    "@testing-library/user-event": "^13.5.0",
+    "artplayer": "^4.2.7",
+    "axios": "^0.25.0",
+    "axios-progress-bar": "^1.2.0",
+    "react": "^17.0.2",
+    "react-bootstrap": "^2.1.1",
+    "react-circular-progressbar": "^2.0.4",
+    "react-dom": "^17.0.2",
+    "react-easyfullscreen": "^1.1.1",
+    "react-full-screen": "^1.1.0",
+    "react-loading-skeleton": "^3.0.2",
+    "react-responsive": "^9.0.0-beta.6",
+    "react-router-dom": "^6.2.1",
+    "react-scripts": "5.0.0",
+    "react-switch-theme": "^0.3.0",
+    "react-top-loading-bar": "^2.1.0",
+    "screenfull": "^6.0.1",
+    "swiper": "^6.8.4",
+    "web-vitals": "^2.1.4"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "dependencies": {
-    "@material-ui/core": "^4.12.3",
-    "@material-ui/icons": "^4.11.2",
-    "@material-ui/lab": "^4.0.0-alpha.60",
-    "@sweetalert2/theme-dark": "^5.0.8",
-    "array-move": "^4.0.0",
-    "artplayer": "^4.2.3",
-    "axios": "^0.24.0",
-    "bootstrap": "5.1.3",
-    "react-bootstrap": "^2.1.1",
-    "react-router-dom": "^5.2.0",
-    "react-smooth-dnd": "^0.11.1",
-    "srt-webvtt": "^2.0.0",
-    "sweetalert2": "^11.3.0",
-    "swiper": "6.8.4"
-  },
-  "devDependencies": {
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-scripts": "^4.0.3"
-  },
-  "engines": {
-    "node": ">=16.0.0"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Dester-Alken/Dester-Libdrive-Web.git"
-  },
-  "author": "Elias Benbourenane <me@elias.eu.org> (https://elias.eu.org)",
-  "funding": [
-    {
-      "type": "ko-fi",
-      "url": "https://ko-fi.com/eliasbenb"
-    }
-  ],
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/libDrive/libDrive/issues"
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
   },
   "browserslist": {
     "production": [
