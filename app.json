@@ -1,0 +1,32 @@
+{
+  "name": "WEB",
+  "description": "x",
+  "success_url": "/",
+  "env": {
+    "REACT_APP_BACKEND": {
+      "description": "Backend server url",
+      "value": "https://yourappname.herokuapp.com",
+      "required": true
+    },
+    "REACT_APP_TMDB": {
+      "description": "TMDB API KEY VALUE",
+      "value": "",
+      "required": true
+    },
+    "REACT_APP_AUTH0_DOMAIN": {
+      "description": "AUTH0 DOMAIN URL eg. xyz.us.auth0.com (must be without https:// & no end /)",
+      "value": "",
+      "required": true
+    },
+    "REACT_APP_AUTH0_CLIENT_ID": {
+      "description": "AUTH0 CLIENT_ID VALUE",
+      "value": "",
+      "required": true
+    }
+  },
+  "buildpacks": [
+    {
+      "url": "mars/create-react-app"
+    }
+  ]
+}
