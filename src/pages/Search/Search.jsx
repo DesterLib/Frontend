@@ -14,7 +14,7 @@ const Search = () => {
   const [searchResults, setSearchResults] = useState([]);
 
   useEffect(() => {
-    axios.get('https://somebs.herokuapp.com/api/v1/metadata')
+    axios.get(`${process.env.REACT_APP_BACKEND}/api/v1/metadata`)
     .then(function(response) {
       setSearchResults(response.data.content)
     })
@@ -26,7 +26,7 @@ const Search = () => {
   const searchItems = (searchValue) => {
     setSearchQuery(searchValue)
     if (searchQuery !== "" && searchQuery !== null) {
-      axios.get(`https://somebs.herokuapp.com/api/v1/metadata?auth=0&q=${searchValue}`)
+      axios.get(`${process.env.REACT_APP_BACKEND}/api/v1/metadata?auth=0&q=${searchValue}`)
       .then(function(response) {
         setSearchResults(response.data.content)
       })
@@ -34,7 +34,7 @@ const Search = () => {
         console.log(error)
       })
     } else {
-      axios.get('https://somebs.herokuapp.com/api/v1/metadata')
+      axios.get(`${process.env.REACT_APP_BACKEND}/api/v1/metadata`)
       .then(function(response) {
         setSearchResults(response.data.content)
       })
