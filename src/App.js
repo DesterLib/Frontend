@@ -38,6 +38,13 @@ const App = () => {
     fetchData()
   }, [backend_url])
 
+  if(sliderData) {
+    sliderData.map((categorie, index) => {
+      if(categorie && categorie.children && categorie.children.length > 0) {
+      }
+    })
+  }
+
   if(globalData.length === 0 && Object.keys(globalError).length > 0) {
     console.log(globalData)
     console.log(globalError)

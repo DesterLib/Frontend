@@ -78,6 +78,9 @@ typings/
 # parcel-bundler cache (https://parceljs.org/)
 .cache
 
+# macOS DS_Store
+.DS_Store
+
 # Next.js build output
 .next
 

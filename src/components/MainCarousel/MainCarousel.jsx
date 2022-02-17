@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Badge, Button, Carousel } from 'react-bootstrap';
+import { PLACEHOLDER_BACKDROP } from '../../config';
 import { guid } from '../../utilities';
 import "./style.css";
 
@@ -50,7 +51,7 @@ const MainCarousel = ({ metadata }) => {
 
                 <div className="container-home-bg justify-content-center col-lg-8 g-0">
                     <div className="item-bg-shadow-carousel"></div>
-                    <img className="img-fluid" src={item.backdropPath} alt=""/>
+                    <img className="img-fluid" src={item.backdropPath !== null ? item.backdropPath : PLACEHOLDER_BACKDROP} alt=""/>
                 </div>
             </Carousel.Item>
             )))}

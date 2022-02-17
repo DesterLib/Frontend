@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import { Link, useLocation, useSearchParams } from 'react-router-dom';
 import { Episodes, Navigation } from '../../components';
+import { PLACEHOLDER_POSTER } from '../../config';
 import { getSeasonNumber } from '../../utilities';
 import "./style.css";
 
@@ -65,7 +66,7 @@ const SeasonsDetails = () => {
                         <Row>
                             <Col className="p-0" xs={4}>
                                 <div className="item-poster-container">
-                                    <img className="img-fluid" src={"https://www.themoviedb.org/t/p/w500" + seasonTmdbData.poster_path} alt="" />
+                                    <img className="img-fluid" src={seasonTmdbData.poster_path !== null ? "https://www.themoviedb.org/t/p/w500" + seasonTmdbData.poster_path : PLACEHOLDER_POSTER} alt="" />
                                 </div>
                             </Col>
                             <Col className="item-season-container" xs={8}>  

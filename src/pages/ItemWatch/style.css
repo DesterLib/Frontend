@@ -3,8 +3,8 @@ body {
 }
 
 .art-video-player.art-control-show .video-player-header, .art-video-player.art-hover .video-player-header {
-  opacity: 1;
-  visibility: visible;
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
 .video-player-header {
@@ -49,85 +49,85 @@ body {
 }
 
 .art-progress {
-  height: 20px;
+  height: 20px !important;
 }
 
 .art-controls-right {
-  display:flex;
-  flex-direction: row-reverse;
+  display:flex !important;
+  flex-direction: row-reverse !important;
 }
 
 .art-controls-left {
-  display: flex;
-  flex-direction: row;
+  display: flex !important;
+  flex-direction: row !important;
 }
 
 .art-controls-left .art-control:nth-child(1) {
-  order: 1;
+  order: 1 !important;
 }
 
 .art-controls-left .art-control:nth-child(2) {
-  order: 3;
+  order: 3 !important;
 }
 
 .art-controls-left .art-control:nth-child(3) {
-  order: 2;
+  order: 2 !important;
 }
 
 .art-controls-left .art-control:nth-child(4) {
-  order: 4;
+  order: 4 !important;
 }
 
 .art-controls-left .art-control:nth-child(5) {
-  order: 5;
+  order: 5 !important;
 }
 
 .art-video-player .art-bottom .art-progress {
-  bottom: 20px;
+  bottom: 20px !important;
 }
 
 .art-video-player .art-bottom .art-progress .art-control-progress {
-  height: 20px;
-  padding-top: 7px;
-  padding-bottom: 8px;
+  height: 20px !important;
+  padding-top: 7px !important;
+  padding-bottom: 8px !important;
 }
 
 .video-player-state-icon {
-  background: var(--glass);
-  height: 60px;
-  width: 60px;
-  font-size: 30px;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  background: var(--glass) !important;
+  height: 60px !important;
+  width: 60px !important;
+  font-size: 30px !important;
+  border-radius: 50% !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
 }
 
 .art-video-player:hover .art-mask .art-state {
-  transform: scale(1.1);
-  color: white;
+  transform: scale(1.1) !important;
+  color: white !important;
 }
 
 .video-player-icon {
-  color: white;
-  transform: scale(1.5);
-  height: 30px;
-  width: 30px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  color: white !important;
+  transform: scale(1.5) !important;
+  height: 30px !important;
+  width: 30px !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
 }
 
 .video-player-icon:hover {
-  transform: scale(1.6);
+  transform: scale(1.6) !important;
 }
 
 .bi-arrows-fullscreen, .bi-fullscreen-exit {
-  transform: scale(1);
+  transform: scale(1) !important;
 }
 
 .bi-arrows-fullscreen:hover, .bi-fullscreen-exit:hover {
-  transform: scale(1.1);
+  transform: scale(1.1) !important;
 }
 
 @-webkit-keyframes pulse {
@@ -167,24 +167,24 @@ body {
 }
 
 .modal-fullscreen .modal-body {
-  padding: 0;
+  padding: 0 !important;
 }
 
 .video-player-style {
-  height: 100%;
-  width: 100%;
+  height: 100% !important;
+  width: 100% !important;
 }
 
 .art-icon {
-  margin: 10px;
+  margin: 10px !important;
 }
 .art-bottom{
   height: 120px !important;
-  bottom: -1px;
+  bottom: 20px !important;
 }
 .art-controls {
-  height: auto;
-  padding-bottom: 20px;
+  height: auto !important;
+  padding-bottom: 20px !important;
 }
 /* .art-icon {
   transform: scale(1.3);
@@ -193,7 +193,7 @@ body {
   transform: scale(1.4);
 } */
 .art-video-player .art-bottom {
-  padding: 50px 30px 0px;
+  padding: 50px 30px 0px !important;
 }
 .art-video-player .art-bottom .art-controls .art-control {
   font-size: 14px !important;
@@ -201,29 +201,34 @@ body {
 }
 
 .art-video-player.art-info-show .art-info {
-  display: none;
+  display: none !important;
 }
 
 .art-video-player .art-mask .art-state {
-  opacity: 1;
-  bottom: auto;
-  position: relative;
-  right: auto;
+  opacity: 1 !important;
+  bottom: auto !important;
+  position: relative !important;
+  right: auto !important;
 }
 
 .art-video-player .art-control-selector:hover .art-selector-list {
-  border-radius: 10px;
-  background-color: var(--bgPrimary);
-  padding: 0;
+  border-radius: 10px !important;
+  background-color: var(--bgPrimary) !important;
+  color: var(--text) !important;
+  padding: 0 !important;
+}
+
+.art-video-player .art-control-selector .art-selector-list .art-selector-item.art-current, .art-video-player .art-control-selector .art-selector-list .art-selector-item  {
+  color: var(--text) !important;
 }
 
 .art-video-player .art-control-selector .art-selector-list .art-selector-item.art-current, .art-video-player .art-control-selector .art-selector-list .art-selector-item:hover {
-  color: rgb(0, 0, 0) !important;
-  background-color: #fff !important;
+  background-color: var(--text) !important;
+  color: var(--contrast) !important;
 }
 
 .art-video-player .art-bottom .art-controls .art-control-quality {
-  margin-right: 10px;
+  margin-right: 10px !important;
 }
 
 .art-video-player .art-settings .art-setting-inner {
@@ -244,30 +249,30 @@ body {
 }
 
 .art-subtitle-range::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background: white;
-  cursor: pointer;
-  transition: all 0.15s ease-in-out;
+  -webkit-appearance: none !important;
+  width: 20px !important;
+  height: 20px !important;
+  border-radius: 50% !important;
+  background: white !important;
+  cursor: pointer !important;
+  transition: all 0.15s ease-in-out !important;
 }
 
 .art-subtitle-range::-webkit-slider-thumb:hover {
-  background: #d4d4d4;
-  transform: scale(1.2);
+  background: #d4d4d4 !important;
+  transform: scale(1.2) !important;
 }
 .art-subtitle-range::-moz-range-thumb {
-  width: 20px;
-  height: 20px;
-  border: 0;
-  border-radius: 50%;
-  background: white;
-  cursor: pointer;
-  transition: background 0.15s ease-in-out;
+  width: 20px !important;
+  height: 20px !important;
+  border: 0 !important;
+  border-radius: 50% !important;
+  background: white !important;
+  cursor: pointer !important;
+  transition: background 0.15s ease-in-out !important;
 }
 .art-subtitle-range::-moz-range-thumb:hover {
-  background: #d4d4d4;
+  background: #d4d4d4 !important;
 }
 
 /* .art-video-player .art-settings .art-setting-radio .art-radio-item.current button, .art-video-player .art-settings .art-setting-radio .art-radio-item button:active {
@@ -305,7 +310,7 @@ body {
 }
 
 .art-video-player .art-bottom .art-progress .art-control-progress .art-control-progress-inner,.art-video-player .art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-played,.art-video-player .art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-loaded {
-  border-radius: 50px;
+  border-radius: 50px !important;
 }
 
 .art-video-player .art-bottom:hover .art-progress .art-control-progress .art-control-progress-inner .art-progress-indicator {
@@ -315,38 +320,38 @@ body {
 }
 
 .art-video-player .art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-tip {
-  top: -35px;
+  top: -35px !important;
 }
 
 .art-video-player.art-control-show {
-  transition: visibility 0s linear 300ms, opacity 300ms;
+  transition: visibility 0s linear 300ms, opacity 300ms !important;
 }
 
 .art-icon-state {
-  margin: 0;
+  margin: 0 !important;
 }
 
 .art-video-player .art-mini-header {
-  display: none;
+  display: none !important;
 }
 
 .art-video-player .art-mini-header .art-mini-title {
-  display: none;
+  display: none !important;
 }
 
 .art-video-player .art-mini-close {
-  display: none;
-  opacity: 0;
-  visibility: hidden;
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
 }
 
 .art-video-player .art-notice .art-notice-inner {
-  padding: 10px;
+  padding: 10px !important;
 }
 
 .art-video-player .art-notice .art-notice-inner {
-  position: absolute;
-  right: 0;
+  position: absolute !important;
+  right: 0 !important;
 }
 
 .art-video-player .art-bottom .art-progress .art-control-progress .art-control-progress-inner .art-progress-indicator {
@@ -357,10 +362,9 @@ body {
 
 @media (max-width:767px) {
   .art-video-player .art-bottom .art-progress .art-control-progress {
-    height: 50px;
-    padding-top: 23px;
-    padding-bottom: 23px;
-    bottom: 20px;
+    height: 50px !important;
+    padding-top: 23px !important;
+    padding-bottom: 23px !important;
   }
   .art-video-player .art-bottom .art-controls .art-control-onlyText {
     display: none !important;

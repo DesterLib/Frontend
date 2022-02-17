@@ -9,7 +9,7 @@ import "./style.css";
 
 const Seasons = ({parentName, apiId, parentId, seasons, tmdbSeasons}) => {
 
-    console.log(seasons)
+    console.log(tmdbSeasons)
 
     return (
         <Row className="m-2 pt-2">

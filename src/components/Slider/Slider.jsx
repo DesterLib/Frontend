@@ -61,7 +61,7 @@ const Slider = ({ metadata, type }) => {
                     }}
                     >
                     {category.children.length
-                      ? category.children.map((item, index) => (
+                      ? category.children.slice(0, 8).map((item, index) => (
                         <SwiperSlide className="slider-slide" key={guid()}>
                             <Link
                               to={`/${item.type === "file" ? "movie" : "serie"}/${

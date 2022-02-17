@@ -83,14 +83,14 @@ const NavUI = ({type}) => {
                             <button className="dester-round-button" onClick={() => (setDiffTheme())}>{theme === "light" ? <i className="bi bi-moon-stars-fill"></i> : <i className="bi bi-sun-fill"></i>}</button>
                             {user && (
                                 <NavDropdown className="user-profile-button" title={<div className="profile-avatar-wrapper"><img className="profile-avatar" src={user.picture} alt="" /></div>}>
-                                    <Dropdown.Item href="#/action-1"><i class="bi bi-person-fill"></i>&nbsp;{user.name}</Dropdown.Item>
+                                    <Dropdown.Item href="#/action-1"><i className="bi bi-person-fill"></i>&nbsp;{user.name}</Dropdown.Item>
                                     <Dropdown.Item href="#/action-2"><i className="bi bi-gear-fill"></i>&nbsp;Settings</Dropdown.Item>
-                                    <Dropdown.Item onClick={() => logout({ returnTo: window.location.origin })} href="#/action-2"><i class="bi bi-box-arrow-left"></i>&nbsp;Log out</Dropdown.Item>
+                                    <Dropdown.Item onClick={() => logout({ returnTo: window.location.origin })} href="#/action-2"><i className="bi bi-box-arrow-left"></i>&nbsp;Log out</Dropdown.Item>
                                 </NavDropdown>
                             )}
                             {!user && (
                                 <NavDropdown className="user-profile-button" title={<i className="bi bi-person-circle"></i>}>
-                                    <Dropdown.Item onClick={() => logout({ returnTo: window.location.origin })} href="#/action-2"><i class="bi bi-box-arrow-right"></i>&nbsp;Log in</Dropdown.Item>
+                                    <Dropdown.Item onClick={() => logout({ returnTo: window.location.origin })} href="#/action-2"><i className="bi bi-box-arrow-right"></i>&nbsp;Log in</Dropdown.Item>
                                 </NavDropdown>
                             )}
                         </Navbar.Collapse>
@@ -126,7 +126,7 @@ const NavUI = ({type}) => {
                         </Nav.Link>
                     </Nav.Item>
                     <Nav.Item>
-                        <Nav.Link as={Link} to="/"><i className="icon-navbar color-2 bi bi-search"></i></Nav.Link>
+                        <Nav.Link as={Link} to="/search"><i className="icon-navbar color-2 bi bi-search"></i></Nav.Link>
                     </Nav.Item>
                     <Nav.Item>
                         <Nav.Link as={Link} to="/"><i className="icon-navbar color-2 bi bi-collection-fill"></i></Nav.Link>
@@ -172,14 +172,6 @@ const NavUI = ({type}) => {
                             <Nav.Link href="/"><i className="icon-navbar color-1 bi bi-house"></i>Home</Nav.Link>
                             <Nav.Link href="/"><i className="icon-navbar color-1 bi bi-search"></i>Search</Nav.Link>
                         </Nav>
-                        {/* <NavDropdown className="user-profile-button" title={<>{user ? user.name : <i className="bi bi-person-circle"></i>}</>}>
-                        {!isLoading && user && 
-                        (<>
-                            <Dropdown.Item href="#/action-1"><i class="bi bi-person-fill"></i>&nbsp;Profile</Dropdown.Item>
-                            <Dropdown.Item href="#/action-2"><i className="bi bi-gear-fill"></i>&nbsp;Settings</Dropdown.Item>
-                            <Dropdown.Item href="#/action-2"><i class="bi bi-box-arrow-left"></i>&nbsp;Log out</Dropdown.Item>
-                        </>)}
-                        </NavDropdown> */}
                         <button className="dester-round-button" onClick={() => (setDiffTheme())}>{theme === "light" ? <i className="bi bi-moon-stars-fill"></i> : <i className="bi bi-sun-fill"></i>}</button>
                     </Navbar.Collapse>
                 </Container>
