@@ -20,28 +20,6 @@ const NavUI = ({type}) => {
     const [userMetadata, setUserAccessToken] = useState(null);
     const domain = process.env.REACT_APP_AUTH0_DOMAIN;
 
-    // useEffect(() => {
-    // const getUserMetadata = async () => {
-    //     try {
-    //         const accessToken = await getAccessTokenSilently({
-    //             audience: `https://${domain}/api/v2/`,
-    //             scope: "read:current_user",
-    //         });
-    
-    //         setUserAccessToken(accessToken);
-    //         } catch (e) {
-    //         console.log(e.message);
-    //         }
-    // };
-
-    // getUserMetadata();
-    // }, [getAccessTokenSilently, user?.sub]);
-
-    // if(user) {
-    //     console.log(user)
-    //     console.log(userMetadata)
-    // }
-
     return (
         <>
             {type === "desktop" && (

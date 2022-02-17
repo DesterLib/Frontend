@@ -9,8 +9,6 @@ import "./style.css";
 
 const Seasons = ({parentName, apiId, parentId, seasons, tmdbSeasons}) => {
 
-    console.log(tmdbSeasons)
-
     return (
         <Row className="m-2 pt-2">
             <h4 style={{color: "var(--text)"}}>Seasons</h4>

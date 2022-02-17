@@ -44,8 +44,6 @@ const Search = () => {
     }
   }
 
-  console.log(searchResults)
-
   return (
     <Container className="page-bottom-margin p-4 pt-0">
       <div className="search-wrapper">
@@ -70,7 +68,6 @@ const Search = () => {
                 <div>
                 <h5 className="search-category-title">From: {category.name} ({category.children.length})</h5>
                 <Row>
-                {console.log(category.categoryInfo.type)}
                   {category.children.slice(0, 6).map((item, index) => (
                     <Col key={index} className="p-lg-4 p-sm-3" xs={6} sm={4} md={3} lg={3} xl={2}>
                       <Link
