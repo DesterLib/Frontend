@@ -1,54 +1,36 @@
 {
-  "name": "dester-lib-web",
+  "name": "frontend-v2",
   "version": "0.1.0",
   "private": true,
-  "dependencies": {
-    "@auth0/auth0-react": "^1.9.0",
-    "@chiragrupani/fullscreen-react": "^1.1.1",
-    "@testing-library/jest-dom": "^5.16.1",
-    "@testing-library/react": "^12.1.2",
-    "@testing-library/user-event": "^13.5.0",
-    "artplayer": "^4.2.7",
-    "axios": "^0.25.0",
-    "axios-progress-bar": "^1.2.0",
-    "react": "^17.0.2",
-    "react-bootstrap": "^2.1.1",
-    "react-circular-progressbar": "^2.0.4",
-    "react-dom": "^17.0.2",
-    "react-easyfullscreen": "^1.1.1",
-    "react-full-screen": "^1.1.0",
-    "react-loading-skeleton": "^3.0.2",
-    "react-responsive": "^9.0.0-beta.6",
-    "react-router-dom": "^6.2.1",
-    "react-scripts": "5.0.0",
-    "react-switch-theme": "^0.3.0",
-    "react-top-loading-bar": "^2.1.0",
-    "screenfull": "^6.0.1",
-    "swiper": "^6.8.4",
-    "web-vitals": "^2.1.4"
-  },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "format": "npx prettier --write \"{,!(.next)/**/}*.{js, jsx}\""
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+  "dependencies": {
+    "@emotion/cache": "^11.7.1",
+    "@emotion/react": "^11.8.2",
+    "@emotion/server": "^11.4.0",
+    "@emotion/styled": "^11.8.1",
+    "@mui/material": "^5.5.3",
+    "install": "^0.13.0",
+    "next": "12.1.4",
+    "node-fetch": "^3.2.3",
+    "npm": "^8.6.0",
+    "prettier": "^2.6.2",
+    "react": "18.0.0",
+    "react-dom": "18.0.0",
+    "swiper": "^8.0.7"
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+  "devDependencies": {
+    "@types/node": "17.0.23",
+    "@types/react": "17.0.43",
+    "@types/react-dom": "17.0.14",
+    "eslint": "8.12.0",
+    "eslint-config-next": "12.1.4",
+    "eslint-config-prettier": "^8.5.0",
+    "typescript": "4.6.3"
   }
 }
