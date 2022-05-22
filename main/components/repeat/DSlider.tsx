@@ -30,7 +30,7 @@ const DSlider = ({ title, itemData }: any) => {
                     </Typography>
                     <IconButton></IconButton>
                                         <DSwiper
-                                        navigation
+                                        
                         breakpoints={{
                             "240": {
                                 slidesPerView: 2,

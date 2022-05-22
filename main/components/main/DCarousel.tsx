@@ -105,12 +105,14 @@ const DSlide = ({ item }: any) => {
             layout="fill"
             objectFit="cover"
             src={APP_API_PATH + APP_API_VERSION_PATH + "/assets/image/" + APP_POSTER_QUALITY + item.poster_url}
+            alt={item.title}
           />
         ) : (          
           <Image
             layout="fill"
             objectFit="cover"
             src={APP_API_PATH + APP_API_VERSION_PATH + "/assets/image/" + APP_BACKDROP_QUALITY + item.backdrop_url}
+            alt={item.title}
           />
         )}
       </ItemBackground>
