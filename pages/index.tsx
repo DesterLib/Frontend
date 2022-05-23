@@ -8,6 +8,7 @@ import { useTheme } from '@mui/system';
 import React from 'react';
 import fetch from 'node-fetch';
 import { APP_API_PATH } from '../main/config';
+import DPersonCard from '../main/components/repeat/DPersonCard';
 
 export async function getServerSideProps() {
     const res = await fetch(`${APP_API_PATH}/api/v1/home`);
@@ -50,11 +51,12 @@ const Home: NextPage = ({ colorModeContext, themeMode, data }: any) => {
                 }}
             >
                 <React.Fragment>
-                    <DCarousel itemData={data.data.carousel} />
+                    {/* <DCarousel itemData={data.data.carousel} />
                     <DSlider title='Popular Movies' itemData={data.data.top_rated_movies} />
                     <DSlider title='Newly Added Movies' itemData={data.data.newly_added_movies} />
                     <DSlider title='Newly Added Episodes' itemData={data.data.new_episodes} />
-                    <DSlider title='Popular TV Shows' itemData={data.data.top_rated_series} />
+                    <DSlider title='Popular TV Shows' itemData={data.data.top_rated_series} /> */}
+                    <DPersonCard />
                 </React.Fragment>
             </Box>
             <DBottomBar />

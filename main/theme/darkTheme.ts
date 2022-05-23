@@ -11,7 +11,7 @@ const darkTheme = {
             dark: '#FF007A',
         },
         background: {
-            paper: '#1D3743',
+            paper: '#174453',
             default: '#00151C',
         },
     },
