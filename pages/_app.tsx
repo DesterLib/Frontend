@@ -57,6 +57,12 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
                         textTransform: 'none',
                     },
                 },
+                shape: {
+                    borderRadius:
+                        mode === 'light'
+                            ? lightTheme.shape.borderRadius
+                            : darkTheme.shape.borderRadius,
+                },
                 components: {
                     MuiMenu: {
                         styleOverrides: {

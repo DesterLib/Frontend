@@ -29,14 +29,6 @@ export async function getServerSideProps() {
 const Home: NextPage = ({ colorModeContext, themeMode, data }: any) => {
     const theme = useTheme();
 
-    // const [carouselData, setCarouselData] = React.useState({});
-
-    // useEffect(() => {
-    //   const fetchMovies = () => {
-
-    //   }
-    // }, [])
-
     return (
         <Box>
             <DNavbar colorModeContext={colorModeContext} themeMode={themeMode} />
