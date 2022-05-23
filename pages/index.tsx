@@ -8,7 +8,6 @@ import { useTheme } from '@mui/system';
 import React from 'react';
 import fetch from 'node-fetch';
 import { APP_API_PATH } from '../main/config';
-import DPersonCard from '../main/components/repeat/DPersonCard';
 
 export async function getServerSideProps() {
     const res = await fetch(`${APP_API_PATH}/api/v1/home`);

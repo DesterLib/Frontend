@@ -1,10 +1,14 @@
 {
+    "env": {
+        "browser": true,
+        "es2021": true
+    },
     "extends": [
         "eslint:recommended",
-        "plugin:react/recommended",
         "plugin:@typescript-eslint/recommended",
-        "prettier",
-        "next/core-web-vitals"
+        "plugin:react/recommended",
+        "next",
+        "prettier"
     ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
@@ -23,12 +27,14 @@
         "quotes": ["error", "single"],
         "no-duplicate-imports": "error",
         "no-var": "off",
-        "react/prop-types": "off",
-        "prettier/prettier": 2
+        "react/prop-types": "off"
     },
     "settings": {
         "import/resolver": {
             "typescript": {}
+        },
+        "react": {
+            "version": "17.0.43"
         }
     }
 }
