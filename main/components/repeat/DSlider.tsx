@@ -1,12 +1,11 @@
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import SwiperCore, { Autoplay, EffectFade, Navigation, A11y } from 'swiper';
 import { styled } from '@mui/system';
 import Typography from '@mui/material/Typography';
 import DCard from './DCard';
 import { IconButton } from '@mui/material';
 
-const DSwiper = styled(Swiper)(({ theme }) => ({
+const DSwiper = styled(Swiper)(() => ({
     padding: '20px',
     '--swiper-navigation-size': '10px',
     '& .swiper-button-prev': {
@@ -23,8 +22,12 @@ const DSlider = ({ title, itemData }: any) => {
             {itemData && Object.keys(itemData).length !== 0 ? (
                 <div style={{ padding: '20px' }}>
                     <Typography
-                        sx={{ padding: '0px 20px', display: 'flex', alignItems: 'center' }}
-                        variant="h5"
+                        sx={{
+                            padding: '0px 20px',
+                            display: 'flex',
+                            alignItems: 'center',
+                        }}
+                        variant='h5'
                     >
                         {title || null}
                     </Typography>
