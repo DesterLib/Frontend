@@ -62,8 +62,8 @@ const DComment = () => {
                 </Box>
                 <Typography variant='body2'>
                     When I watched the first season when it was originally aired, it had some
-                    serious fan following, but I won't say it was very very famous at the time. Now,
-                    after the second season, seems everything has changed.
+                    serious fan following, but I won&apos;t say it was very very famous at the time.
+                    Now, after the second season, seems everything has changed.
                 </Typography>
                 <Box sx={{ paddingTop: '10px', textAlign: 'end' }}>
                     <Typography variant='body2'>4 September 2017</Typography>

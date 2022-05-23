@@ -10,6 +10,7 @@ import {
     ListItemText,
     Typography,
 } from '@mui/material';
+import { APP_API_PATH, APP_API_VERSION_PATH, APP_POSTER_QUALITY } from '../../config';
 
 const SearchWrapper = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -56,7 +57,6 @@ const SearchResults = styled('div')(({ theme }) => ({
     position: 'absolute',
     top: '50px',
     padding: '10px',
-    visibility: 'hidden',
     backgroundColor: theme.palette.background.default,
     backgroundImage: 'linear-gradient(rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.09))',
     backdropFilter: 'blur(10px)',
@@ -70,6 +70,7 @@ const SearchCard = styled('div')(({ theme }) => ({
     color: theme.palette.text.primary,
 }));
 
+/*
 const movieData = [
     {
         name: 'Jujutsu Kaisen 0',
@@ -117,8 +118,17 @@ const serieData = [
         poster: 'https://www.themoviedb.org/t/p/w1280/8BiZ8KXS0itmOx4uQw3E8UnmqEQ.jpg',
     },
 ];
+*/
 
-const SearchCardContainer = () => {
+const SearchCardContainer = (props: any) => {
+    const data = props.data || { ok: false };
+    var movieData: object[] = [];
+    var seriesData: object[] = [];
+    if (data.ok && data.results) {
+        movieData = data.results.movies || [];
+        seriesData = data.results.series || [];
+    }
+
     return (
         <Grid container>
             <Grid container spacing={1.2}>
@@ -142,7 +152,7 @@ const SearchCardContainer = () => {
                             padding: '5px',
                         }}
                     >
-                        {movieData.map((item, index) => (
+                        {movieData.map((item: any, index: number) => (
                             <ListItemButton
                                 sx={{ borderRadius: '5px', padding: '5px' }}
                                 key={index}
@@ -151,10 +161,16 @@ const SearchCardContainer = () => {
                                     <Avatar
                                         sx={{ width: '50px', height: '70px' }}
                                         variant='rounded'
-                                        src={item.poster}
+                                        src={
+                                            APP_API_PATH +
+                                            APP_API_VERSION_PATH +
+                                            '/assets/image/' +
+                                            APP_POSTER_QUALITY +
+                                            item.poster_url
+                                        }
                                     />
                                 </ListItemAvatar>
-                                <ListItemText primary={item.name} secondary={item.date} />
+                                <ListItemText primary={item.title} secondary={item.release_date} />
                             </ListItemButton>
                         ))}
                     </List>
@@ -169,7 +185,7 @@ const SearchCardContainer = () => {
                         variant='subtitle2'
                     >
                         <i style={{ paddingRight: '5px' }} className='ri-tv-fill'></i>
-                        TV Serie
+                        TV Series
                     </Typography>
                     <List
                         sx={{
@@ -179,7 +195,7 @@ const SearchCardContainer = () => {
                             padding: '5px',
                         }}
                     >
-                        {serieData.map((item, index) => (
+                        {seriesData.map((item: any, index: number) => (
                             <ListItemButton
                                 sx={{ borderRadius: '5px', padding: '5px' }}
                                 key={index}
@@ -188,10 +204,19 @@ const SearchCardContainer = () => {
                                     <Avatar
                                         sx={{ width: '50px', height: '70px' }}
                                         variant='rounded'
-                                        src={item.poster}
+                                        src={
+                                            APP_API_PATH +
+                                            APP_API_VERSION_PATH +
+                                            '/assets/image/' +
+                                            APP_POSTER_QUALITY +
+                                            item.poster_url
+                                        }
                                     />
                                 </ListItemAvatar>
-                                <ListItemText primary={item.name} secondary={item.date} />
+                                <ListItemText
+                                    primary={item.title}
+                                    secondary={(item.release_date || '').slice(0, 4)}
+                                />
                             </ListItemButton>
                         ))}
                     </List>

@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { alpha } from '@mui/material/styles';
-import { APP_LOGO_LIGHT, APP_LOGO_DARK, APP_NAME } from '../../config';
+import { APP_API_PATH, APP_LOGO_LIGHT, APP_LOGO_DARK, APP_NAME } from '../../config';
 import {
     SearchIconWrapper,
     SearchInputBase,
@@ -23,15 +23,36 @@ import { useTheme } from '@mui/system';
 
 const DNavbar = ({ colorModeContext, themeMode }: any) => {
     const [userMenu, setUserMenu] = useState<null | HTMLElement>(null);
+    const [searchQuery, setSearchQuery] = useState<string>('');
+    const [searchResult, setSearchResult] = useState<object>({ ok: false });
+    const [searchAnchor, setSearchAnchor] = useState<null | HTMLElement>(null);
 
     const colorMode: any = useContext(colorModeContext);
 
-    const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
+    const handleOpenUserMenu = (event: any) => {
         setUserMenu(event.currentTarget);
     };
 
     const handleCloseUserMenu = () => {
         setUserMenu(null);
+    };
+
+    const handleChangeSearch = async (event: any) => {
+        const query: string = event.target.value || '';
+        setSearchQuery(query);
+        if (query.length > 2) {
+            const res = await fetch(`${APP_API_PATH}/api/v1/search?query=${query}&limit=5`);
+            const data = (await res.json()) || null;
+            setSearchResult(data);
+        }
+    };
+
+    const handleOpenSearch = (event: any) => {
+        setSearchAnchor(event.currentTarget);
+    };
+
+    const handleCloseSearch = () => {
+        setSearchAnchor(null);
     };
 
     const theme = useTheme();
@@ -94,6 +115,8 @@ const DNavbar = ({ colorModeContext, themeMode }: any) => {
         },
     };
 
+    const isSearchOpen = Boolean(searchAnchor);
+
     return (
         <Box>
             <AppBar sx={appBarStyles} elevation={0} position='fixed'>
@@ -131,7 +154,7 @@ const DNavbar = ({ colorModeContext, themeMode }: any) => {
                         />
                     </Box>
                     <Box sx={{ width: '100%', margin: '0px 20px' }}>
-                        <SearchWrapper>
+                        <SearchWrapper onFocus={handleOpenSearch} onBlur={handleCloseSearch}>
                             <SearchIconWrapper>
                                 <i className='ri-search-2-line'></i>
                             </SearchIconWrapper>
@@ -139,10 +162,14 @@ const DNavbar = ({ colorModeContext, themeMode }: any) => {
                                 fullWidth
                                 placeholder='Search…'
                                 inputProps={{ 'aria-label': 'search' }}
+                                value={searchQuery}
+                                onChange={handleChangeSearch}
                             />
-                            <SearchResults>
-                                <SearchCardContainer />
-                            </SearchResults>
+                            {isSearchOpen ? (
+                                <SearchResults>
+                                    <SearchCardContainer data={searchResult} />
+                                </SearchResults>
+                            ) : null}
                         </SearchWrapper>
                     </Box>
                     <Box
