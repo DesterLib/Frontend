@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&display=swap');
 
-.swiper-button-next, .swiper-button-prev {
+.swiper-button-next,
+.swiper-button-prev {
     background-color: rgba(41, 41, 41, 0.5) !important;
     backdrop-filter: blur(10px);
     color: #00ffb3 !important;
@@ -11,7 +12,8 @@
 }
 
 @media only screen and (max-width: 991px) {
-    .swiper-button-next, .swiper-button-prev {
+    .swiper-button-next,
+    .swiper-button-prev {
         display: none;
     }
 }

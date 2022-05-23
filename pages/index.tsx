@@ -19,7 +19,6 @@ export async function getServerSideProps() {
     //     }
     //   }
     // }
-    console.log(res);
     return {
         props: {
             data,
