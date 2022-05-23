@@ -20,13 +20,13 @@ import Error from 'next/error';
  */
 
 // eslint-disable-next-line
-const ColorModeContext = createContext({ toggleColorMode: () => { } });
+const ColorModeContext = createContext({ toggleColorMode: () => {} });
 
 const clientSideEmotionCache = createEmotionCache();
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
     useEffect(() => {
-        document.title = 'DesterLib'
+        document.title = 'DesterLib';
     }, []);
 
     const emotionCache = clientSideEmotionCache;
@@ -48,13 +48,20 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
                     ...(mode === 'light' ? lightTheme.palette : darkTheme.palette),
                 },
                 typography: {
-                    fontFamily: `${mode === 'light'
+                    fontFamily: `${
+                        mode === 'light'
                             ? lightTheme.typography.fontFamily
                             : darkTheme.typography.fontFamily
-                        }`,
+                    }`,
                     button: {
                         textTransform: 'none',
                     },
+                },
+                shape: {
+                    borderRadius:
+                        mode === 'light'
+                            ? lightTheme.shape.borderRadius
+                            : darkTheme.shape.borderRadius,
                 },
                 components: {
                     MuiMenu: {
@@ -65,10 +72,11 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
                             paper: {
                                 margin: '0px',
                                 padding: '8px',
-                                background: `${mode === 'light'
+                                background: `${
+                                    mode === 'light'
                                         ? lightTheme.palette.background.paper
                                         : darkTheme.palette.background.paper
-                                    } !important`,
+                                } !important`,
                             },
                             list: {
                                 padding: 0,

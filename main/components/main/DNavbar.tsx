@@ -123,7 +123,12 @@ const DNavbar = ({ colorModeContext, themeMode }: any) => {
                             minHeight: '60px',
                         }}
                     >
-                        <Image layout='fill' objectFit='contain' src={themeMode === 'dark' ? APP_LOGO_LIGHT : APP_LOGO_DARK} alt={APP_NAME} />
+                        <Image
+                            layout='fill'
+                            objectFit='contain'
+                            src={themeMode === 'dark' ? APP_LOGO_LIGHT : APP_LOGO_DARK}
+                            alt={APP_NAME}
+                        />
                     </Box>
                     <Box sx={{ width: '100%', margin: '0px 20px' }}>
                         <SearchWrapper>
