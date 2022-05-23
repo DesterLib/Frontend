@@ -8,6 +8,7 @@ import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { alpha } from '@mui/material/styles';
+import { debounce } from 'lodash';
 import { APP_API_PATH, APP_LOGO_LIGHT, APP_LOGO_DARK, APP_NAME } from '../../config';
 import {
     SearchIconWrapper,
@@ -21,12 +22,17 @@ import { useContext, useState } from 'react';
 import { Divider } from '@mui/material';
 import { useTheme } from '@mui/system';
 
+const handleDebouncedSearch = debounce(async function (query, setSearchResult) {
+    const res = await fetch(`${APP_API_PATH}/api/v1/search?query=${query}&limit=5`);
+    const data = (await res.json()) || null;
+    setSearchResult(data || { ok: false });
+}, 1500);
+
 const DNavbar = ({ colorModeContext, themeMode }: any) => {
     const [userMenu, setUserMenu] = useState<null | HTMLElement>(null);
     const [searchQuery, setSearchQuery] = useState<string>('');
     const [searchResult, setSearchResult] = useState<object>({ ok: false });
     const [searchAnchor, setSearchAnchor] = useState<null | HTMLElement>(null);
-    const [lastSearchTime, setLastSearchTime] = useState<number>(0);
 
     const colorMode: any = useContext(colorModeContext);
 
@@ -41,11 +47,10 @@ const DNavbar = ({ colorModeContext, themeMode }: any) => {
     const handleChangeSearch = async (event: any) => {
         const query: string = event.target.value || '';
         setSearchQuery(query);
-        if (query.length > 2 && new Date().getTime() - lastSearchTime > 2500) {
-            const res = await fetch(`${APP_API_PATH}/api/v1/search?query=${query}&limit=5`);
-            const data = (await res.json()) || null;
-            setSearchResult(data);
-            setLastSearchTime(new Date().getTime());
+        if (query.length > 2) {
+            handleDebouncedSearch(query, setSearchResult);
+        } else {
+            setSearchResult({ ok: false });
         }
     };
 
