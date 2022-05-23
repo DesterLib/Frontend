@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { alpha } from '@mui/material/styles';
-import { APP_LOGO, APP_NAME } from '../../config';
+import { APP_LOGO_LIGHT, APP_LOGO_DARK, APP_NAME } from '../../config';
 import {
     SearchIconWrapper,
     SearchInputBase,
@@ -123,7 +123,7 @@ const DNavbar = ({ colorModeContext, themeMode }: any) => {
                             minHeight: '60px',
                         }}
                     >
-                        <Image layout='fill' objectFit='contain' src={APP_LOGO} alt={APP_NAME} />
+                        <Image layout='fill' objectFit='contain' src={themeMode === 'dark' ? APP_LOGO_LIGHT : APP_LOGO_DARK} alt={APP_NAME} />
                     </Box>
                     <Box sx={{ width: '100%', margin: '0px 20px' }}>
                         <SearchWrapper>
