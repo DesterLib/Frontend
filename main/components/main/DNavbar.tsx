@@ -26,6 +26,7 @@ const DNavbar = ({ colorModeContext, themeMode }: any) => {
     const [searchQuery, setSearchQuery] = useState<string>('');
     const [searchResult, setSearchResult] = useState<object>({ ok: false });
     const [searchAnchor, setSearchAnchor] = useState<null | HTMLElement>(null);
+    const [lastSearchTime, setLastSearchTime] = useState<number>(0);
 
     const colorMode: any = useContext(colorModeContext);
 
@@ -40,10 +41,11 @@ const DNavbar = ({ colorModeContext, themeMode }: any) => {
     const handleChangeSearch = async (event: any) => {
         const query: string = event.target.value || '';
         setSearchQuery(query);
-        if (query.length > 2) {
+        if (query.length > 2 && new Date().getTime() - lastSearchTime > 2500) {
             const res = await fetch(`${APP_API_PATH}/api/v1/search?query=${query}&limit=5`);
             const data = (await res.json()) || null;
             setSearchResult(data);
+            setLastSearchTime(new Date().getTime());
         }
     };
 
