@@ -70,6 +70,10 @@ const SearchCard = styled('div')(({ theme }) => ({
     color: theme.palette.text.primary,
 }));
 
+const Search404 = styled('div')(({ theme }) => ({
+    color: theme.palette.text.secondary,
+}));
+
 /*
 const movieData = [
     {
@@ -144,36 +148,38 @@ const SearchCardContainer = (props: any) => {
                         <i style={{ paddingRight: '5px' }} className='ri-movie-2-fill'></i>
                         Movies
                     </Typography>
-                    <List
-                        sx={{
-                            width: '100%',
-                            bgcolor: 'background.paper',
-                            borderRadius: '5px',
-                            padding: '5px',
-                        }}
-                    >
-                        {movieData.map((item: any, index: number) => (
-                            <ListItemButton
-                                sx={{ borderRadius: '5px', padding: '5px' }}
-                                key={index}
-                            >
-                                <ListItemAvatar sx={{ marginRight: '5px' }}>
-                                    <Avatar
-                                        sx={{ width: '50px', height: '70px' }}
-                                        variant='rounded'
-                                        src={
-                                            APP_API_PATH +
-                                            APP_API_VERSION_PATH +
-                                            '/assets/image/' +
-                                            APP_POSTER_QUALITY +
-                                            item.poster_url
-                                        }
-                                    />
-                                </ListItemAvatar>
-                                <ListItemText primary={item.title} secondary={item.release_date} />
-                            </ListItemButton>
-                        ))}
-                    </List>
+                    {movieData.length ? (
+                        <List
+                            sx={{
+                                width: '100%',
+                                bgcolor: 'background.paper',
+                                borderRadius: '5px',
+                                padding: '5px',
+                            }}
+                        >
+                            {movieData.map((item: any, index: number) => (
+                                <ListItemButton
+                                    sx={{ borderRadius: '5px', padding: '5px' }}
+                                    key={index}
+                                >
+                                    <ListItemAvatar sx={{ marginRight: '5px' }}>
+                                        <Avatar
+                                            sx={{ width: '50px', height: '70px' }}
+                                            variant='rounded'
+                                            src={
+                                                APP_API_PATH +
+                                                APP_API_VERSION_PATH +
+                                                '/assets/image/' +
+                                                APP_POSTER_QUALITY +
+                                                item.poster_url
+                                            }
+                                        />
+                                    </ListItemAvatar>
+                                    <ListItemText primary={item.title} secondary={(item.release_date || '').slice(0, 4)} />
+                                </ListItemButton>
+                            ))}
+                        </List>
+                    ) : data.ok ? <Search404><Typography variant='subtitle2'>No results...</Typography></Search404> : null}
                 </Grid>
                 <Grid item xs={6}>
                     <Typography
@@ -187,39 +193,40 @@ const SearchCardContainer = (props: any) => {
                         <i style={{ paddingRight: '5px' }} className='ri-tv-fill'></i>
                         TV Series
                     </Typography>
-                    <List
-                        sx={{
-                            width: '100%',
-                            bgcolor: 'background.paper',
-                            borderRadius: '5px',
-                            padding: '5px',
-                        }}
-                    >
-                        {seriesData.map((item: any, index: number) => (
-                            <ListItemButton
-                                sx={{ borderRadius: '5px', padding: '5px' }}
-                                key={index}
-                            >
-                                <ListItemAvatar sx={{ marginRight: '5px' }}>
-                                    <Avatar
-                                        sx={{ width: '50px', height: '70px' }}
-                                        variant='rounded'
-                                        src={
-                                            APP_API_PATH +
-                                            APP_API_VERSION_PATH +
-                                            '/assets/image/' +
-                                            APP_POSTER_QUALITY +
-                                            item.poster_url
-                                        }
+                    {seriesData.length ? (
+                        <List
+                            sx={{
+                                width: '100%',
+                                bgcolor: 'background.paper',
+                                borderRadius: '5px',
+                                padding: '5px',
+                            }}
+                        >
+                            {seriesData.map((item: any, index: number) => (
+                                <ListItemButton
+                                    sx={{ borderRadius: '5px', padding: '5px' }}
+                                    key={index}
+                                >
+                                    <ListItemAvatar sx={{ marginRight: '5px' }}>
+                                        <Avatar
+                                            sx={{ width: '50px', height: '70px' }}
+                                            variant='rounded'
+                                            src={
+                                                APP_API_PATH +
+                                                APP_API_VERSION_PATH +
+                                                '/assets/image/' +
+                                                APP_POSTER_QUALITY +
+                                                item.poster_url
+                                            }
+                                        />
+                                    </ListItemAvatar>
+                                    <ListItemText
+                                        primary={item.title} secondary={(item.release_date || '').slice(0, 4)}
                                     />
-                                </ListItemAvatar>
-                                <ListItemText
-                                    primary={item.title}
-                                    secondary={(item.release_date || '').slice(0, 4)}
-                                />
-                            </ListItemButton>
-                        ))}
-                    </List>
+                                </ListItemButton>
+                            ))}
+                        </List>
+                    ) : data.ok ? <Search404><Typography variant='subtitle2'>No results...</Typography></Search404> : null}
                 </Grid>
             </Grid>
         </Grid>
