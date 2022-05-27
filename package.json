@@ -4,49 +4,36 @@
     "description": "DesterLib's frontend",
     "license": "MIT",
     "scripts": {
-        "dev": "next dev -p 35510",
-        "build": "next build",
-        "start": "next start",
-        "lint": "eslint main/**/**/*.{js,jsx,ts,tsx,json} pages/**/*.{js,jsx,ts,tsx,json}",
-        "lint:fix": "eslint --fix main/**/**/*.{js,jsx,ts,tsx,json} pages/**/*.{js,jsx,ts,tsx,json}",
-        "format": "prettier --write main/**/**/*.{js,jsx,ts,tsx,css,md,json} pages/**/*.{js,jsx,ts,tsx,json} styles/*.css --config .prettierrc.json"
+        "start": "react-scripts start",
+        "build": "react-scripts build",
+        "lint": "eslint src/**/*.{js,jsx,ts,tsx,json}",
+        "lint:fix": "eslint --fix src/**/*.{js,jsx,ts,tsx,json}",
+        "format": "prettier --write src/**/*.{js,jsx,ts,tsx,css,md,json} .eslintrc.json .prettierrc.json package.json tsconfig.json --config .prettierrc.json"
     },
     "dependencies": {
-        "@emotion/cache": "^11.7.1",
-        "@emotion/react": "^11.8.2",
-        "@emotion/server": "^11.4.0",
-        "@emotion/styled": "^11.8.1",
-        "@mui/material": "^5.5.3",
-        "install": "^0.13.0",
+        "@mui/material": "^5.8.1",
+        "@mui/styled-engine": "^5.8.0",
+        "@types/node": "^16.11.36",
+        "@types/react": "^18.0.9",
+        "@types/react-dom": "^18.0.5",
         "lodash": "^4.17.21",
-        "next": "12.1.4",
-        "node-fetch": "^3.2.3",
-        "npm": "^8.10.0",
-        "react": "18.0.0",
-        "react-dom": "18.0.0",
-        "swiper": "^8.0.7"
+        "react": "^18.1.0",
+        "react-dom": "^18.1.0",
+        "react-router-dom": "^6.3.0",
+        "react-scripts": "5.0.1",
+        "swiper": "^8.1.6",
+        "typescript": "^4.7.2"
     },
     "devDependencies": {
-        "@next/eslint-plugin-next": "^12.1.6",
+        "@trivago/prettier-plugin-sort-imports": "^3.2.0",
         "@types/lodash": "^4.14.182",
-        "@types/node": "17.0.23",
-        "@types/react": "17.0.43",
-        "@types/react-dom": "17.0.14",
-        "@typescript-eslint/eslint-plugin": "^5.25.0",
-        "@typescript-eslint/parser": "^5.25.0",
+        "@typescript-eslint/eslint-plugin": "^5.26.0",
+        "@typescript-eslint/parser": "^5.26.0",
         "eslint": "^8.16.0",
-        "eslint-config-next": "^12.1.6",
         "eslint-config-prettier": "^8.5.0",
-        "eslint-config-standard": "^17.0.0",
-        "eslint-import-resolver-typescript": "^2.7.1",
-        "eslint-plugin-import": "^2.26.0",
-        "eslint-plugin-n": "^15.2.0",
         "eslint-plugin-prettier": "^4.0.0",
-        "eslint-plugin-promise": "^6.0.0",
         "eslint-plugin-react": "^7.30.0",
-        "eslint-plugin-react-hooks": "^4.5.0",
-        "prettier": "^2.6.2",
-        "typescript": "4.6.3"
+        "prettier": "^2.6.2"
     },
     "contributors": [
         {
@@ -59,5 +46,17 @@
             "email": "me@elias.eu.org",
             "url": "https://elias.eu.org"
         }
-    ]
+    ],
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
+    }
 }

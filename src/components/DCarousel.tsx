@@ -1,19 +1,19 @@
-import Image from 'next/image';
 import Chip from '@mui/material/Chip';
 import Typography from '@mui/material/Typography';
-import { styled } from '@mui/system';
+import { styled } from '@mui/material/styles';
+import React from 'react';
+import SwiperCore, { A11y, Autoplay, EffectFade, Navigation } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import SwiperCore, { Autoplay, EffectFade, Navigation, A11y } from 'swiper';
-import styles from './DCarousel.module.css';
-import DButton from '../repeat/DButton';
+
 import {
     APP_API_PATH,
     APP_API_VERSION_PATH,
     APP_BACKDROP_QUALITY,
     APP_POSTER_QUALITY,
-} from '../../config';
-import React from 'react';
-import useBreakpoint from '../../utilities/useBreakpoint';
+} from '../config';
+import styles from '../styles/DCarousel.module.css';
+import useBreakpoint from '../utilities/useBreakpoint';
+import DButton from './DButton';
 
 const chipCss = {
     px: 1,
@@ -40,6 +40,46 @@ const ItemBackground = styled('div')(() => ({
     zIndex: 5,
 }));
 
+const HeaderImage = styled('img')(() => ({
+    position: 'absolute',
+    top: '0',
+    left: '0',
+    bottom: '0',
+    right: '0',
+    boxSizing: 'border-box',
+    padding: '0',
+    border: 'none',
+    margin: 'auto',
+    display: 'block',
+    width: '0',
+    height: '0',
+    minWidth: '100%',
+    maxWidth: '100%',
+    minHeight: '100%',
+    maxHeight: '100%',
+    objectFit: 'cover',
+}));
+
+const HeaderLogo = styled('img')(() => ({
+    position: 'absolute',
+    top: '0',
+    left: '0',
+    bottom: '0',
+    right: '0',
+    boxSizing: 'border-box',
+    padding: '0',
+    border: 'none',
+    margin: 'auto',
+    display: 'block',
+    width: '0',
+    height: '0',
+    minWidth: '100%',
+    maxWidth: '100%',
+    minHeight: '100%',
+    maxGeight: '100%',
+    objectFit: 'contain',
+}));
+
 // const ItemBackground = styled('div', {
 //   shouldForwardProp: (prop) => prop !== "poster" && prop !== "backdrop",
 // })<ItemBackgroundProps>(({ theme, poster, backdrop }) => ({
@@ -64,9 +104,7 @@ const DSlide = ({ item }: any) => {
         <div className={styles.carouselItem}>
             <div className={styles.itemInfo}>
                 <div className={styles.logo}>
-                    <Image
-                        layout='fill'
-                        objectFit='contain'
+                    <HeaderLogo
                         src={
                             APP_API_PATH +
                             APP_API_VERSION_PATH +
@@ -120,9 +158,7 @@ const DSlide = ({ item }: any) => {
             </div>
             <ItemBackground>
                 {breakpoint === 'xs' ? (
-                    <Image
-                        layout='fill'
-                        objectFit='cover'
+                    <HeaderImage
                         src={
                             APP_API_PATH +
                             APP_API_VERSION_PATH +
@@ -133,9 +169,7 @@ const DSlide = ({ item }: any) => {
                         alt={item.title}
                     />
                 ) : (
-                    <Image
-                        layout='fill'
-                        objectFit='cover'
+                    <HeaderImage
                         src={
                             APP_API_PATH +
                             APP_API_VERSION_PATH +

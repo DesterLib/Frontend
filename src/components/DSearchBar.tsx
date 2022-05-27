@@ -1,16 +1,17 @@
-import * as React from 'react';
-import { styled, alpha } from '@mui/material/styles';
-import InputBase from '@mui/material/InputBase';
-import Grid from '@mui/material/Grid';
 import {
     Avatar,
     List,
-    ListItemButton,
     ListItemAvatar,
+    ListItemButton,
     ListItemText,
     Typography,
 } from '@mui/material';
-import { APP_API_PATH, APP_API_VERSION_PATH, APP_POSTER_QUALITY } from '../../config';
+import Grid from '@mui/material/Grid';
+import InputBase from '@mui/material/InputBase';
+import { alpha, styled } from '@mui/material/styles';
+import * as React from 'react';
+
+import { APP_API_PATH, APP_API_VERSION_PATH, APP_POSTER_QUALITY } from '../config';
 
 const SearchWrapper = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -126,8 +127,8 @@ const serieData = [
 
 const SearchCardContainer = (props: any) => {
     const data = props.data || { ok: false };
-    var movieData: object[] = [];
-    var seriesData: object[] = [];
+    let movieData: object[] = [];
+    let seriesData: object[] = [];
     if (data.ok && data.results) {
         movieData = data.results.movies || [];
         seriesData = data.results.series || [];
@@ -175,11 +176,18 @@ const SearchCardContainer = (props: any) => {
                                             }
                                         />
                                     </ListItemAvatar>
-                                    <ListItemText primary={item.title} secondary={(item.release_date || '').slice(0, 4)} />
+                                    <ListItemText
+                                        primary={item.title}
+                                        secondary={(item.release_date || '').slice(0, 4)}
+                                    />
                                 </ListItemButton>
                             ))}
                         </List>
-                    ) : data.ok ? <Search404><Typography variant='subtitle2'>No results...</Typography></Search404> : null}
+                    ) : data.ok ? (
+                        <Search404>
+                            <Typography variant='subtitle2'>No results...</Typography>
+                        </Search404>
+                    ) : null}
                 </Grid>
                 <Grid item xs={6}>
                     <Typography
@@ -221,12 +229,17 @@ const SearchCardContainer = (props: any) => {
                                         />
                                     </ListItemAvatar>
                                     <ListItemText
-                                        primary={item.title} secondary={(item.release_date || '').slice(0, 4)}
+                                        primary={item.title}
+                                        secondary={(item.release_date || '').slice(0, 4)}
                                     />
                                 </ListItemButton>
                             ))}
                         </List>
-                    ) : data.ok ? <Search404><Typography variant='subtitle2'>No results...</Typography></Search404> : null}
+                    ) : data.ok ? (
+                        <Search404>
+                            <Typography variant='subtitle2'>No results...</Typography>
+                        </Search404>
+                    ) : null}
                 </Grid>
             </Grid>
         </Grid>

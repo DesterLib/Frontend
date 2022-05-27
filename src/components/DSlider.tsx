@@ -1,9 +1,10 @@
+import { IconButton } from '@mui/material';
+import Typography from '@mui/material/Typography';
+import { styled } from '@mui/system';
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { styled } from '@mui/system';
-import Typography from '@mui/material/Typography';
+
 import DCard from './DCard';
-import { IconButton } from '@mui/material';
 
 const DSwiper = styled(Swiper)(() => ({
     padding: '20px',

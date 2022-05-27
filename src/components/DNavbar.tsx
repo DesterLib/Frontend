@@ -1,26 +1,26 @@
-import Image from 'next/image';
+import { Divider } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
 import Avatar from '@mui/material/Avatar';
-import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
+import IconButton from '@mui/material/IconButton';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import { alpha } from '@mui/material/styles';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import { alpha, styled } from '@mui/material/styles';
+import { useTheme } from '@mui/system';
 import { debounce } from 'lodash';
-import { APP_API_PATH, APP_LOGO_LIGHT, APP_LOGO_DARK, APP_NAME } from '../../config';
+// import DButton from '../repeat/DButton';
+import React, { useState } from 'react';
+
+import { APP_API_PATH, APP_LOGO_LIGHT, APP_NAME } from '../config';
 import {
+    SearchCardContainer,
     SearchIconWrapper,
     SearchInputBase,
     SearchResults,
     SearchWrapper,
-    SearchCardContainer,
-} from '../repeat/DSearchBar';
-// import DButton from '../repeat/DButton';
-import { useContext, useState } from 'react';
-import { Divider } from '@mui/material';
-import { useTheme } from '@mui/system';
+} from './DSearchBar';
 
 const handleDebouncedSearch = debounce(async function (query, setSearchResult) {
     const res = await fetch(`${APP_API_PATH}/api/v1/search?query=${query}&limit=5`);
@@ -28,13 +28,31 @@ const handleDebouncedSearch = debounce(async function (query, setSearchResult) {
     setSearchResult(data || { ok: false });
 }, 1500);
 
-const DNavbar = ({ colorModeContext, themeMode }: any) => {
+const LogoImage = styled('img')(() => ({
+    position: 'absolute',
+    top: '0',
+    left: '0',
+    bottom: '0',
+    right: '0',
+    boxsizing: 'border-box',
+    padding: '0',
+    border: 'none',
+    margin: 'auto',
+    display: 'block',
+    width: '0',
+    height: '0',
+    minWidth: '100%',
+    maxWidth: '100%',
+    minHeight: '100%',
+    maxHeight: '100%',
+    objectFit: 'contain',
+}));
+
+const DNavbar = () => {
     const [userMenu, setUserMenu] = useState<null | HTMLElement>(null);
     const [searchQuery, setSearchQuery] = useState<string>('');
     const [searchResult, setSearchResult] = useState<object>({ ok: false });
     const [searchAnchor, setSearchAnchor] = useState<null | HTMLElement>(null);
-
-    const colorMode: any = useContext(colorModeContext);
 
     const handleOpenUserMenu = (event: any) => {
         setUserMenu(event.currentTarget);
@@ -153,12 +171,7 @@ const DNavbar = ({ colorModeContext, themeMode }: any) => {
                             minHeight: '60px',
                         }}
                     >
-                        <Image
-                            layout='fill'
-                            objectFit='contain'
-                            src={themeMode === 'dark' ? APP_LOGO_LIGHT : APP_LOGO_DARK}
-                            alt={APP_NAME}
-                        />
+                        <LogoImage width='160' height='60' src={APP_LOGO_LIGHT} alt={APP_NAME} />
                     </Box>
                     <Box sx={{ width: '100%', margin: '0px 20px' }}>
                         <SearchWrapper onFocus={handleOpenSearch} onBlur={handleCloseSearch}>
@@ -227,23 +240,11 @@ const DNavbar = ({ colorModeContext, themeMode }: any) => {
                                 </Avatar>
                                 <Typography textAlign='center'>Account</Typography>
                             </MenuItem>
-                            <MenuItem onClick={colorMode.toggleColorMode} sx={menuItemStyles}>
-                                {themeMode === 'dark' && (
-                                    <>
-                                        <Avatar sx={{ marginRight: '10px' }}>
-                                            <i className='ri-sun-fill'></i>
-                                        </Avatar>
-                                        <Typography textAlign='center'>Light Theme</Typography>
-                                    </>
-                                )}
-                                {themeMode === 'light' && (
-                                    <>
-                                        <Avatar sx={{ marginRight: '10px' }}>
-                                            <i className='ri-moon-clear-fill'></i>
-                                        </Avatar>
-                                        <Typography textAlign='center'>Dark Theme</Typography>
-                                    </>
-                                )}
+                            <MenuItem sx={menuItemStyles}>
+                                <Avatar sx={{ marginRight: '10px' }}>
+                                    <i className='ri-sun-fill'></i>
+                                </Avatar>
+                                <Typography textAlign='center'>Light Theme</Typography>
                             </MenuItem>
                             <MenuItem sx={menuItemStyles}>
                                 <Avatar sx={{ marginRight: '10px' }}>

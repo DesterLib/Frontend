@@ -1,14 +1,14 @@
-import React from 'react';
+import { Chip } from '@mui/material';
 import Box from '@mui/material/Box';
-import { styled, alpha } from '@mui/material/styles';
-import Image from 'next/image';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import { APP_API_PATH, APP_API_VERSION_PATH, APP_BACKDROP_QUALITY } from '../../config';
+import { alpha, styled } from '@mui/material/styles';
+import React from 'react';
+
+import { APP_API_PATH, APP_API_VERSION_PATH, APP_BACKDROP_QUALITY } from '../config';
 import DButton from './DButton';
-import { Chip } from '@mui/material';
 
 /*
 interface ItemBackgroundProps {
@@ -59,6 +59,23 @@ const CloseButton = styled(IconButton)(({ theme }) => ({
     },
 }));
 
+const ModalImage = styled('img')(() => ({
+    position: 'absolute',
+    inset: '0px',
+    boxSizing: 'border-box',
+    padding: '0px',
+    border: 'none',
+    margin: 'auto',
+    display: 'block',
+    width: '0px',
+    height: '0px',
+    minWidth: '100%',
+    maxWidth: '100%',
+    minHeight: '100%',
+    maxHeight: '100%',
+    objectFit: 'cover',
+}));
+
 interface GenreChipProps {
     id: number;
     name: string;
@@ -72,9 +89,7 @@ const DInfoModal = ({ item, currentState, closeInfoModal }: any) => {
             open={currentState}
         >
             <InfoModalBackdrop>
-                <Image
-                    layout='fill'
-                    objectFit='cover'
+                <ModalImage
                     src={`${APP_API_PATH}${APP_API_VERSION_PATH}/assets/image/${APP_BACKDROP_QUALITY}${item.backdrop_url}`}
                     alt=''
                 />
