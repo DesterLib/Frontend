@@ -10,6 +10,7 @@ import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 
 import Home from './pages/Home';
+import NotFoundPage from './pages/NotFoundPage';
 import './styles/globals.css';
 
 const theme = createTheme({
@@ -71,7 +72,8 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
         <ThemeProvider theme={theme}>
             <CssBaseline />
             <Routes>
-                <Route path='/' element={<Home />}></Route>
+                <Route path='*' element={<NotFoundPage />} />
+                <Route path='/' element={<Home />} />
             </Routes>
         </ThemeProvider>
     </BrowserRouter>,
