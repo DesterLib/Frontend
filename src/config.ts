@@ -1,6 +1,6 @@
-import LogoFullLight from '../assets/logo-full-light.svg';
-import LogoFullDark from '../assets/logo-full-dark.svg';
-import noImagePoster from '../assets/no-image-poster.svg';
+import LogoFullDark from './assets/logo-full-dark.svg';
+import LogoFullLight from './assets/logo-full-light.svg';
+import noImagePoster from './assets/no-image-poster.svg';
 
 const APP_LOGO_LIGHT = LogoFullLight;
 const APP_LOGO_DARK = LogoFullDark;

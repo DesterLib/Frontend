@@ -1,14 +1,14 @@
-import React from 'react';
-import { styled, alpha } from '@mui/material/styles';
-import Image from 'next/image';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
+import { alpha, styled } from '@mui/material/styles';
+import React from 'react';
+
 import {
     APP_API_PATH,
     APP_API_VERSION_PATH,
     APP_NO_IMAGE_POSTER,
     APP_POSTER_QUALITY,
-} from '../../config';
+} from '../config';
 import DInfoModal from './DInfoModal';
 
 const PlayButton = styled('div')(() => ({
@@ -96,6 +96,26 @@ const CardWrapper = styled('div')(() => ({
     width: '100%',
 }));
 
+const ItemImage = styled('img')(() => ({
+    position: 'absolute',
+    top: '0',
+    left: '0',
+    bottom: '0',
+    right: '0',
+    boxSizing: 'border-box',
+    padding: '0',
+    border: 'none',
+    margin: 'auto',
+    display: 'block',
+    width: '0',
+    height: '0',
+    minWidth: '100%',
+    maxWidth: '100%',
+    minHeight: '100%',
+    maxHeight: '100%',
+    objectFit: 'cover',
+}));
+
 const DCard = ({ item }: any) => {
     const [openModalState, setOpenModalState] = React.useState(false);
     const openInfoModal = (event: any) => {
@@ -110,7 +130,7 @@ const DCard = ({ item }: any) => {
         <Card>
             <CardWrapper>
                 <ImageWrapper className='imageWrapper'>
-                    <Image
+                    <ItemImage
                         className='image'
                         src={
                             (item &&
@@ -119,8 +139,6 @@ const DCard = ({ item }: any) => {
                             APP_NO_IMAGE_POSTER
                         }
                         alt=''
-                        layout='fill'
-                        objectFit='cover'
                     />
                     <PlayButton className='playButton'>
                         <i className='ri-play-mini-fill'></i>
