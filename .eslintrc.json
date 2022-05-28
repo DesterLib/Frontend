@@ -22,7 +22,8 @@
         "@typescript-eslint/no-explicit-any": "off",
         "indent": ["error", 4],
         "quotes": ["error", "single"],
-        "semi": ["error", "always"]
+        "semi": ["error", "always"],
+        "no-var": 0
     },
     "settings": {
         "import/resolver": {
