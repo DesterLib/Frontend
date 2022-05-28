@@ -12,6 +12,7 @@ import { useTheme } from '@mui/system';
 import { debounce } from 'lodash';
 // import DButton from '../repeat/DButton';
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import { APP_API_PATH, APP_LOGO_LIGHT, APP_NAME } from '../config';
 import {
@@ -204,6 +205,7 @@ const DNavbar = () => {
                             <Avatar alt='Alken Dester' />
                         </IconButton>
                         <Menu
+                            disableScrollLock={true}
                             sx={menuStyles}
                             id='menu-appbar'
                             anchorEl={userMenu}
@@ -234,24 +236,28 @@ const DNavbar = () => {
                                 </Box>
                             </MenuItem>
                             <Divider />
-                            <MenuItem sx={menuItemStyles}>
-                                <Avatar sx={{ marginRight: '10px' }}>
-                                    <i className='ri-user-fill'></i>
-                                </Avatar>
-                                <Typography textAlign='center'>Account</Typography>
-                            </MenuItem>
+                            <Link to='/account' style={{ textDecoration: 'none' }}>
+                                <MenuItem sx={menuItemStyles}>
+                                    <Avatar sx={{ marginRight: '10px' }}>
+                                        <i className='ri-user-fill'></i>
+                                    </Avatar>
+                                    <Typography textAlign='center'>Account</Typography>
+                                </MenuItem>
+                            </Link>
                             <MenuItem sx={menuItemStyles}>
                                 <Avatar sx={{ marginRight: '10px' }}>
                                     <i className='ri-sun-fill'></i>
                                 </Avatar>
                                 <Typography textAlign='center'>Light Theme</Typography>
                             </MenuItem>
-                            <MenuItem sx={menuItemStyles}>
-                                <Avatar sx={{ marginRight: '10px' }}>
-                                    <i className='icon ri-settings-2-fill'></i>
-                                </Avatar>
-                                <Typography textAlign='center'>Settings</Typography>
-                            </MenuItem>
+                            <Link to='/settings' style={{ textDecoration: 'none' }}>
+                                <MenuItem sx={menuItemStyles}>
+                                    <Avatar sx={{ marginRight: '10px' }}>
+                                        <i className='icon ri-settings-2-fill'></i>
+                                    </Avatar>
+                                    <Typography textAlign='center'>Settings</Typography>
+                                </MenuItem>
+                            </Link>
                             <MenuItem sx={menuItemStyles}>
                                 <Avatar sx={{ marginRight: '10px' }}>
                                     <i className='icon ri-logout-box-fill'></i>

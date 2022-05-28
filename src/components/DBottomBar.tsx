@@ -2,11 +2,13 @@ import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import Box from '@mui/material/Box';
 import { alpha, useTheme } from '@mui/system';
-import React from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const DBottomBar = () => {
-    const [value, setValue] = React.useState(0);
     const theme = useTheme();
+    const navigate = useNavigate();
+    const [value, setValue] = useState<number>(0);
 
     const BoxStyles = {
         position: 'fixed',
@@ -28,8 +30,15 @@ const DBottomBar = () => {
             <BottomNavigation
                 showLabels
                 value={value}
-                onChange={(event, newValue) => {
-                    setValue(newValue);
+                onChange={(event, val) => {
+                    setValue(val);
+                    if (val == 0) {
+                        navigate('/');
+                    } else if (val == 1) {
+                        // open search
+                    } else if (val == 2) {
+                        navigate('/settings');
+                    }
                 }}
             >
                 <BottomNavigationAction
@@ -39,10 +48,6 @@ const DBottomBar = () => {
                 <BottomNavigationAction
                     label='Search'
                     icon={<i style={{ fontSize: '22px' }} className='ri-search-2-fill'></i>}
-                />
-                <BottomNavigationAction
-                    label='Collections'
-                    icon={<i style={{ fontSize: '22px' }} className='ri-stack-fill'></i>}
                 />
                 <BottomNavigationAction
                     label='Settings'

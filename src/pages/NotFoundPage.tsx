@@ -1,5 +1,6 @@
 import { Box, Typography } from '@mui/material';
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import Error from '../assets/error.png';
 import DButton from '../components/DButton';
@@ -24,14 +25,15 @@ const NotFoundPage = () => {
                     404 - You Lost ?
                 </Typography>
             </Box>
-            <DButton
-                href='/'
-                variant='contained'
-                color='primary'
-                startIcon={<i style={{ fontSize: '16px' }} className='ri-home-2-fill'></i>}
-            >
-                GO HOME
-            </DButton>
+            <Link to='/' style={{ textDecoration: 'none' }}>
+                <DButton
+                    variant='contained'
+                    color='primary'
+                    startIcon={<i style={{ fontSize: '16px' }} className='ri-home-2-fill'></i>}
+                >
+                    GO HOME
+                </DButton>
+            </Link>
         </Box>
     );
 };

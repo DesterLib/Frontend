@@ -23,7 +23,7 @@
     scrollbar-color: #33ffc2 #06131c;
 }
 *::-webkit-scrollbar {
-    width: 11px;
+    width: 9px;
 }
 *::-webkit-scrollbar-track {
     background: #06131c;
@@ -31,5 +31,5 @@
 *::-webkit-scrollbar-thumb {
     background-color: #33ffc2;
     border-radius: 8px;
-    border: 1.5px outset #06131c;
+    border: 1px outset #06131c;
 }
