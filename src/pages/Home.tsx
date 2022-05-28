@@ -9,7 +9,7 @@ import DNavbar from '../components/DNavbar';
 import DSlider from '../components/DSlider';
 import { APP_API_PATH } from '../config';
 
-function Home() {
+const Home = () => {
     const [isLoaded, setIsLoaded] = useState<boolean>(false);
     const [data, setData] = useState<any>({});
     const theme = useTheme();
@@ -59,6 +59,6 @@ function Home() {
             <CircularProgress />
         </Box>
     );
-}
+};
 
 export default Home;
