@@ -1,5 +1,6 @@
 .carousel {
     --swiper-navigation-size: 20px;
+    margin-bottom: 20px;
 }
 
 .carouselSlideWrapper .carouselItem {

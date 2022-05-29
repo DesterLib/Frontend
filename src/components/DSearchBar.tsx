@@ -1,5 +1,6 @@
 import {
     Avatar,
+    IconButton,
     List,
     ListItemAvatar,
     ListItemButton,
@@ -12,6 +13,7 @@ import { alpha, styled } from '@mui/material/styles';
 import * as React from 'react';
 
 import { APP_API_PATH, APP_API_VERSION_PATH, APP_POSTER_QUALITY } from '../config';
+import DInfoModal from './DInfoModal';
 
 const SearchWrapper = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -75,56 +77,6 @@ const Search404 = styled('div')(({ theme }) => ({
     color: theme.palette.text.secondary,
 }));
 
-/*
-const movieData = [
-    {
-        name: 'Jujutsu Kaisen 0',
-        date: 'Dec 24, 2021',
-        rating: '87%',
-        duration: '1 hour, 45 mins',
-        poster: 'https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx131573-rpl82vDEDRm6.jpg',
-    },
-    {
-        name: 'Kimetsu no Yaiba: Mugen Ressha-hen',
-        date: 'Oct 16, 2020',
-        rating: '86%',
-        duration: '1 hour, 57 mins',
-        poster: 'https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx112151-1qlQwPB1RrJe.png',
-    },
-    {
-        name: 'Bubble',
-        date: 'Apr 28, 2022',
-        rating: '87%',
-        duration: '1 hour, 40 mins',
-        poster: 'https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx131573-rpl82vDEDRm6.jpg',
-    },
-];
-
-const serieData = [
-    {
-        name: 'Moon Knight',
-        date: '2022',
-        rating: '87%',
-        duration: '47 mins',
-        poster: 'https://www.themoviedb.org/t/p/w1280/zQSABH2Dza4mXLow2f0V2IQvJOL.jpg',
-    },
-    {
-        name: 'Lucifer',
-        date: '2016',
-        rating: '86%',
-        duration: '45 mins',
-        poster: 'https://www.themoviedb.org/t/p/w1280/4EYPN5mVIhKLfxGruy7Dy41dTVn.jpg',
-    },
-    {
-        name: 'Tangled: Before Ever After',
-        date: '2017',
-        rating: '87%',
-        duration: '55 mins',
-        poster: 'https://www.themoviedb.org/t/p/w1280/8BiZ8KXS0itmOx4uQw3E8UnmqEQ.jpg',
-    },
-];
-*/
-
 const SearchCardContainer = (props: any) => {
     const data = props.data || { ok: false };
     let movieData: object[] = [];
@@ -133,6 +85,15 @@ const SearchCardContainer = (props: any) => {
         movieData = data.results.movies || [];
         seriesData = data.results.series || [];
     }
+
+    const [openModalState, setOpenModalState] = React.useState(false);
+    const openInfoModal = (event: any) => {
+        event.preventDefault();
+        setOpenModalState(true);
+    };
+    const closeInfoModal = () => {
+        setOpenModalState(false);
+    };
 
     return (
         <Grid container>
@@ -180,6 +141,10 @@ const SearchCardContainer = (props: any) => {
                                         primary={item.title}
                                         secondary={(item.release_date || '').slice(0, 4)}
                                     />
+                                    <IconButton onClick={openInfoModal} onContextMenu={(e) => e.preventDefault()} aria-label='more'>
+                                        <i className='ri-more-2-fill'></i>
+                                    </IconButton>
+                                    <DInfoModal item={item} currentState={openModalState} closeInfoModal={closeInfoModal} />
                                 </ListItemButton>
                             ))}
                         </List>
@@ -232,6 +197,10 @@ const SearchCardContainer = (props: any) => {
                                         primary={item.title}
                                         secondary={(item.release_date || '').slice(0, 4)}
                                     />
+                                    <IconButton onClick={openInfoModal} onContextMenu={(e) => e.preventDefault()} aria-label='more'>
+                                        <i className='ri-more-2-fill'></i>
+                                    </IconButton>
+                                    <DInfoModal item={item} currentState={openModalState} closeInfoModal={closeInfoModal} />
                                 </ListItemButton>
                             ))}
                         </List>

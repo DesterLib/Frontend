@@ -14,7 +14,7 @@ import { debounce } from 'lodash';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { APP_API_PATH, APP_LOGO_LIGHT, APP_NAME } from '../config';
+import { APP_API_PATH, APP_LOGO_DARK, APP_LOGO_LIGHT, APP_NAME } from '../config';
 import {
     SearchCardContainer,
     SearchIconWrapper,
@@ -49,7 +49,7 @@ const LogoImage = styled('img')(() => ({
     objectFit: 'contain',
 }));
 
-const DNavbar = () => {
+const DNavbar = ({ colorModeContext, themeMode }: any) => {
     const [userMenu, setUserMenu] = useState<null | HTMLElement>(null);
     const [searchQuery, setSearchQuery] = useState<string>('');
     const [searchResult, setSearchResult] = useState<object>({ ok: false });
@@ -82,6 +82,8 @@ const DNavbar = () => {
     };
 
     const theme = useTheme();
+
+    const colorMode: any = React.useContext(colorModeContext);
 
     const appBarStyles = {
         backgroundColor: alpha(theme.palette.background.default, 0.9),
@@ -172,7 +174,14 @@ const DNavbar = () => {
                             minHeight: '60px',
                         }}
                     >
-                        <LogoImage width='160' height='60' src={APP_LOGO_LIGHT} alt={APP_NAME} />
+                        <Link to='/'>
+                            <LogoImage
+                                width='160'
+                                height='60'
+                                src={themeMode === 'dark' ? APP_LOGO_LIGHT : APP_LOGO_DARK}
+                                alt={APP_NAME}
+                            />
+                        </Link>
                     </Box>
                     <Box sx={{ width: '100%', margin: '0px 20px' }}>
                         <SearchWrapper onFocus={handleOpenSearch} onBlur={handleCloseSearch}>
@@ -205,7 +214,6 @@ const DNavbar = () => {
                             <Avatar alt='Alken Dester' />
                         </IconButton>
                         <Menu
-                            disableScrollLock={true}
                             sx={menuStyles}
                             id='menu-appbar'
                             anchorEl={userMenu}
@@ -236,28 +244,36 @@ const DNavbar = () => {
                                 </Box>
                             </MenuItem>
                             <Divider />
-                            <Link to='/account' style={{ textDecoration: 'none' }}>
-                                <MenuItem sx={menuItemStyles}>
-                                    <Avatar sx={{ marginRight: '10px' }}>
-                                        <i className='ri-user-fill'></i>
-                                    </Avatar>
-                                    <Typography textAlign='center'>Account</Typography>
-                                </MenuItem>
-                            </Link>
                             <MenuItem sx={menuItemStyles}>
                                 <Avatar sx={{ marginRight: '10px' }}>
-                                    <i className='ri-sun-fill'></i>
+                                    <i className='ri-user-fill'></i>
                                 </Avatar>
-                                <Typography textAlign='center'>Light Theme</Typography>
+                                <Typography textAlign='center'>Account</Typography>
                             </MenuItem>
-                            <Link to='/settings' style={{ textDecoration: 'none' }}>
-                                <MenuItem sx={menuItemStyles}>
-                                    <Avatar sx={{ marginRight: '10px' }}>
-                                        <i className='icon ri-settings-2-fill'></i>
-                                    </Avatar>
-                                    <Typography textAlign='center'>Settings</Typography>
-                                </MenuItem>
-                            </Link>
+                            <MenuItem onClick={colorMode.toggleColorMode} sx={menuItemStyles}>
+                                {themeMode === 'dark' && (
+                                    <>
+                                        <Avatar sx={{ marginRight: '10px' }}>
+                                            <i className='ri-sun-fill'></i>
+                                        </Avatar>
+                                        <Typography textAlign='center'>Light Theme</Typography>
+                                    </>
+                                )}
+                                {themeMode === 'light' && (
+                                    <>
+                                        <Avatar sx={{ marginRight: '10px' }}>
+                                            <i className='ri-moon-clear-fill'></i>
+                                        </Avatar>
+                                        <Typography textAlign='center'>Dark Theme</Typography>
+                                    </>
+                                )}
+                            </MenuItem>
+                            <MenuItem sx={menuItemStyles}>
+                                <Avatar sx={{ marginRight: '10px' }}>
+                                    <i className='icon ri-settings-2-fill'></i>
+                                </Avatar>
+                                <Typography textAlign='center'>Settings</Typography>
+                            </MenuItem>
                             <MenuItem sx={menuItemStyles}>
                                 <Avatar sx={{ marginRight: '10px' }}>
                                     <i className='icon ri-logout-box-fill'></i>

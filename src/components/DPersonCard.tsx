@@ -2,7 +2,7 @@ import { Avatar, Box, Typography, alpha } from '@mui/material';
 import { useTheme } from '@mui/system';
 import React from 'react';
 
-const DPersonCard = () => {
+const DPersonCard = ({ item }: any) => {
     const theme = useTheme();
     return (
         <Box sx={{ maxWidth: '140px' }}>
@@ -24,10 +24,9 @@ const DPersonCard = () => {
                         justifyContent: 'center',
                         alignItems: 'center',
                     }}
-                    alt='John Doe'
-                >
-                    D
-                </Avatar>
+                    src={item.image}
+                    alt={item.name}
+                />
             </Box>
             <Box
                 sx={{
@@ -40,7 +39,7 @@ const DPersonCard = () => {
                     overflow: 'hidden',
                 }}
             >
-                <Typography variant='body1'>Tom Hardy</Typography>
+                <Typography noWrap variant='body1'>{item.name}</Typography>
                 <Typography
                     noWrap
                     sx={{ color: alpha(theme.palette.text.primary, 0.7), fontWeight: 'bold' }}
@@ -49,7 +48,7 @@ const DPersonCard = () => {
                     As
                 </Typography>
                 <Typography sx={{ width: 'calc(100% - 20px)' }} noWrap variant='body2'>
-                    Some Guy / Avatar
+                    {item.avatar}
                 </Typography>
                 <Box
                     sx={{

@@ -23,13 +23,11 @@
     scrollbar-color: #33ffc2 #06131c;
 }
 *::-webkit-scrollbar {
-    width: 9px;
+    width: 3px;
 }
 *::-webkit-scrollbar-track {
     background: #06131c;
 }
 *::-webkit-scrollbar-thumb {
     background-color: #33ffc2;
-    border-radius: 8px;
-    border: 1px outset #06131c;
 }

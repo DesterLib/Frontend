@@ -5,11 +5,10 @@ import React, { useEffect, useState } from 'react';
 
 import DBottomBar from '../components/DBottomBar';
 import DCarousel from '../components/DCarousel';
-import DNavbar from '../components/DNavbar';
 import DSlider from '../components/DSlider';
 import { APP_API_PATH } from '../config';
 
-const Home = () => {
+function Home() {
     const [isLoaded, setIsLoaded] = useState<boolean>(false);
     const [data, setData] = useState<any>({});
     const theme = useTheme();
@@ -26,7 +25,6 @@ const Home = () => {
 
     return isLoaded ? (
         <Box>
-            <DNavbar />
             <Box
                 sx={{
                     marginTop: 'calc(60px + 20px)',
@@ -38,10 +36,10 @@ const Home = () => {
             >
                 <React.Fragment>
                     <DCarousel itemData={data.data.carousel} />
-                    <DSlider title='Popular Movies' itemData={data.data.top_rated_movies} />
-                    <DSlider title='Newly Added Movies' itemData={data.data.newly_added_movies} />
-                    <DSlider title='Newly Added Episodes' itemData={data.data.new_episodes} />
-                    <DSlider title='Popular TV Shows' itemData={data.data.top_rated_series} />
+                    <DSlider variant='item' title='Popular Movies' itemData={data.data.top_rated_movies} />
+                    <DSlider variant='item' title='Newly Added Movies' itemData={data.data.newly_added_movies} />
+                    <DSlider variant='item' title='Newly Added Episodes' itemData={data.data.new_episodes} />
+                    <DSlider variant='item' title='Popular TV Shows' itemData={data.data.top_rated_series} />
                 </React.Fragment>
             </Box>
             <DBottomBar />
@@ -59,6 +57,6 @@ const Home = () => {
             <CircularProgress />
         </Box>
     );
-};
+}
 
 export default Home;
