@@ -7,6 +7,7 @@ import DNavbar from './components/DNavbar';
 import Home from './pages/Home';
 import Movie from './pages/Movie';
 import NotFoundPage from './pages/NotFoundPage';
+import Settings from './pages/Settings';
 import darkTheme from './theme/darkTheme';
 import lightTheme from './theme/lightTheme';
 
@@ -101,6 +102,7 @@ const App = () => {
                         <Route path='*' element={<NotFoundPage />} />
                         <Route path='/' element={<Home />} />
                         <Route path='/movie' element={<Movie />} />
+                        <Route path='/settings' element={<Settings />} />
                     </Routes>
                 </BrowserRouter>
             </ThemeProvider>

@@ -8,7 +8,7 @@ import DCarousel from '../components/DCarousel';
 import DSlider from '../components/DSlider';
 import { APP_API_PATH } from '../config';
 
-function Home() {
+const Home = () => {
     const [isLoaded, setIsLoaded] = useState<boolean>(false);
     const [data, setData] = useState<any>({});
     const theme = useTheme();
@@ -36,10 +36,26 @@ function Home() {
             >
                 <React.Fragment>
                     <DCarousel itemData={data.data.carousel} />
-                    <DSlider variant='item' title='Popular Movies' itemData={data.data.top_rated_movies} />
-                    <DSlider variant='item' title='Newly Added Movies' itemData={data.data.newly_added_movies} />
-                    <DSlider variant='item' title='Newly Added Episodes' itemData={data.data.new_episodes} />
-                    <DSlider variant='item' title='Popular TV Shows' itemData={data.data.top_rated_series} />
+                    <DSlider
+                        variant='item'
+                        title='Popular Movies'
+                        itemData={data.data.top_rated_movies}
+                    />
+                    <DSlider
+                        variant='item'
+                        title='Newly Added Movies'
+                        itemData={data.data.newly_added_movies}
+                    />
+                    <DSlider
+                        variant='item'
+                        title='Newly Added Episodes'
+                        itemData={data.data.new_episodes}
+                    />
+                    <DSlider
+                        variant='item'
+                        title='Popular TV Shows'
+                        itemData={data.data.top_rated_series}
+                    />
                 </React.Fragment>
             </Box>
             <DBottomBar />
@@ -57,6 +73,6 @@ function Home() {
             <CircularProgress />
         </Box>
     );
-}
+};
 
 export default Home;

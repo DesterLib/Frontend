@@ -1,5 +1,6 @@
 import { Box, Typography } from '@mui/material';
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import Error from '../assets/error.png';
 import DButton from '../components/DButton';
@@ -14,7 +15,7 @@ const NotFoundPage = () => {
                 justifyContent: 'center',
                 alignItems: 'center',
                 flexDirection: 'column',
-                padding: '20px'
+                padding: '20px',
             }}
         >
             <Box>
@@ -36,7 +37,7 @@ const NotFoundPage = () => {
                         background: '-webkit-linear-gradient(#14dca0, #03d7fc)',
                         '-webkit-background-clip': 'text',
                         '-webkit-text-fill-color': 'transparent',
-                        paddingBottom: '10px'
+                        paddingBottom: '10px',
                     }}
                 >
                     404 - You Lost ?
@@ -44,19 +45,20 @@ const NotFoundPage = () => {
                 <Box
                     sx={{ display: 'flex', justifyContent: 'space-between', paddingBottom: '5px' }}
                 >
-                    <DButton
-                        href='/'
-                        variant='contained'
-                        color='primary'
-                        startIcon={
-                            <i
-                                style={{ fontSize: '16px', fontWeight: 'bold' }}
-                                className='ri-home-line'
-                            ></i>
-                        }
-                    >
-                        Go Home
-                    </DButton>
+                    <Link to='/' style={{ textDecoration: 'none' }}>
+                        <DButton
+                            variant='contained'
+                            color='primary'
+                            startIcon={
+                                <i
+                                    style={{ fontSize: '16px', fontWeight: 'bold' }}
+                                    className='ri-home-line'
+                                ></i>
+                            }
+                        >
+                            Go Home
+                        </DButton>
+                    </Link>
                     <DButton
                         href='/'
                         variant='contained'

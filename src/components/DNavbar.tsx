@@ -214,6 +214,7 @@ const DNavbar = ({ colorModeContext, themeMode }: any) => {
                             <Avatar alt='Alken Dester' />
                         </IconButton>
                         <Menu
+                            disableScrollLock={true}
                             sx={menuStyles}
                             id='menu-appbar'
                             anchorEl={userMenu}
@@ -244,12 +245,14 @@ const DNavbar = ({ colorModeContext, themeMode }: any) => {
                                 </Box>
                             </MenuItem>
                             <Divider />
-                            <MenuItem sx={menuItemStyles}>
-                                <Avatar sx={{ marginRight: '10px' }}>
-                                    <i className='ri-user-fill'></i>
-                                </Avatar>
-                                <Typography textAlign='center'>Account</Typography>
-                            </MenuItem>
+                            <Link to='/account' style={{ textDecoration: 'none' }}>
+                                <MenuItem sx={menuItemStyles}>
+                                    <Avatar sx={{ marginRight: '10px' }}>
+                                        <i className='ri-user-fill'></i>
+                                    </Avatar>
+                                    <Typography textAlign='center'>Account</Typography>
+                                </MenuItem>
+                            </Link>
                             <MenuItem onClick={colorMode.toggleColorMode} sx={menuItemStyles}>
                                 {themeMode === 'dark' && (
                                     <>
@@ -268,12 +271,14 @@ const DNavbar = ({ colorModeContext, themeMode }: any) => {
                                     </>
                                 )}
                             </MenuItem>
-                            <MenuItem sx={menuItemStyles}>
-                                <Avatar sx={{ marginRight: '10px' }}>
-                                    <i className='icon ri-settings-2-fill'></i>
-                                </Avatar>
-                                <Typography textAlign='center'>Settings</Typography>
-                            </MenuItem>
+                            <Link to='/settings' style={{ textDecoration: 'none' }}>
+                                <MenuItem sx={menuItemStyles}>
+                                    <Avatar sx={{ marginRight: '10px' }}>
+                                        <i className='icon ri-settings-2-fill'></i>
+                                    </Avatar>
+                                    <Typography textAlign='center'>Settings</Typography>
+                                </MenuItem>
+                            </Link>
                             <MenuItem sx={menuItemStyles}>
                                 <Avatar sx={{ marginRight: '10px' }}>
                                     <i className='icon ri-logout-box-fill'></i>
