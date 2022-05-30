@@ -25,3 +25,4 @@ yarn-error.log*
 # custom for alken
 .gitignore
 /src/config.ts
+.env
