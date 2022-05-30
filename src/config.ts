@@ -12,7 +12,6 @@ const APP_API_VERSION_PATH = '/api/v1';
 const APP_NO_IMAGE_POSTER = noImagePoster;
 const APP_POSTER_QUALITY = 'w500';
 const APP_BACKDROP_QUALITY = 'w1280';
-const APP_DEFAULT_LANGUAGE = 'en';
 
 export {
     APP_LOGO_LIGHT,
