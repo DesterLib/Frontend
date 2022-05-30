@@ -39,7 +39,12 @@ const Home = () => {
                     <DSlider
                         variant='item'
                         title='Popular Movies'
-                        itemData={data.data.top_rated_movies}
+                        itemData={data.data.most_popular_movies}
+                    />
+                    <DSlider
+                        variant='item'
+                        title='Popular TV Series'
+                        itemData={data.data.most_popular_series}
                     />
                     <DSlider
                         variant='item'
@@ -49,11 +54,16 @@ const Home = () => {
                     <DSlider
                         variant='item'
                         title='Newly Added Episodes'
-                        itemData={data.data.new_episodes}
+                        itemData={data.data.newly_added_episodes}
                     />
                     <DSlider
                         variant='item'
-                        title='Popular TV Shows'
+                        title='Top Rated Movies'
+                        itemData={data.data.top_rated_Movies}
+                    />
+                    <DSlider
+                        variant='item'
+                        title='Top Rated TV Series'
                         itemData={data.data.top_rated_series}
                     />
                 </React.Fragment>
