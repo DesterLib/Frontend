@@ -102,7 +102,7 @@ const App = () => {
                         <Route path='*' element={<NotFoundPage />} />
                         <Route path='/' element={<Home />} />
                         <Route path='/movie/:id' element={<Movie />} />
-                        <Route path='/settings' element={<Settings />} />
+                        <Route path='/settings/*' element={<Settings />} />
                     </Routes>
                 </BrowserRouter>
             </ThemeProvider>

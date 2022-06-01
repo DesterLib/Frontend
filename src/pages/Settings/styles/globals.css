@@ -1,0 +1,37 @@
+.json-string {
+    color: rgb(255, 167, 60);
+}
+.json-number {
+    color: rgb(60, 161, 255);
+}
+.json-boolean {
+    color: rgb(138, 138, 255);
+}
+.json-null {
+    color: rgb(255, 0, 0);
+}
+.json-key {
+    color: rgb(20, 220, 160);
+}
+.json-quotes {
+    color: rgb(255, 167, 60);
+}
+
+* {
+    scrollbar-width: auto;
+    scrollbar-color: #14dca0 #06131c;
+}
+
+*::-webkit-scrollbar {
+    width: 11px;
+}
+
+*::-webkit-scrollbar-track {
+    background: #06131c;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: #14dca0;
+    border-radius: 8px;
+    border: 1.5px outset #06131c;
+}
