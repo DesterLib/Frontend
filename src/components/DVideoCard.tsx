@@ -84,6 +84,7 @@ const ItemImage = styled('img')(() => ({
 
 const DVideoCard = ({ item }: any) => {
     const [openModalState, setOpenModalState] = React.useState(false);
+    // eslint-disable-next-line
     const openInfoModal = (event: any) => {
         event.preventDefault();
         setOpenModalState(true);

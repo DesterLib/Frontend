@@ -5,7 +5,7 @@ const DSpacer = styled('div')(({ theme }) => ({
     backgroundColor: theme.palette.primary.main,
     height: '5px',
     width: '5px',
-    margin: '8px'
+    margin: '8px',
 }));
 
 export default DSpacer;

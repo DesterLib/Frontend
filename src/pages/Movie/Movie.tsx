@@ -1,11 +1,13 @@
 import Box from '@mui/material/Box';
 import Chip from '@mui/material/Chip';
+import CircularProgress from '@mui/material/CircularProgress';
 import Grid from '@mui/material/Grid';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import { alpha } from '@mui/material/styles';
 import { useTheme } from '@mui/system';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import useResizeObserver from 'use-resize-observer';
 
@@ -14,44 +16,25 @@ import DComment from '../../components/DComment';
 import DItemLogo from '../../components/DItemLogo';
 import DSlider from '../../components/DSlider';
 import DSpacer from '../../components/DSpacer';
+import { APP_API_PATH, APP_API_VERSION_PATH } from '../../config';
 import { MainWrapper } from './MoviePageComponents';
-
-const people = [
-    {
-        id: 1,
-        name: 'Sandra Oh',
-        avatar: 'Ming (voice)',
-        image: 'https://www.themoviedb.org/t/p/w276_and_h350_face/zU8vjebHxcP60ESEL5Ok68KWZvj.jpg',
-    },
-    {
-        id: 2,
-        name: 'Rosalie Chiang',
-        avatar: 'Meilin "Mei" Lee (voice)',
-        image: 'https://www.themoviedb.org/t/p/w276_and_h350_face/cbEWkQM0FS9vzv07JFErCk0YKkx.jpg',
-    },
-    {
-        id: 3,
-        name: 'Ava Morse',
-        avatar: 'Miriam (voice)',
-        image: 'https://www.themoviedb.org/t/p/w276_and_h350_face/e3bkf5MHPzqvSrJALr78pp0DCWt.jpg',
-    },
-    {
-        id: 4,
-        name: 'Maitreyi Ramakrishnan',
-        avatar: 'Priya (voice)',
-        image: 'https://www.themoviedb.org/t/p/w276_and_h350_face/jBFqjwvngaz6ZXEhNd6dMeZ0W6c.jpg',
-    },
-    {
-        id: 5,
-        name: 'Hyein Park',
-        avatar: 'Abby (voice)',
-        image: 'https://www.themoviedb.org/t/p/w276_and_h350_face/aud7tBslfKn2qIrKCbltxpXoOTi.jpg',
-    },
-];
 
 const Movie = () => {
     const { ref, height } = useResizeObserver<HTMLDivElement>();
+    const [isLoaded, setIsLoaded] = useState<boolean>(false);
+    const [data, setData] = useState<any>({});
     const theme = useTheme();
+    const { id } = useParams();
+
+    useEffect(() => {
+        const getData = async () => {
+            const res = await fetch(`${APP_API_PATH}${APP_API_VERSION_PATH}/movie?id=${id}`);
+            const data = (await res.json()) || {};
+            setData(data.results || { ok: false });
+            setIsLoaded(true);
+        };
+        getData();
+    }, []);
 
     const videos = [
         {
@@ -65,12 +48,12 @@ const Movie = () => {
         },
     ];
 
-    return (
+    return isLoaded ? (
         <Box>
             <Grid container>
                 <MainWrapper
                     ref={ref}
-                    url='https://www.themoviedb.org/t/p/w1066_and_h600_bestv2/fOy2Jurz9k6RnJnMUMRDAgBwru2.jpg'
+                    url={`https://www.themoviedb.org/t/p/w1066_and_h600_bestv2/${data.backdrop_url}`}
                 />
                 <Box
                     sx={{
@@ -97,9 +80,9 @@ const Movie = () => {
                     }}
                 >
                     <Typography sx={{ fontWeight: '500', paddingBottom: '15px' }} variant='h4'>
-                        Turning Red
+                        {data.title}
                     </Typography>
-                    <DItemLogo src='https://www.themoviedb.org/t/p/w1280/ut7WBlw5q0odVHIpZSRgmm6Trkr.png' />
+                    <DItemLogo src={`https://www.themoviedb.org/t/p/w1280/${data.logo}`} />
                     <Grid container>
                         <Grid item></Grid>
                         <Grid item></Grid>
@@ -160,7 +143,7 @@ const Movie = () => {
                         <img
                             style={{ borderRadius: '15px' }}
                             width='100%'
-                            src='https://www.themoviedb.org/t/p/w1280/qsdjk9oAKSQMWs0Vt5Pyfh6O4GZ.jpg'
+                            src={`https://www.themoviedb.org/t/p/w1280/${data.poster_url}`}
                             alt=''
                         />
                     </Box>
@@ -176,40 +159,22 @@ const Movie = () => {
                         >
                             Description
                         </Typography>
-                        <Typography variant='body2'>
-                            Thirteen-year-old Mei is experiencing the awkwardness of being a
-                            teenager with a twist – when she gets too excited, she transforms into a
-                            giant red panda.
-                        </Typography>
+                        <Typography variant='body2'>{data.description}</Typography>
                         <Box sx={{ marginTop: '20px' }}>
-                            <Link style={{ textDecoration: 'none' }} to='search?genre=animation'>
-                                <Chip
-                                    clickable
-                                    sx={{ margin: theme.spacing(0.5) }}
-                                    label='Animation'
-                                />
-                            </Link>
-                            <Link style={{ textDecoration: 'none' }} to='search?genre=family'>
-                                <Chip
-                                    clickable
-                                    sx={{ margin: theme.spacing(0.5) }}
-                                    label='Family'
-                                />
-                            </Link>
-                            <Link style={{ textDecoration: 'none' }} to='search?genre=comedy'>
-                                <Chip
-                                    clickable
-                                    sx={{ margin: theme.spacing(0.5) }}
-                                    label='Comedy'
-                                />
-                            </Link>
-                            <Link style={{ textDecoration: 'none' }} to='search?genre=fantasy'>
-                                <Chip
-                                    clickable
-                                    sx={{ margin: theme.spacing(0.5) }}
-                                    label='Fantasy'
-                                />
-                            </Link>
+                            {data.genres &&
+                                data.genres.map((genre: any) => (
+                                    <Link
+                                        style={{ textDecoration: 'none' }}
+                                        to={`search?genre=${genre.name}`}
+                                        key={genre.id}
+                                    >
+                                        <Chip
+                                            clickable
+                                            sx={{ margin: theme.spacing(0.5) }}
+                                            label={genre.name}
+                                        />
+                                    </Link>
+                                ))}
                         </Box>
                         <Grid container p={2}>
                             <Grid item md={7} p={2}>
@@ -346,10 +311,10 @@ const Movie = () => {
                 </Grid>
             </Grid>
             <Box>
-                <DSlider variant='person' title='Cast' itemData={people} />
+                <DSlider variant='people' title='Cast' itemData={data.cast} />
             </Box>
             <Box>
-                <DSlider variant='item' title='Recommendation' itemData={people} />
+                <DSlider variant='item' title='Recommendation' itemData={[]} />
             </Box>
             <Box>
                 <DSlider variant='video' title='Videos' itemData={videos} />
@@ -369,6 +334,18 @@ const Movie = () => {
                     <DComment />
                 </Box>
             </Box>
+        </Box>
+    ) : (
+        <Box
+            sx={{
+                width: '100%',
+                height: '100vh',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+            }}
+        >
+            <CircularProgress />
         </Box>
     );
 };

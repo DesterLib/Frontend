@@ -47,7 +47,7 @@ const DSlider = ({ title, itemData, variant }: any) => {
                             </IconButton>
                         </Box>
                     </Box>
-                    {variant === ('item' || 'people') && (
+                    {(variant === 'item' || variant === 'people') && (
                         <DSwiper
                             grabCursor={true}
                             watchSlidesProgress={true}
@@ -89,7 +89,7 @@ const DSlider = ({ title, itemData, variant }: any) => {
                             {itemData.map((item: any) => (
                                 <SwiperSlide key={item.id}>
                                     {variant === 'item' ? <DCard item={item} /> : null}
-                                    {variant === 'person' ? <DPersonCard item={item} /> : null}
+                                    {variant === 'people' ? <DPersonCard item={item} /> : null}
                                 </SwiperSlide>
                             ))}
                         </DSwiper>

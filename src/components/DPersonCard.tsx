@@ -27,7 +27,7 @@ const DPersonCard = ({ item }: any) => {
                         justifyContent: 'center',
                         alignItems: 'center',
                     }}
-                    src={item.image}
+                    src={`https://image.tmdb.org/t/p/w300${item.profile_path}`}
                     alt={item.name}
                 />
             </Box>
@@ -53,7 +53,7 @@ const DPersonCard = ({ item }: any) => {
                     As
                 </Typography>
                 <Typography sx={{ width: 'calc(100% - 20px)' }} noWrap variant='body2'>
-                    {item.avatar}
+                    {item.character}
                 </Typography>
                 <Box
                     sx={{
