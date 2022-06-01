@@ -1,16 +1,14 @@
-import {
-    Avatar,
-    IconButton,
-    List,
-    ListItemAvatar,
-    ListItemButton,
-    ListItemText,
-    Typography,
-} from '@mui/material';
+import Avatar from '@mui/material/Avatar';
 import Grid from '@mui/material/Grid';
+import IconButton from '@mui/material/IconButton';
 import InputBase from '@mui/material/InputBase';
+import List from '@mui/material/List';
+import ListItemAvatar from '@mui/material/ListItemAvatar';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemText from '@mui/material/ListItemText';
+import Typography from '@mui/material/Typography';
 import { alpha, styled } from '@mui/material/styles';
-import * as React from 'react';
+import React from 'react';
 
 import { APP_API_PATH, APP_API_VERSION_PATH, APP_POSTER_QUALITY } from '../config';
 import DInfoModal from './DInfoModal';
@@ -141,10 +139,18 @@ const SearchCardContainer = (props: any) => {
                                         primary={item.title}
                                         secondary={(item.release_date || '').slice(0, 4)}
                                     />
-                                    <IconButton onClick={openInfoModal} onContextMenu={(e) => e.preventDefault()} aria-label='more'>
+                                    <IconButton
+                                        onClick={openInfoModal}
+                                        onContextMenu={(e) => e.preventDefault()}
+                                        aria-label='more'
+                                    >
                                         <i className='ri-more-2-fill'></i>
                                     </IconButton>
-                                    <DInfoModal item={item} currentState={openModalState} closeInfoModal={closeInfoModal} />
+                                    <DInfoModal
+                                        item={item}
+                                        currentState={openModalState}
+                                        closeInfoModal={closeInfoModal}
+                                    />
                                 </ListItemButton>
                             ))}
                         </List>
@@ -197,10 +203,18 @@ const SearchCardContainer = (props: any) => {
                                         primary={item.title}
                                         secondary={(item.release_date || '').slice(0, 4)}
                                     />
-                                    <IconButton onClick={openInfoModal} onContextMenu={(e) => e.preventDefault()} aria-label='more'>
+                                    <IconButton
+                                        onClick={openInfoModal}
+                                        onContextMenu={(e) => e.preventDefault()}
+                                        aria-label='more'
+                                    >
                                         <i className='ri-more-2-fill'></i>
                                     </IconButton>
-                                    <DInfoModal item={item} currentState={openModalState} closeInfoModal={closeInfoModal} />
+                                    <DInfoModal
+                                        item={item}
+                                        currentState={openModalState}
+                                        closeInfoModal={closeInfoModal}
+                                    />
                                 </ListItemButton>
                             ))}
                         </List>

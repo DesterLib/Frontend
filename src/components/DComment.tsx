@@ -1,5 +1,7 @@
 import { Avatar, Typography } from '@mui/material';
-import { Box, useTheme } from '@mui/system';
+import Box from '@mui/material/Box';
+import { alpha } from '@mui/material/styles';
+import { useTheme } from '@mui/system';
 import React from 'react';
 
 const DComment = () => {
@@ -7,7 +9,13 @@ const DComment = () => {
     return (
         <Box sx={{ display: 'flex' }}>
             <Box
-                sx={{ width: 'fit-content', height: '100%', padding: '10px', textAlign: 'center' }}
+                sx={{
+                    width: 'fit-content',
+                    height: '100%',
+                    padding: '10px',
+                    textAlign: 'center',
+                    marginRight: '20px',
+                }}
             >
                 <Box
                     sx={{
@@ -23,7 +31,13 @@ const DComment = () => {
                 </Box>
                 <Typography variant='body1'>John Doe</Typography>
             </Box>
-            <Box sx={{ padding: '10px' }}>
+            <Box
+                sx={{
+                    padding: '20px',
+                    backgroundColor: alpha('#193F4F', 0.4),
+                    borderRadius: '15px',
+                }}
+            >
                 <Box
                     sx={{
                         display: 'flex',
@@ -55,7 +69,7 @@ const DComment = () => {
                         }}
                     >
                         <i style={{ color: '#FFD333' }} className='ri-star-fill'></i>
-                        <Typography sx={{ paddingLeft: '5px' }} variant='body2'>
+                        <Typography sx={{ padding: '0px 7px' }} variant='body2'>
                             7.1
                         </Typography>
                     </Box>

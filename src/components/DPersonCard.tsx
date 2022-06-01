@@ -1,4 +1,7 @@
-import { Avatar, Box, Typography, alpha } from '@mui/material';
+import Avatar from '@mui/material/Avatar';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import { alpha } from '@mui/material/styles';
 import { useTheme } from '@mui/system';
 import React from 'react';
 
@@ -39,7 +42,9 @@ const DPersonCard = ({ item }: any) => {
                     overflow: 'hidden',
                 }}
             >
-                <Typography noWrap variant='body1'>{item.name}</Typography>
+                <Typography noWrap variant='body1'>
+                    {item.name}
+                </Typography>
                 <Typography
                     noWrap
                     sx={{ color: alpha(theme.palette.text.primary, 0.7), fontWeight: 'bold' }}

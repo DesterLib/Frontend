@@ -1,11 +1,13 @@
-import { IconButton } from '@mui/material';
+import Box from '@mui/material/Box';
+import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import { Box, styled } from '@mui/system';
+import { styled } from '@mui/material/styles';
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 import DCard from './DCard';
 import DPersonCard from './DPersonCard';
+import DVideoCard from './DVideoCard';
 
 const DSwiper = styled(Swiper)(() => ({
     padding: '20px',
@@ -45,51 +47,99 @@ const DSlider = ({ title, itemData, variant }: any) => {
                             </IconButton>
                         </Box>
                     </Box>
-                    <DSwiper
-                        grabCursor={true}
-                        watchSlidesProgress={true}
-                        navigation={{
-                            prevEl: navigationPrevRef.current,
-                            nextEl: navigationNextRef.current,
-                        }}
-                        onBeforeInit={(swiper: any) => {
-                            swiper.params.navigation.prevEl = navigationPrevRef.current;
-                            swiper.params.navigation.nextEl = navigationNextRef.current;
-                        }}
-                        breakpoints={{
-                            '240': {
-                                slidesPerView: 2,
-                                spaceBetween: 10,
-                            },
-                            '385': {
-                                slidesPerView: 2,
-                                spaceBetween: 10,
-                            },
-                            '570': {
-                                slidesPerView: 4,
-                                spaceBetween: 10,
-                            },
-                            '760': {
-                                slidesPerView: 5,
-                                spaceBetween: 10,
-                            },
-                            '940': {
-                                slidesPerView: 6,
-                                spaceBetween: 20,
-                            },
-                            '1194': {
-                                slidesPerView: 7,
-                                spaceBetween: 20,
-                            },
-                        }}
-                    >
-                        {itemData.map((item: any) => (
-                            <SwiperSlide key={item.id}>
-                                {variant === 'item' ? <DCard item={item} /> : null}
-                                {variant === 'person' ? <DPersonCard item={item} /> : null}
-                            </SwiperSlide>
-                        ))}
-                    </DSwiper>
+                    {variant === ('item' || 'people') && (
+                        <DSwiper
+                            grabCursor={true}
+                            watchSlidesProgress={true}
+                            navigation={{
+                                prevEl: navigationPrevRef.current,
+                                nextEl: navigationNextRef.current,
+                            }}
+                            onBeforeInit={(swiper: any) => {
+                                swiper.params.navigation.prevEl = navigationPrevRef.current;
+                                swiper.params.navigation.nextEl = navigationNextRef.current;
+                            }}
+                            breakpoints={{
+                                '240': {
+                                    slidesPerView: 2,
+                                    spaceBetween: 10,
+                                },
+                                '385': {
+                                    slidesPerView: 2,
+                                    spaceBetween: 10,
+                                },
+                                '570': {
+                                    slidesPerView: 4,
+                                    spaceBetween: 10,
+                                },
+                                '760': {
+                                    slidesPerView: 5,
+                                    spaceBetween: 10,
+                                },
+                                '940': {
+                                    slidesPerView: 6,
+                                    spaceBetween: 20,
+                                },
+                                '1194': {
+                                    slidesPerView: 7,
+                                    spaceBetween: 20,
+                                },
+                            }}
+                        >
+                            {itemData.map((item: any) => (
+                                <SwiperSlide key={item.id}>
+                                    {variant === 'item' ? <DCard item={item} /> : null}
+                                    {variant === 'person' ? <DPersonCard item={item} /> : null}
+                                </SwiperSlide>
+                            ))}
+                        </DSwiper>
+                    )}
+                    {variant === 'video' && (
+                        <DSwiper
+                            grabCursor={true}
+                            watchSlidesProgress={true}
+                            navigation={{
+                                prevEl: navigationPrevRef.current,
+                                nextEl: navigationNextRef.current,
+                            }}
+                            onBeforeInit={(swiper: any) => {
+                                swiper.params.navigation.prevEl = navigationPrevRef.current;
+                                swiper.params.navigation.nextEl = navigationNextRef.current;
+                            }}
+                            breakpoints={{
+                                '240': {
+                                    slidesPerView: 1,
+                                    spaceBetween: 10,
+                                },
+                                '385': {
+                                    slidesPerView: 1,
+                                    spaceBetween: 10,
+                                },
+                                '570': {
+                                    slidesPerView: 2,
+                                    spaceBetween: 10,
+                                },
+                                '760': {
+                                    slidesPerView: 3,
+                                    spaceBetween: 10,
+                                },
+                                '940': {
+                                    slidesPerView: 3,
+                                    spaceBetween: 20,
+                                },
+                                '1194': {
+                                    slidesPerView: 4,
+                                    spaceBetween: 20,
+                                },
+                            }}
+                        >
+                            {itemData.map((item: any) => (
+                                <SwiperSlide key={item.id}>
+                                    {variant === 'video' ? <DVideoCard item={item} /> : null}
+                                </SwiperSlide>
+                            ))}
+                        </DSwiper>
+                    )}
                 </div>
             ) : null}
         </React.Fragment>

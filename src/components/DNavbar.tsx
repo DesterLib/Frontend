@@ -1,7 +1,7 @@
-import { Divider } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
+import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
@@ -279,12 +279,14 @@ const DNavbar = ({ colorModeContext, themeMode }: any) => {
                                     <Typography textAlign='center'>Settings</Typography>
                                 </MenuItem>
                             </Link>
-                            <MenuItem sx={menuItemStyles}>
-                                <Avatar sx={{ marginRight: '10px' }}>
-                                    <i className='icon ri-logout-box-fill'></i>
-                                </Avatar>
-                                <Typography textAlign='center'>Logout</Typography>
-                            </MenuItem>
+                            <Link to='/logout' style={{ textDecoration: 'none' }}>
+                                <MenuItem sx={menuItemStyles}>
+                                    <Avatar sx={{ marginRight: '10px' }}>
+                                        <i className='icon ri-logout-box-fill'></i>
+                                    </Avatar>
+                                    <Typography textAlign='center'>Logout</Typography>
+                                </MenuItem>
+                            </Link>
                         </Menu>
                     </Box>
                 </Toolbar>

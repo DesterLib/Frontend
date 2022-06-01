@@ -1,6 +1,6 @@
 import Button, { ButtonProps } from '@mui/material/Button';
 import { alpha } from '@mui/material/styles';
-import { styled } from '@mui/system';
+import { styled } from '@mui/material/styles';
 
 const DButton = styled(Button)<ButtonProps>(({ theme }) => ({
     borderRadius: 15,

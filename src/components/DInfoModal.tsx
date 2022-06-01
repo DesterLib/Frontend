@@ -1,4 +1,4 @@
-import { Chip } from '@mui/material';
+import Chip from '@mui/material/Chip';
 import Box from '@mui/material/Box';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
