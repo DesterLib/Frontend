@@ -2,27 +2,21 @@ import { Alert, Box, Button, Snackbar, TextField } from '@mui/material';
 import React, { useEffect } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 
-const GDrive = () => {
+const GDrive = (props: any) => {
     const [searchParams] = useSearchParams();
-
-    const tempAccessToken = localStorage.getItem('gdrive_accessToken') || '';
     const tempAuthCode = searchParams.get('code') || '';
-    const tempClientId = localStorage.getItem('gdrive_clientId') || '';
-    const tempClientSecret = localStorage.getItem('gdrive_clientSecret') || '';
-    const tempRefreshToken = localStorage.getItem('gdrive_refreshToken') || '';
 
-    const [accessToken, setAccessToken] = React.useState(tempAccessToken);
-    const [authCode] = React.useState(tempAuthCode);
-    const [clientId, setClientId] = React.useState(tempClientId);
-    const [clientSecret, setClientSecret] = React.useState(tempClientSecret);
-    const [refreshToken, setRefreshToken] = React.useState(tempRefreshToken);
+    const [refresh, setRefresh] = React.useState<number>(0);
+    const [authCode] = React.useState<string>(tempAuthCode);
     const [openSnackBar, setOpenSnackBar] = React.useState(
         !!new URLSearchParams(window.location.search).get('gdrive_accessToken'),
     );
 
+    const { config, updateConfig } = props;
+
     useEffect(() => {
         handleTokenFromQueryParams();
-        window.history.pushState({}, document.title, '/gdrive');
+        window.history.pushState({}, document.title, '/settings/gdrive');
     }, []);
 
     const handleTokenFromQueryParams = () => {
@@ -40,7 +34,7 @@ const GDrive = () => {
     const tradeAuthCode = async () => {
         const body = {
             grant_type: 'authorization_code',
-            redirect_uri: `${window.location.origin}/gdrive`,
+            redirect_uri: `${window.location.origin}/settings/gdrive`,
             code: authCode,
         };
         await requestTokens(body);
@@ -50,7 +44,9 @@ const GDrive = () => {
         const response = await fetch('https://accounts.google.com/o/oauth2/token', {
             method: 'POST',
             headers: {
-                Authorization: `Basic ${btoa(`${clientId}:${clientSecret}`)}`,
+                Authorization: `Basic ${btoa(
+                    `${config.gdrive.client_id}:${config.gdrive.client_secret}`,
+                )}`,
                 'Content-Type': 'application/x-www-form-urlencoded',
             },
             body: objToFormEncoded(body),
@@ -77,23 +73,31 @@ const GDrive = () => {
     };
 
     const handleChangeClientId = (event: any) => {
-        setClientId(event.target.value);
-        localStorage.setItem('gdrive_clientId', event.target.value);
+        var newConfig = config;
+        newConfig['client_id'] = event.target.value;
+        updateConfig(newConfig);
+        setRefresh(refresh + 1);
     };
 
     const handleChangeClientSecret = (event: any) => {
-        setClientSecret(event.target.value);
-        localStorage.setItem('gdrive_clientSecret', event.target.value);
+        var newConfig = config;
+        newConfig['client_secret'] = event.target.value;
+        updateConfig(newConfig);
+        setRefresh(refresh + 1);
     };
 
     const handleChangeAccessToken = (event: any) => {
-        setAccessToken(event.target.value);
-        localStorage.setItem('gdrive_accessToken', event.target.value);
+        var newConfig = config;
+        newConfig['access_token'] = event.target.value;
+        updateConfig(newConfig);
+        setRefresh(refresh + 1);
     };
 
     const handleChangeRefreshToken = (event: any) => {
-        setRefreshToken(event.target.value);
-        localStorage.setItem('gdrive_refreshToken', event.target.value);
+        var newConfig = config;
+        newConfig['refresh_token'] = event.target.value;
+        updateConfig(newConfig);
+        setRefresh(refresh + 1);
     };
 
     const textFieldStyles = {
@@ -112,10 +116,7 @@ const GDrive = () => {
                     All Tokens Generated Successfully!
                 </Alert>
             </Snackbar>
-            <Link
-                style={{ textDecoration: 'none', width: '100%', color: '#ffffff' }}
-                to='/gdrive/tokens'
-            >
+            <Link style={{ textDecoration: 'none', width: '100%', color: '#ffffff' }} to='tokens'>
                 <Button variant='contained' sx={{ marginBottom: '20px' }}>
                     Auto Generate Google Drive Tokens
                 </Button>
@@ -125,28 +126,28 @@ const GDrive = () => {
                     sx={textFieldStyles}
                     fullWidth
                     label='Client ID'
-                    value={clientId}
+                    value={config.client_id}
                     onChange={handleChangeClientId}
                 />
                 <TextField
                     sx={textFieldStyles}
                     fullWidth
                     label='Client Secret'
-                    value={clientSecret}
+                    value={config.client_secret}
                     onChange={handleChangeClientSecret}
                 />
                 <TextField
                     sx={textFieldStyles}
                     fullWidth
                     label='Access Token'
-                    value={accessToken}
+                    value={config.access_token}
                     onChange={handleChangeAccessToken}
                 />
                 <TextField
                     sx={textFieldStyles}
                     fullWidth
                     label='Refresh token'
-                    value={refreshToken}
+                    value={config.refresh_token}
                     onChange={handleChangeRefreshToken}
                 />
             </Box>

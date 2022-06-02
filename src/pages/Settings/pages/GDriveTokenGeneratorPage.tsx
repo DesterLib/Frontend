@@ -2,12 +2,11 @@ import { Box, Button, Typography } from '@mui/material';
 import TextField from '@mui/material/TextField';
 import React from 'react';
 
-const GDriveTokenGenerator = () => {
-    const tempClientId = localStorage.getItem('gdrive_clientId') || '';
-    const tempClientSecret = localStorage.getItem('gdrive_clientSecret') || '';
+const GDriveTokenGenerator = (props: any) => {
+    const { config } = props;
 
-    const [clientId, setClientId] = React.useState(tempClientId);
-    const [clientSecret, setClientSecret] = React.useState(tempClientSecret);
+    const [clientId, setClientId] = React.useState<string>(config.client_id || '');
+    const [clientSecret, setClientSecret] = React.useState<string>(config.client_secret || '');
 
     const objToFormEncoded = (object: object) => {
         return Object.entries(object)
@@ -19,7 +18,7 @@ const GDriveTokenGenerator = () => {
         event.preventDefault();
         const query = objToFormEncoded({
             response_type: 'code',
-            redirect_uri: `${window.location.origin}/gdrive`,
+            redirect_uri: `${window.location.origin}/settings/gdrive`,
             client_id: clientId,
             scope: 'https://www.googleapis.com/auth/drive',
             access_type: 'offline',
@@ -30,12 +29,10 @@ const GDriveTokenGenerator = () => {
 
     const handleChangeClientId = (event: any) => {
         setClientId(event.target.value);
-        localStorage.setItem('gdrive_clientId', event.target.value);
     };
 
     const handleChangeClientSecret = (event: any) => {
         setClientSecret(event.target.value);
-        localStorage.setItem('gdrive_clientSecret', event.target.value);
     };
 
     const boxContainer = {

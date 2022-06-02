@@ -1,7 +1,7 @@
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import { alpha, styled } from '@mui/material/styles';
-import React from 'react';
+import React, { useState } from 'react';
 
 import {
     APP_API_PATH,
@@ -117,7 +117,7 @@ const ItemImage = styled('img')(() => ({
 }));
 
 const DCard = ({ item }: any) => {
-    const [openModalState, setOpenModalState] = React.useState(false);
+    const [openModalState, setOpenModalState] = useState(false);
     const openInfoModal = (event: any) => {
         event.preventDefault();
         setOpenModalState(true);

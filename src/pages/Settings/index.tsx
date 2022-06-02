@@ -16,13 +16,13 @@ import UIPage from './pages/UIPage';
 
 const Settings = () => {
     const [isLoaded, setIsLoaded] = useState<boolean>(false);
-    const [data, setData] = useState<any>({});
+    const [config, setConfig] = useState<any>({});
 
     useEffect(() => {
         const getData = async () => {
             const res = await fetch(`${APP_API_PATH}${APP_API_VERSION_PATH}/settings`);
             const data = (await res.json()) || {};
-            setData(data.results || { ok: false });
+            setConfig(data.results || { ok: false });
             setIsLoaded(true);
         };
         getData();
@@ -44,19 +44,57 @@ const Settings = () => {
         },
     });
 
+    const setApp = (appConfig: any) => {
+        var newConfig = config;
+        newConfig['app'] = appConfig;
+        setConfig(newConfig);
+    };
+
+    const setCategories = (categoriesConfig: any) => {
+        var newConfig = config;
+        newConfig['categories'] = categoriesConfig;
+        setConfig(newConfig);
+    };
+
+    const setUi = (uiConfig: any) => {
+        var newConfig = config;
+        newConfig['ui'] = uiConfig;
+        setConfig(newConfig);
+    };
+
+    const setGdrive = (gdriveConfig: any) => {
+        var newConfig = config;
+        newConfig['gdrive'] = gdriveConfig;
+        setConfig(newConfig);
+    };
+
     return isLoaded ? (
         <ThemeProvider theme={theme}>
             <NavBar>
                 <Routes>
-                    <Route path='/' element={<HomePage data={data} />} />
-                    <Route path='/category' element={<CategoryPage data={data} />} />
-                    <Route path='/ui' element={<UIPage data={data} />} />
-                    <Route path='/gdrive' element={<GDrive data={data} />} />
+                    <Route
+                        path='/'
+                        element={<HomePage config={config.app} updateConfig={setApp} />}
+                    />
+                    <Route
+                        path='/category'
+                        element={
+                            <CategoryPage config={config.categories} updateConfig={setCategories} />
+                        }
+                    />
+                    <Route
+                        path='/ui'
+                        element={<UIPage config={config.io} updateConfig={setUi} />}
+                    />
+                    <Route
+                        path='/gdrive'
+                        element={<GDrive config={config.gdrive} updateConfig={setGdrive} />}
+                    />
                     <Route
                         path='/gdrive/tokens'
-                        element={<GDriveTokenGeneratorPage data={data} />}
+                        element={<GDriveTokenGeneratorPage config={config.gdrive} />}
                     />
-                    <Route path='/config' element={<GenerateConfigPage data={data} />} />
+                    <Route path='/config' element={<GenerateConfigPage data={config} />} />
                 </Routes>
             </NavBar>
         </ThemeProvider>

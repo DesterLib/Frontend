@@ -1,6 +1,6 @@
 import { CssBaseline, PaletteMode } from '@mui/material';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import React from 'react';
+import React, { createContext, useEffect, useMemo, useState } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import DNavbar from './components/DNavbar';
@@ -12,19 +12,19 @@ import darkTheme from './theme/darkTheme';
 import lightTheme from './theme/lightTheme';
 
 // eslint-disable-next-line
-const ColorModeContext = React.createContext({ toggleColorMode: () => {} });
+const ColorModeContext = createContext({ toggleColorMode: () => {} });
 
 const App = () => {
-    const [mode, setMode] = React.useState<PaletteMode>('dark');
+    const [mode, setMode] = useState<PaletteMode>('dark');
 
-    React.useEffect(() => {
+    useEffect(() => {
         document.title = 'DesterLib';
         let localTheme = localStorage.getItem('theme') || 'dark';
         localTheme = localTheme === 'light' ? 'light' : 'dark';
         setMode(localTheme as PaletteMode);
     }, []);
 
-    const colorMode = React.useMemo(
+    const colorMode = useMemo(
         () => ({
             toggleColorMode: () => {
                 let localTheme = localStorage.getItem('theme') || 'dark';
@@ -36,7 +36,7 @@ const App = () => {
         [],
     );
 
-    const theme = React.useMemo(
+    const theme = useMemo(
         () =>
             createTheme({
                 palette: {

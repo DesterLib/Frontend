@@ -13,82 +13,73 @@ import { Box } from '@mui/system';
 import React from 'react';
 
 const SingleCategory = (props: any) => {
-    const [isAdult, setIsAdult] = React.useState(false);
-    const [isAnime, setIsAnime] = React.useState(false);
-    const [categoryType, setCategoryType] = React.useState('');
-    const [categoryProvider, setCategoryProvider] = React.useState('');
-    const [categoryLanguage, setCategoryLanguage] = React.useState('');
-    const [categoryName, setCategoryName] = React.useState('');
-    const [categoryId, setCategoryId] = React.useState('');
-    const [categoryDriveId, setCategoryDriveId] = React.useState('');
+    const { config, index, updateConfig } = props;
+
+    const [refresh, setRefresh] = React.useState<number>(0);
     const [isInitial, setIsInitial] = React.useState(true);
 
     const handleChangeCategoryAdult = (event: any) => {
-        var adult;
+        var newConfig = config;
         if (typeof event == 'boolean') {
-            adult = event;
+            newConfig[index]['adult'] = event;
         } else {
-            adult = !isAdult;
+            newConfig[index]['adult'] = !newConfig[index].adult;
         }
-        setIsAdult(adult);
-        var importedCategories = JSON.parse(localStorage.getItem('categories') || '[]');
-        importedCategories[props.index]['adult'] = adult;
-        localStorage.setItem('categories', JSON.stringify(importedCategories));
+        updateConfig(newConfig);
+        setRefresh(refresh + 1);
     };
 
     const handleChangeCategoryAnime = (event: any) => {
-        var anime;
+        var newConfig = config;
         if (typeof event == 'boolean') {
-            anime = event;
+            newConfig[index]['anime'] = event;
         } else {
-            anime = !isAnime;
+            newConfig[index]['anime'] = !newConfig[index].anime;
         }
-        setIsAnime(anime);
-        var importedCategories = JSON.parse(localStorage.getItem('categories') || '[]');
-        importedCategories[props.index]['anime'] = anime;
-        localStorage.setItem('categories', JSON.stringify(importedCategories));
+        updateConfig(newConfig);
+        setRefresh(refresh + 1);
     };
 
     const handleChangeCategoryType = (event: any) => {
-        setCategoryType(event.target.value);
-        var importedCategories = JSON.parse(localStorage.getItem('categories') || '[]');
-        importedCategories[props.index]['type'] = event.target.value;
-        localStorage.setItem('categories', JSON.stringify(importedCategories));
+        var newConfig = config;
+        newConfig[index]['type'] = event.target.value;
+        updateConfig(newConfig);
+        setRefresh(refresh + 1);
     };
 
     const handleChangeCategoryLanguage = (event: any) => {
-        setCategoryLanguage(event.target.value);
-        var importedCategories = JSON.parse(localStorage.getItem('categories') || '[]');
-        importedCategories[props.index]['language'] = event.target.value;
-        localStorage.setItem('categories', JSON.stringify(importedCategories));
+        var newConfig = config;
+        newConfig[index]['language'] = event.target.value;
+        updateConfig(newConfig);
+        setRefresh(refresh + 1);
     };
 
     const handleChangeCategoryProvider = (event: any) => {
-        setCategoryProvider(event.target.value);
-        var importedCategories = JSON.parse(localStorage.getItem('categories') || '[]');
-        importedCategories[props.index]['provider'] = event.target.value;
-        localStorage.setItem('categories', JSON.stringify(importedCategories));
+        var newConfig = config;
+        newConfig[index]['provider'] = event.target.value;
+        updateConfig(newConfig);
+        setRefresh(refresh + 1);
     };
 
     const handleChangeCategoryName = (event: any) => {
-        setCategoryName(event.target.value);
-        var importedCategories = JSON.parse(localStorage.getItem('categories') || '[]');
-        importedCategories[props.index]['name'] = event.target.value;
-        localStorage.setItem('categories', JSON.stringify(importedCategories));
+        var newConfig = config;
+        newConfig[index]['name'] = event.target.value;
+        updateConfig(newConfig);
+        setRefresh(refresh + 1);
     };
 
     const handleChangeCategoryId = (event: any) => {
-        setCategoryId(event.target.value);
-        var importedCategories = JSON.parse(localStorage.getItem('categories') || '[]');
-        importedCategories[props.index]['id'] = event.target.value;
-        localStorage.setItem('categories', JSON.stringify(importedCategories));
+        var newConfig = config;
+        newConfig[index]['id'] = event.target.value;
+        updateConfig(newConfig);
+        setRefresh(refresh + 1);
     };
 
     const handleChangeCategoryDriveId = (event: any) => {
-        setCategoryDriveId(event.target.value);
-        var importedCategories = JSON.parse(localStorage.getItem('categories') || '[]');
-        importedCategories[props.index]['drive_id'] = event.target.value;
-        localStorage.setItem('categories', JSON.stringify(importedCategories));
+        var newConfig = config;
+        newConfig[index]['drive_id'] = event.target.value;
+        updateConfig(newConfig);
+        setRefresh(refresh + 1);
     };
 
     const textFieldStyles = {
@@ -96,29 +87,32 @@ const SingleCategory = (props: any) => {
     };
 
     if (isInitial && props.item) {
-        if (typeof props.item.adult == 'boolean') {
-            handleChangeCategoryAdult(props.item.adult);
+        if (typeof config[index].adult !== 'boolean') {
+            handleChangeCategoryAdult(false);
         }
-        if (typeof props.item.anime == 'boolean') {
-            handleChangeCategoryAnime(props.item.anime);
+        if (typeof config[index].anime !== 'boolean') {
+            handleChangeCategoryAnime(false);
         }
-        if (['movie', 'serie', 'music'].includes(props.item.type)) {
-            handleChangeCategoryType({ target: { value: props.item.type } });
+        if (config[index].type && !['movies', 'series', 'music'].includes(config[index].type)) {
+            handleChangeCategoryType({ target: { value: '' } });
         }
-        if (['en', 'hi', 'ja'].includes(props.item.language)) {
-            handleChangeCategoryLanguage({ target: { value: props.item.language } });
+        if (config[index].language && !['en', 'hi', 'ja'].includes(config[index].language)) {
+            handleChangeCategoryLanguage({ target: { value: '' } });
         }
-        if (['googledrive', 'onedrive', 'sharepoint'].includes(props.item.provider)) {
-            handleChangeCategoryProvider({ target: { value: props.item.provider } });
+        if (
+            config[index].provider &&
+            !['gdrive', 'onedrive', 'sharepoint'].includes(config[index].provider)
+        ) {
+            handleChangeCategoryProvider({ target: { value: '' } });
         }
-        if (typeof props.item.name == 'string') {
-            handleChangeCategoryName({ target: { value: props.item.name } });
+        if (typeof props.item.name !== 'string') {
+            handleChangeCategoryName({ target: { value: '' } });
         }
-        if (typeof props.item.id == 'string') {
-            handleChangeCategoryId({ target: { value: props.item.id } });
+        if (typeof props.item.id !== 'string') {
+            handleChangeCategoryId({ target: { value: '' } });
         }
-        if (typeof props.item.drive_id == 'string') {
-            handleChangeCategoryDriveId({ target: { value: props.item.drive_id } });
+        if (typeof props.item.drive_id !== 'string') {
+            handleChangeCategoryDriveId({ target: { value: '' } });
         }
         setIsInitial(false);
     } else if (isInitial) {
@@ -135,7 +129,7 @@ const SingleCategory = (props: any) => {
                             control={
                                 <Switch
                                     color='primary'
-                                    checked={isAdult}
+                                    checked={config[index].adult}
                                     onChange={handleChangeCategoryAdult}
                                 />
                             }
@@ -151,7 +145,7 @@ const SingleCategory = (props: any) => {
                             control={
                                 <Switch
                                     color='primary'
-                                    checked={isAnime}
+                                    checked={config[index].anime}
                                     onChange={handleChangeCategoryAnime}
                                 />
                             }
@@ -168,7 +162,7 @@ const SingleCategory = (props: any) => {
                         <Select
                             labelId='category-provider-label'
                             id='category-provider-select'
-                            value={categoryProvider}
+                            value={config[index].provider}
                             label='Provider'
                             onChange={handleChangeCategoryProvider}
                             sx={textFieldStyles}
@@ -185,13 +179,13 @@ const SingleCategory = (props: any) => {
                         <Select
                             labelId='category-type-label'
                             id='category-type-select'
-                            value={categoryType}
+                            value={config[index].type}
                             label='Type'
                             onChange={handleChangeCategoryType}
                             sx={textFieldStyles}
                         >
-                            <MenuItem value={'movie'}>Movies</MenuItem>
-                            <MenuItem value={'serie'}>TV Series</MenuItem>
+                            <MenuItem value={'movies'}>Movies</MenuItem>
+                            <MenuItem value={'series'}>TV Series</MenuItem>
                             <MenuItem value={'music'}>Music</MenuItem>
                         </Select>
                     </FormControl>
@@ -202,7 +196,7 @@ const SingleCategory = (props: any) => {
                         <Select
                             labelId='category-language-label'
                             id='category-language-select'
-                            value={categoryLanguage}
+                            value={config[index].language}
                             label='Language'
                             onChange={handleChangeCategoryLanguage}
                             sx={textFieldStyles}
@@ -222,20 +216,20 @@ const SingleCategory = (props: any) => {
                 sx={textFieldStyles}
                 fullWidth
                 label='Category Name'
-                value={categoryName}
+                value={config[index].name}
                 onChange={handleChangeCategoryName}
             />
             <TextField
                 sx={textFieldStyles}
                 fullWidth
                 label='Folder ID'
-                value={categoryId}
+                value={config[index].id}
                 onChange={handleChangeCategoryId}
             />
             <TextField
                 fullWidth
                 label='Drive ID'
-                value={categoryDriveId}
+                value={config[index].drive_id}
                 onChange={handleChangeCategoryDriveId}
             />
         </Box>

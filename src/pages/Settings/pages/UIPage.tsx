@@ -1,6 +1,8 @@
 import React from 'react';
 
-const UIPage = () => {
+const UIPage = (props: any) => {
+    const { config } = props;
+    console.log(config);
     return <div>UIPage</div>;
 };
 

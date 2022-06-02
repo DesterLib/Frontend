@@ -1,39 +1,40 @@
 import { Box, TextField } from '@mui/material';
 import React, { useState } from 'react';
 
-const HomePage = () => {
+const HomePage = (props: any) => {
     const textFiledStyles = {
         marginBottom: '20px',
     };
+    const [refresh, setRefresh] = useState<number>(0);
 
-    var tempAppName = localStorage.getItem('app_name') || '';
-    var tempAppTitle = localStorage.getItem('app_description') || '';
-    var tempAppDescription = localStorage.getItem('app_description') || '';
-    var tempAppDomain = localStorage.getItem('app_domain') || '';
-
-    const [appName, setAppName] = useState(tempAppName);
-    const [appTitle, setAppTitle] = useState(tempAppTitle);
-    const [appDescription, setAppDescription] = useState(tempAppDescription);
-    const [appDomain, setAppDomain] = useState(tempAppDomain);
+    const { config, updateConfig } = props;
 
     const handleChangeName = (event: any) => {
-        setAppName(event.target.value);
-        localStorage.setItem('app_name', event.target.value);
+        var newConfig = config;
+        newConfig['name'] = event.target.value;
+        updateConfig(newConfig);
+        setRefresh(refresh + 1);
     };
 
     const handleChangeTitle = (event: any) => {
-        setAppTitle(event.target.value);
-        localStorage.setItem('app_title', event.target.value);
+        var newConfig = config;
+        newConfig['title'] = event.target.value;
+        updateConfig(newConfig);
+        setRefresh(refresh + 1);
     };
 
     const handleChangeDescription = (event: any) => {
-        setAppDescription(event.target.value);
-        localStorage.setItem('app_description', event.target.value);
+        var newConfig = config;
+        newConfig['description'] = event.target.value;
+        updateConfig(newConfig);
+        setRefresh(refresh + 1);
     };
 
     const handleChangeDomain = (event: any) => {
-        setAppDomain(event.target.value);
-        localStorage.setItem('app_domain', event.target.value);
+        var newConfig = config;
+        newConfig['domain'] = event.target.value;
+        updateConfig(newConfig);
+        setRefresh(refresh + 1);
     };
 
     return (
@@ -45,7 +46,7 @@ const HomePage = () => {
                 label='App Name'
                 variant='outlined'
                 onChange={handleChangeName}
-                value={appName}
+                value={config.name}
             />
             <TextField
                 sx={textFiledStyles}
@@ -54,7 +55,7 @@ const HomePage = () => {
                 label='App Title'
                 variant='outlined'
                 onChange={handleChangeTitle}
-                value={appTitle}
+                value={config.title}
             />
             <TextField
                 sx={textFiledStyles}
@@ -63,7 +64,7 @@ const HomePage = () => {
                 label='App Description'
                 variant='outlined'
                 onChange={handleChangeDescription}
-                value={appDescription}
+                value={config.description}
             />
             <TextField
                 sx={textFiledStyles}
@@ -72,7 +73,7 @@ const HomePage = () => {
                 label='Domain'
                 variant='outlined'
                 onChange={handleChangeDomain}
-                value={appDomain}
+                value={config.domain}
             />
         </Box>
     );

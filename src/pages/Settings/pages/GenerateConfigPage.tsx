@@ -13,8 +13,10 @@ import {
 import parse from 'html-react-parser';
 import React, { useEffect } from 'react';
 
-const GenerateConfigPage = () => {
-    const [config, setConfig] = React.useState({});
+const GenerateConfigPage = (data: any) => {
+    var tempConfig = data.data || {};
+
+    const [config, setConfig] = React.useState(tempConfig);
     const [openSnackBar, setOpenSnackBar] = React.useState(false);
     const [errorMessage, setErrorMessage] = React.useState<string[]>([]);
     const [isOneLine, setIsOneLine] = React.useState<boolean>(false);
@@ -76,72 +78,32 @@ const GenerateConfigPage = () => {
     };
 
     const createConfig = () => {
-        const app_name = localStorage.getItem('app_name') || 'DesterLib';
-        const app_title =
-            localStorage.getItem('app_title') || 'DesterLib - A Powerful Media Interface';
-        const app_description =
-            localStorage.getItem('app_description') ||
-            'DesterLib is a powerful and lightweight media solution to interface your movie and TV libraries in a goddamn gorgeous way';
-        const app_domain = localStorage.getItem('app_domain') || '';
-        const gdrive_clientId = localStorage.getItem('gdrive_clientId') || '';
-        const gdrive_clientSecret = localStorage.getItem('gdrive_clientSecret') || '';
-        const gdrive_refreshToken = localStorage.getItem('gdrive_refreshToken') || '';
-        const gdrive_accessToken = localStorage.getItem('gdrive_accessToken') || '';
-
         var error = '';
+        var tempConfig = config;
 
-        if (!gdrive_clientId || !gdrive_clientSecret || !gdrive_refreshToken) {
-            error += 'Warning! The Google Drive section was not configured correctly!\n';
+        if (!config.app) {
+            tempConfig['app'] = {};
+            error += 'Warning! The home section was not configured!\n';
         }
-
-        var tempCategories = JSON.parse(localStorage.getItem('categories') || '[]');
-        if (tempCategories.length == 0) {
-            error += 'Warning! No categories were found! Go back to create some.\n';
-        } else {
-            for (let i = 0; i < tempCategories.length; i++) {
-                tempCategories[i]['type'] = tempCategories[i].type || 'movie';
-                tempCategories[i]['language'] = tempCategories[i].language || 'en';
-                tempCategories[i]['name'] = tempCategories[i].name || 'undefined';
-                tempCategories[i]['adult'] = tempCategories[i].anime || false;
-                tempCategories[i]['anime'] = tempCategories[i].anime || false;
-                if (!tempCategories[i].id) {
-                    tempCategories[i]['id'] = null;
-                    error += `Warning! No Google Drive folder ID was provided for category ${i.toString()}\n`;
-                }
-            }
+        if (!config.categories) {
+            tempConfig['app'] = [];
+            error += 'Warning! The categories section was not configured!\n';
+        } else if (!config.categories.length) {
+            error += 'Warning! No category were added in the categories section!\n';
         }
-        const categories = tempCategories;
+        if (!config.gdrive) {
+            tempConfig['gdrive'] = {};
+            error += 'Warning! The Google Drive section was not configured!\n';
+        } else if (
+            !config.gdrive.client_id ||
+            !config.gdrive.client_secret ||
+            !config.gdrive.refresh_token
+        ) {
+            error += 'Warning! One or more vairables are missing in the Google Drive Section!\n';
+        }
         displayError(error);
 
-        setConfig({
-            app: {
-                name: app_name,
-                title: app_title,
-                description: app_description,
-                domain: app_domain,
-            },
-            categories: categories,
-            ui: {
-                palatte: {
-                    primary: {
-                        main: '',
-                        light: '',
-                        dark: '',
-                    },
-                    secondary: {
-                        main: '',
-                        light: '',
-                        dark: '',
-                    },
-                },
-            },
-            gdrive: {
-                client_id: gdrive_clientId,
-                client_secret: gdrive_clientSecret,
-                refresh_token: gdrive_refreshToken,
-                access_token: gdrive_accessToken,
-            },
-        });
+        setConfig(tempConfig);
     };
     const handleDownloadConfig = () => {
         const element = document.createElement('a');
