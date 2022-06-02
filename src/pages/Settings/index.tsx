@@ -17,6 +17,7 @@ import UIPage from './pages/UIPage';
 const Settings = () => {
     const [isLoaded, setIsLoaded] = useState<boolean>(false);
     const [config, setConfig] = useState<any>({});
+    const [refresh, setRefresh] = useState<number>(0);
 
     useEffect(() => {
         const getData = async () => {
@@ -68,9 +69,18 @@ const Settings = () => {
         setConfig(newConfig);
     };
 
+    const handleSave = () => {
+        fetch(`${APP_API_PATH}${APP_API_VERSION_PATH}/settings`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(config),
+        });
+        setRefresh(refresh + 1);
+    };
+
     return isLoaded ? (
         <ThemeProvider theme={theme}>
-            <NavBar>
+            <NavBar handleSave={handleSave}>
                 <Routes>
                     <Route
                         path='/'
