@@ -2,7 +2,7 @@ import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import { styled } from '@mui/material/styles';
-import React from 'react';
+import React, { Fragment, useRef } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 import DCard from './DCard';
@@ -21,10 +21,10 @@ const DSwiper = styled(Swiper)(() => ({
 }));
 
 const DSlider = ({ title, itemData, variant }: any) => {
-    const navigationPrevRef = React.useRef(null);
-    const navigationNextRef = React.useRef(null);
+    const navigationPrevRef = useRef(null);
+    const navigationNextRef = useRef(null);
     return (
-        <React.Fragment>
+        <Fragment>
             {itemData && Object.keys(itemData).length !== 0 ? (
                 <div style={{ padding: '10px' }}>
                     <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -142,7 +142,7 @@ const DSlider = ({ title, itemData, variant }: any) => {
                     )}
                 </div>
             ) : null}
-        </React.Fragment>
+        </Fragment>
     );
 };
 

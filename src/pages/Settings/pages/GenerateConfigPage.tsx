@@ -11,21 +11,21 @@ import {
     Switch,
 } from '@mui/material';
 import parse from 'html-react-parser';
-import React, { useEffect } from 'react';
+import React, { SyntheticEvent, useEffect, useState } from 'react';
 
 const GenerateConfigPage = (data: any) => {
     var tempConfig = data.data || {};
 
-    const [config, setConfig] = React.useState(tempConfig);
-    const [openSnackBar, setOpenSnackBar] = React.useState(false);
-    const [errorMessage, setErrorMessage] = React.useState<string[]>([]);
-    const [isOneLine, setIsOneLine] = React.useState<boolean>(false);
+    const [config, setConfig] = useState(tempConfig);
+    const [openSnackBar, setOpenSnackBar] = useState(false);
+    const [errorMessage, setErrorMessage] = useState<string[]>([]);
+    const [isOneLine, setIsOneLine] = useState<boolean>(false);
 
     useEffect(() => {
         createConfig();
     }, []);
 
-    const handleCloseSnackBar = (event?: React.SyntheticEvent | Event, reason?: string) => {
+    const handleCloseSnackBar = (event?: SyntheticEvent | Event, reason?: string) => {
         if (reason === 'clickaway') {
             return;
         }

@@ -8,7 +8,7 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import Typography from '@mui/material/Typography';
 import { alpha, styled } from '@mui/material/styles';
-import React from 'react';
+import React, { useState } from 'react';
 
 import { APP_API_PATH, APP_API_VERSION_PATH, APP_POSTER_QUALITY } from '../config';
 import DInfoModal from './DInfoModal';
@@ -84,7 +84,7 @@ const SearchCardContainer = (props: any) => {
         seriesData = data.results.series || [];
     }
 
-    const [openModalState, setOpenModalState] = React.useState(false);
+    const [openModalState, setOpenModalState] = useState(false);
     const openInfoModal = (event: any) => {
         event.preventDefault();
         setOpenModalState(true);

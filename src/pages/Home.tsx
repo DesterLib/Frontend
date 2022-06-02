@@ -1,7 +1,7 @@
 import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
 import { useTheme } from '@mui/system';
-import React, { useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 
 import DBottomBar from '../components/DBottomBar';
 import DCarousel from '../components/DCarousel';
@@ -34,7 +34,7 @@ const Home = () => {
                     },
                 }}
             >
-                <React.Fragment>
+                <Fragment>
                     <DCarousel itemData={data.data.carousel} />
                     <DSlider
                         variant='item'
@@ -66,7 +66,7 @@ const Home = () => {
                         title='Top Rated TV Series'
                         itemData={data.data.top_rated_series}
                     />
-                </React.Fragment>
+                </Fragment>
             </Box>
             <DBottomBar />
         </Box>

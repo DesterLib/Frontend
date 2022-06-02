@@ -11,7 +11,7 @@ import { alpha, styled } from '@mui/material/styles';
 import { useTheme } from '@mui/system';
 import { debounce } from 'lodash';
 // import DButton from '../repeat/DButton';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { APP_API_PATH, APP_LOGO_DARK, APP_LOGO_LIGHT, APP_NAME } from '../config';
@@ -83,7 +83,7 @@ const DNavbar = ({ colorModeContext, themeMode }: any) => {
 
     const theme = useTheme();
 
-    const colorMode: any = React.useContext(colorModeContext);
+    const colorMode: any = useContext(colorModeContext);
 
     const appBarStyles = {
         backgroundColor: alpha(theme.palette.background.default, 0.9),

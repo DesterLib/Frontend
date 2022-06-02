@@ -10,13 +10,13 @@ import {
     TextField,
 } from '@mui/material';
 import { Box } from '@mui/system';
-import React from 'react';
+import React, { useState } from 'react';
 
 const SingleCategory = (props: any) => {
     const { config, index, updateConfig } = props;
 
-    const [refresh, setRefresh] = React.useState<number>(0);
-    const [isInitial, setIsInitial] = React.useState(true);
+    const [refresh, setRefresh] = useState<number>(0);
+    const [isInitial, setIsInitial] = useState(true);
 
     const handleChangeCategoryAdult = (event: any) => {
         var newConfig = config;

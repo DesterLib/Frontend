@@ -17,7 +17,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import * as React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import Logo from '../assets/logo-full-light.svg';
@@ -30,7 +30,7 @@ interface Props {
 
 export default function NavBar(props: Props) {
     const { children } = props;
-    const [mobileOpen, setMobileOpen] = React.useState(false);
+    const [mobileOpen, setMobileOpen] = useState(false);
 
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);

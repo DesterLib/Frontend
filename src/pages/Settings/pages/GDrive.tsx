@@ -1,14 +1,14 @@
 import { Alert, Box, Button, Snackbar, TextField } from '@mui/material';
-import React, { useEffect } from 'react';
+import React, { SyntheticEvent, useEffect, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 
 const GDrive = (props: any) => {
     const [searchParams] = useSearchParams();
     const tempAuthCode = searchParams.get('code') || '';
 
-    const [refresh, setRefresh] = React.useState<number>(0);
-    const [authCode] = React.useState<string>(tempAuthCode);
-    const [openSnackBar, setOpenSnackBar] = React.useState(
+    const [refresh, setRefresh] = useState<number>(0);
+    const [authCode] = useState<string>(tempAuthCode);
+    const [openSnackBar, setOpenSnackBar] = useState(
         !!new URLSearchParams(window.location.search).get('gdrive_accessToken'),
     );
 
@@ -65,7 +65,7 @@ const GDrive = (props: any) => {
         }
     };
 
-    const handleCloseSnackBar = (event?: React.SyntheticEvent | Event, reason?: string) => {
+    const handleCloseSnackBar = (event?: SyntheticEvent | Event, reason?: string) => {
         if (reason === 'clickaway') {
             return;
         }

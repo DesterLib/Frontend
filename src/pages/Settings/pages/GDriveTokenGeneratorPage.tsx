@@ -1,12 +1,12 @@
 import { Box, Button, Typography } from '@mui/material';
 import TextField from '@mui/material/TextField';
-import React from 'react';
+import React, { useState } from 'react';
 
 const GDriveTokenGenerator = (props: any) => {
     const { config } = props;
 
-    const [clientId, setClientId] = React.useState<string>(config.client_id || '');
-    const [clientSecret, setClientSecret] = React.useState<string>(config.client_secret || '');
+    const [clientId, setClientId] = useState<string>(config.client_id || '');
+    const [clientSecret, setClientSecret] = useState<string>(config.client_secret || '');
 
     const objToFormEncoded = (object: object) => {
         return Object.entries(object)

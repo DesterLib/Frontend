@@ -1,5 +1,5 @@
 import { alpha, styled } from '@mui/material/styles';
-import React from 'react';
+import React, { useState } from 'react';
 
 import { APP_NO_IMAGE_POSTER } from '../config';
 import DInfoModal from './DInfoModal';
@@ -83,7 +83,7 @@ const ItemImage = styled('img')(() => ({
 }));
 
 const DVideoCard = ({ item }: any) => {
-    const [openModalState, setOpenModalState] = React.useState(false);
+    const [openModalState, setOpenModalState] = useState(false);
     // eslint-disable-next-line
     const openInfoModal = (event: any) => {
         event.preventDefault();
