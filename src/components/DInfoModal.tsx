@@ -6,6 +6,7 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import { alpha, styled } from '@mui/material/styles';
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import { APP_API_PATH, APP_API_VERSION_PATH, APP_BACKDROP_QUALITY } from '../config';
 import DButton from './DButton';
@@ -81,7 +82,7 @@ interface GenreChipProps {
     name: string;
 }
 
-const DInfoModal = ({ item, currentState, closeInfoModal }: any) => {
+const DInfoModal = ({ item, type, currentState, closeInfoModal }: any) => {
     return (
         <InfoModal
             onClose={closeInfoModal}
@@ -102,15 +103,21 @@ const DInfoModal = ({ item, currentState, closeInfoModal }: any) => {
             ) : null}
             <DialogContent dividers>
                 <Box sx={{ marginBottom: '20px' }}>
-                    <DButton
-                        sx={{ marginRight: 2 }}
-                        variant='contained'
-                        color='primary'
-                        size='small'
-                        startIcon={<i className='ri-play-mini-fill'></i>}
+                    <Link
+                        style={{ textDecoration: 'none' }}
+                        to={`/${type}/${item.tmdb_id}`}
+                        key={item.id}
                     >
-                        Play Now
-                    </DButton>
+                        <DButton
+                            sx={{ marginRight: 2 }}
+                            variant='contained'
+                            color='primary'
+                            size='small'
+                            startIcon={<i className='ri-play-mini-fill'></i>}
+                        >
+                            Play Now
+                        </DButton>
+                    </Link>
                     <DButton
                         sx={{
                             '& .MuiButton-startIcon': { marginRight: '0px' },

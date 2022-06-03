@@ -41,36 +41,42 @@ const Home = () => {
                 }}
             >
                 <Fragment>
-                    <DCarousel itemData={data.data.carousel} />
+                    <DCarousel type='movie' itemData={data.data.carousel} />
                     <DSlider
                         variant='item'
                         title='Popular Movies'
                         itemData={data.data.most_popular_movies}
+                        type='movie'
                     />
                     <DSlider
                         variant='item'
                         title='Popular TV Series'
                         itemData={data.data.most_popular_series}
+                        type='serie'
                     />
                     <DSlider
                         variant='item'
                         title='Newly Added Movies'
                         itemData={data.data.newly_added_movies}
+                        type='movie'
                     />
                     <DSlider
                         variant='item'
                         title='Newly Added Episodes'
                         itemData={data.data.newly_added_episodes}
+                        type='serie'
                     />
                     <DSlider
                         variant='item'
                         title='Top Rated Movies'
                         itemData={data.data.top_rated_Movies}
+                        type='movie'
                     />
                     <DSlider
                         variant='item'
                         title='Top Rated TV Series'
                         itemData={data.data.top_rated_series}
+                        type='serie'
                     />
                 </Fragment>
             </Box>

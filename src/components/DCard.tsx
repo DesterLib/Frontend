@@ -2,6 +2,7 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import { alpha, styled } from '@mui/material/styles';
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import {
     APP_API_PATH,
@@ -116,7 +117,7 @@ const ItemImage = styled('img')(() => ({
     objectFit: 'cover',
 }));
 
-const DCard = ({ item }: any) => {
+const DCard = ({ item, type }: any) => {
     const [openModalState, setOpenModalState] = useState(false);
     const openInfoModal = (event: any) => {
         event.preventDefault();
@@ -140,9 +141,15 @@ const DCard = ({ item }: any) => {
                         }
                         alt=''
                     />
-                    <PlayButton className='playButton'>
-                        <i className='ri-play-mini-fill'></i>
-                    </PlayButton>
+                    <Link
+                        style={{ textDecoration: 'none' }}
+                        to={`/${type}/${item.tmdb_id}`}
+                        key={item.id}
+                    >
+                        <PlayButton className='playButton'>
+                            <i className='ri-play-mini-fill'></i>
+                        </PlayButton>
+                    </Link>
                 </ImageWrapper>
                 <BottomButtonWrapper className='bottomButtonWrapper'>
                     <Button
@@ -161,7 +168,7 @@ const DCard = ({ item }: any) => {
                 {(item && item.title && (item.title || null)) ||
                     (item && item.name && (item.name || null))}
             </CardTitle>
-            <DInfoModal item={item} currentState={openModalState} closeInfoModal={closeInfoModal} />
+            <DInfoModal item={item} type={type} currentState={openModalState} closeInfoModal={closeInfoModal} />
         </Card>
     );
 };

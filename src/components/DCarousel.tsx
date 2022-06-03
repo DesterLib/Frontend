@@ -2,6 +2,7 @@ import Chip from '@mui/material/Chip';
 import Typography from '@mui/material/Typography';
 import { styled } from '@mui/material/styles';
 import React from 'react';
+import { Link } from 'react-router-dom';
 import SwiperCore, { A11y, Autoplay, EffectFade, Navigation } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
@@ -98,7 +99,7 @@ const HeaderLogo = styled('img')(() => ({
 //   },
 // }));
 
-const DSlide = ({ item }: any) => {
+const DSlide = ({ item, type }: any) => {
     const breakpoint = useBreakpoint();
     return (
         <div className={styles.carouselItem}>
@@ -138,14 +139,20 @@ const DSlide = ({ item }: any) => {
                         />
                     </div>
                     <div className={styles.buttons}>
-                        <DButton
-                            sx={{ marginRight: 2 }}
-                            variant='contained'
-                            color='primary'
-                            startIcon={<i className='ri-play-mini-fill'></i>}
+                        <Link
+                            style={{ textDecoration: 'none' }}
+                            to={`/${type}/${item.tmdb_id}`}
+                            key={item.id}
                         >
-                            PLAY NOW
-                        </DButton>
+                            <DButton
+                                sx={{ marginRight: 2 }}
+                                variant='contained'
+                                color='primary'
+                                startIcon={<i className='ri-play-mini-fill'></i>}
+                            >
+                                PLAY NOW
+                            </DButton>
+                        </Link>
                         <DButton
                             startIcon={<i className='ri-add-circle-line'></i>}
                             variant='contained'
@@ -186,7 +193,7 @@ const DSlide = ({ item }: any) => {
     );
 };
 
-const DCarousel = ({ itemData }: any) => {
+const DCarousel = ({ type, itemData }: any) => {
     SwiperCore.use([Autoplay, EffectFade, Navigation, A11y]);
     return (
         <Swiper
@@ -201,7 +208,7 @@ const DCarousel = ({ itemData }: any) => {
                 itemData.map((item: any) => (
                     <SwiperSlide key={item.id}>
                         <div className={styles.carouselSlideWrapper}>
-                            <DSlide item={item} />
+                            <DSlide item={item} type={type} />
                         </div>
                     </SwiperSlide>
                 ))}

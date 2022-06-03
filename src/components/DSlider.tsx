@@ -20,7 +20,7 @@ const DSwiper = styled(Swiper)(() => ({
     },
 }));
 
-const DSlider = ({ title, itemData, variant }: any) => {
+const DSlider = ({ title, type, itemData, variant }: any) => {
     const navigationPrevRef = useRef(null);
     const navigationNextRef = useRef(null);
     return (
@@ -88,7 +88,7 @@ const DSlider = ({ title, itemData, variant }: any) => {
                         >
                             {itemData.map((item: any) => (
                                 <SwiperSlide key={item.id}>
-                                    {variant === 'item' ? <DCard item={item} /> : null}
+                                    {variant === 'item' ? <DCard item={item} type={type} /> : null}
                                     {variant === 'people' ? <DPersonCard item={item} /> : null}
                                 </SwiperSlide>
                             ))}
