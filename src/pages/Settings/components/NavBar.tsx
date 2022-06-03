@@ -4,6 +4,7 @@ import GoogleIcon from '@mui/icons-material/Google';
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import MenuIcon from '@mui/icons-material/Menu';
 import PaletteRoundedIcon from '@mui/icons-material/PaletteRounded';
+import SettingsIcon from '@mui/icons-material/Settings';
 import { Button } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -21,6 +22,8 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import Logo from '../assets/logo-full-light.svg';
+import OneDriveIcon from '../assets/onedrive.png';
+import SharePointIcon from '../assets/sharepoint.png';
 
 const drawerWidth = 240;
 
@@ -49,19 +52,34 @@ export default function NavBar(props: Props) {
             slug: '',
         },
         {
-            id: 'category',
-            text: 'Category',
-            slug: 'category',
+            id: 'categories',
+            text: 'Categories',
+            slug: 'categories',
         },
         {
             id: 'ui',
-            text: 'UI',
+            text: 'Interface',
             slug: 'ui',
         },
         {
             id: 'gdrive',
             text: 'Google Drive',
             slug: 'gdrive',
+        },
+        {
+            id: 'onedrive',
+            text: 'OneDrive',
+            slug: 'onedrive',
+        },
+        {
+            id: 'sharepoint',
+            text: 'SharePoint',
+            slug: 'sharepoint',
+        },
+        {
+            id: 'other',
+            text: 'Other',
+            slug: 'other',
         },
         {
             id: 'generateConfig',
@@ -91,9 +109,12 @@ export default function NavBar(props: Props) {
                             >
                                 <ListItemIcon>
                                     {item.id === 'home' && <HomeRoundedIcon />}
-                                    {item.id === 'category' && <CategoryRoundedIcon />}
+                                    {item.id === 'categories' && <CategoryRoundedIcon />}
                                     {item.id === 'ui' && <PaletteRoundedIcon />}
                                     {item.id === 'gdrive' && <GoogleIcon />}
+                                    {item.id === 'onedrive' && <img src={OneDriveIcon} />}
+                                    {item.id === 'sharepoint' && <img src={SharePointIcon} />}
+                                    {item.id === 'other' && <SettingsIcon />}
                                     {item.id === 'generateConfig' && <CodeRoundedIcon />}
                                 </ListItemIcon>
                                 <ListItemText primary={item.text} />

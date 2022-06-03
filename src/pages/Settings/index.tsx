@@ -12,6 +12,9 @@ import GDrive from './pages/GDrive';
 import GDriveTokenGeneratorPage from './pages/GDriveTokenGeneratorPage';
 import GenerateConfigPage from './pages/GenerateConfigPage';
 import HomePage from './pages/HomePage';
+import OneDrivePage from './pages/OneDrivePage';
+import OtherPage from './pages/OtherPage';
+import SharePointPage from './pages/SharePointPage';
 import UIPage from './pages/UIPage';
 
 const Settings = () => {
@@ -32,6 +35,12 @@ const Settings = () => {
             }
             if (!tempConfig.gdrive) {
                 tempConfig['gdrive'] = {};
+            }
+            if (!tempConfig.onedrive) {
+                tempConfig['onedrive'] = {};
+            }
+            if (!tempConfig.sharepoint) {
+                tempConfig['sharepoint'] = {};
             }
             if (!tempConfig.tmdb) {
                 tempConfig['tmdb'] = {};
@@ -88,6 +97,30 @@ const Settings = () => {
         setConfig(newConfig);
     };
 
+    const setOnedrive = (onedriveConfig: any) => {
+        var newConfig = config;
+        newConfig['onedrive'] = onedriveConfig;
+        setConfig(newConfig);
+    };
+
+    const setSharepoint = (sharepointConfig: any) => {
+        var newConfig = config;
+        newConfig['sharepoint'] = sharepointConfig;
+        setConfig(newConfig);
+    };
+
+    const setTmdb = (tmdbConfig: any) => {
+        var newConfig = config;
+        newConfig['tmdb'] = tmdbConfig;
+        setConfig(newConfig);
+    };
+
+    const setBuild = (buildConfig: any) => {
+        var newConfig = config;
+        newConfig['build'] = buildConfig;
+        setConfig(newConfig);
+    };
+
     const handleSave = () => {
         fetch(`${APP_API_PATH}${APP_API_VERSION_PATH}/settings`, {
             method: 'POST',
@@ -106,7 +139,7 @@ const Settings = () => {
                         element={<HomePage config={config.app} updateConfig={setApp} />}
                     />
                     <Route
-                        path='/category'
+                        path='/categories'
                         element={
                             <CategoryPage config={config.categories} updateConfig={setCategories} />
                         }
@@ -122,6 +155,32 @@ const Settings = () => {
                     <Route
                         path='/gdrive/tokens'
                         element={<GDriveTokenGeneratorPage config={config.gdrive} />}
+                    />
+                    <Route
+                        path='/onedrive'
+                        element={
+                            <OneDrivePage config={config.onedrive} updateConfig={setOnedrive} />
+                        }
+                    />
+                    <Route
+                        path='/sharepoint'
+                        element={
+                            <SharePointPage
+                                config={config.sharepoint}
+                                updateConfig={setSharepoint}
+                            />
+                        }
+                    />
+                    <Route
+                        path='/other'
+                        element={
+                            <OtherPage
+                                tmdb={config.tmdb}
+                                build={config.build}
+                                updateTmdb={setTmdb}
+                                updateBuild={setBuild}
+                            />
+                        }
                     />
                     <Route path='/config' element={<GenerateConfigPage data={config} />} />
                 </Routes>
