@@ -135,8 +135,8 @@ const DCard = ({ item, type }: any) => {
                         className='image'
                         src={
                             (item &&
-                                item.poster_url &&
-                                `${APP_API_PATH}${APP_API_VERSION_PATH}/assets/image/${APP_POSTER_QUALITY}${item.poster_url}`) ||
+                                item.poster_path &&
+                                `${APP_API_PATH}${APP_API_VERSION_PATH}/assets/image/${APP_POSTER_QUALITY}${item.poster_path}`) ||
                             APP_NO_IMAGE_POSTER
                         }
                         alt=''

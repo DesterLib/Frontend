@@ -91,7 +91,7 @@ const DInfoModal = ({ item, type, currentState, closeInfoModal }: any) => {
         >
             <InfoModalBackdrop>
                 <ModalImage
-                    src={`${APP_API_PATH}${APP_API_VERSION_PATH}/assets/image/${APP_BACKDROP_QUALITY}${item.backdrop_url}`}
+                    src={`${APP_API_PATH}${APP_API_VERSION_PATH}/assets/image/${APP_BACKDROP_QUALITY}${item.backdrop_path}`}
                     alt=''
                 />
                 <InfoModalBackdropWrapper />

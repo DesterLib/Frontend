@@ -111,7 +111,7 @@ const DSlide = ({ item, type }: any) => {
                             APP_API_VERSION_PATH +
                             '/assets/image/' +
                             APP_POSTER_QUALITY +
-                            item.logo
+                            item.logo_path
                         }
                         alt=''
                     />
@@ -171,7 +171,7 @@ const DSlide = ({ item, type }: any) => {
                             APP_API_VERSION_PATH +
                             '/assets/image/' +
                             APP_POSTER_QUALITY +
-                            item.poster_url
+                            item.poster_path
                         }
                         alt={item.title}
                     />
@@ -182,13 +182,13 @@ const DSlide = ({ item, type }: any) => {
                             APP_API_VERSION_PATH +
                             '/assets/image/' +
                             APP_BACKDROP_QUALITY +
-                            item.backdrop_url
+                            item.backdrop_path
                         }
                         alt={item.title}
                     />
                 )}
             </ItemBackground>
-            {/* <ItemBackground poster={APP_API_PATH + APP_API_VERSION_PATH + "/assets/image/" + APP_POSTER_QUALITY + item.poster_url} backdrop={APP_API_PATH + APP_API_VERSION_PATH + "/assets/image/" + APP_BACKDROP_QUALITY + item.backdrop_url} /> */}
+            {/* <ItemBackground poster={APP_API_PATH + APP_API_VERSION_PATH + "/assets/image/" + APP_POSTER_QUALITY + item.poster_path} backdrop={APP_API_PATH + APP_API_VERSION_PATH + "/assets/image/" + APP_BACKDROP_QUALITY + item.backdrop_path} /> */}
         </div>
     );
 };

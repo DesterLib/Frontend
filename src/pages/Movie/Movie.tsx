@@ -53,7 +53,7 @@ const Movie = () => {
             <Grid container>
                 <MainWrapper
                     ref={ref}
-                    url={`https://www.themoviedb.org/t/p/w1066_and_h600_bestv2/${data.backdrop_url}`}
+                    url={`https://www.themoviedb.org/t/p/w1066_and_h600_bestv2/${data.backdrop_path}`}
                 />
                 <Box
                     sx={{
@@ -82,7 +82,7 @@ const Movie = () => {
                     <Typography sx={{ fontWeight: '500', paddingBottom: '15px' }} variant='h4'>
                         {data.title}
                     </Typography>
-                    <DItemLogo src={`https://www.themoviedb.org/t/p/w1280/${data.logo}`} />
+                    <DItemLogo src={`https://www.themoviedb.org/t/p/w1280/${data.logo_path}`} />
                     <Grid container>
                         <Grid item></Grid>
                         <Grid item></Grid>
@@ -143,7 +143,7 @@ const Movie = () => {
                         <img
                             style={{ borderRadius: '15px' }}
                             width='100%'
-                            src={`https://www.themoviedb.org/t/p/w1280/${data.poster_url}`}
+                            src={`https://www.themoviedb.org/t/p/w1280/${data.poster_path}`}
                             alt=''
                         />
                     </Box>

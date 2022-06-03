@@ -131,7 +131,7 @@ const SearchCardContainer = (props: any) => {
                                                 APP_API_VERSION_PATH +
                                                 '/assets/image/' +
                                                 APP_POSTER_QUALITY +
-                                                item.poster_url
+                                                item.poster_path
                                             }
                                         />
                                     </ListItemAvatar>
@@ -195,7 +195,7 @@ const SearchCardContainer = (props: any) => {
                                                 APP_API_VERSION_PATH +
                                                 '/assets/image/' +
                                                 APP_POSTER_QUALITY +
-                                                item.poster_url
+                                                item.poster_path
                                             }
                                         />
                                     </ListItemAvatar>

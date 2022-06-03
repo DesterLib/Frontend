@@ -101,7 +101,7 @@ const DVideoCard = ({ item }: any) => {
                         className='image'
                         src={
                             (item &&
-                                item.poster_url &&
+                                item.poster_path &&
                                 `https://i.ytimg.com/vi/${item.key}/hqdefault.jpg`) ||
                             APP_NO_IMAGE_POSTER
                         }

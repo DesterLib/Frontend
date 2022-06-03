@@ -91,7 +91,9 @@ export default function NavBar(props: Props) {
     const drawer = (
         <div>
             <Toolbar>
-                <img style={{ margin: 'auto' }} width='80%' src={Logo} alt='' />
+                <Link style={{ textDecoration: 'none' }} to='/'>
+                    <img style={{ margin: 'auto' }} width='80%' src={Logo} alt='' />
+                </Link>
             </Toolbar>
             <List>
                 {sideBarContents.map((item) => (
