@@ -2,6 +2,7 @@ import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
 import { useTheme } from '@mui/system';
 import React, { Fragment, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import DBottomBar from '../components/DBottomBar';
 import DCarousel from '../components/DCarousel';
@@ -12,6 +13,7 @@ const Home = () => {
     const [isLoaded, setIsLoaded] = useState<boolean>(false);
     const [data, setData] = useState<any>({});
     const theme = useTheme();
+    const navigate = useNavigate();
 
     useEffect(() => {
         const getData = async () => {
@@ -22,6 +24,10 @@ const Home = () => {
         };
         getData();
     }, []);
+
+    if (isLoaded && data.redirect) {
+        navigate(data.redirect);
+    }
 
     return isLoaded ? (
         <Box>

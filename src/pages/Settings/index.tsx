@@ -23,7 +23,26 @@ const Settings = () => {
         const getData = async () => {
             const res = await fetch(`${APP_API_PATH}${APP_API_VERSION_PATH}/settings`);
             const data = (await res.json()) || {};
-            setConfig(data.results || { ok: false });
+            var tempConfig = data.results || {};
+            if (!tempConfig.app) {
+                tempConfig['app'] = {};
+            }
+            if (!tempConfig.categories) {
+                tempConfig['categories'] = [];
+            }
+            if (!tempConfig.gdrive) {
+                tempConfig['gdrive'] = {};
+            }
+            if (!tempConfig.tmdb) {
+                tempConfig['tmdb'] = {};
+            }
+            if (!tempConfig.build) {
+                tempConfig['build'] = {};
+            }
+            if (!tempConfig.rclone) {
+                tempConfig['rclone'] = {};
+            }
+            setConfig(tempConfig);
             setIsLoaded(true);
         };
         getData();
