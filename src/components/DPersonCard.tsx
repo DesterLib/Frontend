@@ -13,8 +13,8 @@ const DPersonCard = ({ item }: any) => {
         <Box sx={{ maxWidth: '220px' }}>
             <Box
                 sx={{
-                    width: '180px',
-                    height: '180px',
+                    width: '150px',
+                    height: '150px',
                     boxShadow: '0px 0px 0px 3px rgba(0,255,179,1)',
                     borderRadius: '50%',
                     margin: '0 auto 15px auto',

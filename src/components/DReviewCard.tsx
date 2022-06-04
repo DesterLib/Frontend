@@ -22,7 +22,7 @@ const DReviewCard = ({ item }: any) => {
     }
 
     return (
-        <Box sx={{ display: 'flex' }}>
+        <Box sx={{ display: 'flex', marginBottom: '10px' }}>
             <Box
                 sx={{
                     width: 'fit-content',
@@ -87,13 +87,15 @@ const DReviewCard = ({ item }: any) => {
                             }}
                         >
                             <i style={{ color: '#FFD333' }} className='ri-star-fill'></i>
-                            <Typography sx={{ padding: '0px 7px' }} variant='body2'>
+                            <Typography noWrap sx={{ padding: '0px 7px' }} variant='body2'>
                                 {item.author_details.rating}
                             </Typography>
                         </Box>
                     ) : null}
                 </Box>
-                <Typography variant='body2'>{item.content}</Typography>
+                <Box sx={{ overflow: 'hidden', maxHeight: '200px' }}>
+                    <Typography variant='body2'>{item.content}</Typography>
+                </Box>
                 <Box sx={{ paddingTop: '10px', textAlign: 'end' }}>
                     <Typography variant='body2'>
                         {new Date(

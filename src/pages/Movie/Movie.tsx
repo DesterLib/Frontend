@@ -17,6 +17,7 @@ import DSlider from '../../components/DSlider';
 import DSpacer from '../../components/DSpacer';
 import { APP_API_PATH, APP_API_VERSION_PATH, APP_POSTER_QUALITY } from '../../config';
 import { MainWrapper } from './MoviePageComponents';
+import DReviewList from '../../components/DReviewList';
 
 const Movie = () => {
     const { ref, height } = useResizeObserver<HTMLDivElement>();
@@ -334,7 +335,8 @@ const Movie = () => {
                 <DSlider variant='video' title='Videos' itemData={data.videos} />
             </Box>
             <Box>
-                <DSlider variant='reviews' title='Reviews' itemData={data.reviews} />
+                {/* <DSlider variant='reviews' title='Reviews' itemData={data.reviews} /> */}
+                <DReviewList title='Reviews' itemData={data.reviews}/>
             </Box>
         </Box>
     ) : (
