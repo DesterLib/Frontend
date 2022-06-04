@@ -1,10 +1,11 @@
+import { Button } from '@mui/material';
 import { alpha, styled } from '@mui/material/styles';
 import React, { useState } from 'react';
 
 import { APP_NO_IMAGE_POSTER } from '../config';
-import DInfoModal from './DInfoModal';
+import DVideoModal from './DVideoModal';
 
-const PlayButton = styled('div')(() => ({
+const PlayButton = styled(Button)(() => ({
     position: 'absolute',
     top: '0',
     bottom: '0',
@@ -101,18 +102,22 @@ const DVideoCard = ({ item }: any) => {
                         className='image'
                         src={
                             (item &&
-                                item.poster_path &&
+                                item.key &&
                                 `https://i.ytimg.com/vi/${item.key}/hqdefault.jpg`) ||
                             APP_NO_IMAGE_POSTER
                         }
                         alt=''
                     />
-                    <PlayButton className='playButton'>
+                    <PlayButton className='playButton' onClick={openInfoModal}>
                         <i className='ri-play-mini-fill'></i>
                     </PlayButton>
                 </ImageWrapper>
             </CardWrapper>
-            <DInfoModal item={item} currentState={openModalState} closeInfoModal={closeInfoModal} />
+            <DVideoModal
+                item={item}
+                currentState={openModalState}
+                closeInfoModal={closeInfoModal}
+            />
         </Card>
     );
 };

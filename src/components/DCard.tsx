@@ -168,7 +168,12 @@ const DCard = ({ item, type }: any) => {
                 {(item && item.title && (item.title || null)) ||
                     (item && item.name && (item.name || null))}
             </CardTitle>
-            <DInfoModal item={item} type={type} currentState={openModalState} closeInfoModal={closeInfoModal} />
+            <DInfoModal
+                item={item}
+                type={type}
+                currentState={openModalState}
+                closeInfoModal={closeInfoModal}
+            />
         </Card>
     );
 };

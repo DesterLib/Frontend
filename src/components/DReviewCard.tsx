@@ -4,7 +4,9 @@ import { alpha } from '@mui/material/styles';
 import { useTheme } from '@mui/system';
 import React from 'react';
 
-const DComment = () => {
+import { APP_API_PATH, APP_API_VERSION_PATH, APP_POSTER_QUALITY } from '../config';
+
+const DReviewCard = ({ item }: any) => {
     const theme = useTheme();
     return (
         <Box sx={{ display: 'flex' }}>
@@ -27,9 +29,24 @@ const DComment = () => {
                         padding: '2px',
                     }}
                 >
-                    <Avatar sx={{ height: '100px', width: '100px' }}>H</Avatar>
+                    <Avatar
+                        sx={{ height: '100px', width: '100px' }}
+                        src={
+                            item.author_details.avatar_path
+                                ? item.author_details.avatar_path.includes('gravatar')
+                                    ? item.author_details.avatar_path
+                                    : APP_API_PATH +
+                                      APP_API_VERSION_PATH +
+                                      '/assets/image/' +
+                                      APP_POSTER_QUALITY +
+                                      item.author_details.avatar_path
+                                : null
+                        }
+                    ></Avatar>
                 </Box>
-                <Typography variant='body1'>John Doe</Typography>
+                <Typography variant='body1'>
+                    {item.author_details.name || item.author || item.author_details.username}
+                </Typography>
             </Box>
             <Box
                 sx={{
@@ -70,21 +87,21 @@ const DComment = () => {
                     >
                         <i style={{ color: '#FFD333' }} className='ri-star-fill'></i>
                         <Typography sx={{ padding: '0px 7px' }} variant='body2'>
-                            7.1
+                            {item.rating}
                         </Typography>
                     </Box>
                 </Box>
-                <Typography variant='body2'>
-                    When I watched the first season when it was originally aired, it had some
-                    serious fan following, but I won&apos;t say it was very very famous at the time.
-                    Now, after the second season, seems everything has changed.
-                </Typography>
+                <Typography variant='body2'>{item.content}</Typography>
                 <Box sx={{ paddingTop: '10px', textAlign: 'end' }}>
-                    <Typography variant='body2'>4 September 2017</Typography>
+                    <Typography variant='body2'>
+                        {new Date(
+                            Date.parse(item.updated_at || item.created_at),
+                        ).toLocaleDateString('en-US')}
+                    </Typography>
                 </Box>
             </Box>
         </Box>
     );
 };
 
-export default DComment;
+export default DReviewCard;

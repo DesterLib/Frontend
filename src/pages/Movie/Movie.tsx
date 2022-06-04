@@ -12,11 +12,10 @@ import { Link } from 'react-router-dom';
 import useResizeObserver from 'use-resize-observer';
 
 import DButton from '../../components/DButton';
-import DComment from '../../components/DComment';
 import DItemLogo from '../../components/DItemLogo';
 import DSlider from '../../components/DSlider';
 import DSpacer from '../../components/DSpacer';
-import { APP_API_PATH, APP_API_VERSION_PATH } from '../../config';
+import { APP_API_PATH, APP_API_VERSION_PATH, APP_POSTER_QUALITY } from '../../config';
 import { MainWrapper } from './MoviePageComponents';
 
 const Movie = () => {
@@ -36,17 +35,12 @@ const Movie = () => {
         getData();
     }, []);
 
-    const videos = [
-        {
-            key: 'XdKzUbAiswE',
-        },
-        {
-            key: 'dLI4xgDBkRc',
-        },
-        {
-            key: '3U7KaI_NPGg',
-        },
-    ];
+    var directors;
+    var screenplay;
+    if (isLoaded) {
+        directors = data.crew.filter(({ job }: any) => job === 'Director');
+        screenplay = data.crew.filter(({ job }: any) => job === 'Screenplay');
+    }
 
     return isLoaded ? (
         <Box>
@@ -143,7 +137,13 @@ const Movie = () => {
                         <img
                             style={{ borderRadius: '15px' }}
                             width='100%'
-                            src={`https://www.themoviedb.org/t/p/w1280/${data.poster_path}`}
+                            src={
+                                APP_API_PATH +
+                                APP_API_VERSION_PATH +
+                                '/assets/image/' +
+                                APP_POSTER_QUALITY +
+                                data.poster_path
+                            }
                             alt=''
                         />
                     </Box>
@@ -194,7 +194,15 @@ const Movie = () => {
                                             sx={{ display: 'flex', alignItems: 'center' }}
                                             variant='body1'
                                         >
-                                            Domee Shi
+                                            {directors.map((director: any, i: number) => (
+                                                <Box
+                                                    sx={{ display: 'flex', flexDirection: 'row' }}
+                                                    key={director.id}
+                                                >
+                                                    {director.name}
+                                                    {i < directors.length - 1 ? <DSpacer /> : null}
+                                                </Box>
+                                            ))}
                                         </Typography>
                                     </Box>
                                     <Box sx={{ display: 'flex' }}>
@@ -212,9 +220,15 @@ const Movie = () => {
                                             sx={{ display: 'flex', alignItems: 'center' }}
                                             variant='body1'
                                         >
-                                            Domee Shi
-                                            <DSpacer />
-                                            Julia Cho
+                                            {screenplay.map((screenplay: any, i: number) => (
+                                                <Box
+                                                    sx={{ display: 'flex', flexDirection: 'row' }}
+                                                    key={screenplay.id}
+                                                >
+                                                    {screenplay.name}
+                                                    {i < directors.length - 1 ? <DSpacer /> : null}
+                                                </Box>
+                                            ))}
                                         </Typography>
                                     </Box>
                                     <Box sx={{ display: 'flex' }}>
@@ -317,22 +331,10 @@ const Movie = () => {
                 <DSlider variant='item' title='Recommendation' itemData={[]} />
             </Box>
             <Box>
-                <DSlider variant='video' title='Videos' itemData={videos} />
+                <DSlider variant='video' title='Videos' itemData={data.videos} />
             </Box>
-            <Box sx={{ maxWidth: '820px', padding: '10px' }}>
-                <Typography
-                    sx={{
-                        padding: '0px 20px',
-                        display: 'flex',
-                        alignItems: 'center',
-                    }}
-                    variant='h5'
-                >
-                    Reviews
-                </Typography>
-                <Box sx={{ padding: '20px' }}>
-                    <DComment />
-                </Box>
+            <Box>
+                <DSlider variant='reviews' title='Reviews' itemData={data.reviews} />
             </Box>
         </Box>
     ) : (

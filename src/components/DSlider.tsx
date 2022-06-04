@@ -7,6 +7,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 
 import DCard from './DCard';
 import DPersonCard from './DPersonCard';
+import DReviewCard from './DReviewCard';
 import DVideoCard from './DVideoCard';
 
 const DSwiper = styled(Swiper)(() => ({
@@ -47,7 +48,7 @@ const DSlider = ({ title, type, itemData, variant }: any) => {
                             </IconButton>
                         </Box>
                     </Box>
-                    {(variant === 'item' || variant === 'people') && (
+                    {(variant === 'item' || variant === 'people' || variant === 'reviews') && (
                         <DSwiper
                             grabCursor={true}
                             watchSlidesProgress={true}
@@ -90,6 +91,7 @@ const DSlider = ({ title, type, itemData, variant }: any) => {
                                 <SwiperSlide key={item.id}>
                                     {variant === 'item' ? <DCard item={item} type={type} /> : null}
                                     {variant === 'people' ? <DPersonCard item={item} /> : null}
+                                    {variant === 'reviews' ? <DReviewCard item={item} /> : null}
                                 </SwiperSlide>
                             ))}
                         </DSwiper>

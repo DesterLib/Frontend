@@ -5,17 +5,19 @@ import { alpha } from '@mui/material/styles';
 import { useTheme } from '@mui/system';
 import React from 'react';
 
+import { APP_API_PATH, APP_API_VERSION_PATH, APP_POSTER_QUALITY } from '../config';
+
 const DPersonCard = ({ item }: any) => {
     const theme = useTheme();
     return (
-        <Box sx={{ maxWidth: '140px' }}>
+        <Box sx={{ maxWidth: '220px' }}>
             <Box
                 sx={{
-                    width: '120px',
-                    height: '120px',
+                    width: '180px',
+                    height: '180px',
                     boxShadow: '0px 0px 0px 3px rgba(0,255,179,1)',
                     borderRadius: '50%',
-                    margin: '15px auto',
+                    margin: '0 auto 15px auto',
                     padding: '3px',
                 }}
             >
@@ -27,7 +29,13 @@ const DPersonCard = ({ item }: any) => {
                         justifyContent: 'center',
                         alignItems: 'center',
                     }}
-                    src={`https://image.tmdb.org/t/p/w300${item.profile_path}`}
+                    src={
+                        APP_API_PATH +
+                        APP_API_VERSION_PATH +
+                        '/assets/image/' +
+                        APP_POSTER_QUALITY +
+                        item.profile_path
+                    }
                     alt={item.name}
                 />
             </Box>
