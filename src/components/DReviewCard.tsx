@@ -8,6 +8,19 @@ import { APP_API_PATH, APP_API_VERSION_PATH, APP_POSTER_QUALITY } from '../confi
 
 const DReviewCard = ({ item }: any) => {
     const theme = useTheme();
+    var avatar_path = '';
+    if (item.author_details.avatar_path && item.author_details.avatar_path.startsWith('/')) {
+        avatar_path = (item.author_details.avatar_path || '/').substring(1);
+    }
+    if (avatar_path.length && !avatar_path.startsWith('https://')) {
+        avatar_path =
+            APP_API_PATH +
+            APP_API_VERSION_PATH +
+            '/assets/image/' +
+            APP_POSTER_QUALITY +
+            item.author_details.avatar_path;
+    }
+
     return (
         <Box sx={{ display: 'flex' }}>
             <Box
@@ -29,20 +42,7 @@ const DReviewCard = ({ item }: any) => {
                         padding: '2px',
                     }}
                 >
-                    <Avatar
-                        sx={{ height: '100px', width: '100px' }}
-                        src={
-                            item.author_details.avatar_path
-                                ? item.author_details.avatar_path.includes('gravatar')
-                                    ? item.author_details.avatar_path
-                                    : APP_API_PATH +
-                                      APP_API_VERSION_PATH +
-                                      '/assets/image/' +
-                                      APP_POSTER_QUALITY +
-                                      item.author_details.avatar_path
-                                : null
-                        }
-                    ></Avatar>
+                    <Avatar sx={{ height: '100px', width: '100px' }} src={avatar_path}></Avatar>
                 </Box>
                 <Typography variant='body1'>
                     {item.author_details.name || item.author || item.author_details.username}
@@ -74,22 +74,24 @@ const DReviewCard = ({ item }: any) => {
                     >
                         <Typography variant='body2'>Featured Review</Typography>
                     </Box>
-                    <Box
-                        sx={{
-                            backgroundColor: '#FF3396',
-                            padding: '2px 5px',
-                            width: 'fit-content',
-                            borderRadius: theme.shape.borderRadius,
-                            display: 'flex',
-                            alignItems: 'center',
-                            boxShadow: '0px 0px 0px 3px #FF66B0',
-                        }}
-                    >
-                        <i style={{ color: '#FFD333' }} className='ri-star-fill'></i>
-                        <Typography sx={{ padding: '0px 7px' }} variant='body2'>
-                            {item.rating}
-                        </Typography>
-                    </Box>
+                    {item.author_details.rating ? (
+                        <Box
+                            sx={{
+                                backgroundColor: '#FF3396',
+                                padding: '2px 5px',
+                                width: 'fit-content',
+                                borderRadius: theme.shape.borderRadius,
+                                display: 'flex',
+                                alignItems: 'center',
+                                boxShadow: '0px 0px 0px 3px #FF66B0',
+                            }}
+                        >
+                            <i style={{ color: '#FFD333' }} className='ri-star-fill'></i>
+                            <Typography sx={{ padding: '0px 7px' }} variant='body2'>
+                                {item.author_details.rating}
+                            </Typography>
+                        </Box>
+                    ) : null}
                 </Box>
                 <Typography variant='body2'>{item.content}</Typography>
                 <Box sx={{ paddingTop: '10px', textAlign: 'end' }}>
