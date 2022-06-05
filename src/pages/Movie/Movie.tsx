@@ -13,6 +13,7 @@ import useResizeObserver from 'use-resize-observer';
 
 import DButton from '../../components/DButton';
 import DItemLogo from '../../components/DItemLogo';
+import DPlayer from '../../components/DPlyer';
 import DReviewList from '../../components/DReviewList';
 import DSlider from '../../components/DSlider';
 import DSpacer from '../../components/DSpacer';
@@ -38,9 +39,11 @@ const Movie = () => {
 
     let directors;
     let screenplay;
+    let path;
     if (isLoaded) {
         directors = data.crew.filter(({ job }: any) => job === 'Director');
         screenplay = data.crew.filter(({ job }: any) => job === 'Screenplay');
+        path = data.path;
     }
 
     return isLoaded ? (
@@ -340,6 +343,18 @@ const Movie = () => {
                 {/* <DSlider variant='reviews' title='Reviews' itemData={data.reviews} /> */}
                 <DReviewList title='Reviews' itemData={data.reviews} />
             </Box>
+            <DPlayer
+                option={{
+                    url: `${APP_API_PATH}${APP_API_VERSION_PATH}/stream/${path[0]}`,
+                    autoSize: true,
+                }}
+                style={{
+                    width: '1280px',
+                    height: '720px',
+                    margin: '60px auto 0',
+                }}
+                getInstance={(art: any) => console.log(art)}
+            />
         </Box>
     ) : (
         <Box
