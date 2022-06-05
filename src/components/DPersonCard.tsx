@@ -10,11 +10,10 @@ import { APP_API_PATH, APP_API_VERSION_PATH, APP_POSTER_QUALITY } from '../confi
 const DPersonCard = ({ item }: any) => {
     const theme = useTheme();
     return (
-        <Box sx={{ maxWidth: '220px' }}>
+        <Box sx={{ maxWidth: '220px', padding: '10px' }}>
             <Box
                 sx={{
-                    width: '150px',
-                    height: '150px',
+                    aspectRatio: '1/1',
                     boxShadow: '0px 0px 0px 3px rgba(0,255,179,1)',
                     borderRadius: '50%',
                     margin: '0 auto 15px auto',

@@ -9,7 +9,7 @@ const DItemLogo = ({ src }: any) => {
         width: 'auto',
         height: 'auto',
         minWidth: '100px',
-        maxWidth: '180px',
+        maxWidth: '200px',
         objectFit: 'contain',
     }));
     return <LogoImage src={src} />;

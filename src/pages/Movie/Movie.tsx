@@ -74,10 +74,10 @@ const Movie = () => {
                         flexDirection: 'column',
                     }}
                 >
-                    <Typography sx={{ fontWeight: '500', paddingBottom: '15px' }} variant='h4'>
+                    <DItemLogo src={`https://www.themoviedb.org/t/p/w1280/${data.logo_path}`} />
+                    <Typography sx={{ fontWeight: '500', paddingBottom: '15px' }} variant='h5'>
                         {data.title}
                     </Typography>
-                    <DItemLogo src={`https://www.themoviedb.org/t/p/w1280/${data.logo_path}`} />
                     <Grid container>
                         <Grid item></Grid>
                         <Grid item></Grid>
@@ -193,6 +193,7 @@ const Movie = () => {
                                         </Typography>
                                         <Typography
                                             sx={{ display: 'flex', alignItems: 'center' }}
+                                            component={'span'}
                                             variant='body1'
                                         >
                                             {directors.map((director: any, i: number) => (
@@ -220,6 +221,7 @@ const Movie = () => {
                                         <Typography
                                             sx={{ display: 'flex', alignItems: 'center' }}
                                             variant='body1'
+                                            component={'span'}
                                         >
                                             {screenplay.map((screenplay: any, i: number) => (
                                                 <Box
@@ -287,6 +289,7 @@ const Movie = () => {
                                                 alignItems: 'center',
                                             }}
                                             variant='body1'
+                                            component={'span'}
                                         >
                                             English
                                             <DSpacer />
@@ -311,6 +314,7 @@ const Movie = () => {
                                                 alignItems: 'center',
                                             }}
                                             variant='body1'
+                                            component={'span'}
                                         >
                                             1080p
                                             <DSpacer />

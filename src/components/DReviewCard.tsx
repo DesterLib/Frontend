@@ -93,7 +93,7 @@ const DReviewCard = ({ item }: any) => {
                         </Box>
                     ) : null}
                 </Box>
-                <Box sx={{ overflow: 'hidden', maxHeight: '200px' }}>
+                <Box sx={{ overflow: 'hidden', maxHeight: '100px' }}>
                     <Typography variant='body2'>{item.content}</Typography>
                 </Box>
                 <Box sx={{ paddingTop: '10px', textAlign: 'end' }}>

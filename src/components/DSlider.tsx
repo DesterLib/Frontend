@@ -48,7 +48,7 @@ const DSlider = ({ title, type, itemData, variant }: any) => {
                             </IconButton>
                         </Box>
                     </Box>
-                    {(variant === 'item' || variant === 'people' || variant === 'reviews') && (
+                    {(variant === 'item' || 'people' || 'reviews') && (
                         <DSwiper
                             grabCursor={true}
                             watchSlidesProgress={true}
