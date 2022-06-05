@@ -13,13 +13,13 @@ import useResizeObserver from 'use-resize-observer';
 
 import DButton from '../../components/DButton';
 import DItemLogo from '../../components/DItemLogo';
+import DReviewList from '../../components/DReviewList';
 import DSlider from '../../components/DSlider';
 import DSpacer from '../../components/DSpacer';
 import { APP_API_PATH, APP_API_VERSION_PATH, APP_POSTER_QUALITY } from '../../config';
-import { MainWrapper } from './MoviePageComponents';
-import DReviewList from '../../components/DReviewList';
+import { MainWrapper } from './SeriePageComponents';
 
-const Movie = () => {
+const Serie = () => {
     const { ref, height } = useResizeObserver<HTMLDivElement>();
     const [isLoaded, setIsLoaded] = useState<boolean>(false);
     const [data, setData] = useState<any>({});
@@ -338,7 +338,7 @@ const Movie = () => {
             </Box>
             <Box>
                 {/* <DSlider variant='reviews' title='Reviews' itemData={data.reviews} /> */}
-                <DReviewList title='Reviews' itemData={data.reviews}/>
+                <DReviewList title='Reviews' itemData={data.reviews} />
             </Box>
         </Box>
     ) : (
@@ -356,4 +356,4 @@ const Movie = () => {
     );
 };
 
-export default Movie;
+export default Serie;
