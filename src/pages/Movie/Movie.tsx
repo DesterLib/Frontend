@@ -13,11 +13,11 @@ import useResizeObserver from 'use-resize-observer';
 
 import DButton from '../../components/DButton';
 import DItemLogo from '../../components/DItemLogo';
+import DReviewList from '../../components/DReviewList';
 import DSlider from '../../components/DSlider';
 import DSpacer from '../../components/DSpacer';
 import { APP_API_PATH, APP_API_VERSION_PATH, APP_POSTER_QUALITY } from '../../config';
 import { MainWrapper } from './MoviePageComponents';
-import DReviewList from '../../components/DReviewList';
 
 const Movie = () => {
     const { ref, height } = useResizeObserver<HTMLDivElement>();
@@ -36,8 +36,8 @@ const Movie = () => {
         getData();
     }, []);
 
-    var directors;
-    var screenplay;
+    let directors;
+    let screenplay;
     if (isLoaded) {
         directors = data.crew.filter(({ job }: any) => job === 'Director');
         screenplay = data.crew.filter(({ job }: any) => job === 'Screenplay');
@@ -338,7 +338,7 @@ const Movie = () => {
             </Box>
             <Box>
                 {/* <DSlider variant='reviews' title='Reviews' itemData={data.reviews} /> */}
-                <DReviewList title='Reviews' itemData={data.reviews}/>
+                <DReviewList title='Reviews' itemData={data.reviews} />
             </Box>
         </Box>
     ) : (
