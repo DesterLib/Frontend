@@ -345,7 +345,7 @@ const Movie = () => {
             </Box>
             <DPlayer
                 option={{
-                    url: `${APP_API_PATH}${APP_API_VERSION_PATH}/stream/${path[0]}`,
+                    url: `${APP_API_PATH}${APP_API_VERSION_PATH}/stream/${data.rclone_index}/${path[0]}`,
                     autoSize: true,
                 }}
                 style={{

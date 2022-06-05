@@ -30,10 +30,11 @@ const drawerWidth = 240;
 interface Props {
     children: JSX.Element;
     handleSave: () => void;
+    handleRebuild: () => void;
 }
 
 export default function NavBar(props: Props) {
-    const { children, handleSave } = props;
+    const { children, handleSave, handleRebuild } = props;
     const [mobileOpen, setMobileOpen] = useState(false);
 
     const handleDrawerToggle = () => {
@@ -126,6 +127,7 @@ export default function NavBar(props: Props) {
                 ))}
             </List>
             <Button onClick={handleSave}>Save</Button>
+            <Button onClick={handleRebuild}>Rebuild Metadata</Button>
         </div>
     );
 

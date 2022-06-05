@@ -130,9 +130,14 @@ const Settings = () => {
         setRefresh(refresh + 1);
     };
 
+    const handleRebuild = () => {
+        fetch(`${APP_API_PATH}${APP_API_VERSION_PATH}/rebuild`);
+        setRefresh(refresh + 1);
+    };
+
     return isLoaded ? (
         <ThemeProvider theme={theme}>
-            <NavBar handleSave={handleSave}>
+            <NavBar handleSave={handleSave} handleRebuild={handleRebuild}>
                 <Routes>
                     <Route
                         path='/'
