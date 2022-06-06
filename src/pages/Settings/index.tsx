@@ -16,6 +16,7 @@ import OneDrivePage from './pages/OneDrivePage';
 import OtherPage from './pages/OtherPage';
 import SharePointPage from './pages/SharePointPage';
 import UIPage from './pages/UIPage';
+import Auth0Page from './pages/Auth0Page';
 
 const Settings = () => {
     const [isLoaded, setIsLoaded] = useState<boolean>(false);
@@ -29,6 +30,9 @@ const Settings = () => {
             var tempConfig = data.results || {};
             if (!tempConfig.app) {
                 tempConfig['app'] = {};
+            }
+            if (!tempConfig.auth0) {
+                tempConfig['auth0'] = {};
             }
             if (!tempConfig.categories) {
                 tempConfig['categories'] = [];
@@ -76,6 +80,12 @@ const Settings = () => {
     const setApp = (appConfig: any) => {
         var newConfig = config;
         newConfig['app'] = appConfig;
+        setConfig(newConfig);
+    };
+
+    const setAuth0 = (auth0Config: any) => {
+        var newConfig = config;
+        newConfig['auth0'] = auth0Config;
         setConfig(newConfig);
     };
 
@@ -142,6 +152,10 @@ const Settings = () => {
                     <Route
                         path='/'
                         element={<HomePage config={config.app} updateConfig={setApp} />}
+                    />
+                    <Route
+                        path='/auth0'
+                        element={<Auth0Page config={config.auth0} updateConfig={setAuth0} />}
                     />
                     <Route
                         path='/categories'

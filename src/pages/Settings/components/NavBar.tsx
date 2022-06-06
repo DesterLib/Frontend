@@ -2,6 +2,7 @@ import CategoryRoundedIcon from '@mui/icons-material/CategoryRounded';
 import CodeRoundedIcon from '@mui/icons-material/CodeRounded';
 import GoogleIcon from '@mui/icons-material/Google';
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
+import LockOpenIcon from '@mui/icons-material/LockOpen';
 import MenuIcon from '@mui/icons-material/Menu';
 import PaletteRoundedIcon from '@mui/icons-material/PaletteRounded';
 import SettingsIcon from '@mui/icons-material/Settings';
@@ -51,6 +52,11 @@ export default function NavBar(props: Props) {
             id: 'home',
             text: 'Home',
             slug: '',
+        },
+        {
+            id: 'auth0',
+            text: 'Auth0',
+            slug: 'auth0',
         },
         {
             id: 'categories',
@@ -112,6 +118,7 @@ export default function NavBar(props: Props) {
                             >
                                 <ListItemIcon>
                                     {item.id === 'home' && <HomeRoundedIcon />}
+                                    {item.id === 'auth0' && <LockOpenIcon />}
                                     {item.id === 'categories' && <CategoryRoundedIcon />}
                                     {item.id === 'ui' && <PaletteRoundedIcon />}
                                     {item.id === 'gdrive' && <GoogleIcon />}
