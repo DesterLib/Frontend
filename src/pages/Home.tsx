@@ -50,7 +50,7 @@ const Home = () => {
                     />
                     <DSlider
                         variant='item'
-                        title='Popular TV Series'
+                        title='Popular Series'
                         itemData={data.data.most_popular_series}
                         type='serie'
                     />
@@ -59,6 +59,12 @@ const Home = () => {
                         title='Newly Added Movies'
                         itemData={data.data.newly_added_movies}
                         type='movie'
+                    />
+                    <DSlider
+                        variant='item'
+                        title='Newly Released Episodes'
+                        itemData={data.data.newly_released_episodes}
+                        type='serie'
                     />
                     <DSlider
                         variant='item'
@@ -74,7 +80,7 @@ const Home = () => {
                     />
                     <DSlider
                         variant='item'
-                        title='Top Rated TV Series'
+                        title='Top Rated Series'
                         itemData={data.data.top_rated_series}
                         type='serie'
                     />
