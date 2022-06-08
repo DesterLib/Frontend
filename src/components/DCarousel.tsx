@@ -113,7 +113,7 @@ const DSlide = ({ item, type }: any) => {
                             APP_POSTER_QUALITY +
                             item.logo_path
                         }
-                        alt=''
+                        alt={item.title}
                     />
                 </div>
                 <div className={styles.info}>

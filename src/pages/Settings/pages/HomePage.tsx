@@ -1,4 +1,7 @@
-import { Box, TextField } from '@mui/material';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import ConstructionIcon from '@mui/icons-material/Construction';
 import React, { useState } from 'react';
 
 const HomePage = (props: any) => {
@@ -7,7 +10,7 @@ const HomePage = (props: any) => {
     };
     const [refresh, setRefresh] = useState<number>(0);
 
-    const { config, updateConfig } = props;
+    const { config, updateConfig, handleRebuild } = props;
 
     const handleChangeName = (event: any) => {
         var newConfig = config;
@@ -75,6 +78,7 @@ const HomePage = (props: any) => {
                 onChange={handleChangeDomain}
                 value={config.domain}
             />
+            <Button variant='outlined' color='warning' startIcon={<ConstructionIcon/>} onClick={handleRebuild}>Rebuild Metadata</Button>
         </Box>
     );
 };

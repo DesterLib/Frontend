@@ -12,7 +12,7 @@ import { useTheme } from '@mui/system';
 import { debounce } from 'lodash';
 // import DButton from '../repeat/DButton';
 import React, { useContext, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import { APP_API_PATH, APP_LOGO_DARK, APP_LOGO_LIGHT, APP_NAME } from '../config';
 import {
@@ -54,6 +54,8 @@ const DNavbar = ({ colorModeContext, themeMode }: any) => {
     const [searchQuery, setSearchQuery] = useState<string>('');
     const [searchResult, setSearchResult] = useState<object>({ ok: false });
     const [searchAnchor, setSearchAnchor] = useState<null | HTMLElement>(null);
+
+    const location = useLocation();
 
     const handleOpenUserMenu = (event: any) => {
         setUserMenu(event.currentTarget);
@@ -144,6 +146,8 @@ const DNavbar = ({ colorModeContext, themeMode }: any) => {
     };
 
     const isSearchOpen = Boolean(searchAnchor);
+
+    if(location.pathname.includes('/settings')) return <></>;
 
     return (
         <Box>
