@@ -13,7 +13,7 @@ import useResizeObserver from 'use-resize-observer';
 
 import DButton from '../../components/DButton';
 import DItemLogo from '../../components/DItemLogo';
-import DPlayer from '../../components/DPlyer';
+import DPlayer from '../../components/DPlayer';
 import DReviewList from '../../components/DReviewList';
 import DSlider from '../../components/DSlider';
 import DSpacer from '../../components/DSpacer';
@@ -45,6 +45,7 @@ const Movie = () => {
         screenplay = data.crew.filter(({ job }: any) => job === 'Screenplay');
         path = data.path;
     }
+    console.log(data);
 
     return isLoaded ? (
         <Box>
@@ -344,16 +345,12 @@ const Movie = () => {
                 <DReviewList title='Reviews' itemData={data.reviews} />
             </Box>
             <DPlayer
-                option={{
-                    url: `${APP_API_PATH}${APP_API_VERSION_PATH}/stream/${data.rclone_index}/${path[0]}`,
-                    autoSize: true,
-                }}
+                src={`${APP_API_PATH}${APP_API_VERSION_PATH}/stream/${data.rclone_index}/${path[0]}`}
                 style={{
                     width: '1280px',
                     height: '720px',
                     margin: '60px auto 0',
                 }}
-                getInstance={(art: any) => console.log(art)}
             />
         </Box>
     ) : (
