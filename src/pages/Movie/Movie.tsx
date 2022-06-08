@@ -29,7 +29,7 @@ const Movie = () => {
 
     useEffect(() => {
         const getData = async () => {
-            const res = await fetch(`${APP_API_PATH}${APP_API_VERSION_PATH}/movie?id=${id}`);
+            const res = await fetch(`${APP_API_PATH}${APP_API_VERSION_PATH}/movie/${id}`);
             const data = (await res.json()) || {};
             setData(data.results || { ok: false });
             setIsLoaded(true);

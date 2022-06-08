@@ -75,7 +75,7 @@ const Home = () => {
                     <DSlider
                         variant='item'
                         title='Top Rated Movies'
-                        itemData={data.data.top_rated_Movies}
+                        itemData={data.data.top_rated_movies}
                         type='movie'
                     />
                     <DSlider
