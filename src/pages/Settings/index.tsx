@@ -7,6 +7,7 @@ import { Route, Routes } from 'react-router-dom';
 
 import { APP_API_PATH, APP_API_VERSION_PATH } from '../../config';
 import NavBar from './components/NavBar';
+import Auth0Page from './pages/Auth0Page';
 import CategoryPage from './pages/CategoryPage';
 import GDrive from './pages/GDrive';
 import GDriveTokenGeneratorPage from './pages/GDriveTokenGeneratorPage';
@@ -16,7 +17,6 @@ import OneDrivePage from './pages/OneDrivePage';
 import OtherPage from './pages/OtherPage';
 import SharePointPage from './pages/SharePointPage';
 import UIPage from './pages/UIPage';
-import Auth0Page from './pages/Auth0Page';
 
 const Settings = () => {
     const [isLoaded, setIsLoaded] = useState<boolean>(false);
@@ -147,11 +147,17 @@ const Settings = () => {
 
     return isLoaded ? (
         <ThemeProvider theme={theme}>
-            <NavBar handleSave={handleSave} handleRebuild={handleRebuild}>
+            <NavBar handleSave={handleSave}>
                 <Routes>
                     <Route
                         path='/'
-                        element={<HomePage config={config.app} updateConfig={setApp} />}
+                        element={
+                            <HomePage
+                                handleRebuild={handleRebuild}
+                                config={config.app}
+                                updateConfig={setApp}
+                            />
+                        }
                     />
                     <Route
                         path='/auth0'

@@ -2,7 +2,7 @@ import CategoryRoundedIcon from '@mui/icons-material/CategoryRounded';
 import CodeRoundedIcon from '@mui/icons-material/CodeRounded';
 import GoogleIcon from '@mui/icons-material/Google';
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
-import LockOpenIcon from '@mui/icons-material/LockOpen';
+import LocalPoliceIcon from '@mui/icons-material/LocalPolice';
 import MenuIcon from '@mui/icons-material/Menu';
 import PaletteRoundedIcon from '@mui/icons-material/PaletteRounded';
 import SettingsIcon from '@mui/icons-material/Settings';
@@ -31,11 +31,10 @@ const drawerWidth = 240;
 interface Props {
     children: JSX.Element;
     handleSave: () => void;
-    handleRebuild: () => void;
 }
 
 export default function NavBar(props: Props) {
-    const { children, handleSave, handleRebuild } = props;
+    const { children, handleSave } = props;
     const [mobileOpen, setMobileOpen] = useState(false);
 
     const handleDrawerToggle = () => {
@@ -118,7 +117,7 @@ export default function NavBar(props: Props) {
                             >
                                 <ListItemIcon>
                                     {item.id === 'home' && <HomeRoundedIcon />}
-                                    {item.id === 'auth0' && <LockOpenIcon />}
+                                    {item.id === 'auth0' && <LocalPoliceIcon />}
                                     {item.id === 'categories' && <CategoryRoundedIcon />}
                                     {item.id === 'ui' && <PaletteRoundedIcon />}
                                     {item.id === 'gdrive' && <GoogleIcon />}
@@ -133,8 +132,6 @@ export default function NavBar(props: Props) {
                     </ListItem>
                 ))}
             </List>
-            <Button onClick={handleSave}>Save</Button>
-            <Button onClick={handleRebuild}>Rebuild Metadata</Button>
         </div>
     );
 
@@ -149,7 +146,7 @@ export default function NavBar(props: Props) {
                     width: { sm: `calc(100% - ${drawerWidth}px)` },
                     ml: { sm: `${drawerWidth}px` },
                     backgroundImage: 'none',
-                    height: '70px',
+                    height: 'auto',
                 }}
             >
                 <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -165,9 +162,10 @@ export default function NavBar(props: Props) {
                     <Typography variant='h6' noWrap component='div'>
                         Dester Admin Panel
                     </Typography>
-                    <Button onClick={handleClearLocalStorage} color='warning' variant='outlined'>
+                    {/* <Button onClick={handleClearLocalStorage} color='warning' variant='outlined'>
                         Reset
-                    </Button>
+                    </Button> */}
+                    <Button variant='contained' onClick={handleSave}>Save</Button>
                 </Toolbar>
             </AppBar>
             <Box
