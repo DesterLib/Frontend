@@ -6,7 +6,7 @@ import { createPortal } from 'react-dom';
 import DPlayerBase from './DPlayerBase';
 import DPlaylist from './DPlaylist';
 
-const DPlayer = ({src}:any) => {
+const DPlayer = ({ videoData }: any) => {
     const [show, setShow] = React.useState(false);
     const [art, setArt] = React.useState<any>({});
 
@@ -75,13 +75,13 @@ const DPlayer = ({src}:any) => {
         },
     };
     return (
-        <Box sx={{ width: '600px', marginLeft: 'auto', marginRight: 'auto', marginTop: '20px' }}>
+        <Box sx={{ width: '100%', marginLeft: 'auto', marginRight: 'auto', marginTop: '20px' }}>
             <>
                 <DPlayerBase
                     style={{
                         aspectRatio: 16 / 9,
                     }}
-                    src={src}
+                    src={videoData.src}
                     settings={settings}
                     getInstance={(art: any) => {
                         art.on('ready', () => setArt(art));
@@ -115,9 +115,9 @@ const DPlayer = ({src}:any) => {
                 {Object.keys(art).length !== 0
                     ? createPortal(
                         <Box sx={{ padding: '20px !important' }}>
-                            <Typography variant='h5'>You There!</Typography>
+                            <Typography variant='h5'>{videoData.title}</Typography>
                             <Typography variant='subtitle1'>
-                                S1 E2 - Demon Slayer Kimetsu No Yaiba
+                                {videoData.subTitle}
                             </Typography>
                         </Box>,
                         art.layers.title,

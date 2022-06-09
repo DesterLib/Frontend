@@ -163,6 +163,8 @@ const DNavbar = ({ colorModeContext, themeMode }: any) => {
                             fontSize: '24px',
                             height: '45px',
                             width: '45px',
+                            marginLeft: '0px',
+                            marginRight: '10px',
                         }}
                     >
                         <i className='ri-menu-line'></i>

@@ -5,11 +5,11 @@ import Grid from '@mui/material/Grid';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import { alpha } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
 import { useTheme } from '@mui/system';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import useResizeObserver from 'use-resize-observer';
 
 import DButton from '../../components/DButton';
 import DItemLogo from '../../components/DItemLogo';
@@ -17,14 +17,20 @@ import DPlayer from '../../components/DPlayer';
 import DReviewList from '../../components/DReviewList';
 import DSlider from '../../components/DSlider';
 import DSpacer from '../../components/DSpacer';
-import { APP_API_PATH, APP_API_VERSION_PATH, APP_POSTER_QUALITY } from '../../config';
+import {
+    APP_API_PATH,
+    APP_API_VERSION_PATH,
+    APP_BACKDROP_QUALITY,
+    APP_POSTER_QUALITY,
+} from '../../config';
+import useBreakpoint from '../../utilities/useBreakpoint';
 import { MainWrapper } from './MoviePageComponents';
 
 const Movie = () => {
-    const { ref, height } = useResizeObserver<HTMLDivElement>();
     const [isLoaded, setIsLoaded] = useState<boolean>(false);
     const [data, setData] = useState<any>({});
     const theme = useTheme();
+    const breakpoint = useBreakpoint();
     const { id } = useParams();
 
     useEffect(() => {
@@ -38,320 +44,447 @@ const Movie = () => {
     }, []);
 
     let directors;
-    let screenplay;
+    let screenplays;
     let path;
-    if (isLoaded) {
+    if (isLoaded && data && Object.keys(data).length !== 0 && data.crew) {
         directors = data.crew.filter(({ job }: any) => job === 'Director');
-        screenplay = data.crew.filter(({ job }: any) => job === 'Screenplay');
+        screenplays = data.crew.filter(({ job }: any) => job === 'Screenplay');
         path = data.path;
+    } else {
+        directors = [];
+        screenplays = [];
+        path = '';
     }
-    console.log(data);
+
+    const ItemBackground = styled('div')(() => ({
+        width: '100%',
+        position: 'relative',
+        [theme.breakpoints.up('md')]: {
+            paddingBottom: '40.25%',
+            width: '100% !important',
+        },
+        [theme.breakpoints.down('md')]: {
+            paddingBottom: '150%',
+            marginTop: '48px',
+        },
+    }));
+
+    const HeaderImage = styled('img')(() => ({
+        width: '100%',
+        height: '100%',
+        objectFit: 'cover',
+        zIndex: '5',
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        bottom: 0,
+        right: 0,
+    }));
+
+    const PosterImage = styled('img')(() => ({
+        width: '100%',
+        borderRadius: '15px',
+        maxWidth: '200px',
+        [theme.breakpoints.down('md')]: {
+            borderRadius: '10px',
+        },
+    }));
+
+    const LinearGradient = styled('div')(() => ({
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        bottom: 0,
+        right: 0,
+        width: '100%',
+        height: '100%',
+        zIndex: '10',
+        [theme.breakpoints.up('md')]: {
+            background:
+                'linear-gradient( 90deg, rgba(2, 22, 31, 1) 6%, rgba(1, 9, 12, 0.5032606792717087) 70%, rgba(0, 0, 0, 0) 100% )',
+        },
+        [theme.breakpoints.down('md')]: {
+            background:
+                'linear-gradient( 0deg, rgba(2, 22, 31, 1) 40%, rgba(2, 16, 22, 0.7721682422969187) 68%, rgba(1, 9, 12, 0.5032606792717087) 80%, rgba(0, 0, 0, 0) 100% )',
+        },
+    }));
+
+    const videoData = {
+        id: '1',
+        title: data.title,
+        subTitle: data.title,
+        src: `${APP_API_PATH}${APP_API_VERSION_PATH}/stream/${data.rclone_index}/${path[0]}`,
+        playlist: [],
+    };
 
     return isLoaded ? (
         <Box>
-            <Grid container>
-                <MainWrapper
-                    ref={ref}
-                    url={`https://www.themoviedb.org/t/p/w1066_and_h600_bestv2/${data.backdrop_path}`}
-                />
-                <Box
-                    sx={{
-                        backgroundImage:
-                            'linear-gradient(90deg, rgba(0,21,28,1) 0%, rgba(0,0,0,0) 100%)',
-                        position: 'absolute',
-                        width: '100%',
-                        aspectRatio: '21/9',
-                        zIndex: '0',
-                    }}
-                />
-                <Grid
-                    item
-                    md={6}
-                    sx={{
-                        zIndex: '10',
-                        height: `${height}px`,
-                        display: 'flex',
-                        justifyContent: 'center',
-                        padding: '40px',
-                        flexDirection: 'column',
-                    }}
-                >
-                    <DItemLogo src={`https://www.themoviedb.org/t/p/w1280/${data.logo_path}`} />
-                    <Typography sx={{ fontWeight: '500', paddingBottom: '15px' }} variant='h5'>
-                        {data.title}
-                    </Typography>
-                    <Grid container>
-                        <Grid item></Grid>
-                        <Grid item></Grid>
-                        <Grid item></Grid>
-                        <Grid item></Grid>
-                    </Grid>
-                    <Grid container sx={{ marginTop: '20px' }}>
-                        <Grid sx={{ marginRight: '10px' }} item>
-                            <DButton
-                                startIcon={<i className='ri-play-mini-fill'></i>}
-                                variant='contained'
-                            >
-                                PLAY
-                            </DButton>
-                        </Grid>
-                        <Grid sx={{ marginRight: '10px' }} item>
-                            <DButton
-                                startIcon={<i className='ri-movie-2-line'></i>}
-                                sx={{
-                                    span: {
-                                        margin: '0px',
-                                    },
-                                }}
-                                color='secondary'
-                                variant='contained'
-                            />
-                        </Grid>
-                        <Grid sx={{ marginRight: '10px' }} item>
-                            <DButton
-                                startIcon={<i className='ri-heart-line'></i>}
-                                sx={{
-                                    span: {
-                                        margin: '0px',
-                                    },
-                                }}
-                                color='secondary'
-                                variant='contained'
-                            />
-                        </Grid>
-                        <Grid sx={{ marginRight: '10px' }} item>
-                            <DButton
-                                startIcon={<i className='ri-more-2-fill'></i>}
-                                sx={{
-                                    span: {
-                                        margin: '0px',
-                                    },
-                                }}
-                                color='secondary'
-                                variant='contained'
-                            />
-                        </Grid>
-                    </Grid>
-                </Grid>
-            </Grid>
-            <Grid container p={2}>
-                <Grid item sm={12} md={2}>
-                    <Box sx={{ padding: '20px' }}>
-                        <img
-                            style={{ borderRadius: '15px' }}
-                            width='100%'
-                            src={
-                                APP_API_PATH +
-                                APP_API_VERSION_PATH +
-                                '/assets/image/' +
-                                APP_POSTER_QUALITY +
-                                data.poster_path
-                            }
-                            alt=''
-                        />
-                    </Box>
-                </Grid>
-                <Grid item sm={12} md={10}>
-                    <Box sx={{ padding: '20px' }}>
+            <Box>
+                <Box sx={{ width: '100%', position: 'relative' }}>
+                    <ItemBackground>
+                        {(breakpoint === 'xs' || breakpoint === 'sm') && (
+                            <>
+                                <HeaderImage
+                                    src={
+                                        APP_API_PATH +
+                                        APP_API_VERSION_PATH +
+                                        '/assets/image/' +
+                                        APP_POSTER_QUALITY +
+                                        data.poster_path
+                                    }
+                                    alt={data.title}
+                                />
+                                <LinearGradient />
+                            </>
+                        )}
+                        {breakpoint !== 'xs' && breakpoint !== 'sm' && (
+                            <>
+                                <HeaderImage
+                                    src={
+                                        APP_API_PATH +
+                                        APP_API_VERSION_PATH +
+                                        '/assets/image/' +
+                                        APP_BACKDROP_QUALITY +
+                                        data.backdrop_path
+                                    }
+                                    alt={data.title}
+                                />
+                                <LinearGradient />
+                            </>
+                        )}
+                    </ItemBackground>
+                    <Box
+                        sx={{
+                            position: 'absolute',
+                            zIndex: '20',
+                            display: 'flex',
+                            height: 'fit-content',
+                            flexDirection: 'column',
+                            top: 0,
+                            left: 0,
+                            right: 0,
+                            bottom: 0,
+                            marginTop: 'auto',
+                            marginLeft: '40px',
+                            marginBottom: '40px',
+                            [theme.breakpoints.down('md')]: {
+                                alignItems: 'center',
+                            },
+                        }}
+                    >
+                        <DItemLogo src={`https://www.themoviedb.org/t/p/w1280/${data.logo_path}`} />
                         <Typography
-                            variant='subtitle1'
                             sx={{
-                                color: alpha(theme.palette.text.primary, 0.7),
-                                marginBottom: '10px',
+                                fontWeight: '500',
+                                paddingBottom: '15px',
+                                width: '90%',
+                                [theme.breakpoints.down('md')]: {
+                                    textAlign: 'center',
+                                },
+                            }}
+                            variant='h5'
+                        >
+                            {data.title}
+                        </Typography>
+                        {/* <Grid container>
+                            <Grid item></Grid>
+                            <Grid item></Grid>
+                            <Grid item></Grid>
+                            <Grid item></Grid>
+                        </Grid> */}
+                        <Grid
+                            container
+                            sx={{
+                                marginTop: '20px',
+                                [theme.breakpoints.down('md')]: {
+                                    justifyContent: 'center',
+                                },
                             }}
                         >
-                            Description
-                        </Typography>
-                        <Typography variant='body2'>{data.description}</Typography>
-                        <Box sx={{ marginTop: '20px' }}>
-                            {data.genres &&
-                                data.genres.map((genre: any) => (
-                                    <Link
-                                        style={{ textDecoration: 'none' }}
-                                        to={`search?genre=${genre.name}`}
-                                        key={genre.id}
-                                    >
-                                        <Chip
-                                            clickable
-                                            sx={{ margin: theme.spacing(0.5) }}
-                                            label={genre.name}
-                                        />
-                                    </Link>
-                                ))}
-                        </Box>
-                        <Grid container p={2}>
-                            <Grid item md={7} p={2}>
-                                <Stack spacing={2}>
-                                    <Box sx={{ display: 'flex' }}>
-                                        <Typography
-                                            sx={{
-                                                width: '150px',
-                                                fontWeight: '600',
-                                                color: alpha(theme.palette.text.primary, 0.8),
-                                            }}
-                                            variant='body1'
-                                        >
-                                            Director
-                                        </Typography>
-                                        <Typography
-                                            sx={{ display: 'flex', alignItems: 'center' }}
-                                            component={'span'}
-                                            variant='body1'
-                                        >
-                                            {directors.map((director: any, i: number) => (
-                                                <Box
-                                                    sx={{ display: 'flex', flexDirection: 'row' }}
-                                                    key={director.id}
-                                                >
-                                                    {director.name}
-                                                    {i < directors.length - 1 ? <DSpacer /> : null}
-                                                </Box>
-                                            ))}
-                                        </Typography>
-                                    </Box>
-                                    <Box sx={{ display: 'flex' }}>
-                                        <Typography
-                                            sx={{
-                                                width: '150px',
-                                                fontWeight: '600',
-                                                color: alpha(theme.palette.text.primary, 0.8),
-                                            }}
-                                            variant='body1'
-                                        >
-                                            Screenplay
-                                        </Typography>
-                                        <Typography
-                                            sx={{ display: 'flex', alignItems: 'center' }}
-                                            variant='body1'
-                                            component={'span'}
-                                        >
-                                            {screenplay.map((screenplay: any, i: number) => (
-                                                <Box
-                                                    sx={{ display: 'flex', flexDirection: 'row' }}
-                                                    key={screenplay.id}
-                                                >
-                                                    {screenplay.name}
-                                                    {i < directors.length - 1 ? <DSpacer /> : null}
-                                                </Box>
-                                            ))}
-                                        </Typography>
-                                    </Box>
-                                    <Box sx={{ display: 'flex' }}>
-                                        <Typography
-                                            sx={{
-                                                width: '150px',
-                                                fontWeight: '600',
-                                                color: alpha(theme.palette.text.primary, 0.8),
-                                            }}
-                                            variant='body1'
-                                        >
-                                            Studio
-                                        </Typography>
-                                        <Typography
-                                            sx={{ display: 'flex', alignItems: 'center' }}
-                                            variant='body1'
-                                        >
-                                            Domee Shi
-                                        </Typography>
-                                    </Box>
-                                </Stack>
+                            <Grid sx={{ marginRight: '10px' }} item>
+                                <DButton
+                                    startIcon={<i className='ri-play-mini-fill'></i>}
+                                    variant='contained'
+                                >
+                                    PLAY
+                                </DButton>
                             </Grid>
-                            <Grid item md={5} p={2}>
-                                <Stack spacing={2}>
-                                    <Box sx={{ display: 'flex' }}>
-                                        <Typography
-                                            sx={{
-                                                width: '150px',
-                                                fontWeight: '600',
-                                                color: alpha(theme.palette.text.primary, 0.8),
-                                            }}
-                                            variant='body1'
-                                        >
-                                            VIDEO
-                                        </Typography>
-                                        <Typography sx={{ fontWeight: '500' }} variant='body1'>
-                                            1080p HD
-                                        </Typography>
-                                    </Box>
-                                    <Box sx={{ display: 'flex' }}>
-                                        <Typography
-                                            sx={{
-                                                width: '150px',
-                                                fontWeight: '600',
-                                                color: alpha(theme.palette.text.primary, 0.8),
-                                            }}
-                                            variant='body1'
-                                        >
-                                            AUDIO
-                                        </Typography>
-                                        <Typography
-                                            sx={{
-                                                fontWeight: '500',
-                                                display: 'flex',
-                                                alignItems: 'center',
-                                            }}
-                                            variant='body1'
-                                            component={'span'}
-                                        >
-                                            English
-                                            <DSpacer />
-                                            Japanese
-                                        </Typography>
-                                    </Box>
-                                    <Box sx={{ display: 'flex' }}>
-                                        <Typography
-                                            sx={{
-                                                width: '150px',
-                                                fontWeight: '600',
-                                                color: alpha(theme.palette.text.primary, 0.8),
-                                            }}
-                                            variant='body1'
-                                        >
-                                            AVAILABLE QUALITIES
-                                        </Typography>
-                                        <Typography
-                                            sx={{
-                                                fontWeight: '500',
-                                                display: 'flex',
-                                                alignItems: 'center',
-                                            }}
-                                            variant='body1'
-                                            component={'span'}
-                                        >
-                                            1080p
-                                            <DSpacer />
-                                            720p
-                                            <DSpacer />
-                                            480p
-                                        </Typography>
-                                    </Box>
-                                </Stack>
+                            <Grid sx={{ marginRight: '10px' }} item>
+                                <DButton
+                                    startIcon={<i className='ri-movie-2-line'></i>}
+                                    sx={{
+                                        span: {
+                                            margin: '0px',
+                                        },
+                                    }}
+                                    color='secondary'
+                                    variant='contained'
+                                />
+                            </Grid>
+                            <Grid sx={{ marginRight: '10px' }} item>
+                                <DButton
+                                    startIcon={<i className='ri-heart-line'></i>}
+                                    sx={{
+                                        span: {
+                                            margin: '0px',
+                                        },
+                                    }}
+                                    color='secondary'
+                                    variant='contained'
+                                />
+                            </Grid>
+                            <Grid sx={{ marginRight: '10px' }} item>
+                                <DButton
+                                    startIcon={<i className='ri-more-2-fill'></i>}
+                                    sx={{
+                                        span: {
+                                            margin: '0px',
+                                        },
+                                    }}
+                                    color='secondary'
+                                    variant='contained'
+                                />
                             </Grid>
                         </Grid>
                     </Box>
+                </Box>
+                <Grid container p={2}>
+                    <Grid
+                        item
+                        sx={{
+                            [theme.breakpoints.down('sm')]: {
+                                display: 'none',
+                            },
+                        }}
+                        xs={12}
+                        sm={3}
+                        md={2}
+                    >
+                        <Box sx={{ padding: '20px' }}>
+                            <PosterImage
+                                src={
+                                    APP_API_PATH +
+                                    APP_API_VERSION_PATH +
+                                    '/assets/image/' +
+                                    APP_POSTER_QUALITY +
+                                    data.poster_path
+                                }
+                                alt={data.title}
+                            />
+                        </Box>
+                    </Grid>
+                    <Grid item xs={12} sm={9} md={10}>
+                        <Box sx={{ padding: '20px' }}>
+                            <Typography
+                                variant='subtitle1'
+                                sx={{
+                                    color: alpha(theme.palette.text.primary, 0.7),
+                                    marginBottom: '10px',
+                                }}
+                            >
+                                Description
+                            </Typography>
+                            <Typography variant='body2'>{data.description}</Typography>
+                            <Box sx={{ marginTop: '20px' }}>
+                                {data.genres &&
+                                    data.genres.map((genre: any) => (
+                                        <Link
+                                            style={{ textDecoration: 'none' }}
+                                            to={`search?genre=${genre.name}`}
+                                            key={genre.id}
+                                        >
+                                            <Chip
+                                                clickable
+                                                sx={{ margin: theme.spacing(0.5) }}
+                                                label={genre.name}
+                                            />
+                                        </Link>
+                                    ))}
+                            </Box>
+                            <Grid container sx={{ marginTop: '20px' }}>
+                                <Grid item md={7} sx={{ marginBottom: '15px' }}>
+                                    <Stack spacing={2}>
+                                        <Box sx={{ display: 'flex' }}>
+                                            <Typography
+                                                sx={{
+                                                    width: '150px',
+                                                    fontWeight: '600',
+                                                    color: alpha(theme.palette.text.primary, 0.8),
+                                                }}
+                                                variant='body1'
+                                            >
+                                                Director
+                                            </Typography>
+                                            <Typography
+                                                sx={{ display: 'flex', alignItems: 'center' }}
+                                                component={'span'}
+                                                variant='body1'
+                                            >
+                                                {directors.map((director: any, i: number) => (
+                                                    <Box
+                                                        sx={{
+                                                            display: 'flex',
+                                                            flexDirection: 'row',
+                                                        }}
+                                                        key={director.id}
+                                                    >
+                                                        {director.name}
+                                                        {i < directors.length - 1 ? (
+                                                            <DSpacer />
+                                                        ) : null}
+                                                    </Box>
+                                                ))}
+                                            </Typography>
+                                        </Box>
+                                        <Box sx={{ display: 'flex' }}>
+                                            <Typography
+                                                sx={{
+                                                    width: '150px',
+                                                    fontWeight: '600',
+                                                    color: alpha(theme.palette.text.primary, 0.8),
+                                                }}
+                                                variant='body1'
+                                            >
+                                                Screenplay
+                                            </Typography>
+                                            <Typography
+                                                sx={{ display: 'flex', alignItems: 'center' }}
+                                                variant='body1'
+                                                component={'span'}
+                                            >
+                                                {screenplays.map((screenplay: any, i: number) => (
+                                                    <Box
+                                                        sx={{
+                                                            display: 'flex',
+                                                            alignItems: 'center',
+                                                            [theme.breakpoints.down('sm')]: {
+                                                                flexDirection: 'column',
+                                                            },
+                                                            [theme.breakpoints.up('sm')]: {
+                                                                flexDirection: 'row',
+                                                            },
+                                                        }}
+                                                        key={screenplay.id}
+                                                    >
+                                                        {screenplay.name}
+                                                        {i < screenplays.length - 1 ? (
+                                                            <DSpacer />
+                                                        ) : null}
+                                                    </Box>
+                                                ))}
+                                            </Typography>
+                                        </Box>
+                                        <Box sx={{ display: 'flex' }}>
+                                            <Typography
+                                                sx={{
+                                                    width: '150px',
+                                                    fontWeight: '600',
+                                                    color: alpha(theme.palette.text.primary, 0.8),
+                                                }}
+                                                variant='body1'
+                                            >
+                                                Studio
+                                            </Typography>
+                                            <Typography
+                                                sx={{ display: 'flex', alignItems: 'center' }}
+                                                variant='body1'
+                                            >
+                                                Domee Shi
+                                            </Typography>
+                                        </Box>
+                                    </Stack>
+                                </Grid>
+                                <Grid item md={5}>
+                                    <Stack spacing={2}>
+                                        <Box sx={{ display: 'flex' }}>
+                                            <Typography
+                                                sx={{
+                                                    width: '150px',
+                                                    fontWeight: '600',
+                                                    color: alpha(theme.palette.text.primary, 0.8),
+                                                }}
+                                                variant='body1'
+                                            >
+                                                VIDEO
+                                            </Typography>
+                                            <Typography sx={{ fontWeight: '500' }} variant='body1'>
+                                                1080p HD
+                                            </Typography>
+                                        </Box>
+                                        <Box sx={{ display: 'flex' }}>
+                                            <Typography
+                                                sx={{
+                                                    width: '150px',
+                                                    fontWeight: '600',
+                                                    color: alpha(theme.palette.text.primary, 0.8),
+                                                }}
+                                                variant='body1'
+                                            >
+                                                AUDIO
+                                            </Typography>
+                                            <Typography
+                                                sx={{
+                                                    fontWeight: '500',
+                                                    display: 'flex',
+                                                    alignItems: 'center',
+                                                }}
+                                                variant='body1'
+                                                component={'span'}
+                                            >
+                                                English
+                                                <DSpacer />
+                                                Japanese
+                                            </Typography>
+                                        </Box>
+                                        <Box sx={{ display: 'flex' }}>
+                                            <Typography
+                                                sx={{
+                                                    width: '150px',
+                                                    fontWeight: '600',
+                                                    color: alpha(theme.palette.text.primary, 0.8),
+                                                }}
+                                                variant='body1'
+                                            >
+                                                AVAILABLE QUALITIES
+                                            </Typography>
+                                            <Typography
+                                                sx={{
+                                                    fontWeight: '500',
+                                                    display: 'flex',
+                                                    alignItems: 'center',
+                                                }}
+                                                variant='body1'
+                                                component={'span'}
+                                            >
+                                                1080p
+                                                <DSpacer />
+                                                720p
+                                                <DSpacer />
+                                                480p
+                                            </Typography>
+                                        </Box>
+                                    </Stack>
+                                </Grid>
+                            </Grid>
+                        </Box>
+                    </Grid>
                 </Grid>
-            </Grid>
-            <Box>
-                <DSlider variant='people' title='Cast' itemData={data.cast} />
+                <Box>
+                    <DSlider variant='people' title='Cast' itemData={data.cast} />
+                </Box>
+                <Box>
+                    <DSlider variant='item' title='Recommendation' itemData={[]} />
+                </Box>
+                <Box>
+                    <DSlider variant='video' title='Videos' itemData={data.videos} />
+                </Box>
+                <Box>
+                    <DReviewList title='Reviews' itemData={data.reviews} />
+                </Box>
+                <Box>
+                    <DPlayer videoData={videoData} />
+                </Box>
             </Box>
-            <Box>
-                <DSlider variant='item' title='Recommendation' itemData={[]} />
-            </Box>
-            <Box>
-                <DSlider variant='video' title='Videos' itemData={data.videos} />
-            </Box>
-            <Box>
-                {/* <DSlider variant='reviews' title='Reviews' itemData={data.reviews} /> */}
-                <DReviewList title='Reviews' itemData={data.reviews} />
-            </Box>
-            <DPlayer
-                src={`${APP_API_PATH}${APP_API_VERSION_PATH}/stream/${data.rclone_index}/${path[0]}`}
-                style={{
-                    width: '1280px',
-                    height: '720px',
-                    margin: '60px auto 0',
-                }}
-            />
         </Box>
     ) : (
         <Box
