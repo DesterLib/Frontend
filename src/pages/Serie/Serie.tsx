@@ -34,7 +34,7 @@ const Serie = () => {
             setIsLoaded(true);
         };
         getData();
-    }, []);
+    }, [id]);
 
     var directors;
     var screenplay;

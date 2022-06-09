@@ -41,7 +41,7 @@ const Movie = () => {
             setIsLoaded(true);
         };
         getData();
-    }, []);
+    }, [id]);
 
     let directors;
     let screenplays;

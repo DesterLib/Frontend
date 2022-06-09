@@ -9,6 +9,7 @@ import ListItemText from '@mui/material/ListItemText';
 import Typography from '@mui/material/Typography';
 import { alpha, styled } from '@mui/material/styles';
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import { APP_API_PATH, APP_API_VERSION_PATH, APP_POSTER_QUALITY } from '../config';
 import DInfoModal from './DInfoModal';
@@ -92,6 +93,20 @@ const SearchCardContainer = (props: any) => {
     const closeInfoModal = () => {
         setOpenModalState(false);
     };
+    const { handleCloseSearch } = props;
+
+    const link = (id: string, content: any, type: string) => {
+        return (
+            <Link
+                style={{ color: 'inherit', textDecoration: 'inherit' }}
+                to={`/${type}/${id}`}
+                onClick={handleCloseSearch}
+                key={id}
+            >
+                {content}
+            </Link>
+        );
+    };
 
     return (
         <Grid container>
@@ -123,21 +138,29 @@ const SearchCardContainer = (props: any) => {
                                     key={index}
                                 >
                                     <ListItemAvatar sx={{ marginRight: '5px' }}>
-                                        <Avatar
-                                            sx={{ width: '50px', height: '70px' }}
-                                            variant='rounded'
-                                            src={
-                                                APP_API_PATH +
-                                                APP_API_VERSION_PATH +
-                                                '/assets/image/' +
-                                                APP_POSTER_QUALITY +
-                                                item.poster_path
-                                            }
-                                        />
+                                        {link(
+                                            item.tmdb_id,
+                                            <Avatar
+                                                sx={{ width: '50px', height: '70px' }}
+                                                variant='rounded'
+                                                src={
+                                                    APP_API_PATH +
+                                                    APP_API_VERSION_PATH +
+                                                    '/assets/image/' +
+                                                    APP_POSTER_QUALITY +
+                                                    item.poster_path
+                                                }
+                                            />,
+                                            'movie',
+                                        )}
                                     </ListItemAvatar>
                                     <ListItemText
-                                        primary={item.title}
-                                        secondary={(item.release_date || '').slice(0, 4)}
+                                        primary={link(item.tmdb_id, item.title, 'movie')}
+                                        secondary={link(
+                                            item.tmdb_id,
+                                            (item.release_date || '').slice(0, 4),
+                                            'movie',
+                                        )}
                                     />
                                     <IconButton
                                         onClick={openInfoModal}
@@ -187,21 +210,29 @@ const SearchCardContainer = (props: any) => {
                                     key={index}
                                 >
                                     <ListItemAvatar sx={{ marginRight: '5px' }}>
-                                        <Avatar
-                                            sx={{ width: '50px', height: '70px' }}
-                                            variant='rounded'
-                                            src={
-                                                APP_API_PATH +
-                                                APP_API_VERSION_PATH +
-                                                '/assets/image/' +
-                                                APP_POSTER_QUALITY +
-                                                item.poster_path
-                                            }
-                                        />
+                                        {link(
+                                            item.tmdb_id,
+                                            <Avatar
+                                                sx={{ width: '50px', height: '70px' }}
+                                                variant='rounded'
+                                                src={
+                                                    APP_API_PATH +
+                                                    APP_API_VERSION_PATH +
+                                                    '/assets/image/' +
+                                                    APP_POSTER_QUALITY +
+                                                    item.poster_path
+                                                }
+                                            />,
+                                            'serie',
+                                        )}
                                     </ListItemAvatar>
                                     <ListItemText
-                                        primary={item.title}
-                                        secondary={(item.release_date || '').slice(0, 4)}
+                                        primary={link(item.tmdb_id, item.title, 'serie')}
+                                        secondary={link(
+                                            item.tmdb_id,
+                                            (item.release_date || '').slice(0, 4),
+                                            'serie',
+                                        )}
                                     />
                                     <IconButton
                                         onClick={openInfoModal}
