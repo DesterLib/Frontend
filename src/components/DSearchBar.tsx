@@ -80,9 +80,9 @@ const SearchCardContainer = (props: any) => {
     const data = props.data || { ok: false };
     let movieData: object[] = [];
     let seriesData: object[] = [];
-    if (data.ok && data.results) {
-        movieData = data.results.movies || [];
-        seriesData = data.results.series || [];
+    if (data.ok && data.result) {
+        movieData = data.result.movies || [];
+        seriesData = data.result.series || [];
     }
 
     const [openModalState, setOpenModalState] = useState(false);

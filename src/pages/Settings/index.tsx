@@ -27,7 +27,7 @@ const Settings = () => {
         const getData = async () => {
             const res = await fetch(`${APP_API_PATH}${APP_API_VERSION_PATH}/settings`);
             const data = (await res.json()) || {};
-            var tempConfig = data.results || {};
+            var tempConfig = data.result || {};
             if (!tempConfig.app) {
                 tempConfig['app'] = {};
             }

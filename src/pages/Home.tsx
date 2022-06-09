@@ -25,8 +25,8 @@ const Home = () => {
         getData();
     }, []);
 
-    if (isLoaded && data.redirect) {
-        navigate(data.redirect);
+    if (isLoaded && data.code == 428) {
+        navigate(data.result);
     }
 
     return isLoaded ? (
@@ -41,47 +41,47 @@ const Home = () => {
                 }}
             >
                 <Fragment>
-                    <DCarousel type='movie' itemData={data.data.carousel} />
+                    <DCarousel type='movie' itemData={data.result.carousel} />
                     <DSlider
                         variant='item'
                         title='Popular Movies'
-                        itemData={data.data.most_popular_movies}
+                        itemData={data.result.most_popular_movies}
                         type='movie'
                     />
                     <DSlider
                         variant='item'
                         title='Popular Series'
-                        itemData={data.data.most_popular_series}
+                        itemData={data.result.most_popular_series}
                         type='serie'
                     />
                     <DSlider
                         variant='item'
                         title='Newly Added Movies'
-                        itemData={data.data.newly_added_movies}
+                        itemData={data.result.newly_added_movies}
                         type='movie'
                     />
                     <DSlider
                         variant='item'
                         title='Newly Released Episodes'
-                        itemData={data.data.newly_released_episodes}
+                        itemData={data.result.newly_released_episodes}
                         type='serie'
                     />
                     <DSlider
                         variant='item'
                         title='Newly Added Episodes'
-                        itemData={data.data.newly_added_episodes}
+                        itemData={data.result.newly_added_episodes}
                         type='serie'
                     />
                     <DSlider
                         variant='item'
                         title='Top Rated Movies'
-                        itemData={data.data.top_rated_movies}
+                        itemData={data.result.top_rated_movies}
                         type='movie'
                     />
                     <DSlider
                         variant='item'
                         title='Top Rated Series'
-                        itemData={data.data.top_rated_series}
+                        itemData={data.result.top_rated_series}
                         type='serie'
                     />
                 </Fragment>

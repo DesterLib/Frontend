@@ -37,8 +37,8 @@ const Movie = () => {
     useEffect(() => {
         const getData = async () => {
             const res = await fetch(`${APP_API_PATH}${APP_API_VERSION_PATH}/movie/${id}`);
-            const data = (await res.json()) || {};
-            setData(data.results || { ok: false });
+            const data = (await res.json()) || null;
+            setData(data || { ok: false });
             setIsLoaded(true);
         };
         getData();
@@ -47,14 +47,18 @@ const Movie = () => {
     let directors;
     let screenplays;
     let path;
-    if (isLoaded && data && Object.keys(data).length !== 0 && data.crew) {
-        directors = data.crew.filter(({ job }: any) => job === 'Director');
-        screenplays = data.crew.filter(({ job }: any) => job === 'Screenplay');
-        path = data.path;
-    } else {
-        directors = [];
-        screenplays = [];
-        path = '';
+    let videoData;
+    if (isLoaded && data.result && Object.keys(data.result).length !== 0 && data.result.crew) {
+        directors = data.result.crew.filter(({ job }: any) => job === 'Director');
+        screenplays = data.result.crew.filter(({ job }: any) => job === 'Screenplay');
+        path = data.result.path;
+        videoData = {
+            id: '1',
+            title: data.result.title,
+            subTitle: data.result.title,
+            src: `${APP_API_PATH}${APP_API_VERSION_PATH}/stream/${data.result.rclone_index}/${path[0]}`,
+            playlist: [],
+        };
     }
 
     const ItemBackground = styled('div')(() => ({
@@ -110,14 +114,6 @@ const Movie = () => {
         },
     }));
 
-    const videoData = {
-        id: '1',
-        title: data.title,
-        subTitle: data.title,
-        src: `${APP_API_PATH}${APP_API_VERSION_PATH}/stream/${data.rclone_index}/${path[0]}`,
-        playlist: [],
-    };
-
     return isLoaded ? (
         <Box>
             <Box>
@@ -131,9 +127,9 @@ const Movie = () => {
                                         APP_API_VERSION_PATH +
                                         '/assets/image/' +
                                         APP_POSTER_QUALITY +
-                                        data.poster_path
+                                        data.result.poster_path
                                     }
-                                    alt={data.title}
+                                    alt={data.result.title}
                                 />
                                 <LinearGradient />
                             </>
@@ -146,9 +142,9 @@ const Movie = () => {
                                         APP_API_VERSION_PATH +
                                         '/assets/image/' +
                                         APP_BACKDROP_QUALITY +
-                                        data.backdrop_path
+                                        data.result.backdrop_path
                                     }
-                                    alt={data.title}
+                                    alt={data.result.title}
                                 />
                                 <LinearGradient />
                             </>
@@ -173,7 +169,9 @@ const Movie = () => {
                             },
                         }}
                     >
-                        <DItemLogo src={`https://www.themoviedb.org/t/p/w1280/${data.logo_path}`} />
+                        <DItemLogo
+                            src={`https://www.themoviedb.org/t/p/w1280/${data.result.logo_path}`}
+                        />
                         <Typography
                             sx={{
                                 fontWeight: '500',
@@ -268,9 +266,9 @@ const Movie = () => {
                                     APP_API_VERSION_PATH +
                                     '/assets/image/' +
                                     APP_POSTER_QUALITY +
-                                    data.poster_path
+                                    data.result.poster_path
                                 }
-                                alt={data.title}
+                                alt={data.result.title}
                             />
                         </Box>
                     </Grid>
@@ -285,10 +283,10 @@ const Movie = () => {
                             >
                                 Description
                             </Typography>
-                            <Typography variant='body2'>{data.description}</Typography>
+                            <Typography variant='body2'>{data.result.description}</Typography>
                             <Box sx={{ marginTop: '20px' }}>
-                                {data.genres &&
-                                    data.genres.map((genre: any) => (
+                                {data.result.genres &&
+                                    data.result.genres.map((genre: any) => (
                                         <Link
                                             style={{ textDecoration: 'none' }}
                                             to={`search?genre=${genre.name}`}
@@ -471,16 +469,16 @@ const Movie = () => {
                     </Grid>
                 </Grid>
                 <Box>
-                    <DSlider variant='people' title='Cast' itemData={data.cast} />
+                    <DSlider variant='people' title='Cast' itemData={data.result.cast} />
                 </Box>
                 <Box>
                     <DSlider variant='item' title='Recommendation' itemData={[]} />
                 </Box>
                 <Box>
-                    <DSlider variant='video' title='Videos' itemData={data.videos} />
+                    <DSlider variant='video' title='Videos' itemData={data.result.videos} />
                 </Box>
                 <Box>
-                    <DReviewList title='Reviews' itemData={data.reviews} />
+                    <DReviewList title='Reviews' itemData={data.result.reviews} />
                 </Box>
                 <Box>
                     <DPlayer videoData={videoData} />

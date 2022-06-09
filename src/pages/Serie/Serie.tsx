@@ -30,7 +30,7 @@ const Serie = () => {
         const getData = async () => {
             const res = await fetch(`${APP_API_PATH}${APP_API_VERSION_PATH}/serie/${id}`);
             const data = (await res.json()) || {};
-            setData(data.results || { ok: false });
+            setData(data || { ok: false });
             setIsLoaded(true);
         };
         getData();
@@ -39,8 +39,8 @@ const Serie = () => {
     var directors;
     var screenplay;
     if (isLoaded) {
-        directors = data.crew.filter(({ job }: any) => job === 'Director');
-        screenplay = data.crew.filter(({ job }: any) => job === 'Screenplay');
+        directors = data.result.crew.filter(({ job }: any) => job === 'Director');
+        screenplay = data.result.crew.filter(({ job }: any) => job === 'Screenplay');
     }
 
     return isLoaded ? (
@@ -48,7 +48,7 @@ const Serie = () => {
             <Grid container>
                 <MainWrapper
                     ref={ref}
-                    url={`https://www.themoviedb.org/t/p/w1066_and_h600_bestv2/${data.backdrop_path}`}
+                    url={`https://www.themoviedb.org/t/p/w1066_and_h600_bestv2/${data.result.backdrop_path}`}
                 />
                 <Box
                     sx={{
@@ -72,9 +72,11 @@ const Serie = () => {
                         flexDirection: 'column',
                     }}
                 >
-                    <DItemLogo src={`https://www.themoviedb.org/t/p/w1280/${data.logo_path}`} />
+                    <DItemLogo
+                        src={`https://www.themoviedb.org/t/p/w1280/${data.result.logo_path}`}
+                    />
                     <Typography sx={{ fontWeight: '500', paddingBottom: '15px' }} variant='h5'>
-                        {data.title}
+                        {data.result.title}
                     </Typography>
                     <Grid container>
                         <Grid item></Grid>
@@ -141,7 +143,7 @@ const Serie = () => {
                                 APP_API_VERSION_PATH +
                                 '/assets/image/' +
                                 APP_POSTER_QUALITY +
-                                data.poster_path
+                                data.result.poster_path
                             }
                             alt=''
                         />
@@ -158,10 +160,10 @@ const Serie = () => {
                         >
                             Description
                         </Typography>
-                        <Typography variant='body2'>{data.description}</Typography>
+                        <Typography variant='body2'>{data.result.description}</Typography>
                         <Box sx={{ marginTop: '20px' }}>
-                            {data.genres &&
-                                data.genres.map((genre: any) => (
+                            {data.result.genres &&
+                                data.result.genres.map((genre: any) => (
                                     <Link
                                         style={{ textDecoration: 'none' }}
                                         to={`search?genre=${genre.name}`}
@@ -328,17 +330,17 @@ const Serie = () => {
                 </Grid>
             </Grid>
             <Box>
-                <DSlider variant='people' title='Cast' itemData={data.cast} />
+                <DSlider variant='people' title='Cast' itemData={data.result.cast} />
             </Box>
             <Box>
                 <DSlider variant='item' title='Recommendation' itemData={[]} />
             </Box>
             <Box>
-                <DSlider variant='video' title='Videos' itemData={data.videos} />
+                <DSlider variant='video' title='Videos' itemData={data.result.videos} />
             </Box>
             <Box>
-                {/* <DSlider variant='reviews' title='Reviews' itemData={data.reviews} /> */}
-                <DReviewList title='Reviews' itemData={data.reviews} />
+                {/* <DSlider variant='reviews' title='Reviews' itemData={data.result.reviews} /> */}
+                <DReviewList title='Reviews' itemData={data.result.reviews} />
             </Box>
         </Box>
     ) : (
