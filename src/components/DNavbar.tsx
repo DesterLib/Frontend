@@ -147,7 +147,7 @@ const DNavbar = ({ colorModeContext, themeMode }: any) => {
 
     const isSearchOpen = Boolean(searchAnchor);
 
-    if(location.pathname.includes('/settings')) return <></>;
+    if (location.pathname.includes('/settings')) return <></>;
 
     return (
         <Box>
@@ -190,7 +190,7 @@ const DNavbar = ({ colorModeContext, themeMode }: any) => {
                         </Link>
                     </Box>
                     <Box sx={{ width: '100%', margin: '0px 20px' }}>
-                        <SearchWrapper onFocus={handleOpenSearch} onBlur={handleCloseSearch} >
+                        <SearchWrapper onFocus={handleOpenSearch} onBlur={handleCloseSearch}>
                             <SearchIconWrapper>
                                 <i className='ri-search-2-line'></i>
                             </SearchIconWrapper>
@@ -202,8 +202,11 @@ const DNavbar = ({ colorModeContext, themeMode }: any) => {
                                 onChange={handleChangeSearch}
                             />
                             {isSearchOpen ? (
-                                <SearchResults onMouseDown={e => e.preventDefault()}>
-                                    <SearchCardContainer data={searchResult} handleCloseSearch={handleCloseSearch} />
+                                <SearchResults onMouseDown={(e) => e.preventDefault()}>
+                                    <SearchCardContainer
+                                        data={searchResult}
+                                        handleCloseSearch={handleCloseSearch}
+                                    />
                                 </SearchResults>
                             ) : null}
                         </SearchWrapper>

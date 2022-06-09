@@ -24,7 +24,8 @@ import {
     APP_POSTER_QUALITY,
 } from '../../config';
 import useBreakpoint from '../../utilities/useBreakpoint';
-import { MainWrapper } from './MoviePageComponents';
+
+// import { MainWrapper } from './MoviePageComponents';
 
 const Movie = () => {
     const [isLoaded, setIsLoaded] = useState<boolean>(false);

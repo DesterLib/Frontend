@@ -41,11 +41,6 @@ export default function NavBar(props: Props) {
         setMobileOpen(!mobileOpen);
     };
 
-    const handleClearLocalStorage = () => {
-        localStorage.clear();
-        window !== undefined && window.location.reload();
-    };
-
     const sideBarContents = [
         {
             id: 'home',
@@ -165,7 +160,9 @@ export default function NavBar(props: Props) {
                     {/* <Button onClick={handleClearLocalStorage} color='warning' variant='outlined'>
                         Reset
                     </Button> */}
-                    <Button variant='contained' onClick={handleSave}>Save</Button>
+                    <Button variant='contained' onClick={handleSave}>
+                        Save
+                    </Button>
                 </Toolbar>
             </AppBar>
             <Box

@@ -1,7 +1,7 @@
+import ConstructionIcon from '@mui/icons-material/Construction';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
-import ConstructionIcon from '@mui/icons-material/Construction';
 import React, { useState } from 'react';
 
 const HomePage = (props: any) => {
@@ -78,7 +78,14 @@ const HomePage = (props: any) => {
                 onChange={handleChangeDomain}
                 value={config.domain}
             />
-            <Button variant='outlined' color='warning' startIcon={<ConstructionIcon/>} onClick={handleRebuild}>Rebuild Metadata</Button>
+            <Button
+                variant='outlined'
+                color='warning'
+                startIcon={<ConstructionIcon />}
+                onClick={handleRebuild}
+            >
+                Rebuild Metadata
+            </Button>
         </Box>
     );
 };

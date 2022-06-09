@@ -44,9 +44,7 @@ const DPlaylist = ({ data, show, handleClose, handleShitchUrl }: any) => {
                     <i className='ri-close-fill'></i>
                 </IconButton>
                 <Box>
-                    <Typography>
-                        Demon Slayer: Kimetsu no Yaiba
-                    </Typography>
+                    <Typography>Demon Slayer: Kimetsu no Yaiba</Typography>
                     <Typography sx={{ color: '#D0D0D0' }}>Season 1</Typography>
                 </Box>
             </Box>
