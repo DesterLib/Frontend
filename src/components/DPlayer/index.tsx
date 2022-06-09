@@ -74,6 +74,7 @@ const DPlayer = ({ videoData }: any) => {
             indicator: '<i class="ri-checkbox-blank-circle-fill"></i>',
         },
     };
+    // prettier-ignore
     return (
         <Box sx={{ width: '100%', marginLeft: 'auto', marginRight: 'auto', marginTop: '20px' }}>
             <>
@@ -89,37 +90,37 @@ const DPlayer = ({ videoData }: any) => {
                 />
                 {Object.keys(art).length !== 0
                     ? createPortal(
-                          <Box
-                              sx={{
-                                  width: '100%',
-                                  height: '100%',
-                                  display: show ? 'block' : 'none',
-                                  backgroundColor: 'rgba(0, 0, 0, 0.8)',
-                                  zIndex: show ? '60 !important' : '30 !important',
-                              }}
-                              onClick={() => handleClose()}
-                          />,
-                          art.layers.close,
-                      )
+                        <Box
+                            sx={{
+                                width: '100%',
+                                height: '100%',
+                                display: show ? 'block' : 'none',
+                                backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                                zIndex: show ? '60 !important' : '30 !important',
+                            }}
+                            onClick={() => handleClose()}
+                        />,
+                        art.layers.close,
+                    )
                     : null}
                 {Object.keys(art).length !== 0
                     ? createPortal(
-                          <DPlaylist
-                              show={show}
-                              handleClose={handleClose}
-                              handleShitchUrl={handleShitchUrl}
-                          />,
-                          art.layers.playlist,
-                      )
+                        <DPlaylist
+                            show={show}
+                            handleClose={handleClose}
+                            handleShitchUrl={handleShitchUrl}
+                        />,
+                        art.layers.playlist,
+                    )
                     : null}
                 {Object.keys(art).length !== 0
                     ? createPortal(
-                          <Box sx={{ padding: '20px !important' }}>
-                              <Typography variant='h5'>{videoData.title}</Typography>
-                              <Typography variant='subtitle1'>{videoData.subTitle}</Typography>
-                          </Box>,
-                          art.layers.title,
-                      )
+                        <Box sx={{ padding: '20px !important' }}>
+                            <Typography variant='h5'>{videoData.title}</Typography>
+                            <Typography variant='subtitle1'>{videoData.subTitle}</Typography>
+                        </Box>,
+                        art.layers.title,
+                    )
                     : null}
             </>
         </Box>
