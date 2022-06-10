@@ -10,6 +10,7 @@ const DItemLogo = ({ src }: any) => {
         height: 'auto',
         minWidth: '100px',
         maxWidth: '300px',
+        maxHeight: '180px',
         objectFit: 'contain',
         [theme.breakpoints.down('md')]: {
             maxWidth: '80%',

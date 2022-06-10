@@ -26,6 +26,7 @@ const DPlayer = ({ videoData }: any) => {
         flip: true,
         playbackRate: true,
         aspectRatio: true,
+        whitelist: ['*'],
         layers: [
             {
                 html: '',
@@ -88,8 +89,8 @@ const DPlayer = ({ videoData }: any) => {
                         art.on('ready', () => setArt(art));
                     }}
                 />
-                {Object.keys(art).length !== 0
-                    ? createPortal(
+                {Object.keys(art).length !== 0 &&
+                    createPortal(
                         <Box
                             sx={{
                                 width: '100%',
@@ -101,27 +102,24 @@ const DPlayer = ({ videoData }: any) => {
                             onClick={() => handleClose()}
                         />,
                         art.layers.close,
-                    )
-                    : null}
-                {Object.keys(art).length !== 0
-                    ? createPortal(
+                    )}
+                {Object.keys(art).length !== 0 &&
+                    createPortal(
                         <DPlaylist
                             show={show}
                             handleClose={handleClose}
                             handleShitchUrl={handleShitchUrl}
                         />,
                         art.layers.playlist,
-                    )
-                    : null}
-                {Object.keys(art).length !== 0
-                    ? createPortal(
+                    )}
+                {Object.keys(art).length !== 0 &&
+                    createPortal(
                         <Box sx={{ padding: '20px !important' }}>
                             <Typography variant='h5'>{videoData.title}</Typography>
                             <Typography variant='subtitle1'>{videoData.subTitle}</Typography>
                         </Box>,
                         art.layers.title,
-                    )
-                    : null}
+                    )}
             </>
         </Box>
     );

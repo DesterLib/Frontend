@@ -19,7 +19,7 @@ const Home = () => {
         const getData = async () => {
             const res = await fetch(`${APP_API_PATH}/api/v1/home`);
             const data = (await res.json()) || null;
-            setData(data || { ok: false });
+            setData(data.data || { ok: false });
             setIsLoaded(true);
         };
         getData();
@@ -28,6 +28,8 @@ const Home = () => {
     if (isLoaded && data.code == 428) {
         navigate(data.result);
     }
+
+    console.log(data);
 
     return isLoaded ? (
         <Box>
@@ -41,47 +43,47 @@ const Home = () => {
                 }}
             >
                 <Fragment>
-                    <DCarousel type='movie' itemData={data.result.carousel} />
+                    <DCarousel type='movie' itemData={data.carousel} />
                     <DSlider
                         variant='item'
                         title='Popular Movies'
-                        itemData={data.result.most_popular_movies}
+                        itemData={data.most_popular_movies}
                         type='movie'
                     />
                     <DSlider
                         variant='item'
                         title='Popular Series'
-                        itemData={data.result.most_popular_series}
+                        itemData={data.most_popular_series}
                         type='serie'
                     />
                     <DSlider
                         variant='item'
                         title='Newly Added Movies'
-                        itemData={data.result.newly_added_movies}
+                        itemData={data.newly_added_movies}
                         type='movie'
                     />
                     <DSlider
                         variant='item'
                         title='Newly Released Episodes'
-                        itemData={data.result.newly_released_episodes}
+                        itemData={data.newly_released_episodes}
                         type='serie'
                     />
                     <DSlider
                         variant='item'
                         title='Newly Added Episodes'
-                        itemData={data.result.newly_added_episodes}
+                        itemData={data.newly_added_episodes}
                         type='serie'
                     />
                     <DSlider
                         variant='item'
                         title='Top Rated Movies'
-                        itemData={data.result.top_rated_movies}
+                        itemData={data.top_rated_movies}
                         type='movie'
                     />
                     <DSlider
                         variant='item'
                         title='Top Rated Series'
-                        itemData={data.result.top_rated_series}
+                        itemData={data.top_rated_series}
                         type='serie'
                     />
                 </Fragment>

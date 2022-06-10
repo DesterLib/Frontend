@@ -83,6 +83,14 @@ const DNavbar = ({ colorModeContext, themeMode }: any) => {
         setSearchAnchor(null);
     };
 
+    const handleSearchToggle = (event: any) => {
+        if (searchAnchor) {
+            handleOpenSearch(event);
+        } else {
+            handleCloseSearch();
+        }
+    };
+
     const theme = useTheme();
 
     const colorMode: any = useContext(colorModeContext);
@@ -190,7 +198,7 @@ const DNavbar = ({ colorModeContext, themeMode }: any) => {
                         </Link>
                     </Box>
                     <Box sx={{ width: '100%', margin: '0px 20px' }}>
-                        <SearchWrapper onFocus={handleOpenSearch} onBlur={handleCloseSearch}>
+                        <SearchWrapper onClick={handleSearchToggle}>
                             <SearchIconWrapper>
                                 <i className='ri-search-2-line'></i>
                             </SearchIconWrapper>

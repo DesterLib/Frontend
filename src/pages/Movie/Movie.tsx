@@ -24,8 +24,7 @@ import {
     APP_POSTER_QUALITY,
 } from '../../config';
 import useBreakpoint from '../../utilities/useBreakpoint';
-
-// import { MainWrapper } from './MoviePageComponents';
+import { HeaderImage, ItemBackground, LinearGradient, PosterImage } from './MoviePageComponents';
 
 const Movie = () => {
     const [isLoaded, setIsLoaded] = useState<boolean>(false);
@@ -38,81 +37,30 @@ const Movie = () => {
         const getData = async () => {
             const res = await fetch(`${APP_API_PATH}${APP_API_VERSION_PATH}/movie/${id}`);
             const data = (await res.json()) || null;
-            setData(data || { ok: false });
+            setData(data.results || { ok: false });
             setIsLoaded(true);
         };
         getData();
     }, [id]);
 
+    console.log(data);
+
     let directors;
     let screenplays;
     let path;
     let videoData;
-    if (isLoaded && data.result && Object.keys(data.result).length !== 0 && data.result.crew) {
-        directors = data.result.crew.filter(({ job }: any) => job === 'Director');
-        screenplays = data.result.crew.filter(({ job }: any) => job === 'Screenplay');
-        path = data.result.path;
+    if (isLoaded && data && Object.keys(data).length !== 0 && data.crew) {
+        directors = data.crew.filter(({ job }: any) => job === 'Director');
+        screenplays = data.crew.filter(({ job }: any) => job === 'Screenplay');
+        path = data.path;
         videoData = {
             id: '1',
-            title: data.result.title,
-            subTitle: data.result.title,
-            src: `${APP_API_PATH}${APP_API_VERSION_PATH}/stream/${data.result.rclone_index}/${path[0]}`,
+            title: data.title,
+            subTitle: data.title,
+            src: `${APP_API_PATH}${APP_API_VERSION_PATH}/stream/${data.rclone_index}/${path[0]}`,
             playlist: [],
         };
     }
-
-    const ItemBackground = styled('div')(() => ({
-        width: '100%',
-        position: 'relative',
-        [theme.breakpoints.up('md')]: {
-            paddingBottom: '40.25%',
-            width: '100% !important',
-        },
-        [theme.breakpoints.down('md')]: {
-            paddingBottom: '150%',
-            marginTop: '48px',
-        },
-    }));
-
-    const HeaderImage = styled('img')(() => ({
-        width: '100%',
-        height: '100%',
-        objectFit: 'cover',
-        zIndex: '5',
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        bottom: 0,
-        right: 0,
-    }));
-
-    const PosterImage = styled('img')(() => ({
-        width: '100%',
-        borderRadius: '15px',
-        maxWidth: '200px',
-        [theme.breakpoints.down('md')]: {
-            borderRadius: '10px',
-        },
-    }));
-
-    const LinearGradient = styled('div')(() => ({
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        bottom: 0,
-        right: 0,
-        width: '100%',
-        height: '100%',
-        zIndex: '10',
-        [theme.breakpoints.up('md')]: {
-            background:
-                'linear-gradient( 90deg, rgba(2, 22, 31, 1) 6%, rgba(1, 9, 12, 0.5032606792717087) 70%, rgba(0, 0, 0, 0) 100% )',
-        },
-        [theme.breakpoints.down('md')]: {
-            background:
-                'linear-gradient( 0deg, rgba(2, 22, 31, 1) 40%, rgba(2, 16, 22, 0.7721682422969187) 68%, rgba(1, 9, 12, 0.5032606792717087) 80%, rgba(0, 0, 0, 0) 100% )',
-        },
-    }));
 
     return isLoaded ? (
         <Box>
@@ -127,9 +75,9 @@ const Movie = () => {
                                         APP_API_VERSION_PATH +
                                         '/assets/image/' +
                                         APP_POSTER_QUALITY +
-                                        data.result.poster_path
+                                        data.poster_path
                                     }
-                                    alt={data.result.title}
+                                    alt={data.title}
                                 />
                                 <LinearGradient />
                             </>
@@ -142,9 +90,9 @@ const Movie = () => {
                                         APP_API_VERSION_PATH +
                                         '/assets/image/' +
                                         APP_BACKDROP_QUALITY +
-                                        data.result.backdrop_path
+                                        data.backdrop_path
                                     }
-                                    alt={data.result.title}
+                                    alt={data.title}
                                 />
                                 <LinearGradient />
                             </>
@@ -166,11 +114,13 @@ const Movie = () => {
                             marginBottom: '40px',
                             [theme.breakpoints.down('md')]: {
                                 alignItems: 'center',
+                                marginLeft: 'auto',
+                                marginBottom: '10px',
                             },
                         }}
                     >
                         <DItemLogo
-                            src={`https://www.themoviedb.org/t/p/w1280/${data.result.logo_path}`}
+                            src={`https://www.themoviedb.org/t/p/w1280/${data.logo_path}`}
                         />
                         <Typography
                             sx={{
@@ -185,12 +135,6 @@ const Movie = () => {
                         >
                             {data.title}
                         </Typography>
-                        {/* <Grid container>
-                            <Grid item></Grid>
-                            <Grid item></Grid>
-                            <Grid item></Grid>
-                            <Grid item></Grid>
-                        </Grid> */}
                         <Grid
                             container
                             sx={{
@@ -232,7 +176,7 @@ const Movie = () => {
                                     variant='contained'
                                 />
                             </Grid>
-                            <Grid sx={{ marginRight: '10px' }} item>
+                            <Grid item>
                                 <DButton
                                     startIcon={<i className='ri-more-2-fill'></i>}
                                     sx={{
@@ -266,9 +210,9 @@ const Movie = () => {
                                     APP_API_VERSION_PATH +
                                     '/assets/image/' +
                                     APP_POSTER_QUALITY +
-                                    data.result.poster_path
+                                    data.poster_path
                                 }
-                                alt={data.result.title}
+                                alt={data.title}
                             />
                         </Box>
                     </Grid>
@@ -283,10 +227,10 @@ const Movie = () => {
                             >
                                 Description
                             </Typography>
-                            <Typography variant='body2'>{data.result.description}</Typography>
+                            <Typography variant='body2'>{data.description}</Typography>
                             <Box sx={{ marginTop: '20px' }}>
-                                {data.result.genres &&
-                                    data.result.genres.map((genre: any) => (
+                                {data.genres &&
+                                    data.genres.map((genre: any) => (
                                         <Link
                                             style={{ textDecoration: 'none' }}
                                             to={`search?genre=${genre.name}`}
@@ -469,16 +413,16 @@ const Movie = () => {
                     </Grid>
                 </Grid>
                 <Box>
-                    <DSlider variant='people' title='Cast' itemData={data.result.cast} />
+                    <DSlider variant='people' title='Cast' itemData={data.cast} />
                 </Box>
                 <Box>
                     <DSlider variant='item' title='Recommendation' itemData={[]} />
                 </Box>
                 <Box>
-                    <DSlider variant='video' title='Videos' itemData={data.result.videos} />
+                    <DSlider variant='video' title='Videos' itemData={data.videos} />
                 </Box>
                 <Box>
-                    <DReviewList title='Reviews' itemData={data.result.reviews} />
+                    <DReviewList title='Reviews' itemData={data.reviews} />
                 </Box>
                 <Box>
                     <DPlayer videoData={videoData} />

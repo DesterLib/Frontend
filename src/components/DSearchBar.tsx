@@ -9,6 +9,7 @@ import ListItemText from '@mui/material/ListItemText';
 import Typography from '@mui/material/Typography';
 import { alpha, styled } from '@mui/material/styles';
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
 import { APP_API_PATH, APP_API_VERSION_PATH, APP_POSTER_QUALITY } from '../config';
@@ -85,6 +86,7 @@ const SearchCardContainer = (props: any) => {
         seriesData = data.result.series || [];
     }
 
+    const navigate = useNavigate();
     const [openModalState, setOpenModalState] = useState(false);
     const openInfoModal = (event: any) => {
         event.preventDefault();
@@ -95,16 +97,15 @@ const SearchCardContainer = (props: any) => {
     };
     const { handleCloseSearch } = props;
 
-    const link = (id: string, content: any, type: string) => {
+    const SearchRouter = ({ id, children, type, sx }: any) => {
+        const handleOnListItemClick = () => {
+            handleCloseSearch();
+            navigate(`/${type}/${id}`);
+        };
         return (
-            <Link
-                style={{ color: 'inherit', textDecoration: 'inherit' }}
-                to={`/${type}/${id}`}
-                onClick={handleCloseSearch}
-                key={id}
-            >
-                {content}
-            </Link>
+            <ListItemButton sx={sx} onClick={handleOnListItemClick} key={id}>
+                {children}
+            </ListItemButton>
         );
     };
 
@@ -133,34 +134,28 @@ const SearchCardContainer = (props: any) => {
                             }}
                         >
                             {movieData.map((item: any, index: number) => (
-                                <ListItemButton
+                                <SearchRouter
                                     sx={{ borderRadius: '5px', padding: '5px' }}
+                                    type='movie'
                                     key={index}
+                                    id={item.tmdb_id}
                                 >
                                     <ListItemAvatar sx={{ marginRight: '5px' }}>
-                                        {link(
-                                            item.tmdb_id,
-                                            <Avatar
-                                                sx={{ width: '50px', height: '70px' }}
-                                                variant='rounded'
-                                                src={
-                                                    APP_API_PATH +
-                                                    APP_API_VERSION_PATH +
-                                                    '/assets/image/' +
-                                                    APP_POSTER_QUALITY +
-                                                    item.poster_path
-                                                }
-                                            />,
-                                            'movie',
-                                        )}
+                                        <Avatar
+                                            sx={{ width: '50px', height: '70px' }}
+                                            variant='rounded'
+                                            src={
+                                                APP_API_PATH +
+                                                APP_API_VERSION_PATH +
+                                                '/assets/image/' +
+                                                APP_POSTER_QUALITY +
+                                                item.poster_path
+                                            }
+                                        />
                                     </ListItemAvatar>
                                     <ListItemText
-                                        primary={link(item.tmdb_id, item.title, 'movie')}
-                                        secondary={link(
-                                            item.tmdb_id,
-                                            (item.release_date || '').slice(0, 4),
-                                            'movie',
-                                        )}
+                                        primary={item.title}
+                                        secondary={(item.release_date || '').slice(0, 4)}
                                     />
                                     <IconButton
                                         onClick={openInfoModal}
@@ -174,7 +169,7 @@ const SearchCardContainer = (props: any) => {
                                         currentState={openModalState}
                                         closeInfoModal={closeInfoModal}
                                     />
-                                </ListItemButton>
+                                </SearchRouter>
                             ))}
                         </List>
                     ) : data.ok ? (
@@ -205,34 +200,28 @@ const SearchCardContainer = (props: any) => {
                             }}
                         >
                             {seriesData.map((item: any, index: number) => (
-                                <ListItemButton
+                                <SearchRouter
                                     sx={{ borderRadius: '5px', padding: '5px' }}
+                                    type='serie'
                                     key={index}
+                                    id={item.tmdb_id}
                                 >
                                     <ListItemAvatar sx={{ marginRight: '5px' }}>
-                                        {link(
-                                            item.tmdb_id,
-                                            <Avatar
-                                                sx={{ width: '50px', height: '70px' }}
-                                                variant='rounded'
-                                                src={
-                                                    APP_API_PATH +
-                                                    APP_API_VERSION_PATH +
-                                                    '/assets/image/' +
-                                                    APP_POSTER_QUALITY +
-                                                    item.poster_path
-                                                }
-                                            />,
-                                            'serie',
-                                        )}
+                                        <Avatar
+                                            sx={{ width: '50px', height: '70px' }}
+                                            variant='rounded'
+                                            src={
+                                                APP_API_PATH +
+                                                APP_API_VERSION_PATH +
+                                                '/assets/image/' +
+                                                APP_POSTER_QUALITY +
+                                                item.poster_path
+                                            }
+                                        />
                                     </ListItemAvatar>
                                     <ListItemText
-                                        primary={link(item.tmdb_id, item.title, 'serie')}
-                                        secondary={link(
-                                            item.tmdb_id,
-                                            (item.release_date || '').slice(0, 4),
-                                            'serie',
-                                        )}
+                                        primary={item.title}
+                                        secondary={(item.release_date || '').slice(0, 4)}
                                     />
                                     <IconButton
                                         onClick={openInfoModal}
@@ -246,7 +235,7 @@ const SearchCardContainer = (props: any) => {
                                         currentState={openModalState}
                                         closeInfoModal={closeInfoModal}
                                     />
-                                </ListItemButton>
+                                </SearchRouter>
                             ))}
                         </List>
                     ) : data.ok ? (
