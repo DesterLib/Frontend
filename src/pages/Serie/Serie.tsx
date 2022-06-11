@@ -24,7 +24,7 @@ import {
 import useBreakpoint from '../../utilities/useBreakpoint';
 import { HeaderImage, ItemBackground, LinearGradient, PosterImage } from './SeriePageComponents';
 
-const Movie = () => {
+const Serie = () => {
     const [isLoaded, setIsLoaded] = useState<boolean>(false);
     const [data, setData] = useState<any>({});
     const theme = useTheme();
@@ -35,17 +35,27 @@ const Movie = () => {
         const getData = async () => {
             const res = await fetch(`${APP_API_PATH}${APP_API_VERSION_PATH}/serie/${id}`);
             const data = (await res.json()) || {};
-            setData(data || { ok: false });
+            setData(data.result || { ok: false });
             setIsLoaded(true);
         };
         getData();
     }, [id]);
 
-    var directors;
-    var screenplays;
-    if (isLoaded) {
-        directors = data.result.crew.filter(({ job }: any) => job === 'Director');
-        screenplays = data.result.crew.filter(({ job }: any) => job === 'Screenplay');
+    let directors;
+    let screenplays;
+    let path;
+    let videoData;
+    if (isLoaded && data && Object.keys(data).length !== 0 && data.crew) {
+        directors = data.crew.filter(({ job }: any) => job === 'Director');
+        screenplays = data.crew.filter(({ job }: any) => job === 'Screenplay');
+        path = data.path;
+        videoData = {
+            id: '1',
+            title: data.title,
+            subTitle: data.title,
+            src: `${APP_API_PATH}${APP_API_VERSION_PATH}/stream/${data.rclone_index}/${path[0]}`,
+            playlist: [],
+        };
     }
 
     return isLoaded ? (
@@ -431,4 +441,4 @@ const Movie = () => {
     );
 };
 
-export default Movie;
+export default Serie;

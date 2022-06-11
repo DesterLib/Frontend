@@ -19,7 +19,7 @@ const Home = () => {
         const getData = async () => {
             const res = await fetch(`${APP_API_PATH}/api/v1/home`);
             const data = (await res.json()) || null;
-            setData(data.data || { ok: false });
+            setData(data.result || { ok: false });
             setIsLoaded(true);
         };
         getData();
@@ -43,7 +43,7 @@ const Home = () => {
                 }}
             >
                 <Fragment>
-                    <DCarousel type='movie' itemData={data.carousel} />
+                    <DCarousel itemData={data.carousel} />
                     <DSlider
                         variant='item'
                         title='Popular Movies'

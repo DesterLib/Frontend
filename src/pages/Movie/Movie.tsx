@@ -37,13 +37,11 @@ const Movie = () => {
         const getData = async () => {
             const res = await fetch(`${APP_API_PATH}${APP_API_VERSION_PATH}/movie/${id}`);
             const data = (await res.json()) || null;
-            setData(data.results || { ok: false });
+            setData(data.result || { ok: false });
             setIsLoaded(true);
         };
         getData();
     }, [id]);
-
-    console.log(data);
 
     let directors;
     let screenplays;

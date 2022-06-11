@@ -5,7 +5,7 @@ import Typography from '@mui/material/Typography';
 import { styled } from '@mui/material/styles';
 import { useTheme } from '@mui/system';
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import SwiperCore, { A11y, Autoplay, EffectFade, Navigation } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
@@ -74,6 +74,7 @@ const LinearGradient = styled('div')(({ theme }) => ({
 const DSlide = ({ item, type }: any) => {
     const breakpoint = useBreakpoint();
     const theme = useTheme();
+    const navigate = useNavigate();
     return (
         <Box sx={{ width: '100%', position: 'relative' }}>
             <ItemBackground>
@@ -212,6 +213,7 @@ const DSlide = ({ item, type }: any) => {
                             variant='contained'
                             color='primary'
                             startIcon={<i className='ri-play-mini-fill'></i>}
+                            onClick={() => navigate(`/${type}/${item.tmdb_id}`)}
                         >
                             PLAY NOW
                         </DButton>
@@ -240,131 +242,12 @@ const DSlide = ({ item, type }: any) => {
                 </Grid>
             </Box>
         </Box>
-        // <Box sx={{ width: '100%', position: 'relative' }}>
-        //     <div className={styles.itemInfo}>
-        //         <div className={styles.logo}>
-        //             <HeaderLogo
-        //                 src={
-        //                     APP_API_PATH +
-        //                     APP_API_VERSION_PATH +
-        //                     '/assets/image/' +
-        //                     APP_POSTER_QUALITY +
-        //                     item.logo_path
-        //                 }
-        //                 alt={item.title}
-        //             />
-        //         </div>
-        //         <div className={styles.info}>
-        //             <Typography className={styles.title} align='center' variant='h5'>
-        //                 {item.title}
-        //             </Typography>
-        //             <div className={styles.mainInfo}>
-        // <Chip className='year' label='2020' sx={chipCss} />
-        // <Chip
-        //     className='rating'
-        //     icon={<i className='ri-star-fill'></i>}
-        //     label='8.6'
-        //     sx={chipCss}
-        // />
-        // <Chip
-        //     className='type'
-        //     label='Movie'
-        //     sx={chipCss}
-        //     style={{
-        //         backgroundColor: '#d9292f55',
-        //         border: '1px solid #ff411299',
-        //     }}
-        // />
-        //             </div>
-        //             <div className={styles.buttons}>
-        //                 <Link
-        //                     style={{ textDecoration: 'none' }}
-        //                     to={`/${type}/${item.tmdb_id}`}
-        //                     key={item.id}
-        //                 >
-        // <DButton
-        //     sx={{ marginRight: 2 }}
-        //     variant='contained'
-        //     color='primary'
-        //     startIcon={<i className='ri-play-mini-fill'></i>}
-        // >
-        //     PLAY NOW
-        // </DButton>
-        //                 </Link>
-        // <DButton
-        //     startIcon={<i className='ri-add-circle-line'></i>}
-        //     variant='contained'
-        //     color='secondary'
-        // >
-        //     ADD TO LIST
-        // </DButton>
-        //             </div>
-        //         </div>
-        //     </div>
-        //     <ItemBackground>
-        //         {(breakpoint === 'xs' || breakpoint === 'sm') && (
-        //             <>
-        //                 <HeaderImage
-        //                     src={
-        //                         APP_API_PATH +
-        //                         APP_API_VERSION_PATH +
-        //                         '/assets/image/' +
-        //                         APP_POSTER_QUALITY +
-        //                         item.poster_path
-        //                     }
-        //                     alt={item.title}
-        //                 />
-        //                 <LinearGradient />
-        //             </>
-        //         )}
-        //         {breakpoint !== 'xs' && breakpoint !== 'sm' && (
-        //             <>
-        //                 <HeaderImage
-        //                     src={
-        //                         APP_API_PATH +
-        //                         APP_API_VERSION_PATH +
-        //                         '/assets/image/' +
-        //                         APP_BACKDROP_QUALITY +
-        //                         item.backdrop_path
-        //                     }
-        //                     alt={item.title}
-        //                 />
-        //                 <LinearGradient />
-        //             </>
-        //         )}
-        //     </ItemBackground>
-        //     {/* <ItemBackground>
-        //         {breakpoint === 'xs' ? (
-        //             <HeaderImage
-        //                 src={
-        //                     APP_API_PATH +
-        //                     APP_API_VERSION_PATH +
-        //                     '/assets/image/' +
-        //                     APP_POSTER_QUALITY +
-        //                     item.poster_path
-        //                 }
-        //                 alt={item.title}
-        //             />
-        //         ) : (
-        //             <HeaderImage
-        //                 src={
-        //                     APP_API_PATH +
-        //                     APP_API_VERSION_PATH +
-        //                     '/assets/image/' +
-        //                     APP_BACKDROP_QUALITY +
-        //                     item.backdrop_path
-        //                 }
-        //                 alt={item.title}
-        //             />
-        //         )}
-        //     </ItemBackground> */}
-        //     {/* <ItemBackground poster={APP_API_PATH + APP_API_VERSION_PATH + "/assets/image/" + APP_POSTER_QUALITY + item.poster_path} backdrop={APP_API_PATH + APP_API_VERSION_PATH + "/assets/image/" + APP_BACKDROP_QUALITY + item.backdrop_path} /> */}
-        // </Box>
     );
 };
 
-const DCarousel = ({ type, itemData }: any) => {
+const DCarousel = ({ itemData }: any) => {
     SwiperCore.use([Autoplay, EffectFade, Navigation, A11y]);
+    console.log(itemData);
     return (
         <Swiper
             effect={'fade'}
@@ -378,7 +261,7 @@ const DCarousel = ({ type, itemData }: any) => {
                 itemData.map((item: any) => (
                     <SwiperSlide key={item.id}>
                         <div className={styles.carouselSlideWrapper}>
-                            <DSlide item={item} type={type} />
+                            <DSlide item={item} type='movie' />
                         </div>
                     </SwiperSlide>
                 ))}
