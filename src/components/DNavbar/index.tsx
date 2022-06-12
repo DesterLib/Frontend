@@ -1,53 +1,32 @@
-import AppBar from '@mui/material/AppBar';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
-import IconButton from '@mui/material/IconButton';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import { alpha, styled } from '@mui/material/styles';
+import { alpha } from '@mui/material/styles';
 import { useTheme } from '@mui/system';
 import { debounce } from 'lodash';
 // import DButton from '../repeat/DButton';
 import React, { useContext, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
-import { APP_API_PATH, APP_LOGO_DARK, APP_LOGO_LIGHT, APP_NAME } from '../config';
+import { APP_API_PATH, APP_LOGO_DARK, APP_LOGO_LIGHT, APP_NAME } from '../../config';
 import {
     SearchCardContainer,
     SearchIconWrapper,
     SearchInputBase,
     SearchResults,
     SearchWrapper,
-} from './DSearchBar';
+} from '../DSearch/DSearchBar';
+import { AvatarButtonWrapper, LeftMenuToggle, LogoImage, LogoWrapper, StyledAppBar } from './styles';
 
 const handleDebouncedSearch = debounce(async function (query, setSearchResult) {
     const res = await fetch(`${APP_API_PATH}/api/v1/search?query=${query}&limit=5`);
     const data = (await res.json()) || null;
     setSearchResult(data || { ok: false });
 }, 1500);
-
-const LogoImage = styled('img')(() => ({
-    position: 'absolute',
-    top: '0',
-    left: '0',
-    bottom: '0',
-    right: '0',
-    boxsizing: 'border-box',
-    padding: '0',
-    border: 'none',
-    margin: 'auto',
-    display: 'block',
-    width: '0',
-    height: '0',
-    minWidth: '100%',
-    maxWidth: '100%',
-    minHeight: '100%',
-    maxHeight: '100%',
-    objectFit: 'contain',
-}));
 
 const DNavbar = ({ colorModeContext, themeMode }: any) => {
     const [userMenu, setUserMenu] = useState<null | HTMLElement>(null);
@@ -95,25 +74,6 @@ const DNavbar = ({ colorModeContext, themeMode }: any) => {
 
     const colorMode: any = useContext(colorModeContext);
 
-    const appBarStyles = {
-        backgroundColor: alpha(theme.palette.background.default, 0.9),
-        backgroundImage: 'linear-gradient(rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.09))',
-        backdropFilter: 'blur(10px)',
-        width: 'calc(100% - 20px)',
-        marginTop: '10px',
-        left: '0',
-        right: '0',
-        marginLeft: 'auto',
-        marginRight: 'auto',
-        borderRadius: '5px',
-        color: theme.palette.primary.main,
-        [theme.breakpoints.down('md')]: {
-            marginTop: '0px',
-            width: '100%',
-            borderRadius: '0px',
-        },
-    };
-
     const menuStyles = {
         marginTop: '45px',
         '& .MuiPaper-root': {
@@ -159,35 +119,17 @@ const DNavbar = ({ colorModeContext, themeMode }: any) => {
 
     return (
         <Box>
-            <AppBar sx={appBarStyles} elevation={0} position='fixed'>
+            <StyledAppBar elevation={0} position='fixed'>
                 <Toolbar variant='dense'>
-                    <IconButton
+                    <LeftMenuToggle
                         size='large'
                         edge='start'
                         color='inherit'
                         aria-label='menu'
-                        sx={{
-                            padding: '10px',
-                            fontSize: '24px',
-                            height: '45px',
-                            width: '45px',
-                            marginLeft: '0px',
-                            marginRight: '10px',
-                        }}
                     >
                         <i className='ri-menu-line'></i>
-                    </IconButton>
-                    <Box
-                        sx={{
-                            margin: '0px',
-                            fontSize: '0px',
-                            position: 'relative',
-                            width: '200px',
-                            height: '60px',
-                            minWidth: '160px',
-                            minHeight: '60px',
-                        }}
-                    >
+                    </LeftMenuToggle>
+                    <LogoWrapper>
                         <Link to='/'>
                             <LogoImage
                                 width='160'
@@ -196,7 +138,7 @@ const DNavbar = ({ colorModeContext, themeMode }: any) => {
                                 alt={APP_NAME}
                             />
                         </Link>
-                    </Box>
+                    </LogoWrapper>
                     <Box sx={{ width: '100%', margin: '0px 20px' }}>
                         <SearchWrapper onClick={handleSearchToggle}>
                             <SearchIconWrapper>
@@ -227,9 +169,9 @@ const DNavbar = ({ colorModeContext, themeMode }: any) => {
                         }}
                     >
                         {/* <DButton variant="contained" color="primary">Login</DButton> */}
-                        <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                        <AvatarButtonWrapper onClick={handleOpenUserMenu}>
                             <Avatar alt='Alken Dester' />
-                        </IconButton>
+                        </AvatarButtonWrapper>
                         <Menu
                             disableScrollLock={true}
                             sx={menuStyles}
@@ -307,7 +249,7 @@ const DNavbar = ({ colorModeContext, themeMode }: any) => {
                         </Menu>
                     </Box>
                 </Toolbar>
-            </AppBar>
+            </StyledAppBar>
         </Box>
     );
 };

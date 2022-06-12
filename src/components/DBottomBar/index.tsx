@@ -1,32 +1,16 @@
 import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
-import Box from '@mui/material/Box';
-import { alpha, useTheme } from '@mui/system';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { DBottomBarWrapper } from './styles';
+
 const DBottomBar = () => {
-    const theme = useTheme();
     const navigate = useNavigate();
     const [value, setValue] = useState<number>(0);
 
-    const BoxStyles = {
-        position: 'fixed',
-        bottom: 0,
-        left: 0,
-        right: 0,
-        zIndex: 1000,
-        [theme.breakpoints.up('md')]: {
-            display: 'none',
-        },
-        '& .MuiBottomNavigation-root': {
-            backgroundColor: alpha(theme.palette.background.paper, 0.8),
-            backdropFilter: 'blur(10px)',
-        },
-    };
-
     return (
-        <Box sx={BoxStyles}>
+        <DBottomBarWrapper>
             <BottomNavigation
                 showLabels
                 value={value}
@@ -54,7 +38,7 @@ const DBottomBar = () => {
                     icon={<i style={{ fontSize: '22px' }} className='ri-settings-2-fill'></i>}
                 />
             </BottomNavigation>
-        </Box>
+        </DBottomBarWrapper>
     );
 };
 

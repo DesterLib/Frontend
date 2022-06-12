@@ -6,9 +6,10 @@ import { alpha, styled } from '@mui/material/styles';
 import { useTheme } from '@mui/system';
 import React from 'react';
 
-import { APP_API_PATH, APP_API_VERSION_PATH, APP_POSTER_QUALITY } from '../config';
+import { APP_API_PATH, APP_API_VERSION_PATH, APP_POSTER_QUALITY } from '../../config';
+import { AvatarWrapper, Container, InfoWrapper, VoiceInfoTag } from './styles';
 
-const DTooltip = styled(({ className, ...props }: TooltipProps) => (
+const DPersonTooltip = styled(({ className, ...props }: TooltipProps) => (
     <Tooltip {...props} classes={{ popper: className }} />
 ))(({ theme }) => ({
     '& .MuiTooltip-tooltip': {
@@ -25,7 +26,7 @@ const DTooltip = styled(({ className, ...props }: TooltipProps) => (
 const DPersonCard = ({ item }: any) => {
     const theme = useTheme();
     return (
-        <DTooltip
+        <DPersonTooltip
             title={
                 <React.Fragment>
                     <Typography color='inherit'>{item.name}</Typography>
@@ -34,24 +35,9 @@ const DPersonCard = ({ item }: any) => {
                 </React.Fragment>
             }
         >
-            <Box sx={{ maxWidth: '220px', padding: '10px' }}>
-                <Box
-                    sx={{
-                        aspectRatio: '1/1',
-                        boxShadow: '0px 0px 0px 3px rgba(0,255,179,1)',
-                        borderRadius: '50%',
-                        margin: '0 auto 15px auto',
-                        padding: '3px',
-                    }}
-                >
+            <Container>
+                <AvatarWrapper>
                     <Avatar
-                        sx={{
-                            width: '100%',
-                            height: '100%',
-                            display: 'flex',
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                        }}
                         src={
                             APP_API_PATH +
                             APP_API_VERSION_PATH +
@@ -61,18 +47,8 @@ const DPersonCard = ({ item }: any) => {
                         }
                         alt={item.name}
                     />
-                </Box>
-                <Box
-                    sx={{
-                        padding: '5px 10px',
-                        backgroundColor: alpha(theme.palette.background.paper, 0.5),
-                        borderRadius: '10px',
-                        border: `2px solid ${alpha(theme.palette.background.paper, 0.3)}`,
-                        textAlign: 'center',
-                        position: 'relative',
-                        overflow: 'hidden',
-                    }}
-                >
+                </AvatarWrapper>
+                <InfoWrapper>
                     <Typography noWrap variant='body1'>
                         {item.name}
                     </Typography>
@@ -86,22 +62,12 @@ const DPersonCard = ({ item }: any) => {
                     <Typography sx={{ width: 'calc(100% - 20px)' }} noWrap variant='body2'>
                         {item.character}
                     </Typography>
-                    <Box
-                        sx={{
-                            position: 'absolute',
-                            bottom: '0px',
-                            right: '0px',
-                            padding: '0px 5px',
-                            borderRadius: '10px 0px 0px 0px',
-                            backgroundColor: alpha(theme.palette.primary.main, 0.1),
-                            color: theme.palette.primary.main,
-                        }}
-                    >
+                    <VoiceInfoTag>
                         <i className='ri-mic-fill'></i>
-                    </Box>
-                </Box>
-            </Box>
-        </DTooltip>
+                    </VoiceInfoTag>
+                </InfoWrapper>
+            </Container>
+        </DPersonTooltip>
     );
 };
 

@@ -6,9 +6,9 @@ import React, { Fragment, useRef } from 'react';
 import SwiperCore, { Navigation } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
-import DCard from './DCard';
-import DPersonCard from './DPersonCard';
-import DVideoCard from './DVideoCard';
+import DCard from '../DCard';
+import DPersonCard from '../DPersonCard';
+import DVideoCard from '../DVideoCard';
 
 const DSwiper = styled(Swiper)(() => ({
     padding: '20px',

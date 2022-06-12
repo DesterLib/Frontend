@@ -4,7 +4,7 @@ import { alpha } from '@mui/material/styles';
 import { useTheme } from '@mui/system';
 import React from 'react';
 
-import { APP_API_PATH, APP_API_VERSION_PATH, APP_POSTER_QUALITY } from '../config';
+import { APP_API_PATH, APP_API_VERSION_PATH, APP_POSTER_QUALITY } from '../../config';
 
 const DReviewCard = ({ item }: any) => {
     const theme = useTheme();

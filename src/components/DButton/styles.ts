@@ -1,8 +1,7 @@
 import Button, { ButtonProps } from '@mui/material/Button';
-import { alpha } from '@mui/material/styles';
-import { styled } from '@mui/material/styles';
+import { alpha, styled } from '@mui/material/styles';
 
-const DButton = styled(Button)<ButtonProps>(({ theme }) => ({
+export const DButton = styled(Button)<ButtonProps>(({ theme }) => ({
     borderRadius: 15,
     padding: '10px 15px',
     transition: '0.2s ease',
@@ -36,5 +35,3 @@ const DButton = styled(Button)<ButtonProps>(({ theme }) => ({
         },
     },
 }));
-
-export default DButton;

@@ -12,8 +12,8 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
-import { APP_API_PATH, APP_API_VERSION_PATH, APP_POSTER_QUALITY } from '../config';
-import DInfoModal from './DInfoModal';
+import { APP_API_PATH, APP_API_VERSION_PATH, APP_POSTER_QUALITY } from '../../config';
+import DInfoModal from '../DInfoModal';
 
 const SearchWrapper = styled('div')(({ theme }) => ({
     position: 'relative',

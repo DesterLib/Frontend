@@ -1,18 +1,11 @@
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
+import { Button } from '@mui/material';
 import { alpha, styled } from '@mui/material/styles';
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 
-import {
-    APP_API_PATH,
-    APP_API_VERSION_PATH,
-    APP_NO_IMAGE_POSTER,
-    APP_POSTER_QUALITY,
-} from '../config';
-import DInfoModal from './DInfoModal';
+import { APP_NO_IMAGE_POSTER } from '../../config';
+import DVideoModal from '../DVideoModal';
 
-const PlayButton = styled('div')(() => ({
+const PlayButton = styled(Button)(() => ({
     position: 'absolute',
     top: '0',
     bottom: '0',
@@ -38,37 +31,10 @@ const PlayButton = styled('div')(() => ({
 const ImageWrapper = styled('div')(() => ({
     position: 'relative',
     width: '100%',
-    paddingBottom: '150%',
+    paddingBottom: '60%',
     borderRadius: '5px',
     overflow: 'hidden',
     backgroundColor: '#000000',
-}));
-
-const BottomButtonWrapper = styled('div')(() => ({
-    position: 'absolute',
-    bottom: '0',
-    padding: '10px',
-    display: 'flex',
-    justifyContent: 'space-between',
-    borderRadius: '5px',
-    width: '100%',
-    opacity: '0',
-}));
-
-const Button = styled(IconButton)(({ theme }) => ({
-    height: '40px',
-    width: '40px',
-    color: '#FF007A',
-    backgroundColor: alpha(theme.palette.background.default, 0.5),
-    backdropFilter: 'blur(10px)',
-    transition: '0.2s ease',
-    '&:hover': {
-        backgroundColor: theme.palette.background.default,
-    },
-}));
-
-const CardTitle = styled(Typography)(() => ({
-    padding: '10px',
 }));
 
 const Card = styled('div')(({ theme }) => ({
@@ -117,8 +83,9 @@ const ItemImage = styled('img')(() => ({
     objectFit: 'cover',
 }));
 
-const DCard = ({ item, type }: any) => {
+const DVideoCard = ({ item }: any) => {
     const [openModalState, setOpenModalState] = useState(false);
+    // eslint-disable-next-line
     const openInfoModal = (event: any) => {
         event.preventDefault();
         setOpenModalState(true);
@@ -135,42 +102,19 @@ const DCard = ({ item, type }: any) => {
                         className='image'
                         src={
                             (item &&
-                                item.poster_path &&
-                                `${APP_API_PATH}${APP_API_VERSION_PATH}/assets/image/${APP_POSTER_QUALITY}${item.poster_path}`) ||
+                                item.key &&
+                                `https://i.ytimg.com/vi/${item.key}/hqdefault.jpg`) ||
                             APP_NO_IMAGE_POSTER
                         }
                         alt=''
                     />
-                    <Link
-                        style={{ textDecoration: 'none' }}
-                        to={`/${type}/${item.tmdb_id}`}
-                        key={item.id}
-                    >
-                        <PlayButton className='playButton'>
-                            <i className='ri-play-mini-fill'></i>
-                        </PlayButton>
-                    </Link>
+                    <PlayButton className='playButton' onClick={openInfoModal}>
+                        <i className='ri-play-mini-fill'></i>
+                    </PlayButton>
                 </ImageWrapper>
-                <BottomButtonWrapper className='bottomButtonWrapper'>
-                    <Button
-                        onClick={(e) => e.preventDefault()}
-                        onContextMenu={(e) => e.preventDefault()}
-                        sx={{}}
-                    >
-                        <i className='ri-heart-line'></i>
-                    </Button>
-                    <Button onClick={openInfoModal} onContextMenu={(e) => e.preventDefault()}>
-                        <i className='ri-more-2-fill'></i>
-                    </Button>
-                </BottomButtonWrapper>
             </CardWrapper>
-            <CardTitle>
-                {(item && item.title && (item.title || null)) ||
-                    (item && item.name && (item.name || null))}
-            </CardTitle>
-            <DInfoModal
+            <DVideoModal
                 item={item}
-                type={type}
                 currentState={openModalState}
                 closeInfoModal={closeInfoModal}
             />
@@ -178,4 +122,4 @@ const DCard = ({ item, type }: any) => {
     );
 };
 
-export default DCard;
+export default DVideoCard;

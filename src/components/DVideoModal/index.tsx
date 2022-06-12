@@ -5,14 +5,6 @@ import IconButton from '@mui/material/IconButton';
 import { alpha, styled } from '@mui/material/styles';
 import React from 'react';
 
-/*
-interface ItemBackgroundProps {
-  poster?: string;
-  backdrop?: string;
-  theme?: Theme;
-}
-*/
-
 const InfoModal = styled(Dialog)(({ theme }) => ({
     '& .MuiDialogContent-root': {
         padding: theme.spacing(2),

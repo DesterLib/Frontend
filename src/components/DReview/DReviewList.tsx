@@ -3,7 +3,7 @@ import Chip from '@mui/material/Chip';
 import Typography from '@mui/material/Typography';
 import React from 'react';
 
-import DButton from './DButton';
+import DButton from '../DButton';
 import DReviewCard from './DReviewCard';
 
 const DReviewList = ({ title, itemData }: any) => {
