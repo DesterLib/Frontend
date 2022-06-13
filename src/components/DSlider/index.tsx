@@ -1,25 +1,13 @@
 import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import { styled } from '@mui/material/styles';
 import React, { Fragment, useRef } from 'react';
 import SwiperCore, { Navigation } from 'swiper';
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { SwiperSlide } from 'swiper/react';
 
 import DCard from '../DCard';
 import DPersonCard from '../DPersonCard';
 import DVideoCard from '../DVideoCard';
-
-const DSwiper = styled(Swiper)(() => ({
-    padding: '20px',
-    '--swiper-navigation-size': '10px',
-    '& .swiper-button-prev': {
-        top: '0px',
-    },
-    '& .swiper-button-next': {
-        top: '0px',
-    },
-}));
+import { DSliderHeading, DSwiper, MainContainer, SubContainer } from './styles';
 
 const DSlider = ({ title, type, itemData, variant }: any) => {
     const navigationPrevRef = useRef(null);
@@ -30,18 +18,9 @@ const DSlider = ({ title, type, itemData, variant }: any) => {
             {variant === 'item' && (
                 <Fragment>
                     {itemData && Object.keys(itemData).length !== 0 ? (
-                        <div style={{ padding: '10px' }}>
-                            <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                                <Typography
-                                    sx={{
-                                        padding: '0px 20px',
-                                        display: 'flex',
-                                        alignItems: 'center',
-                                    }}
-                                    variant='h5'
-                                >
-                                    {title || null}
-                                </Typography>
+                        <MainContainer>
+                            <SubContainer>
+                                <DSliderHeading variant='h5'>{title || null}</DSliderHeading>
                                 <Box>
                                     <IconButton
                                         ref={navigationPrevRef}
@@ -53,7 +32,7 @@ const DSlider = ({ title, type, itemData, variant }: any) => {
                                         <i className='ri-arrow-right-s-line'></i>
                                     </IconButton>
                                 </Box>
-                            </Box>
+                            </SubContainer>
                             <DSwiper
                                 grabCursor={true}
                                 watchSlidesProgress={true}
@@ -98,25 +77,16 @@ const DSlider = ({ title, type, itemData, variant }: any) => {
                                     </SwiperSlide>
                                 ))}
                             </DSwiper>
-                        </div>
+                        </MainContainer>
                     ) : null}
                 </Fragment>
             )}
             {variant === 'people' && (
                 <Fragment>
                     {itemData && Object.keys(itemData).length !== 0 ? (
-                        <div style={{ padding: '10px' }}>
-                            <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                                <Typography
-                                    sx={{
-                                        padding: '0px 20px',
-                                        display: 'flex',
-                                        alignItems: 'center',
-                                    }}
-                                    variant='h5'
-                                >
-                                    {title || null}
-                                </Typography>
+                        <MainContainer>
+                            <SubContainer>
+                                <DSliderHeading variant='h5'>{title || null}</DSliderHeading>
                                 <Box>
                                     <IconButton
                                         ref={navigationPrevRef}
@@ -128,7 +98,7 @@ const DSlider = ({ title, type, itemData, variant }: any) => {
                                         <i className='ri-arrow-right-s-line'></i>
                                     </IconButton>
                                 </Box>
-                            </Box>
+                            </SubContainer>
                             <DSwiper
                                 grabCursor={true}
                                 watchSlidesProgress={true}
@@ -173,16 +143,16 @@ const DSlider = ({ title, type, itemData, variant }: any) => {
                                     </SwiperSlide>
                                 ))}
                             </DSwiper>
-                        </div>
+                        </MainContainer>
                     ) : null}
                 </Fragment>
             )}
             {variant === 'video' && (
                 <Fragment>
                     {itemData && Object.keys(itemData).length !== 0 ? (
-                        <div style={{ padding: '10px' }}>
-                            <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                                <Typography
+                        <MainContainer>
+                            <SubContainer>
+                                <DSliderHeading
                                     sx={{
                                         padding: '0px 20px',
                                         display: 'flex',
@@ -191,7 +161,7 @@ const DSlider = ({ title, type, itemData, variant }: any) => {
                                     variant='h5'
                                 >
                                     {title || null}
-                                </Typography>
+                                </DSliderHeading>
                                 <Box>
                                     <IconButton
                                         ref={navigationPrevRef}
@@ -203,7 +173,7 @@ const DSlider = ({ title, type, itemData, variant }: any) => {
                                         <i className='ri-arrow-right-s-line'></i>
                                     </IconButton>
                                 </Box>
-                            </Box>
+                            </SubContainer>
                             <DSwiper
                                 grabCursor={true}
                                 watchSlidesProgress={true}
@@ -248,7 +218,7 @@ const DSlider = ({ title, type, itemData, variant }: any) => {
                                     </SwiperSlide>
                                 ))}
                             </DSwiper>
-                        </div>
+                        </MainContainer>
                     ) : null}
                 </Fragment>
             )}

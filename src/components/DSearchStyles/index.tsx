@@ -10,7 +10,6 @@ import Typography from '@mui/material/Typography';
 import { alpha, styled } from '@mui/material/styles';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Link } from 'react-router-dom';
 
 import { APP_API_PATH, APP_API_VERSION_PATH, APP_POSTER_QUALITY } from '../../config';
 import DInfoModal from '../DInfoModal';
@@ -20,7 +19,6 @@ const SearchWrapper = styled('div')(({ theme }) => ({
     borderRadius: '15px',
     transition: '0.2s ease-in',
     width: '400px',
-    // width: "100%",
     height: '40px',
     backgroundColor: alpha(theme.palette.background.default, 0.7),
     backgroundImage: 'linear-gradient(rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.09))',

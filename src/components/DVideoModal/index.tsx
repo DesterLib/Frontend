@@ -1,37 +1,7 @@
 import Box from '@mui/material/Box';
-import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
-import IconButton from '@mui/material/IconButton';
-import { alpha, styled } from '@mui/material/styles';
 import React from 'react';
-
-const InfoModal = styled(Dialog)(({ theme }) => ({
-    '& .MuiDialogContent-root': {
-        padding: theme.spacing(2),
-        backgroundColor: alpha('#000000', 1),
-        border: '0px',
-    },
-    '& .MuiDialog-container .MuiDialog-paper': {
-        boxShadow: `0px 0px 0px 2px ${theme.palette.background.default}`,
-        borderRadius: '10px',
-    },
-    '& .MuiDialogActions-root': {
-        padding: theme.spacing(1),
-    },
-}));
-
-const CloseButton = styled(IconButton)(({ theme }) => ({
-    position: 'absolute',
-    right: '8px',
-    top: '8px',
-    backgroundColor: alpha(theme.palette.background.default, 0.5),
-    backdropFilter: 'blur(10)',
-    color: '#ffffff',
-    '&:hover': {
-        color: '#ffffff',
-        backgroundColor: alpha(theme.palette.background.default, 1),
-    },
-}));
+import { CloseButton, InfoModal } from './styles';
 
 const DVideoModal = ({ item, currentState, closeInfoModal }: any) => {
     return (

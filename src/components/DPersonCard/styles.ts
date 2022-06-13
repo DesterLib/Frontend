@@ -7,12 +7,17 @@ export const Container = styled(Box)<BoxProps>(() => ({
     padding: '10px',
 }));
 
-export const AvatarWrapper = styled(Box)<BoxProps>(() => ({
+export const PersonAvatarWrapper = styled(Box)<BoxProps>(() => ({
     aspectRatio: '1/1',
     boxShadow: '0px 0px 0px 3px rgba(0,255,179,1)',
     borderRadius: '50%',
     margin: '0 auto 15px auto',
     padding: '3px',
+}));
+
+export const PersonAvatarImg = styled(Avatar)<AvatarProps>(() => ({
+    height: '100%',
+    width: '100%',
 }));
 
 export const InfoWrapper = styled(Box)<BoxProps>(({ theme }) => ({

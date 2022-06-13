@@ -19,7 +19,7 @@ import {
     SearchInputBase,
     SearchResults,
     SearchWrapper,
-} from '../DSearch/DSearchBar';
+} from '../DSearchStyles';
 import { AvatarButtonWrapper, LeftMenuToggle, LogoImage, LogoWrapper, StyledAppBar } from './styles';
 
 const handleDebouncedSearch = debounce(async function (query, setSearchResult) {

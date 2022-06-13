@@ -1,5 +1,3 @@
-import Avatar from '@mui/material/Avatar';
-import Box from '@mui/material/Box';
 import Tooltip, { TooltipProps } from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 import { alpha, styled } from '@mui/material/styles';
@@ -7,7 +5,7 @@ import { useTheme } from '@mui/system';
 import React from 'react';
 
 import { APP_API_PATH, APP_API_VERSION_PATH, APP_POSTER_QUALITY } from '../../config';
-import { AvatarWrapper, Container, InfoWrapper, VoiceInfoTag } from './styles';
+import { Container, InfoWrapper, PersonAvatarImg, PersonAvatarWrapper, VoiceInfoTag } from './styles';
 
 const DPersonTooltip = styled(({ className, ...props }: TooltipProps) => (
     <Tooltip {...props} classes={{ popper: className }} />
@@ -36,8 +34,8 @@ const DPersonCard = ({ item }: any) => {
             }
         >
             <Container>
-                <AvatarWrapper>
-                    <Avatar
+                <PersonAvatarWrapper>
+                    <PersonAvatarImg
                         src={
                             APP_API_PATH +
                             APP_API_VERSION_PATH +
@@ -47,7 +45,7 @@ const DPersonCard = ({ item }: any) => {
                         }
                         alt={item.name}
                     />
-                </AvatarWrapper>
+                </PersonAvatarWrapper>
                 <InfoWrapper>
                     <Typography noWrap variant='body1'>
                         {item.name}

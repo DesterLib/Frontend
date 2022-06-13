@@ -14,7 +14,7 @@ import { Link } from 'react-router-dom';
 import DButton from '../../components/DButton';
 import DItemLogo from '../../components/DItemLogo';
 import DPlayer from '../../components/DPlayer';
-import DReviewList from '../../components/DReview/DReviewList';
+import DReviewList from '../../components/DReview';
 import DSlider from '../../components/DSlider';
 import DSpacer from '../../components/DSpacer';
 import {
@@ -42,6 +42,8 @@ const Movie = () => {
         };
         getData();
     }, [id]);
+
+    console.log(data.reviews);
 
     let directors;
     let screenplays;
@@ -422,9 +424,9 @@ const Movie = () => {
                 <Box>
                     <DReviewList title='Reviews' itemData={data.reviews} />
                 </Box>
-                <Box>
+                {/* <Box>
                     <DPlayer videoData={videoData} />
-                </Box>
+                </Box> */}
             </Box>
         </Box>
     ) : (
