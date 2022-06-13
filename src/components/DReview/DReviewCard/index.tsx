@@ -1,14 +1,14 @@
-import { Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import React from 'react';
 
 import { APP_API_PATH, APP_API_VERSION_PATH, APP_POSTER_QUALITY } from '../../../config';
 import {
     AvatarContainer,
     AvatarImg,
+    AvatarTitle,
     AvatarWrapper,
     ContentWrapper,
     DateWrapper,
-    FeaturedDeatilsWrapper,
     FeaturedTitleWrapper,
     ListItemWrapper,
     MainContainer,
@@ -35,23 +35,19 @@ const DReviewCard = ({ item }: any) => {
                 <AvatarWrapper>
                     <AvatarImg src={avatar_path}></AvatarImg>
                 </AvatarWrapper>
-                <Typography variant='body1'>
-                    {item.author_details.name || item.author || item.author_details.username}
-                </Typography>
             </AvatarContainer>
             <MainContainer>
                 <SubContainer>
+                    <AvatarTitle variant='subtitle1'>
+                        {item.author_details.name || item.author || item.author_details.username}
+                    </AvatarTitle>
                     <FeaturedTitleWrapper>
                         <Typography variant='body2'>Featured Review</Typography>
+                        <i style={{ color: '#FFD333', marginLeft: '10px' }} className='ri-star-fill'></i>
+                        <Typography noWrap sx={{ padding: '0px 7px' }} variant='body2'>
+                            {item.author_details.rating}
+                        </Typography>
                     </FeaturedTitleWrapper>
-                    {item.author_details.rating ? (
-                        <FeaturedDeatilsWrapper>
-                            <i style={{ color: '#FFD333' }} className='ri-star-fill'></i>
-                            <Typography noWrap sx={{ padding: '0px 7px' }} variant='body2'>
-                                {item.author_details.rating}
-                            </Typography>
-                        </FeaturedDeatilsWrapper>
-                    ) : null}
                 </SubContainer>
                 <ContentWrapper>
                     <Typography variant='body2'>{item.content}</Typography>

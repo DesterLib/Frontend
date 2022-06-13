@@ -1,5 +1,6 @@
 import Avatar, { AvatarProps } from '@mui/material/Avatar';
 import Box, { BoxProps } from '@mui/material/Box';
+import Typography, { TypographyProps } from '@mui/material/Typography';
 import { alpha, styled } from '@mui/material/styles';
 
 export const ListItemWrapper = styled(Box)<BoxProps>(() => ({
@@ -16,9 +17,10 @@ export const AvatarContainer = styled(Box)<BoxProps>(() => ({
 }));
 
 export const AvatarWrapper = styled(Box)<BoxProps>(() => ({
-    width: '100%',
+    width: 'fit-content',
     height: '100%',
     marginBottom: '10px',
+    textAlign: 'center',
     boxShadow: '0px 0px 0px 3px #FF3396',
     borderRadius: '50%',
     padding: '2px',
@@ -43,16 +45,8 @@ export const FeaturedTitleWrapper = styled(Box)<BoxProps>(({ theme }) => ({
     width: 'fit-content',
     borderRadius: theme.shape.borderRadius,
     boxShadow: '0px 0px 0px 3px #AD66FF',
-}));
-
-export const FeaturedDeatilsWrapper = styled(Box)<BoxProps>(({ theme }) => ({
-    backgroundColor: '#FF3396',
-    padding: '2px 5px',
-    width: 'fit-content',
-    borderRadius: theme.shape.borderRadius,
     display: 'flex',
     alignItems: 'center',
-    boxShadow: '0px 0px 0px 3px #FF66B0',
 }));
 
 export const ContentWrapper = styled(Box)<BoxProps>(() => ({
@@ -65,7 +59,11 @@ export const DateWrapper = styled(Box)<BoxProps>(() => ({
     textAlign: 'end',
 }));
 
+export const AvatarTitle = styled(Typography)<TypographyProps>(({ theme }) => ({
+    color: theme.palette.primary.main
+}));
+
 export const AvatarImg = styled(Avatar)<AvatarProps>(() => ({
-    height: '100px',
     width: '100px',
+    height: '100px',
 }));
