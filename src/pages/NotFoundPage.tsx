@@ -1,3 +1,4 @@
+import { useTheme } from '@mui/material';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import React from 'react';
@@ -7,6 +8,8 @@ import Error from '../assets/error.png';
 import DButton from '../components/DButton';
 
 const NotFoundPage = () => {
+
+    const theme = useTheme();
     return (
         <Box
             sx={{
@@ -25,7 +28,7 @@ const NotFoundPage = () => {
             <Box
                 sx={{
                     backgroundColor: '#174453',
-                    borderRadius: '15px',
+                    borderRadius: theme.shape.borderRadius,
                     padding: '15px 20px',
                     maxWidth: '500px',
                     width: '100%',

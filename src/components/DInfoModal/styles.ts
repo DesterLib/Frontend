@@ -11,7 +11,7 @@ export const InfoModal = styled(Dialog)(({ theme }) => ({
     },
     '& .MuiDialog-container .MuiDialog-paper': {
         boxShadow: `0px 0px 0px 2px ${theme.palette.background.default}`,
-        borderRadius: '10px',
+        borderRadius: theme.shape.borderRadius,
     },
     '& .MuiDialogActions-root': {
         padding: theme.spacing(1),

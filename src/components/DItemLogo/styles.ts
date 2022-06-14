@@ -10,6 +10,10 @@ export const LogoImage = styled('img')(({ theme }) => ({
     maxWidth: '300px',
     maxHeight: '180px',
     objectFit: 'contain',
+    [theme.breakpoints.down('lg')]: {
+        maxWidth: '200px',
+        maxHeight: '80px',
+    },
     [theme.breakpoints.down('md')]: {
         maxWidth: '80%',
     },

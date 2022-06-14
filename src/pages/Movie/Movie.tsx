@@ -25,6 +25,7 @@ import {
 } from '../../config';
 import useBreakpoint from '../../utilities/useBreakpoint';
 import { HeaderImage, ItemBackground, LinearGradient, PosterImage } from './MoviePageComponents';
+import { Helmet } from '../../components/DHelmet';
 
 const Movie = () => {
     const [isLoaded, setIsLoaded] = useState<boolean>(false);
@@ -64,6 +65,9 @@ const Movie = () => {
 
     return isLoaded ? (
         <Box>
+            <Helmet>
+                <title>{data.title}</title>
+            </Helmet>
             <Box>
                 <Box sx={{ width: '100%', position: 'relative' }}>
                     <ItemBackground>
@@ -119,9 +123,7 @@ const Movie = () => {
                             },
                         }}
                     >
-                        <DItemLogo
-                            src={`https://www.themoviedb.org/t/p/w1280/${data.logo_path}`}
-                        />
+                        <DItemLogo src={`https://www.themoviedb.org/t/p/w1280/${data.logo_path}`} />
                         <Typography
                             sx={{
                                 fontWeight: '500',

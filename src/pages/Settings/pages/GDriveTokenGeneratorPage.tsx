@@ -1,9 +1,10 @@
-import { Box, Button, Typography } from '@mui/material';
+import { Box, Button, Typography, useTheme } from '@mui/material';
 import TextField from '@mui/material/TextField';
 import React, { useState } from 'react';
 
 const GDriveTokenGenerator = (props: any) => {
     const { config } = props;
+    const theme = useTheme();
 
     const [clientId, setClientId] = useState<string>(config.client_id || '');
     const [clientSecret, setClientSecret] = useState<string>(config.client_secret || '');
@@ -37,7 +38,7 @@ const GDriveTokenGenerator = (props: any) => {
 
     const boxContainer = {
         padding: '20px',
-        borderRadius: '10px',
+        borderRadius: theme.shape.borderRadius,
         maxWidth: '800px',
         margin: 'auto auto',
         marginTop: '40px',

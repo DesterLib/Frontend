@@ -4,7 +4,7 @@ import React, { Fragment, useRef } from 'react';
 import SwiperCore, { Navigation } from 'swiper';
 import { SwiperSlide } from 'swiper/react';
 
-import DCard from '../DCard';
+import DCard from '../DItemCard';
 import DPersonCard from '../DPersonCard';
 import DVideoCard from '../DVideoCard';
 import { DSliderHeading, DSwiper, MainContainer, SubContainer } from './styles';

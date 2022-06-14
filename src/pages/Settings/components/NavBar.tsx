@@ -6,7 +6,7 @@ import LocalPoliceIcon from '@mui/icons-material/LocalPolice';
 import MenuIcon from '@mui/icons-material/Menu';
 import PaletteRoundedIcon from '@mui/icons-material/PaletteRounded';
 import SettingsIcon from '@mui/icons-material/Settings';
-import { Button } from '@mui/material';
+import { Button, useTheme } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -36,6 +36,7 @@ interface Props {
 export default function NavBar(props: Props) {
     const { children, handleSave } = props;
     const [mobileOpen, setMobileOpen] = useState(false);
+    const theme = useTheme();
 
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
@@ -107,7 +108,7 @@ export default function NavBar(props: Props) {
                                 sx={{
                                     margin: '5px 10px',
                                     padding: '5px 15px',
-                                    borderRadius: '10px',
+                                    borderRadius: theme.shape.borderRadius,
                                 }}
                             >
                                 <ListItemIcon>

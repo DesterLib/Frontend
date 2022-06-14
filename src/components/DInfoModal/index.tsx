@@ -47,7 +47,7 @@ const DInfoModal = ({ item, type, currentState, closeInfoModal }: any) => {
                             size='small'
                             startIcon={<i className='ri-play-mini-fill'></i>}
                         >
-                            Play Now
+                            PLAY NOW
                         </DButton>
                     </Link>
                     <DButton

@@ -7,7 +7,7 @@ import ListItemAvatar from '@mui/material/ListItemAvatar';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import Typography from '@mui/material/Typography';
-import { alpha, styled } from '@mui/material/styles';
+import { alpha, styled, useTheme } from '@mui/material/styles';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -16,7 +16,7 @@ import DInfoModal from '../DInfoModal';
 
 const SearchWrapper = styled('div')(({ theme }) => ({
     position: 'relative',
-    borderRadius: '15px',
+    borderRadius: theme.shape.borderRadius,
     transition: '0.2s ease-in',
     width: '400px',
     height: '40px',
@@ -94,6 +94,7 @@ const SearchCardContainer = (props: any) => {
         setOpenModalState(false);
     };
     const { handleCloseSearch } = props;
+    const theme = useTheme();
 
     const SearchRouter = ({ id, children, type, sx }: any) => {
         const handleOnListItemClick = () => {
@@ -127,13 +128,13 @@ const SearchCardContainer = (props: any) => {
                             sx={{
                                 width: '100%',
                                 bgcolor: 'background.paper',
-                                borderRadius: '5px',
+                                borderRadius: theme.shape.borderRadius,
                                 padding: '5px',
                             }}
                         >
                             {movieData.map((item: any, index: number) => (
                                 <SearchRouter
-                                    sx={{ borderRadius: '5px', padding: '5px' }}
+                                    sx={{ borderRadius: theme.shape.borderRadius, padding: '5px' }}
                                     type='movie'
                                     key={index}
                                     id={item.tmdb_id}
@@ -193,13 +194,13 @@ const SearchCardContainer = (props: any) => {
                             sx={{
                                 width: '100%',
                                 bgcolor: 'background.paper',
-                                borderRadius: '5px',
+                                borderRadius: theme.shape.borderRadius,
                                 padding: '5px',
                             }}
                         >
                             {seriesData.map((item: any, index: number) => (
                                 <SearchRouter
-                                    sx={{ borderRadius: '5px', padding: '5px' }}
+                                    sx={{ borderRadius: theme.shape.borderRadius, padding: '5px' }}
                                     type='serie'
                                     key={index}
                                     id={item.tmdb_id}

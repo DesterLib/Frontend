@@ -26,10 +26,10 @@ export const AvatarWrapper = styled(Box)<BoxProps>(() => ({
     padding: '2px',
 }));
 
-export const MainContainer = styled(Box)<BoxProps>(() => ({
+export const MainContainer = styled(Box)<BoxProps>(({ theme }) => ({
     padding: '20px',
     backgroundColor: alpha('#193F4F', 0.4),
-    borderRadius: '15px',
+    borderRadius: theme.shape.borderRadius,
 }));
 
 export const SubContainer = styled(Box)<BoxProps>(() => ({

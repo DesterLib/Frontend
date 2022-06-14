@@ -26,22 +26,22 @@ export const PlayButton = styled(Box)<BoxProps>(() => ({
     },
 }));
 
-export const ImageWrapper = styled(Box)<BoxProps>(() => ({
+export const ImageWrapper = styled(Box)<BoxProps>(({ theme }) => ({
     position: 'relative',
     width: '100%',
     paddingBottom: '150%',
-    borderRadius: '5px',
+    borderRadius: theme.shape.borderRadius,
     overflow: 'hidden',
     backgroundColor: '#000000',
 }));
 
-export const BottomButtonWrapper = styled(Box)<BoxProps>(() => ({
+export const BottomButtonWrapper = styled(Box)<BoxProps>(({ theme }) => ({
     position: 'absolute',
     bottom: '0',
     padding: '10px',
     display: 'flex',
     justifyContent: 'space-between',
-    borderRadius: '5px',
+    borderRadius: theme.shape.borderRadius,
     width: '100%',
     opacity: '0',
 }));

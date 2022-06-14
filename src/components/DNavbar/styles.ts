@@ -33,7 +33,7 @@ export const StyledAppBar = styled(AppBar)(({ theme }) => ({
     right: '0',
     marginLeft: 'auto',
     marginRight: 'auto',
-    borderRadius: '5px',
+    borderRadius: theme.shape.borderRadius,
     color: theme.palette.primary.main,
     [theme.breakpoints.down('md')]: {
         marginTop: '0px',

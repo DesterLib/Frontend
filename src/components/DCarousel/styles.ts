@@ -5,8 +5,8 @@ import Typography, { TypographyProps } from '@mui/material/Typography';
 import { styled } from '@mui/material/styles';
 
 export const StyledChip = styled(Chip)<ChipProps>(() => ({
-    px: 1,
-    mr: 1,
+    padding: '0px 5px',
+    marginRight: '5px',
     color: '#ffffff',
     backgroundColor: '#ffffff24',
     boxShadow: 'inset 0px 0px 0px 2px #00000057',

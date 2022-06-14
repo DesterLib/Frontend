@@ -89,9 +89,6 @@ const DNavbar = ({ colorModeContext, themeMode }: any) => {
         '&:hover': {
             color: theme.palette.primary.main,
         },
-        '&:last-child:hover': {
-            color: '#ff0000',
-        },
         '& .MuiAvatar-root': {
             backgroundColor: alpha('#ffffff', 0.1),
             color: '#ffffff',
@@ -101,15 +98,21 @@ const DNavbar = ({ colorModeContext, themeMode }: any) => {
             backgroundColor: alpha(theme.palette.primary.main, 0.8),
             color: '#ffffff',
         },
-        '&:last-child:hover .MuiAvatar-root': {
-            backgroundColor: '#ff0000',
-        },
         '& .MuiTypography-root': {
             display: 'flex',
             alignItems: 'center',
             '& .icon': {
                 paddingRight: '10px',
             },
+        },
+    };
+
+    const menuLastItemStyles = {
+        '&:hover': {
+            color: '#ff0000',
+        },
+        '&:hover .MuiAvatar-root': {
+            backgroundColor: '#ff0000',
         },
     };
 
@@ -239,7 +242,7 @@ const DNavbar = ({ colorModeContext, themeMode }: any) => {
                                 </MenuItem>
                             </Link>
                             <Link to='/logout' style={{ textDecoration: 'none' }}>
-                                <MenuItem sx={menuItemStyles}>
+                                <MenuItem sx={{...menuItemStyles, ...menuLastItemStyles}}>
                                     <Avatar sx={{ marginRight: '10px' }}>
                                         <i className='icon ri-logout-box-fill'></i>
                                     </Avatar>

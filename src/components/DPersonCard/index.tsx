@@ -11,7 +11,7 @@ const DPersonTooltip = styled(({ className, ...props }: TooltipProps) => (
     <Tooltip {...props} classes={{ popper: className }} />
 ))(({ theme }) => ({
     '& .MuiTooltip-tooltip': {
-        borderRadius: '10px',
+        borderRadius: theme.shape.borderRadius,
         backgroundColor: theme.palette.background.paper,
         color: theme.palette.text,
         border: `2px solid ${alpha(theme.palette.background.default, 0.3)}`,

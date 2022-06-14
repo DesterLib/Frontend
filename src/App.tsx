@@ -83,7 +83,10 @@ const App = () => {
                     MuiMenuItem: {
                         styleOverrides: {
                             root: {
-                                borderRadius: '5px',
+                                borderRadius:
+                                mode === 'light'
+                                    ? lightTheme.shape.borderRadius
+                                    : darkTheme.shape.borderRadius,
                                 transition: '0.2s ease',
                             },
                         },

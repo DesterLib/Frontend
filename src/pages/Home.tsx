@@ -6,20 +6,27 @@ import { useNavigate } from 'react-router-dom';
 
 import DBottomBar from '../components/DBottomBar';
 import DCarousel from '../components/DCarousel';
+import { Helmet } from '../components/DHelmet';
 import DSlider from '../components/DSlider';
 import { APP_API_PATH } from '../config';
+
+// import useNetworkStatus from '../utilities/useNetworkStatus';
 
 const Home = () => {
     const [isLoaded, setIsLoaded] = useState<boolean>(false);
     const [data, setData] = useState<any>({});
+    const [appInfo, setAppInfo] = useState<any>({});
     const theme = useTheme();
     const navigate = useNavigate();
 
     useEffect(() => {
         const getData = async () => {
             const res = await fetch(`${APP_API_PATH}/api/v1/home`);
+            const appFetch = await fetch(`${APP_API_PATH}/api/v1/settings`);
             const data = (await res.json()) || null;
+            const appData = (await appFetch.json()) || null;
             setData(data.result || { ok: false });
+            setAppInfo(appData.result.app || { ok: false });
             setIsLoaded(true);
         };
         getData();
@@ -29,10 +36,23 @@ const Home = () => {
         navigate(data.result);
     }
 
-    console.log(data);
+    console.log(appInfo);
+
+    // const network = useNetworkStatus();
+
+    // console.log(network.online);
+
+    // if (!network.online) return <div>No internet connection</div>;
 
     return isLoaded ? (
         <Box>
+            <Helmet>
+                <meta
+                    name='description'
+                    content={appInfo.description}
+                />
+                <title>{appInfo.name}</title>
+            </Helmet>
             <Box
                 sx={{
                     marginTop: 'calc(60px + 20px)',

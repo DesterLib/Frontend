@@ -16,7 +16,7 @@ const darkTheme = {
         },
     },
     shape: {
-        borderRadius: 5,
+        borderRadius: 10,
     },
     typography: {
         fontFamily: '"Rubik", sans-serif',

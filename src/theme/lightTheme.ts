@@ -16,7 +16,7 @@ const lightTheme = {
         },
     },
     shape: {
-        borderRadius: 3,
+        borderRadius: 5,
     },
     typography: {
         fontFamily: '"Rubik", sans-serif',

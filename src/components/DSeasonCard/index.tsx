@@ -10,7 +10,7 @@ import {
 import DInfoModal from '../DInfoModal';
 import { BottomButtonWrapper, Button, Card, CardTitle, CardWrapper, ImageWrapper, ItemImage, PlayButton } from './styles';
 
-const DCard = ({ item, type }: any) => {
+const DSeasonCard = ({ item, type }: any) => {
     const [openModalState, setOpenModalState] = useState(false);
     const openInfoModal = (event: any) => {
         event.preventDefault();
@@ -71,4 +71,4 @@ const DCard = ({ item, type }: any) => {
     );
 };
 
-export default DCard;
+export default DSeasonCard;

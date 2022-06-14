@@ -98,7 +98,7 @@ const DSlide = ({ item, type }: any) => {
                         <DButton
                             variant='contained'
                             color='primary'
-                            startIcon={<i className='ri-play-mini-fill'></i>}
+                            startIcon={<i style={{ pointerEvents: 'none'}} className='ri-play-mini-fill'></i>}
                             onClick={() => navigate(`/${type}/${item.tmdb_id}`)}
                         >
                             PLAY NOW
@@ -106,7 +106,7 @@ const DSlide = ({ item, type }: any) => {
                     </Grid>
                     <Grid sx={{ marginRight: '10px' }} item>
                         <DButton
-                            startIcon={<i className='ri-add-circle-line'></i>}
+                            startIcon={<i style={{ pointerEvents: 'none'}} className='ri-add-circle-line'></i>}
                             variant='contained'
                             color='secondary'
                         >
@@ -115,7 +115,7 @@ const DSlide = ({ item, type }: any) => {
                     </Grid>
                     <Grid item>
                         <DButton
-                            startIcon={<i className='ri-more-2-fill'></i>}
+                            startIcon={<i style={{ pointerEvents: 'none'}} className='ri-more-2-fill'></i>}
                             sx={{
                                 span: {
                                     margin: '0px',

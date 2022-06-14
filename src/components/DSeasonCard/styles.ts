@@ -1,8 +1,9 @@
 import Box, { BoxProps } from '@mui/material/Box';
-import Button, { ButtonProps } from '@mui/material/Button';
+import IconButton, { IconButtonProps } from '@mui/material/IconButton';
+import Typography, { TypographyProps } from '@mui/material/Typography';
 import { alpha, styled } from '@mui/material/styles';
 
-export const PlayButton = styled(Button)<ButtonProps>(() => ({
+export const PlayButton = styled(Box)<BoxProps>(() => ({
     position: 'absolute',
     top: '0',
     bottom: '0',
@@ -25,16 +26,43 @@ export const PlayButton = styled(Button)<ButtonProps>(() => ({
     },
 }));
 
-export const ImageContainer = styled(Box)<BoxProps>(({ theme }) => ({
+export const ImageWrapper = styled(Box)<BoxProps>(({ theme }) => ({
     position: 'relative',
     width: '100%',
-    paddingBottom: '60%',
+    paddingBottom: '150%',
     borderRadius: theme.shape.borderRadius,
     overflow: 'hidden',
     backgroundColor: '#000000',
 }));
 
-export const Card = styled(Box)<BoxProps>(({ theme }) => ({
+export const BottomButtonWrapper = styled(Box)<BoxProps>(({ theme }) => ({
+    position: 'absolute',
+    bottom: '0',
+    padding: '10px',
+    display: 'flex',
+    justifyContent: 'space-between',
+    borderRadius: theme.shape.borderRadius,
+    width: '100%',
+    opacity: '0',
+}));
+
+export const Button = styled(IconButton)<IconButtonProps>(({ theme }) => ({
+    height: '40px',
+    width: '40px',
+    color: '#FF007A',
+    backgroundColor: alpha(theme.palette.background.default, 0.5),
+    backdropFilter: 'blur(10px)',
+    transition: '0.2s ease',
+    '&:hover': {
+        backgroundColor: theme.palette.background.default,
+    },
+}));
+
+export const CardTitle = styled(Typography)<TypographyProps>(() => ({
+    padding: '10px',
+}));
+
+export const Card = styled('div')(({ theme }) => ({
     position: 'relative',
     boxSizing: 'border-box',
     '&:hover .imageWrapper': {

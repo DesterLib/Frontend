@@ -23,7 +23,7 @@ export const PersonAvatarImg = styled(Avatar)<AvatarProps>(() => ({
 export const InfoWrapper = styled(Box)<BoxProps>(({ theme }) => ({
     padding: '5px 10px',
     backgroundColor: alpha(theme.palette.background.paper, 0.5),
-    borderRadius: '10px',
+    borderRadius: theme.shape.borderRadius,
     border: `2px solid ${alpha(theme.palette.background.paper, 0.3)}`,
     textAlign: 'center',
     position: 'relative',

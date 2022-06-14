@@ -27,11 +27,8 @@ export const HeaderImage = styled('img')(({ theme }) => ({
 
 export const PosterImage = styled('img')(({ theme }) => ({
     width: '100%',
-    borderRadius: '15px',
+    borderRadius: theme.shape.borderRadius,
     maxWidth: '200px',
-    [theme.breakpoints.down('md')]: {
-        borderRadius: '10px',
-    },
 }));
 
 export const LinearGradient = styled('div')(({ theme }) => ({
