@@ -1,6 +1,5 @@
 import Box from '@mui/material/Box';
 import Chip from '@mui/material/Chip';
-import CircularProgress from '@mui/material/CircularProgress';
 import Grid from '@mui/material/Grid';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
@@ -12,6 +11,7 @@ import { Link } from 'react-router-dom';
 
 import DButton from '../../components/DButton';
 import DItemLogo from '../../components/DItemLogo';
+import DLoader from '../../components/DLoader';
 import DReviewList from '../../components/DReview';
 import DSlider from '../../components/DSlider';
 import DSpacer from '../../components/DSpacer';
@@ -427,17 +427,7 @@ const Serie = () => {
             </Box>
         </Box>
     ) : (
-        <Box
-            sx={{
-                width: '100%',
-                height: '100vh',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-            }}
-        >
-            <CircularProgress />
-        </Box>
+        <DLoader />
     );
 };
 

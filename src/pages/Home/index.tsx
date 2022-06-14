@@ -1,14 +1,14 @@
-import Box from '@mui/material/Box';
-import CircularProgress from '@mui/material/CircularProgress';
 import { useTheme } from '@mui/system';
 import React, { Fragment, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import DBottomBar from '../components/DBottomBar';
-import DCarousel from '../components/DCarousel';
-import { Helmet } from '../components/DHelmet';
-import DSlider from '../components/DSlider';
-import { APP_API_PATH } from '../config';
+import DBottomBar from '../../components/DBottomBar';
+import DCarousel from '../../components/DCarousel';
+import { Helmet } from '../../components/DHelmet';
+import DLoader from '../../components/DLoader';
+import DSlider from '../../components/DSlider';
+import { APP_API_PATH } from '../../config';
+import { MainContainer, MainWrapper } from './styles';
 
 // import useNetworkStatus from '../utilities/useNetworkStatus';
 
@@ -45,23 +45,12 @@ const Home = () => {
     // if (!network.online) return <div>No internet connection</div>;
 
     return isLoaded ? (
-        <Box>
+        <MainContainer>
             <Helmet>
-                <meta
-                    name='description'
-                    content={appInfo.description}
-                />
+                <meta name='description' content={appInfo.description} />
                 <title>{appInfo.name}</title>
             </Helmet>
-            <Box
-                sx={{
-                    marginTop: 'calc(60px + 20px)',
-                    marginBottom: '100px',
-                    [theme.breakpoints.down('md')]: {
-                        marginTop: '60px',
-                    },
-                }}
-            >
+            <MainWrapper>
                 <Fragment>
                     <DCarousel itemData={data.carousel} />
                     <DSlider
@@ -107,21 +96,11 @@ const Home = () => {
                         type='serie'
                     />
                 </Fragment>
-            </Box>
+            </MainWrapper>
             <DBottomBar />
-        </Box>
+        </MainContainer>
     ) : (
-        <Box
-            sx={{
-                width: '100%',
-                height: '100vh',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-            }}
-        >
-            <CircularProgress />
-        </Box>
+        <DLoader/>
     );
 };
 

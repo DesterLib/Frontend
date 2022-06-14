@@ -1,6 +1,5 @@
 import Box from '@mui/material/Box';
 import Chip from '@mui/material/Chip';
-import CircularProgress from '@mui/material/CircularProgress';
 import Grid from '@mui/material/Grid';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
@@ -12,7 +11,9 @@ import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
 import DButton from '../../components/DButton';
+import { Helmet } from '../../components/DHelmet';
 import DItemLogo from '../../components/DItemLogo';
+import DLoader from '../../components/DLoader';
 import DPlayer from '../../components/DPlayer';
 import DReviewList from '../../components/DReview';
 import DSlider from '../../components/DSlider';
@@ -25,7 +26,6 @@ import {
 } from '../../config';
 import useBreakpoint from '../../utilities/useBreakpoint';
 import { HeaderImage, ItemBackground, LinearGradient, PosterImage } from './MoviePageComponents';
-import { Helmet } from '../../components/DHelmet';
 
 const Movie = () => {
     const [isLoaded, setIsLoaded] = useState<boolean>(false);
@@ -426,23 +426,13 @@ const Movie = () => {
                 <Box>
                     <DReviewList title='Reviews' itemData={data.reviews} />
                 </Box>
-                {/* <Box>
+                <Box>
                     <DPlayer videoData={videoData} />
-                </Box> */}
+                </Box>
             </Box>
         </Box>
     ) : (
-        <Box
-            sx={{
-                width: '100%',
-                height: '100vh',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-            }}
-        >
-            <CircularProgress />
-        </Box>
+        <DLoader />
     );
 };
 

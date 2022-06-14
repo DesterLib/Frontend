@@ -1,10 +1,10 @@
 import { createTheme } from '@mui/material';
 import Box from '@mui/material/Box';
-import CircularProgress from '@mui/material/CircularProgress';
 import { ThemeProvider } from '@mui/material/styles';
 import React, { useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
+import DLoader from '../../components/DLoader';
 import { APP_API_PATH, APP_API_VERSION_PATH } from '../../config';
 import NavBar from './components/NavBar';
 import Auth0Page from './pages/Auth0Page';
@@ -212,17 +212,7 @@ const Settings = () => {
             </NavBar>
         </ThemeProvider>
     ) : (
-        <Box
-            sx={{
-                width: '100%',
-                height: '100vh',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-            }}
-        >
-            <CircularProgress />
-        </Box>
+        <DLoader />
     );
 };
 

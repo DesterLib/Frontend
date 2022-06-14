@@ -6,7 +6,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import DNavbar from './components/DNavbar';
 import Home from './pages/Home';
 import Movie from './pages/Movie/Movie';
-import NotFoundPage from './pages/NotFoundPage';
+import NotFoundPage from './pages/NotFound';
 import Serie from './pages/Serie/Serie';
 import Settings from './pages/Settings';
 import darkTheme from './theme/darkTheme';
