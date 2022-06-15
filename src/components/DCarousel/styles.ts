@@ -8,7 +8,7 @@ export const StyledChip = styled(Chip)<ChipProps>(({ theme }) => ({
     padding: '0px 5px',
     marginRight: '5px',
     backgroundColor: alpha(theme.palette.secondary.main, 0.8),
-    color: '#ffffff'
+    color: '#ffffff',
 }));
 
 export const ItemBackground = styled(Box)<BoxProps>(({ theme }) => ({

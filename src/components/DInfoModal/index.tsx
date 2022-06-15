@@ -7,7 +7,14 @@ import { Link } from 'react-router-dom';
 
 import { APP_API_PATH, APP_API_VERSION_PATH, APP_BACKDROP_QUALITY } from '../../config';
 import DButton from '../DButton';
-import { ButtonWrapper, CloseButton, InfoModal, InfoModalBackdrop, InfoModalBackdropWrapper, ModalImage } from './styles';
+import {
+    ButtonWrapper,
+    CloseButton,
+    InfoModal,
+    InfoModalBackdrop,
+    InfoModalBackdropWrapper,
+    ModalImage,
+} from './styles';
 
 interface GenreChipProps {
     id: number;

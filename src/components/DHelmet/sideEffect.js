@@ -2,14 +2,14 @@ import React, { PureComponent } from 'react';
 
 const canUseDOM = !!(
     typeof window !== 'undefined' &&
-  window.document &&
-  window.document.createElement
+    window.document &&
+    window.document.createElement
 );
 
 export default function withSideEffect(
     reducePropsToState,
     handleStateChangeOnClient,
-    mapStateOnServer
+    mapStateOnServer,
 ) {
     if (typeof reducePropsToState !== 'function') {
         throw new Error('Expected reducePropsToState to be a function.');
@@ -34,9 +34,11 @@ export default function withSideEffect(
         let state;
 
         function emitChange() {
-            state = reducePropsToState(mountedInstances.map(function (instance) {
-                return instance.props;
-            }));
+            state = reducePropsToState(
+                mountedInstances.map(function (instance) {
+                    return instance.props;
+                }),
+            );
 
             if (SideEffect.canUseDOM) {
                 handleStateChangeOnClient(state);
@@ -58,7 +60,9 @@ export default function withSideEffect(
 
             static rewind() {
                 if (SideEffect.canUseDOM) {
-                    throw new Error('You may only call rewind() on the server. Call peek() to read the current state.');
+                    throw new Error(
+                        'You may only call rewind() on the server. Call peek() to read the current state.',
+                    );
                 }
 
                 let recordedState = state;

@@ -43,8 +43,6 @@ const MoviePage = () => {
         getData();
     }, [movieId]);
 
-    console.log(data.reviews);
-
     let directors;
     let screenplays;
     let path;

@@ -8,7 +8,16 @@ import {
     APP_POSTER_QUALITY,
 } from '../../config';
 import DInfoModal from '../DInfoModal';
-import { BottomButtonWrapper, Button, Card, CardTitle, CardWrapper, ImageWrapper, ItemImage, PlayButton } from './styles';
+import {
+    BottomButtonWrapper,
+    Button,
+    Card,
+    CardTitle,
+    CardWrapper,
+    ImageWrapper,
+    ItemImage,
+    PlayButton,
+} from './styles';
 
 const DItemCard = ({ item, type }: any) => {
     const [openModalState, setOpenModalState] = useState(false);

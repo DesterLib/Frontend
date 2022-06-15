@@ -42,7 +42,10 @@ const DReviewCard = ({ item }: any) => {
                         {item.author_details.name || item.author || item.author_details.username}
                     </AvatarTitle>
                     <FeaturedTitleWrapper>
-                        <i style={{ color: '#FFD333', marginLeft: '10px' }} className='ri-star-fill'></i>
+                        <i
+                            style={{ color: '#FFD333', marginLeft: '10px' }}
+                            className='ri-star-fill'
+                        ></i>
                         <Typography noWrap sx={{ padding: '0px 7px' }} variant='body2'>
                             {item.author_details.rating}
                         </Typography>

@@ -9,11 +9,11 @@ import DNavbar from './components/DNavbar';
 import HomePage from './pages/Home';
 import MoviePage from './pages/Movie';
 import NotFoundPage from './pages/NotFound';
+import SeasonPage from './pages/Season';
 import SeriePage from './pages/Series';
 import Settings from './pages/Settings';
 import darkTheme from './theme/darkTheme';
 import lightTheme from './theme/lightTheme';
-import SeasonPage from './pages/Season';
 
 // eslint-disable-next-line
 const ColorModeContext = createContext({ toggleColorMode: () => {} });
@@ -110,7 +110,10 @@ const App = () => {
                         <Route path='/' element={<HomePage />} />
                         <Route path='/movie/:movieId' element={<MoviePage />} />
                         <Route path='/series/:seriesId' element={<SeriePage />} />
-                        <Route path='/series/:seriesId/season/:seasonNumber' element={<SeasonPage />} />
+                        <Route
+                            path='/series/:seriesId/season/:seasonNumber'
+                            element={<SeasonPage />}
+                        />
                         <Route path='/settings/*' element={<Settings />} />
                     </Routes>
                     <DBottomBar />

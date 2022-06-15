@@ -2,7 +2,7 @@ import Button, { ButtonProps } from '@mui/material/Button';
 import { alpha, styled } from '@mui/material/styles';
 
 export const DButton = styled(Button)<ButtonProps>(({ theme }) => ({
-    borderRadius: theme.shape.borderRadius as number + 5,
+    borderRadius: (theme.shape.borderRadius as number) + 5,
     padding: '10px 15px',
     transition: 'all 0.2s ease-in',
     lineHeight: '1',
@@ -37,13 +37,9 @@ export const DButton = styled(Button)<ButtonProps>(({ theme }) => ({
         // '& .Dester-Button-startIcon': {
 
         // },
-        color: `${
-            theme.palette.mode === 'light'
-                ? '#000000'
-                : theme.palette.primary.main
-        }`
+        color: `${theme.palette.mode === 'light' ? '#000000' : theme.palette.primary.main}`,
     },
     '& .Dester-Button-startIcon': {
-        pointerEvents: 'none'
+        pointerEvents: 'none',
     },
 }));

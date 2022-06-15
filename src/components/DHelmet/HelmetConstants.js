@@ -1,7 +1,7 @@
 export const ATTRIBUTE_NAMES = {
     BODY: 'bodyAttributes',
     HTML: 'htmlAttributes',
-    TITLE: 'titleAttributes'
+    TITLE: 'titleAttributes',
 };
 
 export const TAG_NAMES = {
@@ -14,7 +14,7 @@ export const TAG_NAMES = {
     NOSCRIPT: 'noscript',
     SCRIPT: 'script',
     STYLE: 'style',
-    TITLE: 'title'
+    TITLE: 'title',
 };
 
 export const VALID_TAG_NAMES = Object.values(TAG_NAMES);
@@ -30,7 +30,7 @@ export const TAG_PROPERTIES = {
     PROPERTY: 'property',
     REL: 'rel',
     SRC: 'src',
-    TARGET: 'target'
+    TARGET: 'target',
 };
 
 export const REACT_TAG_MAP = {
@@ -41,7 +41,7 @@ export const REACT_TAG_MAP = {
     contextmenu: 'contextMenu',
     'http-equiv': 'httpEquiv',
     itemprop: 'itemProp',
-    tabindex: 'tabIndex'
+    tabindex: 'tabIndex',
 };
 
 export const HELMET_PROPS = {
@@ -49,7 +49,7 @@ export const HELMET_PROPS = {
     DEFER: 'defer',
     ENCODE_SPECIAL_CHARACTERS: 'encodeSpecialCharacters',
     ON_CHANGE_CLIENT_STATE: 'onChangeClientState',
-    TITLE_TEMPLATE: 'titleTemplate'
+    TITLE_TEMPLATE: 'titleTemplate',
 };
 
 export const HTML_TAG_MAP = Object.keys(REACT_TAG_MAP).reduce((obj, key) => {
@@ -57,10 +57,6 @@ export const HTML_TAG_MAP = Object.keys(REACT_TAG_MAP).reduce((obj, key) => {
     return obj;
 }, {});
 
-export const SELF_CLOSING_TAGS = [
-    TAG_NAMES.NOSCRIPT,
-    TAG_NAMES.SCRIPT,
-    TAG_NAMES.STYLE
-];
+export const SELF_CLOSING_TAGS = [TAG_NAMES.NOSCRIPT, TAG_NAMES.SCRIPT, TAG_NAMES.STYLE];
 
 export const HELMET_ATTRIBUTE = 'data-react-helmet';

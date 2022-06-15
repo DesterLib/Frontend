@@ -1,6 +1,7 @@
 import Box from '@mui/material/Box';
 import DialogContent from '@mui/material/DialogContent';
 import React from 'react';
+
 import { CloseButton, InfoModal } from './styles';
 
 const DVideoModal = ({ item, currentState, closeInfoModal }: any) => {

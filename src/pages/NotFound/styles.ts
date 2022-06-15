@@ -12,8 +12,7 @@ export const MainContainer = styled(Box)<BoxProps>(() => ({
     padding: '20px',
 }));
 
-export const ImageWrapper = styled(Box)<BoxProps>(() => ({
-}));
+export const ImageWrapper = styled(Box)<BoxProps>(() => ({}));
 
 export const Image = styled('img')(() => ({
     width: '100%',

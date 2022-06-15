@@ -82,7 +82,7 @@ const DSlide = ({ item, type }: any) => {
                         <StyledChip className='year' label='2020' />
                         <StyledChip
                             className='rating'
-                            icon={<i style={{color: '#ffd000'}} className='ri-star-fill'></i>}
+                            icon={<i style={{ color: '#ffd000' }} className='ri-star-fill'></i>}
                             label='8.6'
                         />
                         <StyledChip className='type' label='Movie' />
@@ -137,7 +137,6 @@ const DSlide = ({ item, type }: any) => {
 
 const DCarousel = ({ itemData }: any) => {
     SwiperCore.use([Autoplay, EffectFade, Navigation, A11y]);
-    console.log(itemData);
     return (
         <Swiper
             effect={'fade'}

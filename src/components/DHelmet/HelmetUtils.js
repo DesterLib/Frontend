@@ -1,5 +1,6 @@
-import React from 'react';
 import objectAssign from 'object-assign';
+import React from 'react';
+
 import {
     ATTRIBUTE_NAMES,
     HELMET_ATTRIBUTE,
@@ -8,7 +9,7 @@ import {
     REACT_TAG_MAP,
     SELF_CLOSING_TAGS,
     TAG_NAMES,
-    TAG_PROPERTIES
+    TAG_PROPERTIES,
 } from './HelmetConstants.js';
 
 const encodeSpecialCharacters = (str, encode = true) => {
@@ -24,33 +25,23 @@ const encodeSpecialCharacters = (str, encode = true) => {
         .replace(/'/g, '&#x27;');
 };
 
-const getTitleFromPropsList = propsList => {
+const getTitleFromPropsList = (propsList) => {
     const innermostTitle = getInnermostProperty(propsList, TAG_NAMES.TITLE);
-    const innermostTemplate = getInnermostProperty(
-        propsList,
-        HELMET_PROPS.TITLE_TEMPLATE
-    );
+    const innermostTemplate = getInnermostProperty(propsList, HELMET_PROPS.TITLE_TEMPLATE);
 
     if (innermostTemplate && innermostTitle) {
         // use function arg to avoid need to escape $ characters
-        return innermostTemplate.replace(
-            /%s/g,
-            () =>
-                Array.isArray(innermostTitle)
-                    ? innermostTitle.join('')
-                    : innermostTitle
+        return innermostTemplate.replace(/%s/g, () =>
+            Array.isArray(innermostTitle) ? innermostTitle.join('') : innermostTitle,
         );
     }
 
-    const innermostDefaultTitle = getInnermostProperty(
-        propsList,
-        HELMET_PROPS.DEFAULT_TITLE
-    );
+    const innermostDefaultTitle = getInnermostProperty(propsList, HELMET_PROPS.DEFAULT_TITLE);
 
     return innermostTitle || innermostDefaultTitle || undefined;
 };
 
-const getOnChangeClientState = propsList => {
+const getOnChangeClientState = (propsList) => {
     return (
         getInnermostProperty(propsList, HELMET_PROPS.ON_CHANGE_CLIENT_STATE) ||
         // eslint-disable-next-line @typescript-eslint/no-empty-function
@@ -60,17 +51,17 @@ const getOnChangeClientState = propsList => {
 
 const getAttributesFromPropsList = (tagType, propsList) => {
     return propsList
-        .filter(props => typeof props[tagType] !== 'undefined')
-        .map(props => props[tagType])
+        .filter((props) => typeof props[tagType] !== 'undefined')
+        .map((props) => props[tagType])
         .reduce((tagAttrs, current) => {
-            return {...tagAttrs, ...current};
+            return { ...tagAttrs, ...current };
         }, {});
 };
 
 const getBaseTagFromPropsList = (primaryAttributes, propsList) => {
     return propsList
-        .filter(props => typeof props[TAG_NAMES.BASE] !== 'undefined')
-        .map(props => props[TAG_NAMES.BASE])
+        .filter((props) => typeof props[TAG_NAMES.BASE] !== 'undefined')
+        .map((props) => props[TAG_NAMES.BASE])
         .reverse()
         .reduce((innermostBaseTag, tag) => {
             if (!innermostBaseTag.length) {
@@ -81,8 +72,7 @@ const getBaseTagFromPropsList = (primaryAttributes, propsList) => {
                     const lowerCaseAttributeKey = attributeKey.toLowerCase();
 
                     if (
-                        primaryAttributes.indexOf(lowerCaseAttributeKey) !==
-                            -1 &&
+                        primaryAttributes.indexOf(lowerCaseAttributeKey) !== -1 &&
                         tag[lowerCaseAttributeKey]
                     ) {
                         return innermostBaseTag.concat(tag);
@@ -99,7 +89,7 @@ const getTagsFromPropsList = (tagName, primaryAttributes, propsList) => {
     const approvedSeenTags = {};
 
     return propsList
-        .filter(props => {
+        .filter((props) => {
             if (Array.isArray(props[tagName])) {
                 return true;
             }
@@ -107,18 +97,18 @@ const getTagsFromPropsList = (tagName, primaryAttributes, propsList) => {
                 warn(
                     `Helmet: ${tagName} should be of type "Array". Instead found type "${typeof props[
                         tagName
-                    ]}"`
+                    ]}"`,
                 );
             }
             return false;
         })
-        .map(props => props[tagName])
+        .map((props) => props[tagName])
         .reverse()
         .reduce((approvedTags, instanceTags) => {
             const instanceSeenTags = {};
 
             instanceTags
-                .filter(tag => {
+                .filter((tag) => {
                     let primaryAttributeKey;
                     const keys = Object.keys(tag);
                     for (let i = 0; i < keys.length; i++) {
@@ -127,17 +117,14 @@ const getTagsFromPropsList = (tagName, primaryAttributes, propsList) => {
 
                         // Special rule with link tags, since rel and href are both primary tags, rel takes priority
                         if (
-                            primaryAttributes.indexOf(lowerCaseAttributeKey) !==
-                                -1 &&
+                            primaryAttributes.indexOf(lowerCaseAttributeKey) !== -1 &&
                             !(
                                 primaryAttributeKey === TAG_PROPERTIES.REL &&
-                                tag[primaryAttributeKey].toLowerCase() ===
-                                    'canonical'
+                                tag[primaryAttributeKey].toLowerCase() === 'canonical'
                             ) &&
                             !(
                                 lowerCaseAttributeKey === TAG_PROPERTIES.REL &&
-                                tag[lowerCaseAttributeKey].toLowerCase() ===
-                                    'stylesheet'
+                                tag[lowerCaseAttributeKey].toLowerCase() === 'stylesheet'
                             )
                         ) {
                             primaryAttributeKey = lowerCaseAttributeKey;
@@ -175,7 +162,7 @@ const getTagsFromPropsList = (tagName, primaryAttributes, propsList) => {
                     return false;
                 })
                 .reverse()
-                .forEach(tag => approvedTags.push(tag));
+                .forEach((tag) => approvedTags.push(tag));
 
             // Update seen tags with tags from this instance
             const keys = Object.keys(instanceSeenTags);
@@ -184,7 +171,7 @@ const getTagsFromPropsList = (tagName, primaryAttributes, propsList) => {
                 const tagUnion = objectAssign(
                     {},
                     approvedSeenTags[attributeKey],
-                    instanceSeenTags[attributeKey]
+                    instanceSeenTags[attributeKey],
                 );
 
                 approvedSeenTags[attributeKey] = tagUnion;
@@ -208,22 +195,16 @@ const getInnermostProperty = (propsList, property) => {
     return null;
 };
 
-const reducePropsToState = propsList => ({
-    baseTag: getBaseTagFromPropsList(
-        [TAG_PROPERTIES.HREF, TAG_PROPERTIES.TARGET],
-        propsList
-    ),
+const reducePropsToState = (propsList) => ({
+    baseTag: getBaseTagFromPropsList([TAG_PROPERTIES.HREF, TAG_PROPERTIES.TARGET], propsList),
     bodyAttributes: getAttributesFromPropsList(ATTRIBUTE_NAMES.BODY, propsList),
     defer: getInnermostProperty(propsList, HELMET_PROPS.DEFER),
-    encode: getInnermostProperty(
-        propsList,
-        HELMET_PROPS.ENCODE_SPECIAL_CHARACTERS
-    ),
+    encode: getInnermostProperty(propsList, HELMET_PROPS.ENCODE_SPECIAL_CHARACTERS),
     htmlAttributes: getAttributesFromPropsList(ATTRIBUTE_NAMES.HTML, propsList),
     linkTags: getTagsFromPropsList(
         TAG_NAMES.LINK,
         [TAG_PROPERTIES.REL, TAG_PROPERTIES.HREF],
-        propsList
+        propsList,
     ),
     metaTags: getTagsFromPropsList(
         TAG_NAMES.META,
@@ -232,31 +213,20 @@ const reducePropsToState = propsList => ({
             TAG_PROPERTIES.CHARSET,
             TAG_PROPERTIES.HTTPEQUIV,
             TAG_PROPERTIES.PROPERTY,
-            TAG_PROPERTIES.ITEM_PROP
+            TAG_PROPERTIES.ITEM_PROP,
         ],
-        propsList
+        propsList,
     ),
-    noscriptTags: getTagsFromPropsList(
-        TAG_NAMES.NOSCRIPT,
-        [TAG_PROPERTIES.INNER_HTML],
-        propsList
-    ),
+    noscriptTags: getTagsFromPropsList(TAG_NAMES.NOSCRIPT, [TAG_PROPERTIES.INNER_HTML], propsList),
     onChangeClientState: getOnChangeClientState(propsList),
     scriptTags: getTagsFromPropsList(
         TAG_NAMES.SCRIPT,
         [TAG_PROPERTIES.SRC, TAG_PROPERTIES.INNER_HTML],
-        propsList
+        propsList,
     ),
-    styleTags: getTagsFromPropsList(
-        TAG_NAMES.STYLE,
-        [TAG_PROPERTIES.CSS_TEXT],
-        propsList
-    ),
+    styleTags: getTagsFromPropsList(TAG_NAMES.STYLE, [TAG_PROPERTIES.CSS_TEXT], propsList),
     title: getTitleFromPropsList(propsList),
-    titleAttributes: getAttributesFromPropsList(
-        ATTRIBUTE_NAMES.TITLE,
-        propsList
-    )
+    titleAttributes: getAttributesFromPropsList(ATTRIBUTE_NAMES.TITLE, propsList),
 });
 
 const rafPolyfill = (() => {
@@ -281,13 +251,12 @@ const cafPolyfill = (id) => clearTimeout(id);
 
 const requestAnimationFrame =
     typeof window !== 'undefined'
-        ? (window.requestAnimationFrame &&
-              window.requestAnimationFrame.bind(window)) ||
+        ? (window.requestAnimationFrame && window.requestAnimationFrame.bind(window)) ||
           window.webkitRequestAnimationFrame ||
           window.mozRequestAnimationFrame ||
           rafPolyfill
-        // eslint-disable-next-line no-undef
-        : global.requestAnimationFrame || rafPolyfill;
+        : // eslint-disable-next-line no-undef
+        global.requestAnimationFrame || rafPolyfill;
 
 const cancelAnimationFrame =
     typeof window !== 'undefined'
@@ -295,16 +264,16 @@ const cancelAnimationFrame =
           window.webkitCancelAnimationFrame ||
           window.mozCancelAnimationFrame ||
           cafPolyfill
-        // eslint-disable-next-line no-undef
-        : global.cancelAnimationFrame || cafPolyfill;
+        : // eslint-disable-next-line no-undef
+        global.cancelAnimationFrame || cafPolyfill;
 
-const warn = msg => {
+const warn = (msg) => {
     return console && typeof console.warn === 'function' && console.warn(msg);
 };
 
 let _helmetCallback = null;
 
-const handleClientStateChange = newState => {
+const handleClientStateChange = (newState) => {
     if (_helmetCallback) {
         cancelAnimationFrame(_helmetCallback);
     }
@@ -333,7 +302,7 @@ const commitTagChanges = (newState, cb) => {
         scriptTags,
         styleTags,
         title,
-        titleAttributes
+        titleAttributes,
     } = newState;
     updateAttributes(TAG_NAMES.BODY, bodyAttributes);
     updateAttributes(TAG_NAMES.HTML, htmlAttributes);
@@ -346,14 +315,14 @@ const commitTagChanges = (newState, cb) => {
         metaTags: updateTags(TAG_NAMES.META, metaTags),
         noscriptTags: updateTags(TAG_NAMES.NOSCRIPT, noscriptTags),
         scriptTags: updateTags(TAG_NAMES.SCRIPT, scriptTags),
-        styleTags: updateTags(TAG_NAMES.STYLE, styleTags)
+        styleTags: updateTags(TAG_NAMES.STYLE, styleTags),
     };
 
     const addedTags = {};
     const removedTags = {};
 
-    Object.keys(tagUpdates).forEach(tagType => {
-        const {newTags, oldTags} = tagUpdates[tagType];
+    Object.keys(tagUpdates).forEach((tagType) => {
+        const { newTags, oldTags } = tagUpdates[tagType];
 
         if (newTags.length) {
             addedTags[tagType] = newTags;
@@ -368,10 +337,8 @@ const commitTagChanges = (newState, cb) => {
     onChangeClientState(newState, addedTags, removedTags);
 };
 
-const flattenArray = possibleArray => {
-    return Array.isArray(possibleArray)
-        ? possibleArray.join('')
-        : possibleArray;
+const flattenArray = (possibleArray) => {
+    return Array.isArray(possibleArray) ? possibleArray.join('') : possibleArray;
 };
 
 const updateTitle = (title, attributes) => {
@@ -390,9 +357,7 @@ const updateAttributes = (tagName, attributes) => {
     }
 
     const helmetAttributeString = elementTag.getAttribute(HELMET_ATTRIBUTE);
-    const helmetAttributes = helmetAttributeString
-        ? helmetAttributeString.split(',')
-        : [];
+    const helmetAttributes = helmetAttributeString ? helmetAttributeString.split(',') : [];
     const attributesToRemove = [].concat(helmetAttributes);
     const attributeKeys = Object.keys(attributes);
 
@@ -420,24 +385,20 @@ const updateAttributes = (tagName, attributes) => {
 
     if (helmetAttributes.length === attributesToRemove.length) {
         elementTag.removeAttribute(HELMET_ATTRIBUTE);
-    } else if (
-        elementTag.getAttribute(HELMET_ATTRIBUTE) !== attributeKeys.join(',')
-    ) {
+    } else if (elementTag.getAttribute(HELMET_ATTRIBUTE) !== attributeKeys.join(',')) {
         elementTag.setAttribute(HELMET_ATTRIBUTE, attributeKeys.join(','));
     }
 };
 
 const updateTags = (type, tags) => {
     const headElement = document.head || document.querySelector(TAG_NAMES.HEAD);
-    const tagNodes = headElement.querySelectorAll(
-        `${type}[${HELMET_ATTRIBUTE}]`
-    );
+    const tagNodes = headElement.querySelectorAll(`${type}[${HELMET_ATTRIBUTE}]`);
     const oldTags = Array.prototype.slice.call(tagNodes);
     const newTags = [];
     let indexToDelete;
 
     if (tags && tags.length) {
-        tags.forEach(tag => {
+        tags.forEach((tag) => {
             const newElement = document.createElement(type);
 
             for (const attribute in tag) {
@@ -449,15 +410,10 @@ const updateTags = (type, tags) => {
                         if (newElement.styleSheet) {
                             newElement.styleSheet.cssText = tag.cssText;
                         } else {
-                            newElement.appendChild(
-                                document.createTextNode(tag.cssText)
-                            );
+                            newElement.appendChild(document.createTextNode(tag.cssText));
                         }
                     } else {
-                        const value =
-                            typeof tag[attribute] === 'undefined'
-                                ? ''
-                                : tag[attribute];
+                        const value = typeof tag[attribute] === 'undefined' ? '' : tag[attribute];
                         newElement.setAttribute(attribute, value);
                     }
                 }
@@ -479,21 +435,19 @@ const updateTags = (type, tags) => {
         });
     }
 
-    oldTags.forEach(tag => tag.parentNode.removeChild(tag));
-    newTags.forEach(tag => headElement.appendChild(tag));
+    oldTags.forEach((tag) => tag.parentNode.removeChild(tag));
+    newTags.forEach((tag) => headElement.appendChild(tag));
 
     return {
         oldTags,
-        newTags
+        newTags,
     };
 };
 
-const generateElementAttributesAsString = attributes =>
+const generateElementAttributesAsString = (attributes) =>
     Object.keys(attributes).reduce((str, key) => {
         const attr =
-            typeof attributes[key] !== 'undefined'
-                ? `${key}="${attributes[key]}"`
-                : `${key}`;
+            typeof attributes[key] !== 'undefined' ? `${key}="${attributes[key]}"` : `${key}`;
         return str ? `${str} ${attr}` : attr;
     }, '');
 
@@ -503,11 +457,11 @@ const generateTitleAsString = (type, title, attributes, encode) => {
     return attributeString
         ? `<${type} ${HELMET_ATTRIBUTE}="true" ${attributeString}>${encodeSpecialCharacters(
             flattenedTitle,
-            encode
+            encode,
         )}</${type}>`
         : `<${type} ${HELMET_ATTRIBUTE}="true">${encodeSpecialCharacters(
             flattenedTitle,
-            encode
+            encode,
         )}</${type}>`;
 };
 
@@ -515,20 +469,17 @@ const generateTagsAsString = (type, tags, encode) =>
     tags.reduce((str, tag) => {
         const attributeHtml = Object.keys(tag)
             .filter(
-                attribute =>
+                (attribute) =>
                     !(
                         attribute === TAG_PROPERTIES.INNER_HTML ||
                         attribute === TAG_PROPERTIES.CSS_TEXT
-                    )
+                    ),
             )
             .reduce((string, attribute) => {
                 const attr =
                     typeof tag[attribute] === 'undefined'
                         ? attribute
-                        : `${attribute}="${encodeSpecialCharacters(
-                            tag[attribute],
-                            encode
-                        )}"`;
+                        : `${attribute}="${encodeSpecialCharacters(tag[attribute], encode)}"`;
                 return string ? `${string} ${attr}` : attr;
             }, '');
 
@@ -559,7 +510,7 @@ const generateTitleAsReactComponent = (type, title, attributes) => {
     // assigning into an array to define toString function on it
     const initProps = {
         key: title,
-        [HELMET_ATTRIBUTE]: true
+        [HELMET_ATTRIBUTE]: true,
     };
     const props = convertElementAttributestoReactProps(attributes, initProps);
 
@@ -570,10 +521,10 @@ const generateTagsAsReactComponent = (type, tags) =>
     tags.map((tag, i) => {
         const mappedTag = {
             key: i,
-            [HELMET_ATTRIBUTE]: true
+            [HELMET_ATTRIBUTE]: true,
         };
 
-        Object.keys(tag).forEach(attribute => {
+        Object.keys(tag).forEach((attribute) => {
             const mappedAttribute = REACT_TAG_MAP[attribute] || attribute;
 
             if (
@@ -581,7 +532,7 @@ const generateTagsAsReactComponent = (type, tags) =>
                 mappedAttribute === TAG_PROPERTIES.CSS_TEXT
             ) {
                 const content = tag.innerHTML || tag.cssText;
-                mappedTag.dangerouslySetInnerHTML = {__html: content};
+                mappedTag.dangerouslySetInnerHTML = { __html: content };
             } else {
                 mappedTag[mappedAttribute] = tag[attribute];
             }
@@ -595,30 +546,20 @@ const getMethodsForTag = (type, tags, encode) => {
     case TAG_NAMES.TITLE:
         return {
             toComponent: () =>
-                generateTitleAsReactComponent(
-                    type,
-                    tags.title,
-                    tags.titleAttributes,
-                    encode
-                ),
+                generateTitleAsReactComponent(type, tags.title, tags.titleAttributes, encode),
             toString: () =>
-                generateTitleAsString(
-                    type,
-                    tags.title,
-                    tags.titleAttributes,
-                    encode
-                )
+                generateTitleAsString(type, tags.title, tags.titleAttributes, encode),
         };
     case ATTRIBUTE_NAMES.BODY:
     case ATTRIBUTE_NAMES.HTML:
         return {
             toComponent: () => convertElementAttributestoReactProps(tags),
-            toString: () => generateElementAttributesAsString(tags)
+            toString: () => generateElementAttributesAsString(tags),
         };
     default:
         return {
             toComponent: () => generateTagsAsReactComponent(type, tags),
-            toString: () => generateTagsAsString(type, tags, encode)
+            toString: () => generateTagsAsString(type, tags, encode),
         };
     }
 };
@@ -634,30 +575,22 @@ const mapStateOnServer = ({
     scriptTags,
     styleTags,
     title = '',
-    titleAttributes
+    titleAttributes,
 }) => ({
     base: getMethodsForTag(TAG_NAMES.BASE, baseTag, encode),
-    bodyAttributes: getMethodsForTag(
-        ATTRIBUTE_NAMES.BODY,
-        bodyAttributes,
-        encode
-    ),
-    htmlAttributes: getMethodsForTag(
-        ATTRIBUTE_NAMES.HTML,
-        htmlAttributes,
-        encode
-    ),
+    bodyAttributes: getMethodsForTag(ATTRIBUTE_NAMES.BODY, bodyAttributes, encode),
+    htmlAttributes: getMethodsForTag(ATTRIBUTE_NAMES.HTML, htmlAttributes, encode),
     link: getMethodsForTag(TAG_NAMES.LINK, linkTags, encode),
     meta: getMethodsForTag(TAG_NAMES.META, metaTags, encode),
     noscript: getMethodsForTag(TAG_NAMES.NOSCRIPT, noscriptTags, encode),
     script: getMethodsForTag(TAG_NAMES.SCRIPT, scriptTags, encode),
     style: getMethodsForTag(TAG_NAMES.STYLE, styleTags, encode),
-    title: getMethodsForTag(TAG_NAMES.TITLE, {title, titleAttributes}, encode)
+    title: getMethodsForTag(TAG_NAMES.TITLE, { title, titleAttributes }, encode),
 });
 
-export {convertReactPropstoHtmlAttributes};
-export {handleClientStateChange};
-export {mapStateOnServer};
-export {reducePropsToState};
-export {requestAnimationFrame};
-export {warn};
+export { convertReactPropstoHtmlAttributes };
+export { handleClientStateChange };
+export { mapStateOnServer };
+export { reducePropsToState };
+export { requestAnimationFrame };
+export { warn };

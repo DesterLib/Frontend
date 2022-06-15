@@ -25,7 +25,7 @@ export const InfoModalBackdrop = styled(Box)(() => ({
 }));
 
 export const ButtonWrapper = styled(Box)(() => ({
-    marginBottom: '20px'
+    marginBottom: '20px',
 }));
 
 export const InfoModalBackdropWrapper = styled(Box)(() => ({

@@ -80,11 +80,7 @@ export const DateWrapper = styled(Box)<BoxProps>(() => ({
 }));
 
 export const AvatarTitle = styled(Typography)<TypographyProps>(({ theme }) => ({
-    color: `${
-        theme.palette.mode === 'light'
-            ? '#000000'
-            : theme.palette.primary.main
-    }`
+    color: `${theme.palette.mode === 'light' ? '#000000' : theme.palette.primary.main}`,
 }));
 
 export const AvatarImg = styled(Avatar)<AvatarProps>(({ theme }) => ({

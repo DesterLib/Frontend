@@ -8,7 +8,16 @@ import {
     APP_POSTER_QUALITY,
 } from '../../config';
 import DInfoModal from '../DInfoModal';
-import { BottomButtonWrapper, Button, Card, CardTitle, CardWrapper, ImageWrapper, ItemImage, PlayButton } from './styles';
+import {
+    BottomButtonWrapper,
+    Button,
+    Card,
+    CardTitle,
+    CardWrapper,
+    ImageWrapper,
+    ItemImage,
+    PlayButton,
+} from './styles';
 
 const DSeasonCard = ({ item, type }: any) => {
     const [openModalState, setOpenModalState] = useState(false);
@@ -19,8 +28,6 @@ const DSeasonCard = ({ item, type }: any) => {
     const closeInfoModal = () => {
         setOpenModalState(false);
     };
-
-    console.log(item);
 
     return (
         <Card>
@@ -39,7 +46,7 @@ const DSeasonCard = ({ item, type }: any) => {
                     <Link
                         style={{ textDecoration: 'none' }}
                         to={`season/${item.season_number}`}
-                        state={{data: item}}
+                        state={{ data: item }}
                         key={item.id}
                     >
                         <PlayButton className='playButton'>

@@ -5,7 +5,13 @@ import { useTheme } from '@mui/system';
 import React from 'react';
 
 import { APP_API_PATH, APP_API_VERSION_PATH, APP_POSTER_QUALITY } from '../../config';
-import { Container, InfoWrapper, PersonAvatarImg, PersonAvatarWrapper, VoiceInfoTag } from './styles';
+import {
+    Container,
+    InfoWrapper,
+    PersonAvatarImg,
+    PersonAvatarWrapper,
+    VoiceInfoTag,
+} from './styles';
 
 const DPersonTooltip = styled(({ className, ...props }: TooltipProps) => (
     <Tooltip {...props} classes={{ popper: className }} />

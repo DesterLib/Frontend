@@ -1,5 +1,6 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+
 import DCarousel from '../../components/DCarousel';
 import { Helmet } from '../../components/DHelmet';
 import DLoader from '../../components/DLoader';
@@ -95,7 +96,7 @@ const HomePage = () => {
             </MainWrapper>
         </MainContainer>
     ) : (
-        <DLoader/>
+        <DLoader />
     );
 };
 

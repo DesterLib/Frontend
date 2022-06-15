@@ -6,26 +6,6 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
-const data = {
-    title: 'Demon Slayer: Kimetsu no Yaiba (2019)',
-    description:
-        'It is the Taisho Period in Japan. Tanjiro, a kindhearted boy who sells charcoal for a living, finds his family slaughtered by a demon. To make matters worse, his younger sister Nezuko, the sole survivor, has been transformed into a demon herself. Though devastated by this grim reality, Tanjiro resolves to become a “demon slayer” so that he can turn his sister back into a human, and kill the demon that massacred his family.',
-    poster: 'https://www.themoviedb.org/t/p/w1280/wrCVHdkBlBWdJUZPvnJWcBRuhSY.jpg',
-    backdrop:
-        'https://www.themoviedb.org/t/p/w1066_and_h600_bestv2/nTvM4mhqNlHIvUkI1gVnW6XP7GG.jpg',
-    seasonNo: 1,
-    episodeCount: 24,
-    episodes: [
-        {
-            title: 'Cruelty',
-            description:
-                'It is the Taisho Period (i.e. 1912-1926). Tanjiro Kamado is living a modest but blissful life in the mountains with his family. One day, when he returns from selling charcoal in town, he finds the remains of his slaughtered family in pools of blood after a demon attack. Tanjiro rushes down the snowy mountain with the sole survivor, his sister Nezuko, on his back. But on the way, Nezuko suddenly snarls, turning on Tanjiro.',
-            thumbnail:
-                'https://www.themoviedb.org/t/p/w454_and_h254_bestv2/tBBiqP5rAhIpZt54b5fA0DFuhCQ.jpg',
-        },
-    ],
-};
-
 const SeasonPage = () => {
     const theme = useTheme();
     const { seriesId, seasonNumber } = useParams();
@@ -42,8 +22,6 @@ const SeasonPage = () => {
             navigate(`/serie/${seriesId}`);
         }
     }, [seriesId, seasonNumber]);
-
-    console.log(data);
 
     return isLoaded ? (
         <Box

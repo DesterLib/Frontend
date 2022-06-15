@@ -10,7 +10,7 @@ function getNetworkConnectionInfo() {
         return {};
     }
     return {
-        status: connection
+        status: connection,
     };
 }
 function useNetworkStatus() {
