@@ -20,7 +20,13 @@ import {
     SearchResults,
     SearchWrapper,
 } from '../DSearchStyles';
-import { AvatarButtonWrapper, LeftMenuToggle, LogoImage, LogoWrapper, StyledAppBar } from './styles';
+import {
+    AvatarButtonWrapper,
+    LeftMenuToggle,
+    LogoImage,
+    LogoWrapper,
+    StyledAppBar,
+} from './styles';
 
 const handleDebouncedSearch = debounce(async function (query, setSearchResult) {
     const res = await fetch(`${APP_API_PATH}/api/v1/search?query=${query}&limit=5`);
@@ -76,7 +82,7 @@ const DNavbar = ({ colorModeContext, themeMode }: any) => {
 
     const menuStyles = {
         marginTop: '45px',
-        '& .MuiPaper-root': {
+        '& .Dester-Paper-root': {
             backgroundColor: '#090f12 !important',
         },
     };
@@ -89,16 +95,16 @@ const DNavbar = ({ colorModeContext, themeMode }: any) => {
         '&:hover': {
             color: theme.palette.primary.main,
         },
-        '& .MuiAvatar-root': {
+        '& .Dester-Avatar-root': {
             backgroundColor: alpha('#ffffff', 0.1),
             color: '#ffffff',
             transition: '0.2s ease',
         },
-        '&:hover .MuiAvatar-root': {
+        '&:hover .Dester-Avatar-root': {
             backgroundColor: alpha(theme.palette.primary.main, 0.8),
             color: '#ffffff',
         },
-        '& .MuiTypography-root': {
+        '& .Dester-Typography-root': {
             display: 'flex',
             alignItems: 'center',
             '& .icon': {
@@ -111,7 +117,7 @@ const DNavbar = ({ colorModeContext, themeMode }: any) => {
         '&:hover': {
             color: '#ff0000',
         },
-        '&:hover .MuiAvatar-root': {
+        '&:hover .Dester-Avatar-root': {
             backgroundColor: '#ff0000',
         },
     };
@@ -124,12 +130,7 @@ const DNavbar = ({ colorModeContext, themeMode }: any) => {
         <Box>
             <StyledAppBar elevation={0} position='fixed'>
                 <Toolbar variant='dense'>
-                    <LeftMenuToggle
-                        size='large'
-                        edge='start'
-                        color='inherit'
-                        aria-label='menu'
-                    >
+                    <LeftMenuToggle size='large' edge='start' color='inherit' aria-label='menu'>
                         <i className='ri-menu-line'></i>
                     </LeftMenuToggle>
                     <LogoWrapper>
@@ -192,7 +193,7 @@ const DNavbar = ({ colorModeContext, themeMode }: any) => {
                             open={Boolean(userMenu)}
                             onClose={handleCloseUserMenu}
                         >
-                            <MenuItem>
+                            <MenuItem sx={{ color: '#ffffff' }}>
                                 <Avatar
                                     sx={{
                                         marginRight: '10px',
@@ -242,7 +243,7 @@ const DNavbar = ({ colorModeContext, themeMode }: any) => {
                                 </MenuItem>
                             </Link>
                             <Link to='/logout' style={{ textDecoration: 'none' }}>
-                                <MenuItem sx={{...menuItemStyles, ...menuLastItemStyles}}>
+                                <MenuItem sx={{ ...menuItemStyles, ...menuLastItemStyles }}>
                                     <Avatar sx={{ marginRight: '10px' }}>
                                         <i className='icon ri-logout-box-fill'></i>
                                     </Avatar>

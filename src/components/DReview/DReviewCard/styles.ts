@@ -3,20 +3,31 @@ import Box, { BoxProps } from '@mui/material/Box';
 import Typography, { TypographyProps } from '@mui/material/Typography';
 import { alpha, styled } from '@mui/material/styles';
 
-export const ListItemWrapper = styled(Box)<BoxProps>(() => ({
+export const ListItemWrapper = styled(Box)<BoxProps>(({ theme }) => ({
     display: 'flex',
     marginBottom: '10px',
+    padding: '5px',
+    borderRadius: theme.shape.borderRadius,
+    [theme.breakpoints.down('md')]: {
+        backgroundColor: alpha(theme.palette.background.paper, 0.4),
+    },
 }));
 
-export const AvatarContainer = styled(Box)<BoxProps>(() => ({
+export const AvatarContainer = styled(Box)<BoxProps>(({ theme }) => ({
     width: 'fit-content',
     height: '100%',
     padding: '10px',
     textAlign: 'center',
     marginRight: '20px',
+    [theme.breakpoints.down('md')]: {
+        marginRight: '10px',
+    },
+    [theme.breakpoints.down('sm')]: {
+        marginRight: '0px',
+    },
 }));
 
-export const AvatarWrapper = styled(Box)<BoxProps>(() => ({
+export const AvatarWrapper = styled(Box)<BoxProps>(({ theme }) => ({
     width: 'fit-content',
     height: '100%',
     marginBottom: '10px',
@@ -24,12 +35,20 @@ export const AvatarWrapper = styled(Box)<BoxProps>(() => ({
     boxShadow: '0px 0px 0px 3px #FF3396',
     borderRadius: '50%',
     padding: '2px',
+    [theme.breakpoints.down('sm')]: {
+        boxShadow: '0px 0px 0px 2px #FF3396',
+    },
 }));
 
 export const MainContainer = styled(Box)<BoxProps>(({ theme }) => ({
-    padding: '20px',
-    backgroundColor: alpha('#193F4F', 0.4),
     borderRadius: theme.shape.borderRadius,
+    [theme.breakpoints.up('md')]: {
+        backgroundColor: alpha(theme.palette.background.paper, 0.4),
+        padding: '10px 20px',
+    },
+    [theme.breakpoints.down('md')]: {
+        padding: '10px 10px',
+    },
 }));
 
 export const SubContainer = styled(Box)<BoxProps>(() => ({
@@ -40,13 +59,14 @@ export const SubContainer = styled(Box)<BoxProps>(() => ({
 }));
 
 export const FeaturedTitleWrapper = styled(Box)<BoxProps>(({ theme }) => ({
-    backgroundColor: '#9133FF',
     padding: '5px 10px',
     width: 'fit-content',
     borderRadius: theme.shape.borderRadius,
-    boxShadow: '0px 0px 0px 3px #AD66FF',
     display: 'flex',
     alignItems: 'center',
+    [theme.breakpoints.down('md')]: {
+        padding: '0px 5px',
+    },
 }));
 
 export const ContentWrapper = styled(Box)<BoxProps>(() => ({
@@ -60,10 +80,22 @@ export const DateWrapper = styled(Box)<BoxProps>(() => ({
 }));
 
 export const AvatarTitle = styled(Typography)<TypographyProps>(({ theme }) => ({
-    color: theme.palette.primary.main
+    color: `${
+        theme.palette.mode === 'light'
+            ? '#000000'
+            : theme.palette.primary.main
+    }`
 }));
 
-export const AvatarImg = styled(Avatar)<AvatarProps>(() => ({
+export const AvatarImg = styled(Avatar)<AvatarProps>(({ theme }) => ({
     width: '100px',
     height: '100px',
+    [theme.breakpoints.down('md')]: {
+        width: '80px',
+        height: '80px',
+    },
+    [theme.breakpoints.down('sm')]: {
+        width: '50px',
+        height: '50px',
+    },
 }));

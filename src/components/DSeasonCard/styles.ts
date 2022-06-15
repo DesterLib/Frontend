@@ -52,7 +52,7 @@ export const Button = styled(IconButton)<IconButtonProps>(({ theme }) => ({
     color: '#FF007A',
     backgroundColor: alpha(theme.palette.background.default, 0.5),
     backdropFilter: 'blur(10px)',
-    transition: '0.2s ease',
+    transition: 'all 0.2s ease-in',
     '&:hover': {
         backgroundColor: theme.palette.background.default,
     },
@@ -77,9 +77,6 @@ export const Card = styled('div')(({ theme }) => ({
     '&:hover .bottomButtonWrapper': {
         opacity: '1',
         color: theme.palette.primary.main,
-    },
-    '& *': {
-        transition: '0.2s ease-in',
     },
 }));
 

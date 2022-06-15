@@ -1,9 +1,8 @@
 import BottomNavigation from '@mui/material/BottomNavigation';
-import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { DBottomBarWrapper } from './styles';
+import { BottomNavMenuItem, DBottomBarWrapper } from './styles';
 
 const DBottomBar = () => {
     const navigate = useNavigate();
@@ -19,21 +18,21 @@ const DBottomBar = () => {
                     if (val == 0) {
                         navigate('/');
                     } else if (val == 1) {
-                        // open search
+                        navigate('/search');
                     } else if (val == 2) {
                         navigate('/settings');
                     }
                 }}
             >
-                <BottomNavigationAction
+                <BottomNavMenuItem
                     label='Home'
                     icon={<i style={{ fontSize: '22px' }} className='ri-home-fill'></i>}
                 />
-                <BottomNavigationAction
+                <BottomNavMenuItem
                     label='Search'
                     icon={<i style={{ fontSize: '22px' }} className='ri-search-2-fill'></i>}
                 />
-                <BottomNavigationAction
+                <BottomNavMenuItem
                     label='Settings'
                     icon={<i style={{ fontSize: '22px' }} className='ri-settings-2-fill'></i>}
                 />

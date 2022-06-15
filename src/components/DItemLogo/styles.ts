@@ -16,5 +16,6 @@ export const LogoImage = styled('img')(({ theme }) => ({
     },
     [theme.breakpoints.down('md')]: {
         maxWidth: '80%',
+        maxHeight: '150px',
     },
 }));

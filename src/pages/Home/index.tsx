@@ -1,8 +1,5 @@
-import { useTheme } from '@mui/system';
 import React, { Fragment, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
-import DBottomBar from '../../components/DBottomBar';
 import DCarousel from '../../components/DCarousel';
 import { Helmet } from '../../components/DHelmet';
 import DLoader from '../../components/DLoader';
@@ -16,7 +13,6 @@ const Home = () => {
     const [isLoaded, setIsLoaded] = useState<boolean>(false);
     const [data, setData] = useState<any>({});
     const [appInfo, setAppInfo] = useState<any>({});
-    const theme = useTheme();
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -97,7 +93,6 @@ const Home = () => {
                     />
                 </Fragment>
             </MainWrapper>
-            <DBottomBar />
         </MainContainer>
     ) : (
         <DLoader/>

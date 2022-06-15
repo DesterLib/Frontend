@@ -105,7 +105,7 @@ const GDrive = (props: any) => {
     };
 
     return (
-        <div>
+        <Box>
             <Snackbar
                 open={openSnackBar}
                 autoHideDuration={2000}
@@ -151,7 +151,7 @@ const GDrive = (props: any) => {
                     onChange={handleChangeRefreshToken}
                 />
             </Box>
-        </div>
+        </Box>
     );
 };
 export default GDrive;

@@ -91,7 +91,7 @@ export default function NavBar(props: Props) {
     ];
 
     const drawer = (
-        <div>
+        <Box>
             <Toolbar>
                 <Link style={{ textDecoration: 'none' }} to='/'>
                     <img style={{ margin: 'auto' }} width='80%' src={Logo} alt='' />
@@ -128,7 +128,7 @@ export default function NavBar(props: Props) {
                     </ListItem>
                 ))}
             </List>
-        </div>
+        </Box>
     );
 
     const container = window !== undefined ? () => window.document.body : undefined;
@@ -181,7 +181,7 @@ export default function NavBar(props: Props) {
                     }}
                     sx={{
                         display: { xs: 'block', sm: 'none' },
-                        '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+                        '& .Dester-Drawer-paper': { boxSizing: 'border-box', width: drawerWidth },
                     }}
                 >
                     {drawer}
@@ -190,7 +190,7 @@ export default function NavBar(props: Props) {
                     variant='permanent'
                     sx={{
                         display: { xs: 'none', sm: 'block' },
-                        '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+                        '& .Dester-Drawer-paper': { boxSizing: 'border-box', width: drawerWidth },
                     }}
                     open
                 >

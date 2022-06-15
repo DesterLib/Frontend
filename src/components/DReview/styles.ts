@@ -16,6 +16,7 @@ export const ListWrapper = styled(Box)<BoxProps>(() => ({
 
 export const ChipIndex = styled(Chip)<ChipProps>(({ theme }) => ({
     backgroundColor: '#171E22',
+    color: '#ffffff',
     borderRadius: theme.shape.borderRadius,
     padding: '0px 5px',
     marginLeft: '10px',

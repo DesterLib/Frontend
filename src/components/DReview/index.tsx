@@ -36,7 +36,7 @@ const DReviewList = ({ title, itemData }: any) => {
                         {itemsToShow.length ? itemsToShow : 'Loading...'}
                     </Box>
                     <Box sx={{ padding: '20px' }}>
-                        <ShowMoreButton variant='contained' onClick={showMore}>
+                        <ShowMoreButton disableElevation variant='contained' onClick={showMore}>
                             show more
                             <ChipIndex label={itemData.length - numberOfitemsShown} />
                         </ShowMoreButton>

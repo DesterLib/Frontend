@@ -1,6 +1,7 @@
 import { styled } from '@mui/material/styles';
+import Box, { BoxProps } from '@mui/material/Box';
 
-export const ItemBackground = styled('div')(({ theme }) => ({
+export const ItemBackground = styled(Box)<BoxProps>(({ theme }) => ({
     width: '100%',
     position: 'relative',
     [theme.breakpoints.up('md')]: {
@@ -31,7 +32,7 @@ export const PosterImage = styled('img')(({ theme }) => ({
     maxWidth: '200px',
 }));
 
-export const LinearGradient = styled('div')(({ theme }) => ({
+export const LinearGradient = styled(Box)<BoxProps>(({ theme }) => ({
     position: 'absolute',
     top: 0,
     left: 0,

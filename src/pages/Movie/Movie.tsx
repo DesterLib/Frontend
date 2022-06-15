@@ -4,7 +4,6 @@ import Grid from '@mui/material/Grid';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import { alpha } from '@mui/material/styles';
-import { styled } from '@mui/material/styles';
 import { useTheme } from '@mui/system';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
@@ -129,6 +128,7 @@ const Movie = () => {
                                 fontWeight: '500',
                                 paddingBottom: '15px',
                                 width: '90%',
+                                color: 'white',
                                 [theme.breakpoints.down('md')]: {
                                     textAlign: 'center',
                                 },

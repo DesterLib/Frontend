@@ -51,7 +51,7 @@ const DPlaylist = ({ data, show, handleClose, handleShitchUrl }: any) => {
                     {data &&
                         data.seasons &&
                         data.seasons.map((season: any, index: number) => (
-                            <div key={index}>
+                            <Box key={index}>
                                 <ListSubheader
                                     sx={{
                                         padding: '0px 10px !important',
@@ -87,7 +87,7 @@ const DPlaylist = ({ data, show, handleClose, handleShitchUrl }: any) => {
                                                     sx={{
                                                         padding: '5px !important',
                                                         color: '#ffffff',
-                                                        '& .MuiListItemText-secondary': {
+                                                        '& .Dester-ListItemText-secondary': {
                                                             color: 'rgba(255, 255, 255, 0.6)',
                                                         },
                                                     }}
@@ -127,7 +127,7 @@ const DPlaylist = ({ data, show, handleClose, handleShitchUrl }: any) => {
                                             </Box>
                                         </ListItemButton>
                                     ))}
-                            </div>
+                            </Box>
                         ))}
                 </List>
             </Box>

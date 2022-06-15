@@ -131,7 +131,7 @@ const GenerateConfigPage = (data: any) => {
                 anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
                 style={{ marginTop: '70px', marginRight: '6px' }}
             >
-                <div>
+                <Box>
                     {errorMessage.map((error: string, n: number) => {
                         return (
                             <Alert
@@ -145,7 +145,7 @@ const GenerateConfigPage = (data: any) => {
                             </Alert>
                         );
                     })}
-                </div>
+                </Box>
             </Snackbar>
             <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
                 <Button

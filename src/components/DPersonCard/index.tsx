@@ -10,7 +10,7 @@ import { Container, InfoWrapper, PersonAvatarImg, PersonAvatarWrapper, VoiceInfo
 const DPersonTooltip = styled(({ className, ...props }: TooltipProps) => (
     <Tooltip {...props} classes={{ popper: className }} />
 ))(({ theme }) => ({
-    '& .MuiTooltip-tooltip': {
+    '& .Dester-Tooltip-tooltip': {
         borderRadius: theme.shape.borderRadius,
         backgroundColor: theme.palette.background.paper,
         color: theme.palette.text,

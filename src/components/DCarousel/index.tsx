@@ -79,26 +79,25 @@ const DSlide = ({ item, type }: any) => {
                 </ItemContentDescription>
                 <StyledGridContainerParent container>
                     <StyledGridContainerChild container>
-                        <StyledChip className='year' label='2020' />
+                        <StyledChip color='primary' className='year' label='2020' />
                         <StyledChip
                             className='rating'
+                            color='primary'
                             icon={<i className='ri-star-fill'></i>}
                             label='8.6'
                         />
-                        <StyledChip
-                            className='type'
-                            label='Movie'
-                            style={{
-                                backgroundColor: '#d9292f55',
-                                border: '1px solid #ff411299',
-                            }}
-                        />
+                        <StyledChip color='secondary' className='type' label='Movie' />
                     </StyledGridContainerChild>
                     <Grid sx={{ marginRight: '10px' }} item>
                         <DButton
                             variant='contained'
                             color='primary'
-                            startIcon={<i style={{ pointerEvents: 'none'}} className='ri-play-mini-fill'></i>}
+                            startIcon={
+                                <i
+                                    style={{ pointerEvents: 'none' }}
+                                    className='ri-play-mini-fill'
+                                ></i>
+                            }
                             onClick={() => navigate(`/${type}/${item.tmdb_id}`)}
                         >
                             PLAY NOW
@@ -106,7 +105,12 @@ const DSlide = ({ item, type }: any) => {
                     </Grid>
                     <Grid sx={{ marginRight: '10px' }} item>
                         <DButton
-                            startIcon={<i style={{ pointerEvents: 'none'}} className='ri-add-circle-line'></i>}
+                            startIcon={
+                                <i
+                                    style={{ pointerEvents: 'none' }}
+                                    className='ri-add-circle-line'
+                                ></i>
+                            }
                             variant='contained'
                             color='secondary'
                         >
@@ -115,7 +119,9 @@ const DSlide = ({ item, type }: any) => {
                     </Grid>
                     <Grid item>
                         <DButton
-                            startIcon={<i style={{ pointerEvents: 'none'}} className='ri-more-2-fill'></i>}
+                            startIcon={
+                                <i style={{ pointerEvents: 'none' }} className='ri-more-2-fill'></i>
+                            }
                             sx={{
                                 span: {
                                     margin: '0px',
@@ -146,9 +152,9 @@ const DCarousel = ({ itemData }: any) => {
             {itemData &&
                 itemData.map((item: any) => (
                     <SwiperSlide key={item.id}>
-                        <div className={styles.carouselSlideWrapper}>
+                        <Box className={styles.carouselSlideWrapper}>
                             <DSlide item={item} type='movie' />
-                        </div>
+                        </Box>
                     </SwiperSlide>
                 ))}
         </Swiper>

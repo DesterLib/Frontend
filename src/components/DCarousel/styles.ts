@@ -7,9 +7,6 @@ import { styled } from '@mui/material/styles';
 export const StyledChip = styled(Chip)<ChipProps>(() => ({
     padding: '0px 5px',
     marginRight: '5px',
-    color: '#ffffff',
-    backgroundColor: '#ffffff24',
-    boxShadow: 'inset 0px 0px 0px 2px #00000057',
 }));
 
 export const ItemBackground = styled(Box)<BoxProps>(({ theme }) => ({
@@ -79,6 +76,7 @@ export const ItemContentTitleDown = styled(Typography)<TypographyProps>(({ theme
     fontWeight: '400',
     width: '90%',
     marginBottom: '10px',
+    color: '#ffffff',
     [theme.breakpoints.down('md')]: {
         textAlign: 'center',
     },
@@ -88,6 +86,7 @@ export const ItemContentTitleUp = styled(Typography)<TypographyProps>(({ theme }
     fontWeight: '500',
     width: '90%',
     marginBottom: '10px',
+    color: '#ffffff',
     [theme.breakpoints.down('md')]: {
         textAlign: 'center',
     },
@@ -95,6 +94,7 @@ export const ItemContentTitleUp = styled(Typography)<TypographyProps>(({ theme }
 
 export const ItemContentDescription = styled(Typography)<TypographyProps>(({ theme }) => ({
     width: '80%',
+    color: '#ffffff',
     [theme.breakpoints.down('md')]: {
         display: 'none',
     },

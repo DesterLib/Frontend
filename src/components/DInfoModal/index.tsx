@@ -52,7 +52,7 @@ const DInfoModal = ({ item, type, currentState, closeInfoModal }: any) => {
                     </Link>
                     <DButton
                         sx={{
-                            '& .MuiButton-startIcon': { marginRight: '0px' },
+                            '& .Dester-Button-startIcon': { marginRight: '0px' },
                         }}
                         startIcon={<i className='ri-add-circle-line'></i>}
                         variant='contained'

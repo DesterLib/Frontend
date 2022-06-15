@@ -3,6 +3,7 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import React, { createContext, useEffect, useMemo, useState } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
+import './MuiClassNameSetup';
 import DNavbar from './components/DNavbar';
 import Home from './pages/Home';
 import Movie from './pages/Movie/Movie';
@@ -11,6 +12,7 @@ import Serie from './pages/Serie/Serie';
 import Settings from './pages/Settings';
 import darkTheme from './theme/darkTheme';
 import lightTheme from './theme/lightTheme';
+import DBottomBar from './components/DBottomBar';
 
 // eslint-disable-next-line
 const ColorModeContext = createContext({ toggleColorMode: () => {} });
@@ -84,10 +86,10 @@ const App = () => {
                         styleOverrides: {
                             root: {
                                 borderRadius:
-                                mode === 'light'
-                                    ? lightTheme.shape.borderRadius
-                                    : darkTheme.shape.borderRadius,
-                                transition: '0.2s ease',
+                                    mode === 'light'
+                                        ? lightTheme.shape.borderRadius
+                                        : darkTheme.shape.borderRadius,
+                                transition: 'all 0.2s ease-in',
                             },
                         },
                     },
@@ -109,6 +111,7 @@ const App = () => {
                         <Route path='/serie/:id' element={<Serie />} />
                         <Route path='/settings/*' element={<Settings />} />
                     </Routes>
+                    <DBottomBar />
                 </BrowserRouter>
             </ThemeProvider>
         </ColorModeContext.Provider>

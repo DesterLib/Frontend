@@ -4,16 +4,16 @@ import IconButton from '@mui/material/IconButton';
 import { alpha, styled } from '@mui/material/styles';
 
 export const InfoModal = styled(Dialog)(({ theme }) => ({
-    '& .MuiDialogContent-root': {
+    '& .Dester-DialogContent-root': {
         padding: theme.spacing(2),
         backgroundColor: alpha('#000000', 1),
         border: '0px',
     },
-    '& .MuiDialog-container .MuiDialog-paper': {
+    '& .Dester-Dialog-container .Dester-Dialog-paper': {
         boxShadow: `0px 0px 0px 2px ${theme.palette.background.default}`,
         borderRadius: theme.shape.borderRadius,
     },
-    '& .MuiDialogActions-root': {
+    '& .Dester-DialogActions-root': {
         padding: theme.spacing(1),
     },
 }));

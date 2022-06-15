@@ -50,9 +50,6 @@ export const Card = styled(Box)<BoxProps>(({ theme }) => ({
         opacity: '1',
         color: theme.palette.primary.main,
     },
-    '& *': {
-        transition: '0.2s ease-in',
-    },
 }));
 
 export const CardWrapper = styled(Box)<BoxProps>(() => ({

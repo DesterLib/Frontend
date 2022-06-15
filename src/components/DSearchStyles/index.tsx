@@ -1,7 +1,8 @@
 import Avatar from '@mui/material/Avatar';
+import Box, { BoxProps } from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import IconButton from '@mui/material/IconButton';
-import InputBase from '@mui/material/InputBase';
+import InputBase, { InputBaseProps } from '@mui/material/InputBase';
 import List from '@mui/material/List';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import ListItemButton from '@mui/material/ListItemButton';
@@ -14,10 +15,10 @@ import { useNavigate } from 'react-router-dom';
 import { APP_API_PATH, APP_API_VERSION_PATH, APP_POSTER_QUALITY } from '../../config';
 import DInfoModal from '../DInfoModal';
 
-const SearchWrapper = styled('div')(({ theme }) => ({
+const SearchWrapper = styled(Box)<BoxProps>(({ theme }) => ({
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
-    transition: '0.2s ease-in',
+    transition: 'all 0.2s ease-in',
     width: '400px',
     height: '40px',
     backgroundColor: alpha(theme.palette.background.default, 0.7),
@@ -34,7 +35,7 @@ const SearchWrapper = styled('div')(({ theme }) => ({
     },
 }));
 
-const SearchIconWrapper = styled('div')(({ theme }) => ({
+const SearchIconWrapper = styled(Box)<BoxProps>(({ theme }) => ({
     padding: theme.spacing(0, 2),
     height: '100%',
     position: 'absolute',
@@ -44,16 +45,16 @@ const SearchIconWrapper = styled('div')(({ theme }) => ({
     justifyContent: 'center',
 }));
 
-const SearchInputBase = styled(InputBase)(({ theme }) => ({
+const SearchInputBase = styled(InputBase)<InputBaseProps>(({ theme }) => ({
     width: 'calc(100% - 110px)',
     zIndex: '10',
-    '& .MuiInputBase-input': {
+    '& .Dester-InputBase-input': {
         padding: theme.spacing(1, 1, 1, 0),
         paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     },
 }));
 
-const SearchResults = styled('div')(({ theme }) => ({
+const SearchResults = styled(Box)<BoxProps>(({ theme }) => ({
     width: '100%',
     position: 'absolute',
     top: '50px',
@@ -64,14 +65,14 @@ const SearchResults = styled('div')(({ theme }) => ({
     borderRadius: '0px 0px 10px 10px',
 }));
 
-const SearchCard = styled('div')(({ theme }) => ({
+const SearchCard = styled(Box)<BoxProps>(({ theme }) => ({
     overflow: 'hidden',
     position: 'relative',
     display: 'flex',
     color: theme.palette.text.primary,
 }));
 
-const Search404 = styled('div')(({ theme }) => ({
+const Search404 = styled(Box)<BoxProps>(({ theme }) => ({
     color: theme.palette.text.secondary,
 }));
 

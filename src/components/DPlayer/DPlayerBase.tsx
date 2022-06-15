@@ -1,3 +1,4 @@
+import Box from '@mui/material/Box';
 import Artplayer from 'artplayer';
 import React, { useEffect, useRef } from 'react';
 
@@ -28,7 +29,7 @@ const DPlayerBase = React.memo(
             };
         }, [settings, getInstance]);
 
-        return <div ref={artRef} {...rest}></div>;
+        return <Box ref={artRef} {...rest}></Box>;
     },
     () => true,
 );

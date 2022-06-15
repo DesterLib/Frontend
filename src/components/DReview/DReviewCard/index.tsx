@@ -1,4 +1,4 @@
-import { Box, Typography } from '@mui/material';
+import Typography from '@mui/material/Typography';
 import React from 'react';
 
 import { APP_API_PATH, APP_API_VERSION_PATH, APP_POSTER_QUALITY } from '../../../config';
@@ -42,7 +42,6 @@ const DReviewCard = ({ item }: any) => {
                         {item.author_details.name || item.author || item.author_details.username}
                     </AvatarTitle>
                     <FeaturedTitleWrapper>
-                        <Typography variant='body2'>Featured Review</Typography>
                         <i style={{ color: '#FFD333', marginLeft: '10px' }} className='ri-star-fill'></i>
                         <Typography noWrap sx={{ padding: '0px 7px' }} variant='body2'>
                             {item.author_details.rating}

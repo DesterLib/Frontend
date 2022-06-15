@@ -1,5 +1,4 @@
 import { createTheme } from '@mui/material';
-import Box from '@mui/material/Box';
 import { ThemeProvider } from '@mui/material/styles';
 import React, { useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
