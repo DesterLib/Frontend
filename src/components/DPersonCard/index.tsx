@@ -13,7 +13,7 @@ const DPersonTooltip = styled(({ className, ...props }: TooltipProps) => (
     '& .Dester-Tooltip-tooltip': {
         borderRadius: theme.shape.borderRadius,
         backgroundColor: theme.palette.background.paper,
-        color: theme.palette.text,
+        color: theme.palette.text.primary,
         border: `2px solid ${alpha(theme.palette.background.default, 0.3)}`,
         fontSize: 11,
         textAlign: 'center',

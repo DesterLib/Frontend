@@ -13,6 +13,7 @@ export const PlayButton = styled(Button)<ButtonProps>(() => ({
     height: '70px',
     borderRadius: '50%',
     backgroundColor: 'rgba(0, 0, 0, 0.8)',
+    transition: 'all 0.2s ease-in',
     opacity: '0',
     '& i': {
         color: '#ffffff',
@@ -32,13 +33,15 @@ export const ImageContainer = styled(Box)<BoxProps>(({ theme }) => ({
     borderRadius: theme.shape.borderRadius,
     overflow: 'hidden',
     backgroundColor: '#000000',
+    transition: 'all 0.2s ease-in',
 }));
 
 export const Card = styled(Box)<BoxProps>(({ theme }) => ({
     position: 'relative',
     boxSizing: 'border-box',
+    transition: 'all 0.2s ease-in',
     '&:hover .imageWrapper': {
-        boxShadow: `0px 0px 0px 2px ${alpha(theme.palette.primary.main, 0.8)}`,
+        boxShadow: `0px 0px 0px 4px ${alpha(theme.palette.primary.main, 0.8)}`,
     },
     '&:hover .imageWrapper .playButton': {
         opacity: '1',
@@ -75,4 +78,5 @@ export const ItemImage = styled('img')(() => ({
     minHeight: '100%',
     maxHeight: '100%',
     objectFit: 'cover',
+    transition: 'all 0.2s ease-in',
 }));

@@ -4,15 +4,16 @@ import React, { createContext, useEffect, useMemo, useState } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import './MuiClassNameSetup';
+import DBottomBar from './components/DBottomBar';
 import DNavbar from './components/DNavbar';
-import Home from './pages/Home';
-import Movie from './pages/Movie/Movie';
+import HomePage from './pages/Home';
+import MoviePage from './pages/Movie';
 import NotFoundPage from './pages/NotFound';
-import Serie from './pages/Serie/Serie';
+import SeriePage from './pages/Series';
 import Settings from './pages/Settings';
 import darkTheme from './theme/darkTheme';
 import lightTheme from './theme/lightTheme';
-import DBottomBar from './components/DBottomBar';
+import SeasonPage from './pages/Season';
 
 // eslint-disable-next-line
 const ColorModeContext = createContext({ toggleColorMode: () => {} });
@@ -106,9 +107,10 @@ const App = () => {
                     <DNavbar colorModeContext={ColorModeContext} themeMode={mode} />
                     <Routes>
                         <Route path='*' element={<NotFoundPage />} />
-                        <Route path='/' element={<Home />} />
-                        <Route path='/movie/:id' element={<Movie />} />
-                        <Route path='/serie/:id' element={<Serie />} />
+                        <Route path='/' element={<HomePage />} />
+                        <Route path='/movie/:movieId' element={<MoviePage />} />
+                        <Route path='/series/:seriesId' element={<SeriePage />} />
+                        <Route path='/series/:seriesId/season/:seasonId' element={<SeasonPage />} />
                         <Route path='/settings/*' element={<Settings />} />
                     </Routes>
                     <DBottomBar />

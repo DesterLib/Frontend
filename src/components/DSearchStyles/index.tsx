@@ -40,6 +40,7 @@ const SearchIconWrapper = styled(Box)<BoxProps>(({ theme }) => ({
     height: '100%',
     position: 'absolute',
     pointerEvents: 'none',
+    color: theme.palette.text.secondary,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',

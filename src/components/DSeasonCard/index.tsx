@@ -45,13 +45,6 @@ const DSeasonCard = ({ item, type }: any) => {
                     </Link>
                 </ImageWrapper>
                 <BottomButtonWrapper className='bottomButtonWrapper'>
-                    <Button
-                        onClick={(e) => e.preventDefault()}
-                        onContextMenu={(e) => e.preventDefault()}
-                        sx={{}}
-                    >
-                        <i className='ri-heart-line'></i>
-                    </Button>
                     <Button onClick={openInfoModal} onContextMenu={(e) => e.preventDefault()}>
                         <i className='ri-more-2-fill'></i>
                     </Button>

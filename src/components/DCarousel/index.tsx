@@ -79,19 +79,17 @@ const DSlide = ({ item, type }: any) => {
                 </ItemContentDescription>
                 <StyledGridContainerParent container>
                     <StyledGridContainerChild container>
-                        <StyledChip color='primary' className='year' label='2020' />
+                        <StyledChip className='year' label='2020' />
                         <StyledChip
                             className='rating'
-                            color='primary'
-                            icon={<i className='ri-star-fill'></i>}
+                            icon={<i style={{color: '#ffd000'}} className='ri-star-fill'></i>}
                             label='8.6'
                         />
-                        <StyledChip color='secondary' className='type' label='Movie' />
+                        <StyledChip className='type' label='Movie' />
                     </StyledGridContainerChild>
                     <Grid sx={{ marginRight: '10px' }} item>
                         <DButton
                             variant='contained'
-                            color='primary'
                             startIcon={
                                 <i
                                     style={{ pointerEvents: 'none' }}

@@ -2,11 +2,13 @@ import Box, { BoxProps } from '@mui/material/Box';
 import Chip, { ChipProps } from '@mui/material/Chip';
 import Grid, { GridProps } from '@mui/material/Grid';
 import Typography, { TypographyProps } from '@mui/material/Typography';
-import { styled } from '@mui/material/styles';
+import { alpha, styled } from '@mui/material/styles';
 
-export const StyledChip = styled(Chip)<ChipProps>(() => ({
+export const StyledChip = styled(Chip)<ChipProps>(({ theme }) => ({
     padding: '0px 5px',
     marginRight: '5px',
+    backgroundColor: alpha(theme.palette.secondary.main, 0.8),
+    color: '#ffffff'
 }));
 
 export const ItemBackground = styled(Box)<BoxProps>(({ theme }) => ({

@@ -2,7 +2,7 @@ const lightTheme = {
     palette: {
         primary: {
             main: '#33FFC2',
-            light: '#66FFD1',
+            light: '#33FFC2',
             dark: '#00FFB3',
         },
         secondary: {

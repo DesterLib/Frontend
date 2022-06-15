@@ -22,24 +22,44 @@ import {
     APP_POSTER_QUALITY,
 } from '../../config';
 import useBreakpoint from '../../utilities/useBreakpoint';
-import { HeaderImage, ItemBackground, LinearGradient, PosterImage } from './SeriePageComponents';
+import { HeaderImage, ItemBackground, LinearGradient, PosterImage } from './SeriesPageComponents';
 
-const Serie = () => {
+const demo = {
+    seasons: [
+        {
+            id: 1,
+            name: 'Season 1',
+            poster: 'https://image.tmdb.org/t/p/w500/poster.jpg',
+        },
+        {
+            id: 2,
+            name: 'Season 2',
+            poster: 'https://image.tmdb.org/t/p/w500/poster.jpg',
+        },
+        {
+            id: 3,
+            name: 'Season 3',
+            poster: 'https://image.tmdb.org/t/p/w500/poster.jpg',
+        }
+    ]
+};
+
+const SeriePage = () => {
     const [isLoaded, setIsLoaded] = useState<boolean>(false);
     const [data, setData] = useState<any>({});
     const theme = useTheme();
     const breakpoint = useBreakpoint();
-    const { id } = useParams();
+    const { seriesId } = useParams();
 
     useEffect(() => {
         const getData = async () => {
-            const res = await fetch(`${APP_API_PATH}${APP_API_VERSION_PATH}/serie/${id}`);
+            const res = await fetch(`${APP_API_PATH}${APP_API_VERSION_PATH}/serie/${seriesId}`);
             const data = (await res.json()) || {};
             setData(data.result || { ok: false });
             setIsLoaded(true);
         };
         getData();
-    }, [id]);
+    }, [seriesId]);
 
     let directors;
     let screenplays;
@@ -413,6 +433,9 @@ const Serie = () => {
                     </Grid>
                 </Grid>
                 <Box>
+                    <DSlider variant='season' title='Seasons' itemData={demo.seasons} />
+                </Box>
+                <Box>
                     <DSlider variant='people' title='Cast' itemData={data.cast} />
                 </Box>
                 <Box>
@@ -431,4 +454,4 @@ const Serie = () => {
     );
 };
 
-export default Serie;
+export default SeriePage;

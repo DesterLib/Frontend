@@ -9,7 +9,7 @@ import { MainContainer, MainWrapper } from './styles';
 
 // import useNetworkStatus from '../utilities/useNetworkStatus';
 
-const Home = () => {
+const HomePage = () => {
     const [isLoaded, setIsLoaded] = useState<boolean>(false);
     const [data, setData] = useState<any>({});
     const [appInfo, setAppInfo] = useState<any>({});
@@ -59,7 +59,7 @@ const Home = () => {
                         variant='item'
                         title='Popular Series'
                         itemData={data.most_popular_series}
-                        type='serie'
+                        type='series'
                     />
                     <DSlider
                         variant='item'
@@ -71,13 +71,13 @@ const Home = () => {
                         variant='item'
                         title='Newly Released Episodes'
                         itemData={data.newly_released_episodes}
-                        type='serie'
+                        type='series'
                     />
                     <DSlider
                         variant='item'
                         title='Newly Added Episodes'
                         itemData={data.newly_added_episodes}
-                        type='serie'
+                        type='series'
                     />
                     <DSlider
                         variant='item'
@@ -89,7 +89,7 @@ const Home = () => {
                         variant='item'
                         title='Top Rated Series'
                         itemData={data.top_rated_series}
-                        type='serie'
+                        type='series'
                     />
                 </Fragment>
             </MainWrapper>
@@ -99,4 +99,4 @@ const Home = () => {
     );
 };
 
-export default Home;
+export default HomePage;

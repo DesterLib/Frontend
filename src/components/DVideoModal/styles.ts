@@ -5,7 +5,7 @@ import { alpha, styled } from '@mui/material/styles';
 export const InfoModal = styled(Dialog)<DialogProps>(({ theme }) => ({
     '& .Dester-DialogContent-root': {
         padding: theme.spacing(2),
-        backgroundColor: alpha('#000000', 1),
+        backgroundColor: theme.palette.background.default,
         border: '0px',
     },
     '& .Dester-Dialog-container .Dester-Dialog-paper': {
@@ -21,11 +21,11 @@ export const CloseButton = styled(IconButton)<IconButtonProps>(({ theme }) => ({
     position: 'absolute',
     right: '8px',
     top: '8px',
-    backgroundColor: alpha(theme.palette.background.default, 0.5),
+    backgroundColor: alpha(theme.palette.text.primary, 0.5),
     backdropFilter: 'blur(10)',
-    color: '#ffffff',
+    color: theme.palette.background.default,
     '&:hover': {
-        color: '#ffffff',
-        backgroundColor: alpha(theme.palette.background.default, 1),
+        color: theme.palette.background.default,
+        backgroundColor: alpha(theme.palette.text.primary, 1),
     },
 }));

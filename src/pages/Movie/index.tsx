@@ -26,22 +26,22 @@ import {
 import useBreakpoint from '../../utilities/useBreakpoint';
 import { HeaderImage, ItemBackground, LinearGradient, PosterImage } from './MoviePageComponents';
 
-const Movie = () => {
+const MoviePage = () => {
     const [isLoaded, setIsLoaded] = useState<boolean>(false);
     const [data, setData] = useState<any>({});
     const theme = useTheme();
     const breakpoint = useBreakpoint();
-    const { id } = useParams();
+    const { movieId } = useParams();
 
     useEffect(() => {
         const getData = async () => {
-            const res = await fetch(`${APP_API_PATH}${APP_API_VERSION_PATH}/movie/${id}`);
+            const res = await fetch(`${APP_API_PATH}${APP_API_VERSION_PATH}/movie/${movieId}`);
             const data = (await res.json()) || null;
             setData(data.result || { ok: false });
             setIsLoaded(true);
         };
         getData();
-    }, [id]);
+    }, [movieId]);
 
     console.log(data.reviews);
 
@@ -436,4 +436,4 @@ const Movie = () => {
     );
 };
 
-export default Movie;
+export default MoviePage;

@@ -6,9 +6,9 @@ const darkTheme = {
             dark: '#00FFB3',
         },
         secondary: {
-            main: '#FF3396',
-            light: '#FF66B0',
-            dark: '#FF007A',
+            main: '#9133FF',
+            light: '#AD66FF',
+            dark: '#7700FF',
         },
         background: {
             paper: '#174453',

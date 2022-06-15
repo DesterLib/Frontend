@@ -1,7 +1,7 @@
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
-import { alpha, styled } from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';
+import { alpha, styled } from '@mui/material/styles';
 
 export const LogoImage = styled('img')(() => ({
     position: 'absolute',
@@ -24,8 +24,9 @@ export const LogoImage = styled('img')(() => ({
 }));
 
 export const StyledAppBar = styled(AppBar)(({ theme }) => ({
-    backgroundColor: alpha(theme.palette.background.default, 0.9),
-    backgroundImage: 'linear-gradient(rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.09))',
+    backgroundColor: theme.palette.background.default,
+    backgroundImage: `linear-gradient(90deg, rgba(255, 255, 255, 0.09) 0%, ${theme.palette.background.default} 100%)`,
+    boxShadow: '0px 50px 100px -25px rgba(0,0,0)',
     backdropFilter: 'blur(10px)',
     width: 'calc(100% - 20px)',
     marginTop: '10px',
@@ -42,7 +43,7 @@ export const StyledAppBar = styled(AppBar)(({ theme }) => ({
     },
 }));
 
-export const LeftMenuToggle = styled(IconButton)(({ theme }) => ({
+export const LeftMenuToggle = styled(IconButton)(() => ({
     padding: '10px',
     fontSize: '24px',
     height: '45px',
@@ -51,7 +52,7 @@ export const LeftMenuToggle = styled(IconButton)(({ theme }) => ({
     marginRight: '10px',
 }));
 
-export const LogoWrapper = styled(Box)(({ theme }) => ({
+export const LogoWrapper = styled(Box)(() => ({
     margin: '0px',
     fontSize: '0px',
     position: 'relative',
@@ -61,6 +62,6 @@ export const LogoWrapper = styled(Box)(({ theme }) => ({
     minHeight: '60px',
 }));
 
-export const AvatarButtonWrapper = styled(Box)(({ theme }) => ({
-    padding: '0px'
+export const AvatarButtonWrapper = styled(Box)(() => ({
+    padding: '0px',
 }));
