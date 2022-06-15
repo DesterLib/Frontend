@@ -20,6 +20,8 @@ const DSeasonCard = ({ item, type }: any) => {
         setOpenModalState(false);
     };
 
+    console.log(item);
+
     return (
         <Card>
             <CardWrapper>
@@ -36,7 +38,7 @@ const DSeasonCard = ({ item, type }: any) => {
                     />
                     <Link
                         style={{ textDecoration: 'none' }}
-                        to={`/${type}/${item.tmdb_id}`}
+                        to={`${item.season_number}`}
                         key={item.id}
                     >
                         <PlayButton className='playButton'>

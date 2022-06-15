@@ -84,7 +84,7 @@ const DSlider = ({ title, type, itemData, variant }: any) => {
             )}
             {variant === 'season' && (
                 <Fragment>
-                    {itemData && Object.keys(itemData).length !== 0 ? (
+                    {itemData && Object.keys(itemData).length ? (
                         <MainContainer>
                             <SubContainer>
                                 <DSliderHeading variant='h5'>{title || null}</DSliderHeading>
@@ -138,9 +138,9 @@ const DSlider = ({ title, type, itemData, variant }: any) => {
                                     },
                                 }}
                             >
-                                {itemData.map((item: any) => (
-                                    <SwiperSlide key={item.id}>
-                                        <DSeasonCard item={item} type={type} />
+                                {Object.keys(itemData).map((k: string, i: number) => (
+                                    <SwiperSlide key={i}>
+                                        <DSeasonCard item={itemData[k]} type={type} />
                                     </SwiperSlide>
                                 ))}
                             </DSwiper>

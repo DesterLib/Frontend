@@ -24,26 +24,6 @@ import {
 import useBreakpoint from '../../utilities/useBreakpoint';
 import { HeaderImage, ItemBackground, LinearGradient, PosterImage } from './SeriesPageComponents';
 
-const demo = {
-    seasons: [
-        {
-            id: 1,
-            name: 'Season 1',
-            poster: 'https://image.tmdb.org/t/p/w500/poster.jpg',
-        },
-        {
-            id: 2,
-            name: 'Season 2',
-            poster: 'https://image.tmdb.org/t/p/w500/poster.jpg',
-        },
-        {
-            id: 3,
-            name: 'Season 3',
-            poster: 'https://image.tmdb.org/t/p/w500/poster.jpg',
-        }
-    ]
-};
-
 const SeriePage = () => {
     const [isLoaded, setIsLoaded] = useState<boolean>(false);
     const [data, setData] = useState<any>({});
@@ -63,19 +43,9 @@ const SeriePage = () => {
 
     let directors;
     let screenplays;
-    let path;
-    let videoData;
     if (isLoaded && data && Object.keys(data).length !== 0 && data.crew) {
         directors = data.crew.filter(({ job }: any) => job === 'Director');
         screenplays = data.crew.filter(({ job }: any) => job === 'Screenplay');
-        path = data.path;
-        videoData = {
-            id: '1',
-            title: data.title,
-            subTitle: data.title,
-            src: `${APP_API_PATH}${APP_API_VERSION_PATH}/stream/${data.rclone_index}/${path[0]}`,
-            playlist: [],
-        };
     }
 
     return isLoaded ? (
@@ -433,7 +403,7 @@ const SeriePage = () => {
                     </Grid>
                 </Grid>
                 <Box>
-                    <DSlider variant='season' title='Seasons' itemData={demo.seasons} />
+                    <DSlider variant='season' title='Seasons' itemData={data.seasons} />
                 </Box>
                 <Box>
                     <DSlider variant='people' title='Cast' itemData={data.cast} />
