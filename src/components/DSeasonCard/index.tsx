@@ -38,7 +38,8 @@ const DSeasonCard = ({ item, type }: any) => {
                     />
                     <Link
                         style={{ textDecoration: 'none' }}
-                        to={`${item.season_number}`}
+                        to={`season/${item.season_number}`}
+                        state={{data: item}}
                         key={item.id}
                     >
                         <PlayButton className='playButton'>

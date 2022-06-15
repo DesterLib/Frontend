@@ -110,7 +110,7 @@ const App = () => {
                         <Route path='/' element={<HomePage />} />
                         <Route path='/movie/:movieId' element={<MoviePage />} />
                         <Route path='/series/:seriesId' element={<SeriePage />} />
-                        <Route path='/series/:seriesId/season/:seasonId' element={<SeasonPage />} />
+                        <Route path='/series/:seriesId/season/:seasonNumber' element={<SeasonPage />} />
                         <Route path='/settings/*' element={<Settings />} />
                     </Routes>
                     <DBottomBar />

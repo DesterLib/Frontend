@@ -2,8 +2,9 @@ import { IconButton } from '@mui/material';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import { alpha, useTheme } from '@mui/system';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
 const data = {
     title: 'Demon Slayer: Kimetsu no Yaiba (2019)',
@@ -27,7 +28,24 @@ const data = {
 
 const SeasonPage = () => {
     const theme = useTheme();
-    return (
+    const { seriesId, seasonNumber } = useParams();
+    const [data, setData] = useState<any>({});
+    const [isLoaded, setIsLoaded] = useState<boolean>(false);
+    const navigate = useNavigate();
+    const location: any = useLocation();
+
+    useEffect(() => {
+        if (location.state) {
+            setData(location.state.data);
+            setIsLoaded(true);
+        } else {
+            navigate(`/serie/${seriesId}`);
+        }
+    }, [seriesId, seasonNumber]);
+
+    console.log(data);
+
+    return isLoaded ? (
         <Box
             sx={{
                 background: `linear-gradient(0deg, ${theme.palette.background.default} 0%, ${alpha(
@@ -64,7 +82,12 @@ const SeasonPage = () => {
             >
                 <Link style={{ textDecoration: 'none', color: theme.palette.text.primary }} to=''>
                     <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                        <IconButton sx={{ backgroundColor: theme.palette.background.paper, marginRight: '10px' }}>
+                        <IconButton
+                            sx={{
+                                backgroundColor: theme.palette.background.paper,
+                                marginRight: '10px',
+                            }}
+                        >
                             <i className='ri-arrow-left-s-line'></i>
                         </IconButton>
                         <Typography>Previous Season</Typography>
@@ -73,14 +96,19 @@ const SeasonPage = () => {
                 <Link style={{ textDecoration: 'none', color: theme.palette.text.primary }} to=''>
                     <Box sx={{ display: 'flex', alignItems: 'center' }}>
                         <Typography>Next Season</Typography>
-                        <IconButton sx={{ backgroundColor: theme.palette.background.paper, marginLeft: '10px' }}>
+                        <IconButton
+                            sx={{
+                                backgroundColor: theme.palette.background.paper,
+                                marginLeft: '10px',
+                            }}
+                        >
                             <i className='ri-arrow-right-s-line'></i>
                         </IconButton>
                     </Box>
                 </Link>
             </Box>
         </Box>
-    );
+    ) : null;
 };
 
 export default SeasonPage;
