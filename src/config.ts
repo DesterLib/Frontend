@@ -10,7 +10,7 @@ const APP_VERSION = '';
 const APP_API_PATH = process.env.REACT_APP_SERVER_URL || '';
 const APP_API_VERSION_PATH = '/api/v1';
 const APP_NO_IMAGE_POSTER = noImagePoster;
-const APP_POSTER_QUALITY = 'w500';
+const APP_POSTER_QUALITY = 'w300';
 const APP_BACKDROP_QUALITY = 'w1280';
 
 export {
