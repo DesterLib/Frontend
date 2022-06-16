@@ -4,7 +4,7 @@ import { alpha, styled } from '@mui/material/styles';
 export const DButton = styled(Button)<ButtonProps>(({ theme }) => ({
     borderRadius: (theme.shape.borderRadius as number) + 5,
     padding: '10px 15px',
-    transition: 'all 0.2s ease-in',
+    transition: '0.2s ease-out',
     lineHeight: '1',
     fontWeight: '500',
     fontFamily: '"Rubik", sans-serif',

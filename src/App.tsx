@@ -90,7 +90,7 @@ const App = () => {
                                     mode === 'light'
                                         ? lightTheme.shape.borderRadius
                                         : darkTheme.shape.borderRadius,
-                                transition: 'all 0.2s ease-in',
+                                transition: '0.2s ease-out',
                             },
                         },
                     },

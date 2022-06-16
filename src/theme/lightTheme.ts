@@ -4,6 +4,7 @@ const lightTheme = {
             main: '#33FFC2',
             light: '#33FFC2',
             dark: '#00FFB3',
+            contrastText: '#ffffff',
         },
         secondary: {
             main: '#9133FF',

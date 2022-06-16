@@ -18,7 +18,7 @@ import DInfoModal from '../DInfoModal';
 const SearchWrapper = styled(Box)<BoxProps>(({ theme }) => ({
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
-    transition: 'all 0.2s ease-in',
+    transition: '0.2s ease-out',
     width: '400px',
     height: '40px',
     backgroundColor: alpha(theme.palette.background.default, 0.7),

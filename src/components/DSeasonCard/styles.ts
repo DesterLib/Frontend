@@ -14,7 +14,7 @@ export const PlayButton = styled(Box)<BoxProps>(() => ({
     height: '70px',
     borderRadius: '50%',
     backgroundColor: 'rgba(0, 0, 0, 0.8)',
-    transition: 'all 0.2s ease-in',
+    transition: '0.2s ease-out',
     opacity: '0',
     '& i': {
         color: '#ffffff',
@@ -34,7 +34,7 @@ export const ImageWrapper = styled(Box)<BoxProps>(({ theme }) => ({
     borderRadius: theme.shape.borderRadius,
     overflow: 'hidden',
     backgroundColor: theme.palette.background.default,
-    transition: 'all 0.2s ease-in',
+    transition: '0.2s ease-out',
 }));
 
 export const BottomButtonWrapper = styled(Box)<BoxProps>(({ theme }) => ({
@@ -45,7 +45,7 @@ export const BottomButtonWrapper = styled(Box)<BoxProps>(({ theme }) => ({
     justifyContent: 'right',
     borderRadius: theme.shape.borderRadius,
     background: `linear-gradient(0deg, ${theme.palette.background.paper} 0%, #ffffff00 100%)`,
-    transition: 'all 0.2s ease-in',
+    transition: '0.2s ease-out',
     width: '100%',
     opacity: '0',
 }));
@@ -55,7 +55,7 @@ export const Button = styled(IconButton)<IconButtonProps>(({ theme }) => ({
     width: '40px',
     backgroundColor: alpha(theme.palette.background.default, 0.8),
     backdropFilter: 'blur(10px)',
-    transition: 'all 0.2s ease-in',
+    transition: '0.2s ease-out',
     color: theme.palette.text.primary,
     boxShadow: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px',
     '&:hover': {
@@ -71,7 +71,7 @@ export const CardTitle = styled(Typography)<TypographyProps>(() => ({
 export const Card = styled('div')(({ theme }) => ({
     position: 'relative',
     boxSizing: 'border-box',
-    transition: 'all 0.2s ease-in',
+    transition: '0.2s ease-out',
     '&:hover .imageWrapper': {
         boxShadow: `0px 0px 0px 4px ${alpha(theme.palette.primary.main, 0.8)}`,
     },
@@ -110,5 +110,5 @@ export const ItemImage = styled('img')(() => ({
     minHeight: '100%',
     maxHeight: '100%',
     objectFit: 'cover',
-    transition: 'all 0.2s ease-in',
+    transition: '0.2s ease-out',
 }));

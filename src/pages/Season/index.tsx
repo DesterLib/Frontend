@@ -23,6 +23,8 @@ const SeasonPage = () => {
         }
     }, [seriesId, seasonNumber]);
 
+    console.log(location);
+
     return isLoaded ? (
         <Box
             sx={{

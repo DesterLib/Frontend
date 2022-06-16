@@ -31,7 +31,7 @@ const DItemCard = ({ item, type }: any) => {
 
     return (
         <Card>
-            <CardWrapper>
+            <CardWrapper className='cardWrapper'>
                 <ImageWrapper className='imageWrapper'>
                     <ItemImage
                         className='image'
@@ -66,7 +66,7 @@ const DItemCard = ({ item, type }: any) => {
                     </Button>
                 </BottomButtonWrapper>
             </CardWrapper>
-            <CardTitle>
+            <CardTitle className='cardTitle'>
                 {(item && item.title && (item.title || null)) ||
                     (item && item.name && (item.name || null))}
             </CardTitle>
