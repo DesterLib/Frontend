@@ -29,7 +29,6 @@ const DSeasonCard = ({ data, type, seasonKey }: any) => {
         setOpenModalState(false);
     };
     const item = data.seasons[seasonKey];
-    console.log(seasonKey);
 
     return (
         <Card>

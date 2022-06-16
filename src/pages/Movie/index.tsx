@@ -468,24 +468,49 @@ const MoviePage = () => {
                                                 </Typography>
                                             </Box>
                                         ) : null}
-                                        <Box sx={{ display: 'flex' }}>
-                                            <Typography
-                                                sx={{
-                                                    width: '150px',
-                                                    fontWeight: '600',
-                                                    color: alpha(theme.palette.text.primary, 0.8),
-                                                }}
-                                                variant='body1'
-                                            >
-                                                Studio
-                                            </Typography>
-                                            <Typography
-                                                sx={{ display: 'flex', alignItems: 'center' }}
-                                                variant='body1'
-                                            >
-                                                Domee Shi
-                                            </Typography>
-                                        </Box>
+                                        {data.studios.length ? (
+                                            <Box sx={{ display: 'flex' }}>
+                                                <Typography
+                                                    sx={{
+                                                        width: '150px',
+                                                        fontWeight: '600',
+                                                        color: alpha(
+                                                            theme.palette.text.primary,
+                                                            0.8,
+                                                        ),
+                                                    }}
+                                                    variant='body1'
+                                                >
+                                                    Studios
+                                                </Typography>
+                                                <Typography
+                                                    sx={{ display: 'flex', alignItems: 'center' }}
+                                                    variant='body1'
+                                                    component={'span'}
+                                                >
+                                                    {data.studios.map((studio: any, i: number) => (
+                                                        <Box
+                                                            sx={{
+                                                                display: 'flex',
+                                                                alignItems: 'center',
+                                                                [theme.breakpoints.down('sm')]: {
+                                                                    flexDirection: 'column',
+                                                                },
+                                                                [theme.breakpoints.up('sm')]: {
+                                                                    flexDirection: 'row',
+                                                                },
+                                                            }}
+                                                            key={studio.id}
+                                                        >
+                                                            {studio.name}
+                                                            {i < data.studios.length - 1 ? (
+                                                                <DSpacer />
+                                                            ) : null}
+                                                        </Box>
+                                                    ))}
+                                                </Typography>
+                                            </Box>
+                                        ) : null}
                                     </Stack>
                                 </Grid>
                                 <Grid item md={5}>
