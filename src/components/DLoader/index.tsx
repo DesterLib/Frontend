@@ -1,4 +1,4 @@
-import CircularProgress from '@mui/material/CircularProgress';
+import CircularProgress, { circularProgressClasses } from '@mui/material/CircularProgress';
 import React from 'react';
 
 import { MainWrapper } from './styles';
@@ -6,7 +6,15 @@ import { MainWrapper } from './styles';
 const DLoader = () => {
     return (
         <MainWrapper>
-            <CircularProgress />
+            <CircularProgress
+                size={50}
+                thickness={4.6}
+                sx={{
+                    [`& .${circularProgressClasses.circle}`]: {
+                        strokeLinecap: 'round',
+                    },
+                }}
+            />
         </MainWrapper>
     );
 };
