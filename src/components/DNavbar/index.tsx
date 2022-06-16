@@ -73,14 +73,6 @@ const DNavbar = ({ colorModeContext, themeMode }: any) => {
         setSearchAnchor(null);
     };
 
-    const handleSearchToggle = (event: any) => {
-        if (searchAnchor) {
-            handleOpenSearch(event);
-        } else {
-            handleCloseSearch();
-        }
-    };
-
     const theme = useTheme();
 
     const colorMode: any = useContext(colorModeContext);
@@ -129,9 +121,8 @@ const DNavbar = ({ colorModeContext, themeMode }: any) => {
 
     const isSearchOpen = Boolean(searchAnchor);
 
-    if (location.pathname.includes('/settings') || location.pathname.includes('/setup')) return <></>;
-
-    const isSearchOpen = Boolean(searchAnchor);
+    if (location.pathname.includes('/settings') || location.pathname.includes('/setup'))
+        return <></>;
 
     return (
         <Box>
