@@ -20,10 +20,9 @@
     "plugins": ["react", "@typescript-eslint", "prettier"],
     "rules": {
         "@typescript-eslint/no-explicit-any": "off",
-        "indent": ["error", 4],
+        "indent": "off",
         "quotes": ["error", "single"],
         "semi": ["error", "always"],
-        "no-tabs": ["error", { "allowIndentationTabs": true }],
         "no-var": 0,
         "react/prop-types": 0
     },

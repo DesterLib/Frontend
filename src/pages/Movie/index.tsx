@@ -43,14 +43,9 @@ const MoviePage = () => {
         getData();
     }, [movieId]);
 
-    let directors;
-    let screenplays;
-    let path;
     let videoData;
-    if (isLoaded && data && Object.keys(data).length !== 0 && data.crew) {
-        directors = data.crew.filter(({ job }: any) => job === 'Director');
-        screenplays = data.crew.filter(({ job }: any) => job === 'Screenplay');
-        path = data.path;
+    if (isLoaded) {
+        const path = data.path;
         videoData = {
             id: '1',
             title: data.title,
@@ -247,76 +242,232 @@ const MoviePage = () => {
                             <Grid container sx={{ marginTop: '20px' }}>
                                 <Grid item md={7} sx={{ marginBottom: '15px' }}>
                                     <Stack spacing={2}>
-                                        <Box sx={{ display: 'flex' }}>
-                                            <Typography
-                                                sx={{
-                                                    width: '150px',
-                                                    fontWeight: '600',
-                                                    color: alpha(theme.palette.text.primary, 0.8),
-                                                }}
-                                                variant='body1'
-                                            >
-                                                Director
-                                            </Typography>
-                                            <Typography
-                                                sx={{ display: 'flex', alignItems: 'center' }}
-                                                component={'span'}
-                                                variant='body1'
-                                            >
-                                                {directors.map((director: any, i: number) => (
-                                                    <Box
-                                                        sx={{
-                                                            display: 'flex',
-                                                            flexDirection: 'row',
-                                                        }}
-                                                        key={director.id}
-                                                    >
-                                                        {director.name}
-                                                        {i < directors.length - 1 ? (
-                                                            <DSpacer />
-                                                        ) : null}
-                                                    </Box>
-                                                ))}
-                                            </Typography>
-                                        </Box>
-                                        <Box sx={{ display: 'flex' }}>
-                                            <Typography
-                                                sx={{
-                                                    width: '150px',
-                                                    fontWeight: '600',
-                                                    color: alpha(theme.palette.text.primary, 0.8),
-                                                }}
-                                                variant='body1'
-                                            >
-                                                Screenplay
-                                            </Typography>
-                                            <Typography
-                                                sx={{ display: 'flex', alignItems: 'center' }}
-                                                variant='body1'
-                                                component={'span'}
-                                            >
-                                                {screenplays.map((screenplay: any, i: number) => (
-                                                    <Box
-                                                        sx={{
-                                                            display: 'flex',
-                                                            alignItems: 'center',
-                                                            [theme.breakpoints.down('sm')]: {
-                                                                flexDirection: 'column',
-                                                            },
-                                                            [theme.breakpoints.up('sm')]: {
-                                                                flexDirection: 'row',
-                                                            },
-                                                        }}
-                                                        key={screenplay.id}
-                                                    >
-                                                        {screenplay.name}
-                                                        {i < screenplays.length - 1 ? (
-                                                            <DSpacer />
-                                                        ) : null}
-                                                    </Box>
-                                                ))}
-                                            </Typography>
-                                        </Box>
+                                        {data.crew.Creator.length ? (
+                                            <Box sx={{ display: 'flex' }}>
+                                                <Typography
+                                                    sx={{
+                                                        width: '150px',
+                                                        fontWeight: '600',
+                                                        color: alpha(
+                                                            theme.palette.text.primary,
+                                                            0.8,
+                                                        ),
+                                                    }}
+                                                    variant='body1'
+                                                >
+                                                    Creator
+                                                </Typography>
+                                                <Typography
+                                                    sx={{ display: 'flex', alignItems: 'center' }}
+                                                    variant='body1'
+                                                    component={'span'}
+                                                >
+                                                    {data.crew.Creator.map(
+                                                        (creator: any, i: number) => (
+                                                            <Box
+                                                                sx={{
+                                                                    display: 'flex',
+                                                                    alignItems: 'center',
+                                                                    [theme.breakpoints.down('sm')]:
+                                                                        {
+                                                                            flexDirection: 'column',
+                                                                        },
+                                                                    [theme.breakpoints.up('sm')]: {
+                                                                        flexDirection: 'row',
+                                                                    },
+                                                                }}
+                                                                key={creator.id}
+                                                            >
+                                                                {creator.name}
+                                                                {i <
+                                                                data.crew.Creator.length - 1 ? (
+                                                                    <DSpacer />
+                                                                ) : null}
+                                                            </Box>
+                                                        ),
+                                                    )}
+                                                </Typography>
+                                            </Box>
+                                        ) : null}
+                                        {data.crew.Director.length ? (
+                                            <Box sx={{ display: 'flex' }}>
+                                                <Typography
+                                                    sx={{
+                                                        width: '150px',
+                                                        fontWeight: '600',
+                                                        color: alpha(
+                                                            theme.palette.text.primary,
+                                                            0.8,
+                                                        ),
+                                                    }}
+                                                    variant='body1'
+                                                >
+                                                    Director
+                                                </Typography>
+                                                <Typography
+                                                    sx={{ display: 'flex', alignItems: 'center' }}
+                                                    component={'span'}
+                                                    variant='body1'
+                                                >
+                                                    {data.crew.Director.map(
+                                                        (director: any, i: number) => (
+                                                            <Box
+                                                                sx={{
+                                                                    display: 'flex',
+                                                                    flexDirection: 'row',
+                                                                }}
+                                                                key={director.id}
+                                                            >
+                                                                {director.name}
+                                                                {i <
+                                                                data.crew.Director.length - 1 ? (
+                                                                    <DSpacer />
+                                                                ) : null}
+                                                            </Box>
+                                                        ),
+                                                    )}
+                                                </Typography>
+                                            </Box>
+                                        ) : null}
+                                        {data.crew.Screenplay.length ? (
+                                            <Box sx={{ display: 'flex' }}>
+                                                <Typography
+                                                    sx={{
+                                                        width: '150px',
+                                                        fontWeight: '600',
+                                                        color: alpha(
+                                                            theme.palette.text.primary,
+                                                            0.8,
+                                                        ),
+                                                    }}
+                                                    variant='body1'
+                                                >
+                                                    Screenplay
+                                                </Typography>
+                                                <Typography
+                                                    sx={{ display: 'flex', alignItems: 'center' }}
+                                                    variant='body1'
+                                                    component={'span'}
+                                                >
+                                                    {data.crew.Screenplay.map(
+                                                        (screenplay: any, i: number) => (
+                                                            <Box
+                                                                sx={{
+                                                                    display: 'flex',
+                                                                    alignItems: 'center',
+                                                                    [theme.breakpoints.down('sm')]:
+                                                                        {
+                                                                            flexDirection: 'column',
+                                                                        },
+                                                                    [theme.breakpoints.up('sm')]: {
+                                                                        flexDirection: 'row',
+                                                                    },
+                                                                }}
+                                                                key={screenplay.id}
+                                                            >
+                                                                {screenplay.name}
+                                                                {i <
+                                                                data.crew.Screenplay.length - 1 ? (
+                                                                    <DSpacer />
+                                                                ) : null}
+                                                            </Box>
+                                                        ),
+                                                    )}
+                                                </Typography>
+                                            </Box>
+                                        ) : null}
+                                        {data.crew.Author.length ? (
+                                            <Box sx={{ display: 'flex' }}>
+                                                <Typography
+                                                    sx={{
+                                                        width: '150px',
+                                                        fontWeight: '600',
+                                                        color: alpha(
+                                                            theme.palette.text.primary,
+                                                            0.8,
+                                                        ),
+                                                    }}
+                                                    variant='body1'
+                                                >
+                                                    Author
+                                                </Typography>
+                                                <Typography
+                                                    sx={{ display: 'flex', alignItems: 'center' }}
+                                                    variant='body1'
+                                                    component={'span'}
+                                                >
+                                                    {data.crew.Author.map(
+                                                        (author: any, i: number) => (
+                                                            <Box
+                                                                sx={{
+                                                                    display: 'flex',
+                                                                    alignItems: 'center',
+                                                                    [theme.breakpoints.down('sm')]:
+                                                                        {
+                                                                            flexDirection: 'column',
+                                                                        },
+                                                                    [theme.breakpoints.up('sm')]: {
+                                                                        flexDirection: 'row',
+                                                                    },
+                                                                }}
+                                                                key={author.id}
+                                                            >
+                                                                {author.name}
+                                                                {i < data.crew.Author.length - 1 ? (
+                                                                    <DSpacer />
+                                                                ) : null}
+                                                            </Box>
+                                                        ),
+                                                    )}
+                                                </Typography>
+                                            </Box>
+                                        ) : null}
+                                        {data.crew.Writer.length ? (
+                                            <Box sx={{ display: 'flex' }}>
+                                                <Typography
+                                                    sx={{
+                                                        width: '150px',
+                                                        fontWeight: '600',
+                                                        color: alpha(
+                                                            theme.palette.text.primary,
+                                                            0.8,
+                                                        ),
+                                                    }}
+                                                    variant='body1'
+                                                >
+                                                    Writer
+                                                </Typography>
+                                                <Typography
+                                                    sx={{ display: 'flex', alignItems: 'center' }}
+                                                    variant='body1'
+                                                    component={'span'}
+                                                >
+                                                    {data.crew.Writer.map(
+                                                        (writer: any, i: number) => (
+                                                            <Box
+                                                                sx={{
+                                                                    display: 'flex',
+                                                                    alignItems: 'center',
+                                                                    [theme.breakpoints.down('sm')]:
+                                                                        {
+                                                                            flexDirection: 'column',
+                                                                        },
+                                                                    [theme.breakpoints.up('sm')]: {
+                                                                        flexDirection: 'row',
+                                                                    },
+                                                                }}
+                                                                key={writer.id}
+                                                            >
+                                                                {writer.name}
+                                                                {i < data.crew.Writer.length - 1 ? (
+                                                                    <DSpacer />
+                                                                ) : null}
+                                                            </Box>
+                                                        ),
+                                                    )}
+                                                </Typography>
+                                            </Box>
+                                        ) : null}
                                         <Box sx={{ display: 'flex' }}>
                                             <Typography
                                                 sx={{
