@@ -3,9 +3,9 @@ import Box, { BoxProps } from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import IconButton from '@mui/material/IconButton';
 import InputBase, { InputBaseProps } from '@mui/material/InputBase';
-import List from '@mui/material/List';
+import List, { ListProps } from '@mui/material/List';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
-import ListItemButton from '@mui/material/ListItemButton';
+import ListItemButton, { ListItemButtonProps } from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import Typography from '@mui/material/Typography';
 import { alpha, styled, useTheme } from '@mui/material/styles';
@@ -73,6 +73,18 @@ const SearchCard = styled(Box)<BoxProps>(({ theme }) => ({
     color: theme.palette.text.primary,
 }));
 
+const SearchItemButton = styled(ListItemButton)<ListItemButtonProps>(({ theme }) => ({
+    borderRadius: theme.shape.borderRadius,
+    padding: '5px',
+}));
+
+const SearchList = styled(List)<ListProps>(({ theme }) => ({
+    width: '100%',
+    bgcolor: 'background.paper',
+    borderRadius: theme.shape.borderRadius,
+    padding: '5px',
+}));
+
 const Search404 = styled(Box)<BoxProps>(({ theme }) => ({
     color: theme.palette.text.secondary,
 }));
@@ -98,15 +110,15 @@ const SearchCardContainer = (props: any) => {
     const { handleCloseSearch } = props;
     const theme = useTheme();
 
-    const SearchRouter = ({ id, children, type, sx }: any) => {
+    const SearchRouter = ({ id, children, type }: any) => {
         const handleOnListItemClick = () => {
             handleCloseSearch();
             navigate(`/${type}/${id}`);
         };
         return (
-            <ListItemButton sx={sx} onClick={handleOnListItemClick} key={id}>
+            <SearchItemButton onClick={handleOnListItemClick} key={id}>
                 {children}
-            </ListItemButton>
+            </SearchItemButton>
         );
     };
 
@@ -126,21 +138,10 @@ const SearchCardContainer = (props: any) => {
                         Movies
                     </Typography>
                     {movieData.length ? (
-                        <List
-                            sx={{
-                                width: '100%',
-                                bgcolor: 'background.paper',
-                                borderRadius: theme.shape.borderRadius,
-                                padding: '5px',
-                            }}
+                        <SearchList
                         >
                             {movieData.map((item: any, index: number) => (
-                                <SearchRouter
-                                    sx={{ borderRadius: theme.shape.borderRadius, padding: '5px' }}
-                                    type='movie'
-                                    key={index}
-                                    id={item.tmdb_id}
-                                >
+                                <SearchRouter type='movie' key={index} id={item.tmdb_id}>
                                     <ListItemAvatar sx={{ marginRight: '5px' }}>
                                         <Avatar
                                             sx={{ width: '50px', height: '70px' }}
@@ -172,7 +173,7 @@ const SearchCardContainer = (props: any) => {
                                     />
                                 </SearchRouter>
                             ))}
-                        </List>
+                        </SearchList>
                     ) : data.ok ? (
                         <Search404>
                             <Typography variant='subtitle2'>No results...</Typography>
@@ -192,21 +193,10 @@ const SearchCardContainer = (props: any) => {
                         TV Series
                     </Typography>
                     {seriesData.length ? (
-                        <List
-                            sx={{
-                                width: '100%',
-                                bgcolor: 'background.paper',
-                                borderRadius: theme.shape.borderRadius,
-                                padding: '5px',
-                            }}
+                        <SearchList
                         >
                             {seriesData.map((item: any, index: number) => (
-                                <SearchRouter
-                                    sx={{ borderRadius: theme.shape.borderRadius, padding: '5px' }}
-                                    type='serie'
-                                    key={index}
-                                    id={item.tmdb_id}
-                                >
+                                <SearchRouter type='serie' key={index} id={item.tmdb_id}>
                                     <ListItemAvatar sx={{ marginRight: '5px' }}>
                                         <Avatar
                                             sx={{ width: '50px', height: '70px' }}
@@ -238,7 +228,7 @@ const SearchCardContainer = (props: any) => {
                                     />
                                 </SearchRouter>
                             ))}
-                        </List>
+                        </SearchList>
                     ) : data.ok ? (
                         <Search404>
                             <Typography variant='subtitle2'>No results...</Typography>

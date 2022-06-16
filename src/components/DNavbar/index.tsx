@@ -124,7 +124,7 @@ const DNavbar = ({ colorModeContext, themeMode }: any) => {
 
     const isSearchOpen = Boolean(searchAnchor);
 
-    if (location.pathname.includes('/settings')) return <></>;
+    if (location.pathname.includes('/settings') || location.pathname.includes('/setup')) return <></>;
 
     return (
         <Box>
@@ -144,7 +144,7 @@ const DNavbar = ({ colorModeContext, themeMode }: any) => {
                         </Link>
                     </LogoWrapper>
                     <Box sx={{ width: '100%', margin: '0px 20px' }}>
-                        <SearchWrapper onClick={handleSearchToggle}>
+                        <SearchWrapper onFocus={handleOpenSearch} onBlur={handleCloseSearch}>
                             <SearchIconWrapper>
                                 <i className='ri-search-2-line'></i>
                             </SearchIconWrapper>

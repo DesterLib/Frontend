@@ -14,6 +14,7 @@ import SeriePage from './pages/Series';
 import Settings from './pages/Settings';
 import darkTheme from './theme/darkTheme';
 import lightTheme from './theme/lightTheme';
+import SetupPage from './pages/Setup';
 
 // eslint-disable-next-line
 const ColorModeContext = createContext({ toggleColorMode: () => {} });
@@ -115,6 +116,7 @@ const App = () => {
                             element={<SeasonPage />}
                         />
                         <Route path='/settings/*' element={<Settings />} />
+                        <Route path='/setup' element={<SetupPage />} />
                     </Routes>
                     <DBottomBar />
                 </BrowserRouter>

@@ -30,14 +30,12 @@ const HomePage = () => {
     }, []);
 
     if (isLoaded && data.code == 428) {
-        navigate(data.result);
+        navigate(data);
     }
-
-    console.log(appInfo);
 
     // const network = useNetworkStatus();
 
-    // console.log(network.online);
+    // console.log(data.result);
 
     // if (!network.online) return <div>No internet connection</div>;
 
