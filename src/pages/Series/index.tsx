@@ -403,7 +403,7 @@ const SeriePage = () => {
                     </Grid>
                 </Grid>
                 <Box>
-                    <DSlider variant='season' title='Seasons' itemData={data.seasons} />
+                    <DSlider variant='season' title='Seasons' itemData={data} />
                 </Box>
                 <Box>
                     <DSlider variant='people' title='Cast' itemData={data.cast} />

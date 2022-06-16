@@ -6,10 +6,18 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
+import {
+    APP_API_PATH,
+    APP_API_VERSION_PATH,
+    APP_BACKDROP_QUALITY,
+    APP_POSTER_QUALITY,
+} from '../../config';
+
 const SeasonPage = () => {
     const theme = useTheme();
     const { seriesId, seasonNumber } = useParams();
     const [data, setData] = useState<any>({});
+    const [item, setItem] = useState<any>({});
     const [isLoaded, setIsLoaded] = useState<boolean>(false);
     const navigate = useNavigate();
     const location: any = useLocation();
@@ -17,13 +25,12 @@ const SeasonPage = () => {
     useEffect(() => {
         if (location.state) {
             setData(location.state.data);
+            setItem(location.state.data.seasons[location.state.seasonKey]);
             setIsLoaded(true);
         } else {
             navigate(`/serie/${seriesId}`);
         }
     }, [seriesId, seasonNumber]);
-
-    console.log(location);
 
     return isLoaded ? (
         <Box
@@ -31,7 +38,13 @@ const SeasonPage = () => {
                 background: `linear-gradient(0deg, ${theme.palette.background.default} 0%, ${alpha(
                     theme.palette.background.default,
                     0.7,
-                )} 100%), url(${data.backdrop}) no-repeat center center / cover`,
+                )} 100%), url(${
+                    APP_API_PATH +
+                    APP_API_VERSION_PATH +
+                    '/assets/image/' +
+                    APP_BACKDROP_QUALITY +
+                    data.backdrop_path
+                }) no-repeat center center / cover`,
             }}
         >
             <Box
@@ -44,12 +57,22 @@ const SeasonPage = () => {
                 }}
             >
                 <Box sx={{ width: '100%', marginBottom: '20px' }}>
-                    <Typography sx={{ fontWeight: '500' }} variant='h5'>
+                    <Typography sx={{ fontWeight: '700' }} variant='h4'>
                         {data.title}
                     </Typography>
                 </Box>
+                <Box sx={{ width: '100%', marginBottom: '20px' }}>
+                    <Typography sx={{ fontWeight: '500' }} variant='h5'>
+                        {item.name}
+                    </Typography>
+                </Box>
                 <Box sx={{ maxWidth: '220px', margin: 'auto' }}>
-                    <img style={{ borderRadius: '10px' }} width='100%' src={data.poster} alt='' />
+                    <img
+                        style={{ borderRadius: '10px' }}
+                        width='100%'
+                        src={item.poster_path}
+                        alt=''
+                    />
                 </Box>
             </Box>
             <Box

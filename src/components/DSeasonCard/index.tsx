@@ -19,7 +19,7 @@ import {
     PlayButton,
 } from './styles';
 
-const DSeasonCard = ({ item, type }: any) => {
+const DSeasonCard = ({ data, type, seasonKey }: any) => {
     const [openModalState, setOpenModalState] = useState(false);
     const openInfoModal = (event: any) => {
         event.preventDefault();
@@ -28,6 +28,8 @@ const DSeasonCard = ({ item, type }: any) => {
     const closeInfoModal = () => {
         setOpenModalState(false);
     };
+    const item = data.seasons[seasonKey];
+    console.log(seasonKey);
 
     return (
         <Card>
@@ -46,7 +48,7 @@ const DSeasonCard = ({ item, type }: any) => {
                     <Link
                         style={{ textDecoration: 'none' }}
                         to={`season/${item.season_number}`}
-                        state={{ data: item }}
+                        state={{ data: data, type: type, seasonKey: seasonKey }}
                         key={item.id}
                     >
                         <PlayButton className='playButton'>

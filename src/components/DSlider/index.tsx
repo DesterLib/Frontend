@@ -138,9 +138,9 @@ const DSlider = ({ title, type, itemData, variant }: any) => {
                                     },
                                 }}
                             >
-                                {Object.keys(itemData).map((k: string, i: number) => (
+                                {Object.keys(itemData.seasons).map((k: string, i: number) => (
                                     <SwiperSlide key={i}>
-                                        <DSeasonCard item={itemData[k]} type={type} />
+                                        <DSeasonCard data={itemData} type={type} seasonKey={k} />
                                     </SwiperSlide>
                                 ))}
                             </DSwiper>
