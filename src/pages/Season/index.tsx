@@ -6,12 +6,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
-import {
-    APP_API_PATH,
-    APP_API_VERSION_PATH,
-    APP_BACKDROP_QUALITY,
-    APP_POSTER_QUALITY,
-} from '../../config';
+import { APP_API_PATH, APP_API_VERSION_PATH, APP_BACKDROP_QUALITY } from '../../config';
 
 const SeasonPage = () => {
     const theme = useTheme();
