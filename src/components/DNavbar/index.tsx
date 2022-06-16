@@ -8,8 +8,7 @@ import Typography from '@mui/material/Typography';
 import { alpha } from '@mui/material/styles';
 import { useTheme } from '@mui/system';
 import { debounce } from 'lodash';
-// import DButton from '../repeat/DButton';
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 import { APP_API_PATH, APP_LOGO_DARK, APP_LOGO_LIGHT, APP_NAME } from '../../config';
@@ -41,6 +40,12 @@ const DNavbar = ({ colorModeContext, themeMode }: any) => {
     const [searchAnchor, setSearchAnchor] = useState<null | HTMLElement>(null);
 
     const location = useLocation();
+
+    useEffect(() => {
+        if (location.pathname.includes('/settings')) {
+            handleCloseUserMenu();
+        }
+    }, [location.pathname]);
 
     const handleOpenUserMenu = (event: any) => {
         setUserMenu(event.currentTarget);
@@ -125,6 +130,8 @@ const DNavbar = ({ colorModeContext, themeMode }: any) => {
     const isSearchOpen = Boolean(searchAnchor);
 
     if (location.pathname.includes('/settings') || location.pathname.includes('/setup')) return <></>;
+
+    const isSearchOpen = Boolean(searchAnchor);
 
     return (
         <Box>
