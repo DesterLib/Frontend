@@ -13,10 +13,10 @@ import DButton from '../../components/DButton';
 import { Helmet } from '../../components/DHelmet';
 import DItemLogo from '../../components/DItemLogo';
 import DLoader from '../../components/DLoader';
-import DPlayer from '../../components/DPlayer';
 import DReviewList from '../../components/DReview';
 import DSlider from '../../components/DSlider';
 import DSpacer from '../../components/DSpacer';
+import DStreamModal from '../../components/DStreamModal';
 import {
     APP_API_PATH,
     APP_API_VERSION_PATH,
@@ -24,13 +24,7 @@ import {
     APP_POSTER_QUALITY,
 } from '../../config';
 import useBreakpoint from '../../utilities/useBreakpoint';
-import {
-    HeaderImage,
-    ItemBackground,
-    LinearGradient,
-    PosterImage,
-    StyledChip,
-} from './styles';
+import { HeaderImage, ItemBackground, LinearGradient, PosterImage, StyledChip } from './styles';
 
 const MoviePage = () => {
     const [isLoaded, setIsLoaded] = useState<boolean>(false);
@@ -48,6 +42,16 @@ const MoviePage = () => {
         };
         getData();
     }, [movieId]);
+
+    const [openModalState, setOpenModalState] = useState(false);
+    // eslint-disable-next-line
+    const openInfoModal = (event: any) => {
+        event.preventDefault();
+        setOpenModalState(true);
+    };
+    const closeInfoModal = () => {
+        setOpenModalState(false);
+    };
 
     let videoData;
     if (isLoaded) {
@@ -149,6 +153,7 @@ const MoviePage = () => {
                             <Grid sx={{ marginRight: '10px' }} item>
                                 <DButton
                                     startIcon={<i className='ri-play-mini-fill'></i>}
+                                    onClick={openInfoModal}
                                     variant='contained'
                                 >
                                     PLAY
@@ -694,10 +699,12 @@ const MoviePage = () => {
                 <Box>
                     <DReviewList title='Reviews' itemData={data.reviews} />
                 </Box>
-                <Box>
-                    <DPlayer videoData={videoData} />
-                </Box>
             </Box>
+            <DStreamModal
+                videoData={videoData}
+                currentState={openModalState}
+                closeInfoModal={closeInfoModal}
+            />
         </Box>
     ) : (
         <DLoader />

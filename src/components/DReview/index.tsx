@@ -35,12 +35,14 @@ const DReviewList = ({ title, itemData }: any) => {
                     <Box sx={{ padding: '20px' }}>
                         {itemsToShow.length ? itemsToShow : 'Loading...'}
                     </Box>
-                    <Box sx={{ padding: '20px' }}>
-                        <ShowMoreButton disableElevation variant='contained' onClick={showMore}>
-                            show more
-                            <ChipIndex label={itemData.length - numberOfitemsShown} />
-                        </ShowMoreButton>
-                    </Box>
+                    {itemData.length - numberOfitemsShown > 0 ? (
+                        <Box sx={{ padding: '20px' }}>
+                            <ShowMoreButton disableElevation variant='contained' onClick={showMore}>
+                                More
+                                <ChipIndex label={itemData.length - numberOfitemsShown} />
+                            </ShowMoreButton>
+                        </Box>
+                    ) : null}
                 </>
             )}
         </ListWrapper>
