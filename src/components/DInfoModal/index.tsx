@@ -9,11 +9,13 @@ import { APP_API_PATH, APP_API_VERSION_PATH, APP_BACKDROP_QUALITY } from '../../
 import DButton from '../DButton';
 import {
     ButtonWrapper,
+    ChipContainer,
     CloseButton,
     InfoModal,
     InfoModalBackdrop,
     InfoModalBackdropWrapper,
     ModalImage,
+    StyledChip,
 } from './styles';
 
 interface GenreChipProps {
@@ -48,7 +50,7 @@ const DInfoModal = ({ item, type, currentState, closeInfoModal }: any) => {
                         key={item.id}
                     >
                         <DButton
-                            sx={{ marginRight: 2 }}
+                            sx={{ marginRight: 1 }}
                             variant='contained'
                             color='primary'
                             size='small'
@@ -60,12 +62,42 @@ const DInfoModal = ({ item, type, currentState, closeInfoModal }: any) => {
                     <DButton
                         sx={{
                             '& .Dester-Button-startIcon': { marginRight: '0px' },
+                            marginRight: 1,
+                        }}
+                        startIcon={<i className='ri-heart-line'></i>}
+                        variant='contained'
+                        color='secondary'
+                        size='small'
+                    />
+                    <DButton
+                        sx={{
+                            '& .Dester-Button-startIcon': { marginRight: '0px' },
                         }}
                         startIcon={<i className='ri-add-circle-line'></i>}
                         variant='contained'
                         color='secondary'
                         size='small'
                     />
+                    <ChipContainer>
+                        <StyledChip className='year' label={item.year} />
+                        <StyledChip
+                            className='rating'
+                            icon={<i style={{ color: '#ffd000' }} className='ri-star-fill'></i>}
+                            label={item.rating}
+                        />
+                        <StyledChip
+                            className='type'
+                            icon={
+                                <i
+                                    style={{ color: '#ffd000' }}
+                                    className={
+                                        item.number_of_files ? 'ri-movie-2-fill' : 'ri-tv-fill'
+                                    }
+                                ></i>
+                            }
+                            label={item.number_of_files ? 'Movie' : 'Series'}
+                        />
+                    </ChipContainer>
                 </ButtonWrapper>
                 <Box>
                     <Typography sx={{ fontWeight: '400' }} variant='h5' gutterBottom>

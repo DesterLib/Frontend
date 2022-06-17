@@ -79,13 +79,24 @@ const DSlide = ({ item, type }: any) => {
                 </ItemContentDescription>
                 <StyledGridContainerParent container>
                     <StyledGridContainerChild container>
-                        <StyledChip className='year' label='2020' />
+                        <StyledChip className='year' label={item.year} />
                         <StyledChip
                             className='rating'
                             icon={<i style={{ color: '#ffd000' }} className='ri-star-fill'></i>}
-                            label='8.6'
+                            label={item.rating}
                         />
-                        <StyledChip className='type' label='Movie' />
+                        <StyledChip
+                            className='type'
+                            icon={
+                                <i
+                                    style={{ color: '#ffd000' }}
+                                    className={
+                                        item.number_of_files ? 'ri-movie-2-fill' : 'ri-tv-fill'
+                                    }
+                                ></i>
+                            }
+                            label={item.number_of_files ? 'Movie' : 'Series'}
+                        />
                     </StyledGridContainerChild>
                     <Grid sx={{ marginRight: '10px' }} item>
                         <DButton
@@ -99,6 +110,17 @@ const DSlide = ({ item, type }: any) => {
                             onClick={() => navigate(`/${type}/${item.tmdb_id}`)}
                         >
                             PLAY NOW
+                        </DButton>
+                    </Grid>
+                    <Grid sx={{ marginRight: '10px' }} item>
+                        <DButton
+                            startIcon={
+                                <i style={{ pointerEvents: 'none' }} className='ri-heart-line'></i>
+                            }
+                            variant='contained'
+                            color='secondary'
+                        >
+                            FAVORITE
                         </DButton>
                     </Grid>
                     <Grid sx={{ marginRight: '10px' }} item>

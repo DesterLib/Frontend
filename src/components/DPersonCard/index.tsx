@@ -46,6 +46,10 @@ const DPersonCard = ({ item }: any) => {
                 href={`https://www.themoviedb.org/person/${item.id}`}
                 target='_blank'
                 rel='noopener noreferrer'
+                style={{
+                    textDecoration: 'none',
+                    color: 'inherit',
+                }}
             >
                 <PersonAvatarWrapper>
                     <PersonAvatarImg

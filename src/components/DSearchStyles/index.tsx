@@ -135,7 +135,7 @@ const SearchCardContainer = (props: any) => {
                 </ListItemAvatar>
                 <ListItemText
                     primary={item.title}
-                    secondary={(item.release_date || '').slice(0, 4)}
+                    secondary={item.year}
                     onClick={handleOnListItemClick}
                 />
                 <IconButton
@@ -166,10 +166,7 @@ const SearchCardContainer = (props: any) => {
                         }
                     />
                 </ListItemAvatar>
-                <ListItemText
-                    primary={item.title}
-                    secondary={(item.release_date || '').slice(0, 4)}
-                />
+                <ListItemText primary={item.title} secondary={item.year} />
                 <IconButton
                     onClick={openInfoModal}
                     onContextMenu={(e) => e.preventDefault()}

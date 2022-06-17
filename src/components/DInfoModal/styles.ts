@@ -1,4 +1,5 @@
-import Box from '@mui/material/Box';
+import Box, { BoxProps } from '@mui/material/Box';
+import Chip, { ChipProps } from '@mui/material/Chip';
 import Dialog from '@mui/material/Dialog';
 import IconButton from '@mui/material/IconButton';
 import { alpha, styled } from '@mui/material/styles';
@@ -26,6 +27,8 @@ export const InfoModalBackdrop = styled(Box)(() => ({
 
 export const ButtonWrapper = styled(Box)(() => ({
     marginBottom: '20px',
+    display: 'flex',
+    alignItems: 'center',
 }));
 
 export const InfoModalBackdropWrapper = styled(Box)(() => ({
@@ -63,4 +66,16 @@ export const ModalImage = styled('img')(() => ({
     minHeight: '100%',
     maxHeight: '100%',
     objectFit: 'cover',
+}));
+
+export const ChipContainer = styled(Box)<BoxProps>(() => ({
+    marginRight: '0px',
+    marginLeft: 'auto',
+}));
+
+export const StyledChip = styled(Chip)<ChipProps>(({ theme }) => ({
+    padding: '0px 5px',
+    marginLeft: '5px',
+    backgroundColor: alpha(theme.palette.secondary.main, 0.8),
+    color: '#ffffff',
 }));

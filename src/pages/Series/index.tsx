@@ -137,7 +137,7 @@ const SeriePage = () => {
                             </Grid>
                             <Grid sx={{ marginRight: '10px' }} item>
                                 <DButton
-                                    startIcon={<i className='ri-movie-2-line'></i>}
+                                    startIcon={<i className='ri-heart-line'></i>}
                                     sx={{
                                         span: {
                                             margin: '0px',
@@ -149,7 +149,7 @@ const SeriePage = () => {
                             </Grid>
                             <Grid sx={{ marginRight: '10px' }} item>
                                 <DButton
-                                    startIcon={<i className='ri-heart-line'></i>}
+                                    startIcon={<i className='ri-movie-2-line'></i>}
                                     sx={{
                                         span: {
                                             margin: '0px',
