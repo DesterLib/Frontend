@@ -256,7 +256,7 @@ const requestAnimationFrame =
           window.mozRequestAnimationFrame ||
           rafPolyfill
         : // eslint-disable-next-line no-undef
-        global.requestAnimationFrame || rafPolyfill;
+          global.requestAnimationFrame || rafPolyfill;
 
 const cancelAnimationFrame =
     typeof window !== 'undefined'
@@ -265,7 +265,7 @@ const cancelAnimationFrame =
           window.mozCancelAnimationFrame ||
           cafPolyfill
         : // eslint-disable-next-line no-undef
-        global.cancelAnimationFrame || cafPolyfill;
+          global.cancelAnimationFrame || cafPolyfill;
 
 const warn = (msg) => {
     return console && typeof console.warn === 'function' && console.warn(msg);
@@ -456,13 +456,13 @@ const generateTitleAsString = (type, title, attributes, encode) => {
     const flattenedTitle = flattenArray(title);
     return attributeString
         ? `<${type} ${HELMET_ATTRIBUTE}="true" ${attributeString}>${encodeSpecialCharacters(
-            flattenedTitle,
-            encode,
-        )}</${type}>`
+              flattenedTitle,
+              encode,
+          )}</${type}>`
         : `<${type} ${HELMET_ATTRIBUTE}="true">${encodeSpecialCharacters(
-            flattenedTitle,
-            encode,
-        )}</${type}>`;
+              flattenedTitle,
+              encode,
+          )}</${type}>`;
 };
 
 const generateTagsAsString = (type, tags, encode) =>
@@ -543,24 +543,24 @@ const generateTagsAsReactComponent = (type, tags) =>
 
 const getMethodsForTag = (type, tags, encode) => {
     switch (type) {
-    case TAG_NAMES.TITLE:
-        return {
-            toComponent: () =>
-                generateTitleAsReactComponent(type, tags.title, tags.titleAttributes, encode),
-            toString: () =>
-                generateTitleAsString(type, tags.title, tags.titleAttributes, encode),
-        };
-    case ATTRIBUTE_NAMES.BODY:
-    case ATTRIBUTE_NAMES.HTML:
-        return {
-            toComponent: () => convertElementAttributestoReactProps(tags),
-            toString: () => generateElementAttributesAsString(tags),
-        };
-    default:
-        return {
-            toComponent: () => generateTagsAsReactComponent(type, tags),
-            toString: () => generateTagsAsString(type, tags, encode),
-        };
+        case TAG_NAMES.TITLE:
+            return {
+                toComponent: () =>
+                    generateTitleAsReactComponent(type, tags.title, tags.titleAttributes, encode),
+                toString: () =>
+                    generateTitleAsString(type, tags.title, tags.titleAttributes, encode),
+            };
+        case ATTRIBUTE_NAMES.BODY:
+        case ATTRIBUTE_NAMES.HTML:
+            return {
+                toComponent: () => convertElementAttributestoReactProps(tags),
+                toString: () => generateElementAttributesAsString(tags),
+            };
+        default:
+            return {
+                toComponent: () => generateTagsAsReactComponent(type, tags),
+                toString: () => generateTagsAsString(type, tags, encode),
+            };
     }
 };
 

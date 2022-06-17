@@ -12,9 +12,9 @@ import NotFoundPage from './pages/NotFound';
 import SeasonPage from './pages/Season';
 import SeriePage from './pages/Series';
 import Settings from './pages/Settings';
+import SetupPage from './pages/Setup';
 import darkTheme from './theme/darkTheme';
 import lightTheme from './theme/lightTheme';
-import SetupPage from './pages/Setup';
 
 // eslint-disable-next-line
 const ColorModeContext = createContext({ toggleColorMode: () => {} });

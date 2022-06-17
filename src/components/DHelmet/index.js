@@ -97,16 +97,16 @@ const Helmet = (Component) =>
             }
 
             switch (child.type) {
-            case TAG_NAMES.SCRIPT:
-            case TAG_NAMES.NOSCRIPT:
-                return {
-                    innerHTML: nestedChildren,
-                };
+                case TAG_NAMES.SCRIPT:
+                case TAG_NAMES.NOSCRIPT:
+                    return {
+                        innerHTML: nestedChildren,
+                    };
 
-            case TAG_NAMES.STYLE:
-                return {
-                    cssText: nestedChildren,
-                };
+                case TAG_NAMES.STYLE:
+                    return {
+                        cssText: nestedChildren,
+                    };
             }
 
             throw new Error(
@@ -129,24 +129,24 @@ const Helmet = (Component) =>
 
         mapObjectTypeChildren({ child, newProps, newChildProps, nestedChildren }) {
             switch (child.type) {
-            case TAG_NAMES.TITLE:
-                return {
-                    ...newProps,
-                    [child.type]: nestedChildren,
-                    titleAttributes: { ...newChildProps },
-                };
+                case TAG_NAMES.TITLE:
+                    return {
+                        ...newProps,
+                        [child.type]: nestedChildren,
+                        titleAttributes: { ...newChildProps },
+                    };
 
-            case TAG_NAMES.BODY:
-                return {
-                    ...newProps,
-                    bodyAttributes: { ...newChildProps },
-                };
+                case TAG_NAMES.BODY:
+                    return {
+                        ...newProps,
+                        bodyAttributes: { ...newChildProps },
+                    };
 
-            case TAG_NAMES.HTML:
-                return {
-                    ...newProps,
-                    htmlAttributes: { ...newChildProps },
-                };
+                case TAG_NAMES.HTML:
+                    return {
+                        ...newProps,
+                        htmlAttributes: { ...newChildProps },
+                    };
             }
 
             return {
@@ -216,27 +216,27 @@ const Helmet = (Component) =>
                 this.warnOnInvalidChildren(child, nestedChildren);
 
                 switch (child.type) {
-                case TAG_NAMES.LINK:
-                case TAG_NAMES.META:
-                case TAG_NAMES.NOSCRIPT:
-                case TAG_NAMES.SCRIPT:
-                case TAG_NAMES.STYLE:
-                    arrayTypeChildren = this.flattenArrayTypeChildren({
-                        child,
-                        arrayTypeChildren,
-                        newChildProps,
-                        nestedChildren,
-                    });
-                    break;
+                    case TAG_NAMES.LINK:
+                    case TAG_NAMES.META:
+                    case TAG_NAMES.NOSCRIPT:
+                    case TAG_NAMES.SCRIPT:
+                    case TAG_NAMES.STYLE:
+                        arrayTypeChildren = this.flattenArrayTypeChildren({
+                            child,
+                            arrayTypeChildren,
+                            newChildProps,
+                            nestedChildren,
+                        });
+                        break;
 
-                default:
-                    newProps = this.mapObjectTypeChildren({
-                        child,
-                        newProps,
-                        newChildProps,
-                        nestedChildren,
-                    });
-                    break;
+                    default:
+                        newProps = this.mapObjectTypeChildren({
+                            child,
+                            newProps,
+                            newChildProps,
+                            nestedChildren,
+                        });
+                        break;
                 }
             });
 

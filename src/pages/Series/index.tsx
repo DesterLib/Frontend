@@ -216,7 +216,7 @@ const SeriePage = () => {
                                     data.genres.map((genre: any) => (
                                         <Link
                                             style={{ textDecoration: 'none' }}
-                                            to={`search?genre=${genre.name}`}
+                                            to={`/browse?genre=${genre.name}`}
                                             key={genre.id}
                                         >
                                             <Chip
@@ -259,7 +259,17 @@ const SeriePage = () => {
                                                                 }}
                                                                 key={creator.id}
                                                             >
-                                                                {creator.name}
+                                                                <a
+                                                                    href={`https://www.themoviedb.org/person/${creator.id}`}
+                                                                    target='_blank'
+                                                                    rel='noopener noreferrer'
+                                                                    style={{
+                                                                        textDecoration: 'none',
+                                                                        color: 'inherit',
+                                                                    }}
+                                                                >
+                                                                    {creator.name}
+                                                                </a>
                                                                 {i <
                                                                 data.crew.Creator.length - 1 ? (
                                                                     <DSpacer />
@@ -299,7 +309,17 @@ const SeriePage = () => {
                                                                 }}
                                                                 key={director.id}
                                                             >
-                                                                {director.name}
+                                                                <a
+                                                                    href={`https://www.themoviedb.org/person/${director.id}`}
+                                                                    target='_blank'
+                                                                    rel='noopener noreferrer'
+                                                                    style={{
+                                                                        textDecoration: 'none',
+                                                                        color: 'inherit',
+                                                                    }}
+                                                                >
+                                                                    {director.name}
+                                                                </a>
                                                                 {i <
                                                                 data.crew.Director.length - 1 ? (
                                                                     <DSpacer />
@@ -346,7 +366,17 @@ const SeriePage = () => {
                                                                 }}
                                                                 key={screenplay.id}
                                                             >
-                                                                {screenplay.name}
+                                                                <a
+                                                                    href={`https://www.themoviedb.org/person/${screenplay.id}`}
+                                                                    target='_blank'
+                                                                    rel='noopener noreferrer'
+                                                                    style={{
+                                                                        textDecoration: 'none',
+                                                                        color: 'inherit',
+                                                                    }}
+                                                                >
+                                                                    {screenplay.name}
+                                                                </a>
                                                                 {i <
                                                                 data.crew.Screenplay.length - 1 ? (
                                                                     <DSpacer />
@@ -391,7 +421,17 @@ const SeriePage = () => {
                                                             }}
                                                             key={studio.id}
                                                         >
-                                                            {studio.name}
+                                                            <a
+                                                                href={`https://www.themoviedb.org/company/${studio.id}/tv`}
+                                                                target='_blank'
+                                                                rel='noopener noreferrer'
+                                                                style={{
+                                                                    textDecoration: 'none',
+                                                                    color: 'inherit',
+                                                                }}
+                                                            >
+                                                                {studio.name}
+                                                            </a>
                                                             {i < data.studios.length - 1 ? (
                                                                 <DSpacer />
                                                             ) : null}
@@ -453,7 +493,7 @@ const SeriePage = () => {
                                                 }}
                                                 variant='body1'
                                             >
-                                                AVAILABLE QUALITIES
+                                                QUALITIES
                                             </Typography>
                                             <Typography
                                                 sx={{

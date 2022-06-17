@@ -1,6 +1,5 @@
-import Tooltip, { TooltipProps } from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
-import { alpha, styled } from '@mui/material/styles';
+import { alpha } from '@mui/material/styles';
 import { useTheme } from '@mui/system';
 import React from 'react';
 
@@ -13,6 +12,7 @@ import {
     VoiceInfoTag,
 } from './styles';
 
+/*
 const DPersonTooltip = styled(({ className, ...props }: TooltipProps) => (
     <Tooltip {...props} classes={{ popper: className }} />
 ))(({ theme }) => ({
@@ -27,19 +27,26 @@ const DPersonTooltip = styled(({ className, ...props }: TooltipProps) => (
     },
 }));
 
+<DPersonTooltip
+    title={
+        <React.Fragment>
+            <Typography color='inherit'>{item.name}</Typography>
+            <Typography color='inherit'>as</Typography>
+            <Typography color='inherit'>{item.character}</Typography>
+        </React.Fragment>
+    }
+>
+*/
+
 const DPersonCard = ({ item }: any) => {
     const theme = useTheme();
     return (
-        <DPersonTooltip
-            title={
-                <React.Fragment>
-                    <Typography color='inherit'>{item.name}</Typography>
-                    <Typography color='inherit'>as</Typography>
-                    <Typography color='inherit'>{item.character}</Typography>
-                </React.Fragment>
-            }
-        >
-            <Container>
+        <Container>
+            <a
+                href={`https://www.themoviedb.org/person/${item.id}`}
+                target='_blank'
+                rel='noopener noreferrer'
+            >
                 <PersonAvatarWrapper>
                     <PersonAvatarImg
                         src={
@@ -52,26 +59,26 @@ const DPersonCard = ({ item }: any) => {
                         alt={item.name}
                     />
                 </PersonAvatarWrapper>
-                <InfoWrapper>
-                    <Typography noWrap variant='body1'>
-                        {item.name}
-                    </Typography>
-                    <Typography
-                        noWrap
-                        sx={{ color: alpha(theme.palette.text.primary, 0.7), fontWeight: 'bold' }}
-                        variant='body1'
-                    >
-                        As
-                    </Typography>
-                    <Typography sx={{ width: 'calc(100% - 20px)' }} noWrap variant='body2'>
-                        {item.character}
-                    </Typography>
-                    <VoiceInfoTag>
-                        <i className='ri-mic-fill'></i>
-                    </VoiceInfoTag>
-                </InfoWrapper>
-            </Container>
-        </DPersonTooltip>
+            </a>
+            <InfoWrapper>
+                <Typography noWrap variant='body1'>
+                    {item.name}
+                </Typography>
+                <Typography
+                    noWrap
+                    sx={{ color: alpha(theme.palette.text.primary, 0.7), fontWeight: 'bold' }}
+                    variant='body1'
+                >
+                    As
+                </Typography>
+                <Typography sx={{ width: 'calc(100% - 20px)' }} noWrap variant='body2'>
+                    {item.character}
+                </Typography>
+                <VoiceInfoTag>
+                    <i className='ri-mic-fill'></i>
+                </VoiceInfoTag>
+            </InfoWrapper>
+        </Container>
     );
 };
 

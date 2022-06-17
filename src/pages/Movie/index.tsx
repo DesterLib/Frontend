@@ -228,7 +228,7 @@ const MoviePage = () => {
                                     data.genres.map((genre: any) => (
                                         <Link
                                             style={{ textDecoration: 'none' }}
-                                            to={`search?genre=${genre.name}`}
+                                            to={`/browse?genre=${genre.name}`}
                                             key={genre.id}
                                         >
                                             <Chip
@@ -278,7 +278,17 @@ const MoviePage = () => {
                                                                 }}
                                                                 key={creator.id}
                                                             >
-                                                                {creator.name}
+                                                                <a
+                                                                    href={`https://www.themoviedb.org/person/${creator.id}`}
+                                                                    target='_blank'
+                                                                    rel='noopener noreferrer'
+                                                                    style={{
+                                                                        textDecoration: 'none',
+                                                                        color: 'inherit',
+                                                                    }}
+                                                                >
+                                                                    {creator.name}
+                                                                </a>
                                                                 {i <
                                                                 data.crew.Creator.length - 1 ? (
                                                                     <DSpacer />
@@ -318,7 +328,17 @@ const MoviePage = () => {
                                                                 }}
                                                                 key={director.id}
                                                             >
-                                                                {director.name}
+                                                                <a
+                                                                    href={`https://www.themoviedb.org/person/${director.id}`}
+                                                                    target='_blank'
+                                                                    rel='noopener noreferrer'
+                                                                    style={{
+                                                                        textDecoration: 'none',
+                                                                        color: 'inherit',
+                                                                    }}
+                                                                >
+                                                                    {director.name}
+                                                                </a>
                                                                 {i <
                                                                 data.crew.Director.length - 1 ? (
                                                                     <DSpacer />
@@ -365,7 +385,17 @@ const MoviePage = () => {
                                                                 }}
                                                                 key={screenplay.id}
                                                             >
-                                                                {screenplay.name}
+                                                                <a
+                                                                    href={`https://www.themoviedb.org/person/${screenplay.id}`}
+                                                                    target='_blank'
+                                                                    rel='noopener noreferrer'
+                                                                    style={{
+                                                                        textDecoration: 'none',
+                                                                        color: 'inherit',
+                                                                    }}
+                                                                >
+                                                                    {screenplay.name}
+                                                                </a>
                                                                 {i <
                                                                 data.crew.Screenplay.length - 1 ? (
                                                                     <DSpacer />
@@ -412,7 +442,17 @@ const MoviePage = () => {
                                                                 }}
                                                                 key={author.id}
                                                             >
-                                                                {author.name}
+                                                                <a
+                                                                    href={`https://www.themoviedb.org/person/${author.id}`}
+                                                                    target='_blank'
+                                                                    rel='noopener noreferrer'
+                                                                    style={{
+                                                                        textDecoration: 'none',
+                                                                        color: 'inherit',
+                                                                    }}
+                                                                >
+                                                                    {author.name}
+                                                                </a>
                                                                 {i < data.crew.Author.length - 1 ? (
                                                                     <DSpacer />
                                                                 ) : null}
@@ -458,7 +498,17 @@ const MoviePage = () => {
                                                                 }}
                                                                 key={writer.id}
                                                             >
-                                                                {writer.name}
+                                                                <a
+                                                                    href={`https://www.themoviedb.org/person/${writer.id}`}
+                                                                    target='_blank'
+                                                                    rel='noopener noreferrer'
+                                                                    style={{
+                                                                        textDecoration: 'none',
+                                                                        color: 'inherit',
+                                                                    }}
+                                                                >
+                                                                    {writer.name}
+                                                                </a>
                                                                 {i < data.crew.Writer.length - 1 ? (
                                                                     <DSpacer />
                                                                 ) : null}
@@ -502,7 +552,17 @@ const MoviePage = () => {
                                                             }}
                                                             key={studio.id}
                                                         >
-                                                            {studio.name}
+                                                            <a
+                                                                href={`https://www.themoviedb.org/company/${studio.id}/movie`}
+                                                                target='_blank'
+                                                                rel='noopener noreferrer'
+                                                                style={{
+                                                                    textDecoration: 'none',
+                                                                    color: 'inherit',
+                                                                }}
+                                                            >
+                                                                {studio.name}
+                                                            </a>
                                                             {i < data.studios.length - 1 ? (
                                                                 <DSpacer />
                                                             ) : null}
@@ -564,7 +624,7 @@ const MoviePage = () => {
                                                 }}
                                                 variant='body1'
                                             >
-                                                AVAILABLE QUALITIES
+                                                QUALITIES
                                             </Typography>
                                             <Typography
                                                 sx={{
