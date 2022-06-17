@@ -10,7 +10,7 @@ import { APP_API_PATH, APP_API_VERSION_PATH, APP_BACKDROP_QUALITY } from '../../
 
 const SeasonPage = () => {
     const theme = useTheme();
-    const { seriesId, seasonNumber } = useParams();
+    const { seriesId, seasonNumber }: any = useParams();
     const [data, setData] = useState<any>({});
     const [item, setItem] = useState<any>({});
     const [isLoaded, setIsLoaded] = useState<boolean>(false);
@@ -26,6 +26,15 @@ const SeasonPage = () => {
             navigate(`/serie/${seriesId}`);
         }
     }, [seriesId, seasonNumber]);
+
+    let prev_season;
+    let next_season;
+    if (isLoaded) {
+        const season_keys = Object.keys(data.seasons);
+        const season_index = season_keys.indexOf(seasonNumber);
+        prev_season = season_keys[season_index - 1];
+        next_season = season_keys[season_index + 1];
+    }
 
     return isLoaded ? (
         <Box
@@ -78,32 +87,48 @@ const SeasonPage = () => {
                     margin: 'auto',
                 }}
             >
-                <Link style={{ textDecoration: 'none', color: theme.palette.text.primary }} to=''>
-                    <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                        <IconButton
-                            sx={{
-                                backgroundColor: theme.palette.background.paper,
-                                marginRight: '10px',
-                            }}
-                        >
-                            <i className='ri-arrow-left-s-line'></i>
-                        </IconButton>
-                        <Typography>Previous Season</Typography>
-                    </Box>
-                </Link>
-                <Link style={{ textDecoration: 'none', color: theme.palette.text.primary }} to=''>
-                    <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                        <Typography>Next Season</Typography>
-                        <IconButton
-                            sx={{
-                                backgroundColor: theme.palette.background.paper,
-                                marginLeft: '10px',
-                            }}
-                        >
-                            <i className='ri-arrow-right-s-line'></i>
-                        </IconButton>
-                    </Box>
-                </Link>
+                {prev_season ? (
+                    <Link
+                        style={{ textDecoration: 'none', color: theme.palette.text.primary }}
+                        to={`/series/${data.tmdb_id}/season/${prev_season}`}
+                        state={{ data: data, seasonKey: prev_season }}
+                        key={data.seasons[prev_season].id}
+                    >
+                        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                            <IconButton
+                                sx={{
+                                    backgroundColor: theme.palette.background.paper,
+                                    marginRight: '10px',
+                                }}
+                            >
+                                <i className='ri-arrow-left-s-line'></i>
+                            </IconButton>
+                            <Typography>Previous Season</Typography>
+                        </Box>
+                    </Link>
+                ) : (
+                    <div></div>
+                )}
+                {next_season ? (
+                    <Link
+                        style={{ textDecoration: 'none', color: theme.palette.text.primary }}
+                        to={`/series/${data.tmdb_id}/season/${next_season}`}
+                        state={{ data: data, seasonKey: next_season }}
+                        key={data.seasons[next_season].id}
+                    >
+                        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                            <Typography>Next Season</Typography>
+                            <IconButton
+                                sx={{
+                                    backgroundColor: theme.palette.background.paper,
+                                    marginLeft: '10px',
+                                }}
+                            >
+                                <i className='ri-arrow-right-s-line'></i>
+                            </IconButton>
+                        </Box>
+                    </Link>
+                ) : null}
             </Box>
         </Box>
     ) : null;
