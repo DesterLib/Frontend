@@ -24,7 +24,13 @@ import {
     APP_POSTER_QUALITY,
 } from '../../config';
 import useBreakpoint from '../../utilities/useBreakpoint';
-import { HeaderImage, ItemBackground, LinearGradient, PosterImage } from './MoviePageComponents';
+import {
+    HeaderImage,
+    ItemBackground,
+    LinearGradient,
+    PosterImage,
+    StyledChip,
+} from './styles';
 
 const MoviePage = () => {
     const [isLoaded, setIsLoaded] = useState<boolean>(false);
@@ -107,6 +113,7 @@ const MoviePage = () => {
                             bottom: 0,
                             marginTop: 'auto',
                             marginLeft: '40px',
+                            marginRight: '40px',
                             marginBottom: '40px',
                             [theme.breakpoints.down('md')]: {
                                 alignItems: 'center',
@@ -224,6 +231,33 @@ const MoviePage = () => {
                             </Typography>
                             <Typography variant='body2'>{data.description}</Typography>
                             <Box sx={{ marginTop: '20px' }}>
+                                <StyledChip className='year' clickable label={data.year} />
+                                <StyledChip
+                                    className='rating'
+                                    clickable
+                                    icon={
+                                        <i
+                                            style={{ color: '#ffd000' }}
+                                            className='ri-star-fill'
+                                        ></i>
+                                    }
+                                    label={data.rating}
+                                />
+                                <StyledChip
+                                    className='type'
+                                    clickable
+                                    icon={
+                                        <i
+                                            style={{ color: '#ffd000' }}
+                                            className={
+                                                data.number_of_files
+                                                    ? 'ri-movie-2-fill'
+                                                    : 'ri-tv-fill'
+                                            }
+                                        ></i>
+                                    }
+                                    label={data.number_of_files ? 'Movie' : 'Series'}
+                                />
                                 {data.genres &&
                                     data.genres.map((genre: any) => (
                                         <Link

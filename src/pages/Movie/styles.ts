@@ -1,5 +1,13 @@
 import Box, { BoxProps } from '@mui/material/Box';
-import { styled } from '@mui/material/styles';
+import Chip, { ChipProps } from '@mui/material/Chip';
+import { alpha, styled } from '@mui/material/styles';
+
+export const StyledChip = styled(Chip)<ChipProps>(({ theme }) => ({
+    padding: '0px 5px',
+    margin: theme.spacing(0.5),
+    backgroundColor: alpha(theme.palette.secondary.main, 0.8),
+    color: '#ffffff',
+}));
 
 export const ItemBackground = styled(Box)<BoxProps>(({ theme }) => ({
     width: '100%',
