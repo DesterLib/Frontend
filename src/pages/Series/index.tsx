@@ -1,5 +1,4 @@
 import Box from '@mui/material/Box';
-import Chip from '@mui/material/Chip';
 import Grid from '@mui/material/Grid';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
@@ -23,7 +22,14 @@ import {
 } from '../../config';
 import { get } from '../../utilities/requests';
 import useBreakpoint from '../../utilities/useBreakpoint';
-import { HeaderImage, ItemBackground, LinearGradient, PosterImage, StyledChip } from './styles';
+import {
+    HeaderImage,
+    ItemBackground,
+    LinearGradient,
+    PosterImage,
+    StyledChipGenre,
+    StyledChipInfo,
+} from './styles';
 
 const SeriePage = () => {
     const [isLoaded, setIsLoaded] = useState<boolean>(false);
@@ -129,7 +135,7 @@ const SeriePage = () => {
                                 },
                             }}
                         >
-                            <Grid sx={{ marginRight: '10px' }} item>
+                            <Grid sx={{ marginRight: '15px' }} item>
                                 <DButton
                                     startIcon={<i className='ri-play-mini-fill'></i>}
                                     variant='contained'
@@ -137,7 +143,7 @@ const SeriePage = () => {
                                     PLAY
                                 </DButton>
                             </Grid>
-                            <Grid sx={{ marginRight: '10px' }} item>
+                            <Grid sx={{ marginRight: '15px' }} item>
                                 <DButton
                                     startIcon={<i className='ri-heart-line'></i>}
                                     sx={{
@@ -146,10 +152,10 @@ const SeriePage = () => {
                                         },
                                     }}
                                     color='secondary'
-                                    variant='contained'
+                                    variant='icon'
                                 />
                             </Grid>
-                            <Grid sx={{ marginRight: '10px' }} item>
+                            <Grid sx={{ marginRight: '15px' }} item>
                                 <DButton
                                     startIcon={<i className='ri-movie-2-line'></i>}
                                     sx={{
@@ -158,7 +164,7 @@ const SeriePage = () => {
                                         },
                                     }}
                                     color='secondary'
-                                    variant='contained'
+                                    variant='icon'
                                 />
                             </Grid>
                             <Grid item>
@@ -170,7 +176,7 @@ const SeriePage = () => {
                                         },
                                     }}
                                     color='secondary'
-                                    variant='contained'
+                                    variant='icon'
                                 />
                             </Grid>
                         </Grid>
@@ -214,8 +220,8 @@ const SeriePage = () => {
                             </Typography>
                             <Typography variant='body2'>{data.description}</Typography>
                             <Box sx={{ marginTop: '20px' }}>
-                                <StyledChip className='year' clickable label={data.year} />
-                                <StyledChip
+                                <StyledChipInfo className='year' clickable label={data.year} />
+                                <StyledChipInfo
                                     className='rating'
                                     clickable
                                     icon={
@@ -226,7 +232,7 @@ const SeriePage = () => {
                                     }
                                     label={data.rating}
                                 />
-                                <StyledChip
+                                <StyledChipInfo
                                     className='type'
                                     clickable
                                     icon={
@@ -241,6 +247,8 @@ const SeriePage = () => {
                                     }
                                     label={data.number_of_files ? 'Movie' : 'Series'}
                                 />
+                            </Box>
+                            <Box sx={{ marginTop: '10px' }}>
                                 {data.genres &&
                                     data.genres.map((genre: any) => (
                                         <Link
@@ -248,7 +256,7 @@ const SeriePage = () => {
                                             to={`/browse?genre=${genre.name}`}
                                             key={genre.id}
                                         >
-                                            <Chip
+                                            <StyledChipGenre
                                                 clickable
                                                 sx={{ margin: theme.spacing(0.5) }}
                                                 label={genre.name}

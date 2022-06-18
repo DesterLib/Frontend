@@ -2,10 +2,17 @@ import Box, { BoxProps } from '@mui/material/Box';
 import Chip, { ChipProps } from '@mui/material/Chip';
 import { alpha, styled } from '@mui/material/styles';
 
-export const StyledChip = styled(Chip)<ChipProps>(({ theme }) => ({
+export const StyledChipInfo = styled(Chip)<ChipProps>(({ theme }) => ({
     padding: '0px 5px',
     margin: theme.spacing(0.5),
-    backgroundColor: alpha(theme.palette.secondary.main, 0.8),
+    background: `linear-gradient(45deg, ${theme.palette.error.dark} 0%, ${theme.palette.error.light} 100%)`,
+    color: '#ffffff',
+}));
+
+export const StyledChipGenre = styled(Chip)<ChipProps>(({ theme }) => ({
+    padding: '0px 5px',
+    margin: theme.spacing(0.5),
+    background: `linear-gradient(45deg, ${theme.palette.info.dark} 0%, ${theme.palette.info.light} 100%)`,
     color: '#ffffff',
 }));
 
@@ -51,10 +58,10 @@ export const LinearGradient = styled(Box)<BoxProps>(({ theme }) => ({
     zIndex: '10',
     [theme.breakpoints.up('md')]: {
         background:
-            'linear-gradient( 90deg, rgba(2, 22, 31, 1) 6%, rgba(1, 9, 12, 0.5032606792717087) 70%, rgba(0, 0, 0, 0) 100% )',
+            `linear-gradient( 45deg, ${theme.palette.background.default} 20%, ${alpha(theme.palette.background.paper, 0.5)} 70%, rgba(0, 0, 0, 0) 100% )`,
     },
     [theme.breakpoints.down('md')]: {
         background:
-            'linear-gradient( 0deg, rgba(2, 22, 31, 1) 40%, rgba(2, 16, 22, 0.7721682422969187) 68%, rgba(1, 9, 12, 0.5032606792717087) 80%, rgba(0, 0, 0, 0) 100% )',
+        `linear-gradient( 45deg, ${theme.palette.background.default} 20%, ${alpha(theme.palette.background.paper, 0.5)} 70%, rgba(0, 0, 0, 0) 100% ), linear-gradient( 325deg, ${theme.palette.background.paper} 20%, ${alpha(theme.palette.background.paper, 0.5)} 70%, rgba(0, 0, 0, 0) 100% )`,
     },
 }));

@@ -73,7 +73,7 @@ export const Card = styled('div')(({ theme }) => ({
     boxSizing: 'border-box',
     transition: '0.2s ease-out',
     '&:hover .imageWrapper': {
-        boxShadow: `0px 0px 0px 4px ${alpha(theme.palette.primary.main, 0.8)}`,
+        boxShadow: `0px 0px 0px 2px ${alpha(theme.palette.primary.main, 0.8)}`,
     },
     '&:hover .imageWrapper .playButton': {
         opacity: '1',

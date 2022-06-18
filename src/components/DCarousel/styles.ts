@@ -7,7 +7,7 @@ import { alpha, styled } from '@mui/material/styles';
 export const StyledChip = styled(Chip)<ChipProps>(({ theme }) => ({
     padding: '0px 5px',
     marginRight: '5px',
-    backgroundColor: alpha(theme.palette.secondary.main, 0.8),
+    background: `linear-gradient(45deg, ${theme.palette.error.dark} 0%, ${theme.palette.error.light} 100%)`,
     color: '#ffffff',
 }));
 
@@ -46,11 +46,11 @@ export const LinearGradient = styled(Box)<BoxProps>(({ theme }) => ({
     zIndex: '10',
     [theme.breakpoints.up('md')]: {
         background:
-            'linear-gradient( 90deg, rgba(2, 22, 31, 1) 6%, rgba(1, 9, 12, 0.5032606792717087) 70%, rgba(0, 0, 0, 0) 100% )',
+            `linear-gradient( 45deg, ${theme.palette.background.default} 20%, ${alpha(theme.palette.background.paper, 0.5)} 70%, rgba(0, 0, 0, 0) 100% )`,
     },
     [theme.breakpoints.down('md')]: {
         background:
-            'linear-gradient( 0deg, rgba(2, 22, 31, 1) 40%, rgba(2, 16, 22, 0.7721682422969187) 68%, rgba(1, 9, 12, 0.5032606792717087) 80%, rgba(0, 0, 0, 0) 100% )',
+        `linear-gradient( 45deg, ${theme.palette.background.default} 20%, ${alpha(theme.palette.background.paper, 0.5)} 70%, rgba(0, 0, 0, 0) 100% ), linear-gradient( 325deg, ${theme.palette.background.paper} 20%, ${alpha(theme.palette.background.paper, 0.5)} 70%, rgba(0, 0, 0, 0) 100% )`,
     },
 }));
 
@@ -78,7 +78,6 @@ export const ItemContentTitleDown = styled(Typography)<TypographyProps>(({ theme
     fontWeight: '400',
     width: '90%',
     marginBottom: '10px',
-    color: '#ffffff',
     [theme.breakpoints.down('md')]: {
         textAlign: 'center',
     },
@@ -88,7 +87,6 @@ export const ItemContentTitleUp = styled(Typography)<TypographyProps>(({ theme }
     fontWeight: '500',
     width: '90%',
     marginBottom: '10px',
-    color: '#ffffff',
     [theme.breakpoints.down('md')]: {
         textAlign: 'center',
     },
@@ -96,7 +94,6 @@ export const ItemContentTitleUp = styled(Typography)<TypographyProps>(({ theme }
 
 export const ItemContentDescription = styled(Typography)<TypographyProps>(({ theme }) => ({
     width: '80%',
-    color: '#ffffff',
     [theme.breakpoints.down('md')]: {
         display: 'none',
     },
