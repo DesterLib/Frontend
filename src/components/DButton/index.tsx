@@ -11,22 +11,62 @@ import { DButtonPrimary, DButtonSecondary, DButtonStartIcon } from './styles';
 //     return yiq >= 128 ? 'black' : 'white';
 // }
 
-const DButton = ({ startIcon, color, children, variant }: any) => {
+const DButton = ({ startIcon, color, children, variant, onClick }: any) => {
     return (
         <>
             {color === 'primary' || color === undefined ? (
-                <DButtonPrimary>
-                    <DButtonStartIcon className='DButton-startIcon' color={color} variant={variant}>
-                        {startIcon}
-                    </DButtonStartIcon>
+                <DButtonPrimary onClick={onClick}>
+                    {startIcon && (
+                        <DButtonStartIcon
+                            className='DButton-startIcon'
+                            color={color}
+                            variant={variant}
+                        >
+                            {startIcon}
+                        </DButtonStartIcon>
+                    )}
                     {children}
                 </DButtonPrimary>
             ) : null}
             {color === 'secondary' ? (
-                <DButtonSecondary color={color}>
-                    <DButtonStartIcon className='DButton-startIcon' color={color} variant={variant}>
-                        {startIcon}
-                    </DButtonStartIcon>
+                <DButtonSecondary color={color} onClick={onClick}>
+                    {startIcon && (
+                        <DButtonStartIcon
+                            className='DButton-startIcon'
+                            color={color}
+                            variant={variant}
+                        >
+                            {startIcon}
+                        </DButtonStartIcon>
+                    )}
+                    {children}
+                </DButtonSecondary>
+            ) : null}
+            {color === 'warning' ? (
+                <DButtonSecondary color={color} onClick={onClick}>
+                    {startIcon && (
+                        <DButtonStartIcon
+                            className='DButton-startIcon'
+                            color={color}
+                            variant={variant}
+                        >
+                            {startIcon}
+                        </DButtonStartIcon>
+                    )}
+                    {children}
+                </DButtonSecondary>
+            ) : null}
+            {color === 'danger' ? (
+                <DButtonSecondary color={color} onClick={onClick}>
+                    {startIcon && (
+                        <DButtonStartIcon
+                            className='DButton-startIcon'
+                            color={color}
+                            variant={variant}
+                        >
+                            {startIcon}
+                        </DButtonStartIcon>
+                    )}
                     {children}
                 </DButtonSecondary>
             ) : null}

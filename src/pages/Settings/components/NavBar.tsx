@@ -6,7 +6,7 @@ import LocalPoliceIcon from '@mui/icons-material/LocalPolice';
 import MenuIcon from '@mui/icons-material/Menu';
 import PaletteRoundedIcon from '@mui/icons-material/PaletteRounded';
 import SettingsIcon from '@mui/icons-material/Settings';
-import { Button, useTheme } from '@mui/material';
+import { useTheme } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -22,6 +22,7 @@ import Typography from '@mui/material/Typography';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
+import DButton from '../../../components/DButton';
 import Logo from '../assets/logo-full-light.svg';
 import OneDriveIcon from '../assets/onedrive.png';
 import SharePointIcon from '../assets/sharepoint.png';
@@ -83,6 +84,11 @@ export default function NavBar(props: Props) {
             text: 'Other',
             slug: 'other',
         },
+        {
+            id: 'dev',
+            text: 'Dev',
+            slug: 'dev',
+        },
     ];
 
     const drawer = (
@@ -115,7 +121,7 @@ export default function NavBar(props: Props) {
                                     {item.id === 'onedrive' && <img src={OneDriveIcon} />}
                                     {item.id === 'sharepoint' && <img src={SharePointIcon} />}
                                     {item.id === 'other' && <SettingsIcon />}
-                                    {item.id === 'generateConfig' && <CodeRoundedIcon />}
+                                    {item.id === 'dev' && <CodeRoundedIcon />}
                                 </ListItemIcon>
                                 <ListItemText primary={item.text} />
                             </ListItemButton>
@@ -156,9 +162,9 @@ export default function NavBar(props: Props) {
                     {/* <Button onClick={handleClearLocalStorage} color='warning' variant='outlined'>
                         Reset
                     </Button> */}
-                    <Button variant='contained' onClick={handleSave}>
+                    <DButton variant='contained' onClick={handleSave}>
                         Save
-                    </Button>
+                    </DButton>
                 </Toolbar>
             </AppBar>
             <Box

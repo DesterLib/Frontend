@@ -19,6 +19,7 @@ const ButtonBaseStyles = {
     transition: '0.2s ease-out',
     lineHeight: '1',
     display: 'flex',
+    margin: '2px',
     alignItems: 'center',
     fontFamily: '"Rubik", sans-serif',
     fontWeight: '500',

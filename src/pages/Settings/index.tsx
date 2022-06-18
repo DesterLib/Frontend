@@ -1,5 +1,3 @@
-import { createTheme } from '@mui/material';
-import { ThemeProvider } from '@mui/material/styles';
 import React, { useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
@@ -8,6 +6,7 @@ import { APP_API_PATH, APP_API_VERSION_PATH } from '../../config';
 import NavBar from './components/NavBar';
 import Auth0Page from './pages/Auth0Page';
 import CategoryPage from './pages/CategoryPage';
+import DevPage from './pages/DevPage';
 import GDrive from './pages/GDrive';
 import GDriveTokenGeneratorPage from './pages/GDriveTokenGeneratorPage';
 import HomePage from './pages/HomePage';
@@ -58,22 +57,6 @@ const Settings = () => {
         };
         getData();
     }, []);
-
-    const theme = createTheme({
-        palette: {
-            mode: 'dark',
-            primary: {
-                main: '#14dca0',
-            },
-            background: {
-                default: '#02090f',
-                paper: '#06131c',
-            },
-        },
-        shape: {
-            borderRadius: 10,
-        },
-    });
 
     const setApp = (appConfig: any) => {
         var newConfig = config;
@@ -138,84 +121,61 @@ const Settings = () => {
         setRefresh(refresh + 1);
     };
 
-    const handleRebuild = () => {
-        fetch(`${APP_API_PATH}${APP_API_VERSION_PATH}/rebuild`);
-        setRefresh(refresh + 1);
-    };
-
     return isLoaded ? (
-        <ThemeProvider theme={theme}>
-            <NavBar handleSave={handleSave}>
-                <Routes>
-                    <Route
-                        path='/'
-                        element={
-                            <HomePage
-                                handleRebuild={handleRebuild}
-                                config={config.app}
-                                updateConfig={setApp}
-                            />
-                        }
-                    />
-                    <Route
-                        path='/auth0'
-                        element={<Auth0Page config={config.auth0} updateConfig={setAuth0} />}
-                    />
-                    <Route
-                        path='/categories'
-                        element={
-                            <CategoryPage config={config.categories} updateConfig={setCategories} />
-                        }
-                    />
-                    <Route
-                        path='/ui'
-                        element={<UIPage config={config.io} updateConfig={setUi} />}
-                    />
-                    <Route
-                        path='/gdrive'
-                        element={
-                            <GDrive
-                                config={config.gdrive}
-                                updateConfig={setGdrive}
-                                updateStateConfig={setConfig}
-                            />
-                        }
-                    />
-                    <Route
-                        path='/gdrive/tokens'
-                        element={
-                            <GDriveTokenGeneratorPage config={config.gdrive} stateConfig={config} />
-                        }
-                    />
-                    <Route
-                        path='/onedrive'
-                        element={
-                            <OneDrivePage config={config.onedrive} updateConfig={setOnedrive} />
-                        }
-                    />
-                    <Route
-                        path='/sharepoint'
-                        element={
-                            <SharePointPage
-                                config={config.sharepoint}
-                                updateConfig={setSharepoint}
-                            />
-                        }
-                    />
-                    <Route
-                        path='/other'
-                        element={
-                            <OtherPage
-                                tmdb={config.tmdb}
-                                build={config.build}
-                                updateTmdb={setTmdb}
-                                updateBuild={setBuild}
-                            />
-                        }
-                    />
-                </Routes>
-            </NavBar>
-        </ThemeProvider>
+        <NavBar handleSave={handleSave}>
+            <Routes>
+                <Route path='/' element={<HomePage config={config.app} updateConfig={setApp} />} />
+                <Route
+                    path='/auth0'
+                    element={<Auth0Page config={config.auth0} updateConfig={setAuth0} />}
+                />
+                <Route
+                    path='/categories'
+                    element={
+                        <CategoryPage config={config.categories} updateConfig={setCategories} />
+                    }
+                />
+                <Route path='/ui' element={<UIPage config={config.io} updateConfig={setUi} />} />
+                <Route
+                    path='/gdrive'
+                    element={
+                        <GDrive
+                            config={config.gdrive}
+                            updateConfig={setGdrive}
+                            updateStateConfig={setConfig}
+                        />
+                    }
+                />
+                <Route
+                    path='/gdrive/tokens'
+                    element={
+                        <GDriveTokenGeneratorPage config={config.gdrive} stateConfig={config} />
+                    }
+                />
+                <Route
+                    path='/onedrive'
+                    element={<OneDrivePage config={config.onedrive} updateConfig={setOnedrive} />}
+                />
+                <Route
+                    path='/sharepoint'
+                    element={
+                        <SharePointPage config={config.sharepoint} updateConfig={setSharepoint} />
+                    }
+                />
+                <Route
+                    path='/other'
+                    element={
+                        <OtherPage
+                            tmdb={config.tmdb}
+                            build={config.build}
+                            updateTmdb={setTmdb}
+                            updateBuild={setBuild}
+                        />
+                    }
+                />
+                <Route path='/dev' element={<DevPage />} />
+            </Routes>
+        </NavBar>
     ) : (
         <DLoader />
     );
