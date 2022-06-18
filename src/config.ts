@@ -1,6 +1,8 @@
 import LogoFullDark from './assets/logo-full-dark.svg';
 import LogoFullLight from './assets/logo-full-light.svg';
 import noImagePoster from './assets/no-image-poster.svg';
+import errorImage from './assets/error.png';
+import disconnectedImage from './assets/disconnected.png';
 
 const APP_LOGO_LIGHT = LogoFullLight;
 const APP_LOGO_DARK = LogoFullDark;
@@ -12,6 +14,8 @@ const APP_API_VERSION_PATH = '/api/v1';
 const APP_NO_IMAGE_POSTER = noImagePoster;
 const APP_POSTER_QUALITY = 'w300';
 const APP_BACKDROP_QUALITY = 'w1280';
+const APP_ERROR_IMAGE = errorImage;
+const APP_DISCONNECTED_IMAGE = disconnectedImage;
 
 export {
     APP_LOGO_LIGHT,
@@ -24,4 +28,6 @@ export {
     APP_NO_IMAGE_POSTER,
     APP_POSTER_QUALITY,
     APP_BACKDROP_QUALITY,
+    APP_ERROR_IMAGE,
+    APP_DISCONNECTED_IMAGE,
 };

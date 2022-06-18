@@ -15,6 +15,7 @@ import Settings from './pages/Settings';
 import SetupPage from './pages/Setup';
 import darkTheme from './theme/darkTheme';
 import lightTheme from './theme/lightTheme';
+import DisconnectedPage from './pages/Disconnected';
 
 // eslint-disable-next-line
 const ColorModeContext = createContext({ toggleColorMode: () => {} });
@@ -117,6 +118,7 @@ const App = () => {
                         />
                         <Route path='/settings/*' element={<Settings />} />
                         <Route path='/setup' element={<SetupPage />} />
+                        <Route path='/disconnected' element={<DisconnectedPage />} />
                     </Routes>
                     <DBottomBar />
                 </BrowserRouter>

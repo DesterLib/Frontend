@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import Error from '../../assets/error.png';
 import DButton from '../../components/DButton';
+import { APP_ERROR_IMAGE } from '../../config';
 import {
     DetailsContainer,
     ErrorText,
@@ -16,10 +16,10 @@ const NotFoundPage = () => {
     return (
         <MainContainer>
             <ImageWrapper>
-                <Image src={Error} alt='' />
+                <Image src={APP_ERROR_IMAGE} alt='' />
             </ImageWrapper>
             <DetailsContainer>
-                <ErrorText variant='h4'>404 - You Lost ?</ErrorText>
+                <ErrorText variant='h5'>404 - You Lost ?</ErrorText>
                 <NavigationContainer>
                     <Link to='/' style={{ textDecoration: 'none' }}>
                         <DButton
