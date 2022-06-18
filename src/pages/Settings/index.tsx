@@ -10,7 +10,6 @@ import Auth0Page from './pages/Auth0Page';
 import CategoryPage from './pages/CategoryPage';
 import GDrive from './pages/GDrive';
 import GDriveTokenGeneratorPage from './pages/GDriveTokenGeneratorPage';
-import GenerateConfigPage from './pages/GenerateConfigPage';
 import HomePage from './pages/HomePage';
 import OneDrivePage from './pages/OneDrivePage';
 import OtherPage from './pages/OtherPage';
@@ -174,11 +173,19 @@ const Settings = () => {
                     />
                     <Route
                         path='/gdrive'
-                        element={<GDrive config={config.gdrive} updateConfig={setGdrive} />}
+                        element={
+                            <GDrive
+                                config={config.gdrive}
+                                updateConfig={setGdrive}
+                                updateStateConfig={setConfig}
+                            />
+                        }
                     />
                     <Route
                         path='/gdrive/tokens'
-                        element={<GDriveTokenGeneratorPage config={config.gdrive} />}
+                        element={
+                            <GDriveTokenGeneratorPage config={config.gdrive} stateConfig={config} />
+                        }
                     />
                     <Route
                         path='/onedrive'
@@ -206,7 +213,6 @@ const Settings = () => {
                             />
                         }
                     />
-                    <Route path='/config' element={<GenerateConfigPage data={config} />} />
                 </Routes>
             </NavBar>
         </ThemeProvider>

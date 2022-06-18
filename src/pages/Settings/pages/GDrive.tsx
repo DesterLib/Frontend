@@ -1,29 +1,35 @@
 import { Alert, Box, Button, Snackbar, TextField } from '@mui/material';
+import { Buffer } from 'buffer';
 import React, { SyntheticEvent, useEffect, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 
 const GDrive = (props: any) => {
     const [searchParams] = useSearchParams();
     const tempAuthCode = searchParams.get('code') || '';
+    const state = searchParams.get('state');
 
     const [refresh, setRefresh] = useState<number>(0);
+    const [isLoaded, setIsLoaded] = useState<boolean>(false);
     const [authCode] = useState<string>(tempAuthCode);
     const [openSnackBar, setOpenSnackBar] = useState(
         !!new URLSearchParams(window.location.search).get('gdrive_accessToken'),
     );
 
-    const { config, updateConfig } = props;
+    const { config, updateConfig, updateStateConfig } = props;
 
     useEffect(() => {
-        handleTokenFromQueryParams();
-        window.history.pushState({}, document.title, '/settings/gdrive');
-    }, []);
-
-    const handleTokenFromQueryParams = () => {
-        if (authCode) {
+        if (state) {
+            const newConfig = JSON.parse(Buffer.from(state, 'base64').toString('ascii'));
+            updateStateConfig(newConfig);
+            setIsLoaded(true);
+        } else {
+            setIsLoaded(true);
+        }
+        if (authCode && isLoaded) {
             tradeAuthCode();
         }
-    };
+        window.history.pushState({}, document.title, '/settings/gdrive');
+    }, [state, isLoaded]);
 
     const objToFormEncoded = (object: object) => {
         return Object.entries(object)
@@ -44,9 +50,7 @@ const GDrive = (props: any) => {
         const response = await fetch('https://accounts.google.com/o/oauth2/token', {
             method: 'POST',
             headers: {
-                Authorization: `Basic ${btoa(
-                    `${config.gdrive.client_id}:${config.gdrive.client_secret}`,
-                )}`,
+                Authorization: `Basic ${btoa(`${config.client_id}:${config.client_secret}`)}`,
                 'Content-Type': 'application/x-www-form-urlencoded',
             },
             body: objToFormEncoded(body),

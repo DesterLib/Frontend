@@ -83,11 +83,6 @@ export default function NavBar(props: Props) {
             text: 'Other',
             slug: 'other',
         },
-        {
-            id: 'generateConfig',
-            text: 'Generate Config',
-            slug: 'config',
-        },
     ];
 
     const drawer = (
