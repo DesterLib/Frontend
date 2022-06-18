@@ -23,24 +23,25 @@ import {
     APP_BACKDROP_QUALITY,
     APP_POSTER_QUALITY,
 } from '../../config';
+import { get } from '../../utilities/requests';
 import useBreakpoint from '../../utilities/useBreakpoint';
 import { HeaderImage, ItemBackground, LinearGradient, PosterImage, StyledChip } from './styles';
 
 const MoviePage = () => {
     const [isLoaded, setIsLoaded] = useState<boolean>(false);
     const [data, setData] = useState<any>({});
+    const [requestInfo, setRequestInfo] = useState<any>({
+        code: null,
+        message: 'An unknown error has occurred.',
+        ok: false,
+        time_taken: 0,
+    });
     const theme = useTheme();
     const breakpoint = useBreakpoint();
     const { movieId } = useParams();
 
     useEffect(() => {
-        const getData = async () => {
-            const res = await fetch(`${APP_API_PATH}${APP_API_VERSION_PATH}/movie/${movieId}`);
-            const data = (await res.json()) || null;
-            setData(data.result || { ok: false });
-            setIsLoaded(true);
-        };
-        getData();
+        get(`/movie/${movieId}`, setData, setRequestInfo, setIsLoaded);
     }, [movieId]);
 
     const [openModalState, setOpenModalState] = useState(false);
@@ -54,7 +55,7 @@ const MoviePage = () => {
     };
 
     let videoData;
-    if (isLoaded) {
+    if (isLoaded && requestInfo.ok) {
         const path = data.path;
         videoData = {
             id: '1',
@@ -65,7 +66,7 @@ const MoviePage = () => {
         };
     }
 
-    return isLoaded ? (
+    return isLoaded && requestInfo.ok ? (
         <Box>
             <Helmet>
                 <title>{data.title}</title>
@@ -706,7 +707,10 @@ const MoviePage = () => {
                 closeInfoModal={closeInfoModal}
             />
         </Box>
+    ) : isLoaded && !requestInfo.ok ? (
+        <p style={{ marginTop: '200px' }}>{requestInfo.message}</p>
     ) : (
+        // Popup with error message
         <DLoader />
     );
 };

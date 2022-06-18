@@ -109,7 +109,7 @@ const DSlide = ({ item, type }: any) => {
                             }
                             onClick={() => navigate(`/${type}/${item.tmdb_id}`)}
                         >
-                            PLAY NOW
+                            PLAY
                         </DButton>
                     </Grid>
                     <Grid sx={{ marginRight: '10px' }} item>

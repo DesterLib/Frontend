@@ -21,27 +21,28 @@ import {
     APP_BACKDROP_QUALITY,
     APP_POSTER_QUALITY,
 } from '../../config';
+import { get } from '../../utilities/requests';
 import useBreakpoint from '../../utilities/useBreakpoint';
 import { HeaderImage, ItemBackground, LinearGradient, PosterImage, StyledChip } from './styles';
 
 const SeriePage = () => {
     const [isLoaded, setIsLoaded] = useState<boolean>(false);
     const [data, setData] = useState<any>({});
+    const [requestInfo, setRequestInfo] = useState<any>({
+        code: null,
+        message: 'An unknown error has occurred.',
+        ok: false,
+        time_taken: 0,
+    });
     const theme = useTheme();
     const breakpoint = useBreakpoint();
     const { seriesId } = useParams();
 
     useEffect(() => {
-        const getData = async () => {
-            const res = await fetch(`${APP_API_PATH}${APP_API_VERSION_PATH}/serie/${seriesId}`);
-            const data = (await res.json()) || {};
-            setData(data.result || { ok: false });
-            setIsLoaded(true);
-        };
-        getData();
+        get(`/serie/${seriesId}`, setData, setRequestInfo, setIsLoaded);
     }, [seriesId]);
 
-    return isLoaded ? (
+    return isLoaded && requestInfo.ok ? (
         <Box>
             <Box>
                 <Box sx={{ width: '100%', position: 'relative' }}>
@@ -562,7 +563,10 @@ const SeriePage = () => {
                 </Box>
             </Box>
         </Box>
+    ) : isLoaded && !requestInfo.ok ? (
+        <p style={{ marginTop: '200px' }}>{requestInfo.message}</p>
     ) : (
+        // Popup with error message
         <DLoader />
     );
 };
