@@ -1,5 +1,4 @@
 import React, { Fragment, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 import DCarousel from '../../components/DCarousel';
 import { Helmet } from '../../components/DHelmet';
@@ -14,24 +13,22 @@ const HomePage = () => {
     const [isLoaded, setIsLoaded] = useState<boolean>(false);
     const [data, setData] = useState<any>({});
     const [appInfo, setAppInfo] = useState<any>({});
-    const navigate = useNavigate();
 
     useEffect(() => {
         const getData = async () => {
             const res = await fetch(`${APP_API_PATH}/api/v1/home`);
-            const appFetch = await fetch(`${APP_API_PATH}/api/v1/settings`);
-            const data = (await res.json()) || null;
-            const appData = (await appFetch.json()) || null;
-            setData(data.result || { ok: false });
-            setAppInfo(appData.result.app || { ok: false });
+            const data = (await res.json()) || { ok: false };
+            if (data.code == 428) {
+                const appFetch = await fetch(`${APP_API_PATH}/api/v1/settings`);
+                const appData = (await appFetch.json()) || { ok: false };
+                setAppInfo(appData.result.app);
+            } else {
+                setData(data.result);
+            }
             setIsLoaded(true);
         };
         getData();
     }, []);
-
-    if (isLoaded && data.code == 428) {
-        navigate(data);
-    }
 
     // const network = useNetworkStatus();
 
