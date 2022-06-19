@@ -1,5 +1,4 @@
 import Box from '@mui/material/Box';
-import Chip from '@mui/material/Chip';
 import Grid from '@mui/material/Grid';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
@@ -23,9 +22,17 @@ import {
     APP_BACKDROP_QUALITY,
     APP_POSTER_QUALITY,
 } from '../../config';
+import humanSize from '../../utilities/humanSize';
 import { get } from '../../utilities/requests';
 import useBreakpoint from '../../utilities/useBreakpoint';
-import { HeaderImage, ItemBackground, LinearGradient, PosterImage, StyledChip } from './styles';
+import {
+    HeaderImage,
+    ItemBackground,
+    LinearGradient,
+    PosterImage,
+    StyledChipGenre,
+    StyledChipInfo,
+} from './styles';
 
 const MoviePage = () => {
     const [isLoaded, setIsLoaded] = useState<boolean>(false);
@@ -236,8 +243,8 @@ const MoviePage = () => {
                             </Typography>
                             <Typography variant='body2'>{data.description}</Typography>
                             <Box sx={{ marginTop: '20px' }}>
-                                <StyledChip className='year' clickable label={data.year} />
-                                <StyledChip
+                                <StyledChipInfo className='year' clickable label={data.year} />
+                                <StyledChipInfo
                                     className='rating'
                                     clickable
                                     icon={
@@ -248,7 +255,7 @@ const MoviePage = () => {
                                     }
                                     label={data.rating}
                                 />
-                                <StyledChip
+                                <StyledChipInfo
                                     className='type'
                                     clickable
                                     icon={
@@ -263,6 +270,8 @@ const MoviePage = () => {
                                     }
                                     label={data.number_of_files ? 'Movie' : 'Series'}
                                 />
+                            </Box>
+                            <Box sx={{ marginTop: '10px' }}>
                                 {data.genres &&
                                     data.genres.map((genre: any) => (
                                         <Link
@@ -270,7 +279,7 @@ const MoviePage = () => {
                                             to={`/browse?genre=${genre.name}`}
                                             key={genre.id}
                                         >
-                                            <Chip
+                                            <StyledChipGenre
                                                 clickable
                                                 sx={{ margin: theme.spacing(0.5) }}
                                                 label={genre.name}
@@ -294,7 +303,7 @@ const MoviePage = () => {
                                                     }}
                                                     variant='body1'
                                                 >
-                                                    Creator
+                                                    Creators
                                                 </Typography>
                                                 <Typography
                                                     sx={{ display: 'flex', alignItems: 'center' }}
@@ -351,7 +360,7 @@ const MoviePage = () => {
                                                     }}
                                                     variant='body1'
                                                 >
-                                                    Director
+                                                    Directors
                                                 </Typography>
                                                 <Typography
                                                     sx={{ display: 'flex', alignItems: 'center' }}
@@ -458,7 +467,7 @@ const MoviePage = () => {
                                                     }}
                                                     variant='body1'
                                                 >
-                                                    Author
+                                                    Authors
                                                 </Typography>
                                                 <Typography
                                                     sx={{ display: 'flex', alignItems: 'center' }}
@@ -514,7 +523,7 @@ const MoviePage = () => {
                                                     }}
                                                     variant='body1'
                                                 >
-                                                    Writer
+                                                    Writers
                                                 </Typography>
                                                 <Typography
                                                     sx={{ display: 'flex', alignItems: 'center' }}
@@ -573,7 +582,11 @@ const MoviePage = () => {
                                                     Studios
                                                 </Typography>
                                                 <Typography
-                                                    sx={{ display: 'flex', alignItems: 'center' }}
+                                                    sx={{
+                                                        display: 'flex',
+                                                        alignItems: 'center',
+                                                        flexWrap: 'wrap',
+                                                    }}
                                                     variant='body1'
                                                     component={'span'}
                                                 >
@@ -623,47 +636,7 @@ const MoviePage = () => {
                                                 }}
                                                 variant='body1'
                                             >
-                                                VIDEO
-                                            </Typography>
-                                            <Typography sx={{ fontWeight: '500' }} variant='body1'>
-                                                1080p HD
-                                            </Typography>
-                                        </Box>
-                                        <Box sx={{ display: 'flex' }}>
-                                            <Typography
-                                                sx={{
-                                                    width: '150px',
-                                                    fontWeight: '600',
-                                                    color: alpha(theme.palette.text.primary, 0.8),
-                                                }}
-                                                variant='body1'
-                                            >
-                                                AUDIO
-                                            </Typography>
-                                            <Typography
-                                                sx={{
-                                                    fontWeight: '500',
-                                                    display: 'flex',
-                                                    alignItems: 'center',
-                                                }}
-                                                variant='body1'
-                                                component={'span'}
-                                            >
-                                                English
-                                                <DSpacer />
-                                                Japanese
-                                            </Typography>
-                                        </Box>
-                                        <Box sx={{ display: 'flex' }}>
-                                            <Typography
-                                                sx={{
-                                                    width: '150px',
-                                                    fontWeight: '600',
-                                                    color: alpha(theme.palette.text.primary, 0.8),
-                                                }}
-                                                variant='body1'
-                                            >
-                                                QUALITIES
+                                                Qualities
                                             </Typography>
                                             <Typography
                                                 sx={{
@@ -679,6 +652,21 @@ const MoviePage = () => {
                                                 720p
                                                 <DSpacer />
                                                 480p
+                                            </Typography>
+                                        </Box>
+                                        <Box sx={{ display: 'flex' }}>
+                                            <Typography
+                                                sx={{
+                                                    width: '150px',
+                                                    fontWeight: '600',
+                                                    color: alpha(theme.palette.text.primary, 0.8),
+                                                }}
+                                                variant='body1'
+                                            >
+                                                Movie Size
+                                            </Typography>
+                                            <Typography sx={{ fontWeight: '500' }} variant='body1'>
+                                                {humanSize(data.size[0])}
                                             </Typography>
                                         </Box>
                                     </Stack>

@@ -2,10 +2,17 @@ import Box, { BoxProps } from '@mui/material/Box';
 import Chip, { ChipProps } from '@mui/material/Chip';
 import { alpha, styled } from '@mui/material/styles';
 
-export const StyledChip = styled(Chip)<ChipProps>(({ theme }) => ({
+export const StyledChipInfo = styled(Chip)<ChipProps>(({ theme }) => ({
     padding: '0px 5px',
     margin: theme.spacing(0.5),
     background: `linear-gradient(45deg, ${theme.palette.error.dark} 0%, ${theme.palette.error.light} 100%)`,
+    color: '#ffffff',
+}));
+
+export const StyledChipGenre = styled(Chip)<ChipProps>(({ theme }) => ({
+    padding: '0px 5px',
+    margin: theme.spacing(0.5),
+    background: `linear-gradient(45deg, ${theme.palette.info.dark} 0%, ${theme.palette.info.light} 100%)`,
     color: '#ffffff',
 }));
 

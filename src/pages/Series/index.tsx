@@ -20,6 +20,7 @@ import {
     APP_BACKDROP_QUALITY,
     APP_POSTER_QUALITY,
 } from '../../config';
+import humanSize from '../../utilities/humanSize';
 import { get } from '../../utilities/requests';
 import useBreakpoint from '../../utilities/useBreakpoint';
 import {
@@ -280,7 +281,7 @@ const SeriePage = () => {
                                                     }}
                                                     variant='body1'
                                                 >
-                                                    Creator
+                                                    Creators
                                                 </Typography>
                                                 <Typography
                                                     sx={{ display: 'flex', alignItems: 'center' }}
@@ -330,7 +331,7 @@ const SeriePage = () => {
                                                     }}
                                                     variant='body1'
                                                 >
-                                                    Director
+                                                    Directors
                                                 </Typography>
                                                 <Typography
                                                     sx={{ display: 'flex', alignItems: 'center' }}
@@ -440,7 +441,11 @@ const SeriePage = () => {
                                                     Studios
                                                 </Typography>
                                                 <Typography
-                                                    sx={{ display: 'flex', alignItems: 'center' }}
+                                                    sx={{
+                                                        display: 'flex',
+                                                        alignItems: 'center',
+                                                        flexWrap: 'wrap',
+                                                    }}
                                                     variant='body1'
                                                     component={'span'}
                                                 >
@@ -490,47 +495,7 @@ const SeriePage = () => {
                                                 }}
                                                 variant='body1'
                                             >
-                                                VIDEO
-                                            </Typography>
-                                            <Typography sx={{ fontWeight: '500' }} variant='body1'>
-                                                1080p HD
-                                            </Typography>
-                                        </Box>
-                                        <Box sx={{ display: 'flex' }}>
-                                            <Typography
-                                                sx={{
-                                                    width: '150px',
-                                                    fontWeight: '600',
-                                                    color: alpha(theme.palette.text.primary, 0.8),
-                                                }}
-                                                variant='body1'
-                                            >
-                                                AUDIO
-                                            </Typography>
-                                            <Typography
-                                                sx={{
-                                                    fontWeight: '500',
-                                                    display: 'flex',
-                                                    alignItems: 'center',
-                                                }}
-                                                variant='body1'
-                                                component={'span'}
-                                            >
-                                                English
-                                                <DSpacer />
-                                                Japanese
-                                            </Typography>
-                                        </Box>
-                                        <Box sx={{ display: 'flex' }}>
-                                            <Typography
-                                                sx={{
-                                                    width: '150px',
-                                                    fontWeight: '600',
-                                                    color: alpha(theme.palette.text.primary, 0.8),
-                                                }}
-                                                variant='body1'
-                                            >
-                                                QUALITIES
+                                                Qualities
                                             </Typography>
                                             <Typography
                                                 sx={{
@@ -546,6 +511,21 @@ const SeriePage = () => {
                                                 720p
                                                 <DSpacer />
                                                 480p
+                                            </Typography>
+                                        </Box>
+                                        <Box sx={{ display: 'flex' }}>
+                                            <Typography
+                                                sx={{
+                                                    width: '150px',
+                                                    fontWeight: '600',
+                                                    color: alpha(theme.palette.text.primary, 0.8),
+                                                }}
+                                                variant='body1'
+                                            >
+                                                Series Size
+                                            </Typography>
+                                            <Typography sx={{ fontWeight: '500' }} variant='body1'>
+                                                {humanSize(data.size)}
                                             </Typography>
                                         </Box>
                                     </Stack>
