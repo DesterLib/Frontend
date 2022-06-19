@@ -220,7 +220,7 @@ const SeasonPage = () => {
                     <Grid container spacing={3}>
                         {Object.entries(item.episodes).map(([key, val]) => (
                             <Grid key={key} item xs={6} lg={3} xl={2}>
-                                <DEpisodeCard item={val} />
+                                <DEpisodeCard item={val} rclone_index={data.rclone_index} />
                             </Grid>
                         ))}
                     </Grid>

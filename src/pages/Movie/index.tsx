@@ -44,14 +44,14 @@ const MoviePage = () => {
         get(`/movie/${movieId}`, setData, setRequestInfo, setIsLoaded);
     }, [movieId]);
 
-    const [openModalState, setOpenModalState] = useState(false);
+    const [streamModalState, setStreamModalState] = useState(false);
     // eslint-disable-next-line
-    const openInfoModal = (event: any) => {
+    const openStreamModal = (event: any) => {
         event.preventDefault();
-        setOpenModalState(true);
+        setStreamModalState(true);
     };
-    const closeInfoModal = () => {
-        setOpenModalState(false);
+    const closeStreamModal = () => {
+        setStreamModalState(false);
     };
 
     let videoData;
@@ -154,7 +154,7 @@ const MoviePage = () => {
                             <Grid sx={{ marginRight: '10px' }} item>
                                 <DButton
                                     startIcon={<i className='ri-play-mini-fill'></i>}
-                                    onClick={openInfoModal}
+                                    onClick={openStreamModal}
                                 >
                                     PLAY
                                 </DButton>
@@ -702,8 +702,8 @@ const MoviePage = () => {
             </Box>
             <DStreamModal
                 videoData={videoData}
-                currentState={openModalState}
-                closeInfoModal={closeInfoModal}
+                currentState={streamModalState}
+                closeInfoModal={closeStreamModal}
             />
         </Box>
     ) : isLoaded && !requestInfo.ok ? (
@@ -715,13 +715,6 @@ const MoviePage = () => {
 };
 
 export default MoviePage;
-
-
-
-
-
-
-
 
 // import Box from '@mui/material/Box';
 // import Chip from '@mui/material/Chip';
@@ -1427,4 +1420,3 @@ export default MoviePage;
 // };
 
 // export default MoviePage;
-
