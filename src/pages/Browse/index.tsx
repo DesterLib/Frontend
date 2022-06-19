@@ -50,7 +50,8 @@ const BrowsePage = () => {
         }
         setIsLoaded(true);
     }, []);
-    const handleSearch = async () => {
+
+    const handleSearch = () => {
         const params = `?query=${encodeURIComponent(query)}&genre=${encodeURIComponent(
             genre,
         )}&year=${year}&sort=${encodeURIComponent(
@@ -59,6 +60,38 @@ const BrowsePage = () => {
             mediaType,
         )}&page=${page}&limit=${limit}`;
         get(`/browse/${category}/${page}${params}`, setData, setRequestInfo, setIsLoaded);
+    };
+
+    const handleChangeQuery = (event: any) => {
+        setQuery(event.target.value || '');
+    };
+
+    const handleChangeGenre = (event: any) => {
+        setGenre(event.target.value || '');
+    };
+
+    const handleChangeYear = (event: any) => {
+        setYear(event.target.value || '');
+    };
+
+    const handleChangeSort = (event: any) => {
+        setSort(event.target.value || 'title:1');
+    };
+
+    const handleChangeCategory = (event: any) => {
+        setCategory(event.target.value || -1);
+    };
+
+    const handleChangeMediaType = (event: any) => {
+        setMediaType(event.target.value || 'movies');
+    };
+
+    const handleChangePage = (event: any) => {
+        setLimit(event.target.value || 0);
+    };
+
+    const handleChangeLimit = (event: any) => {
+        setPage(event.target.value || 20);
     };
 
     console.log(data);
