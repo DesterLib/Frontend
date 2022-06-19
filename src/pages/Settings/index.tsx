@@ -15,7 +15,10 @@ import OtherPage from './pages/OtherPage';
 import SharePointPage from './pages/SharePointPage';
 import UIPage from './pages/UIPage';
 
-const Settings = () => {
+const Settings = (props: any) => {
+
+    const { colorModeContext, themeMode } = props;
+
     const [isLoaded, setIsLoaded] = useState<boolean>(false);
     const [config, setConfig] = useState<any>({});
     const [refresh, setRefresh] = useState<number>(0);
@@ -122,7 +125,7 @@ const Settings = () => {
     };
 
     return isLoaded ? (
-        <NavBar handleSave={handleSave}>
+        <NavBar themeMode={themeMode} colorModeContext={colorModeContext} handleSave={handleSave}>
             <Routes>
                 <Route path='/' element={<HomePage config={config.app} updateConfig={setApp} />} />
                 <Route

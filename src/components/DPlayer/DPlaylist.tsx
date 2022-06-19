@@ -11,7 +11,7 @@ import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import React from 'react';
 
-const DPlaylist = ({ data, show, handleClose, handleShitchUrl }: any) => {
+const DPlaylist = ({ videoData, playlistData, show, handleClose, handleShitchUrl }: any) => {
     return (
         <Box
             sx={{
@@ -42,15 +42,14 @@ const DPlaylist = ({ data, show, handleClose, handleShitchUrl }: any) => {
                     <i className='ri-close-fill'></i>
                 </IconButton>
                 <Box>
-                    <Typography>Demon Slayer: Kimetsu no Yaiba</Typography>
-                    <Typography sx={{ color: '#D0D0D0' }}>Season 1</Typography>
+                    <Typography variant='h5'>{videoData.title}</Typography>
                 </Box>
             </Box>
             <Box sx={{ overflowY: 'auto' }}>
                 <List sx={{ width: '100%', bgcolor: 'transparent' }}>
-                    {data &&
-                        data.seasons &&
-                        data.seasons.map((season: any, index: number) => (
+                    {videoData &&
+                        videoData.playlist &&
+                        videoData.playlist.map((season: any, index: number) => (
                             <Box key={index}>
                                 <ListSubheader
                                     sx={{

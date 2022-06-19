@@ -21,7 +21,7 @@ const DStreamModal = ({ videoData, currentState, closeInfoModal }: any) => {
             ) : null}
             <DialogContent dividers>
                 <Box>
-                    <DPlayer videoData={videoData} />
+                    <DPlayer aspectRatio='21/9' videoData={videoData} />
                 </Box>
             </DialogContent>
         </InfoModal>

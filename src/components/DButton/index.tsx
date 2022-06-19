@@ -11,11 +11,11 @@ import { DButtonPrimary, DButtonSecondary, DButtonStartIcon } from './styles';
 //     return yiq >= 128 ? 'black' : 'white';
 // }
 
-const DButton = ({ startIcon, color, children, variant, onClick }: any) => {
+const DButton = ({ startIcon, color, children, variant, onClick, disabled, fullwidth }: any) => {
     return (
         <>
             {color === 'primary' || color === undefined ? (
-                <DButtonPrimary onClick={onClick}>
+                <DButtonPrimary fullwidth={fullwidth} disabled={disabled} onClick={onClick}>
                     {startIcon && (
                         <DButtonStartIcon
                             className='DButton-startIcon'
@@ -29,7 +29,7 @@ const DButton = ({ startIcon, color, children, variant, onClick }: any) => {
                 </DButtonPrimary>
             ) : null}
             {color === 'secondary' ? (
-                <DButtonSecondary color={color} onClick={onClick}>
+                <DButtonSecondary fullwidth={fullwidth} disabled={disabled} color={color} onClick={onClick}>
                     {startIcon && (
                         <DButtonStartIcon
                             className='DButton-startIcon'
@@ -43,7 +43,7 @@ const DButton = ({ startIcon, color, children, variant, onClick }: any) => {
                 </DButtonSecondary>
             ) : null}
             {color === 'warning' ? (
-                <DButtonSecondary color={color} onClick={onClick}>
+                <DButtonSecondary fullwidth={fullwidth} disabled={disabled} color={color} onClick={onClick}>
                     {startIcon && (
                         <DButtonStartIcon
                             className='DButton-startIcon'
@@ -57,7 +57,7 @@ const DButton = ({ startIcon, color, children, variant, onClick }: any) => {
                 </DButtonSecondary>
             ) : null}
             {color === 'danger' ? (
-                <DButtonSecondary color={color} onClick={onClick}>
+                <DButtonSecondary fullwidth={fullwidth} disabled={disabled} color={color} onClick={onClick}>
                     {startIcon && (
                         <DButtonStartIcon
                             className='DButton-startIcon'

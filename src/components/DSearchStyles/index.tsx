@@ -10,9 +10,14 @@ import ListItemText from '@mui/material/ListItemText';
 import Typography from '@mui/material/Typography';
 import { alpha, styled } from '@mui/material/styles';
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-import { APP_API_PATH, APP_API_VERSION_PATH, APP_POSTER_QUALITY } from '../../config';
+import {
+    APP_API_PATH,
+    APP_API_VERSION_PATH,
+    APP_NO_IMAGE_POSTER,
+    APP_POSTER_QUALITY,
+} from '../../config';
 import DInfoModal from '../DInfoModal';
 
 const SearchWrapper = styled(Box)<BoxProps>(({ theme }) => ({
@@ -47,7 +52,6 @@ const SearchIconWrapper = styled(Box)<BoxProps>(({ theme }) => ({
 }));
 
 const SearchInputBase = styled(InputBase)<InputBaseProps>(({ theme }) => ({
-    width: 'calc(100% - 110px)',
     zIndex: '10',
     '& .Dester-InputBase-input': {
         padding: theme.spacing(1, 1, 1, 0),
@@ -89,6 +93,11 @@ const Search404 = styled(Box)<BoxProps>(({ theme }) => ({
     color: theme.palette.text.secondary,
 }));
 
+const SearchRouterLink = styled(Link)(() => ({
+    textDecoration: 'none',
+    color: 'inherit'
+}));
+
 const SearchCardContainer = (props: any) => {
     const data = props.data || { ok: false };
     let movieData: object[] = [];
@@ -97,9 +106,6 @@ const SearchCardContainer = (props: any) => {
         movieData = data.result.movies || [];
         seriesData = data.result.series || [];
     }
-
-    const navigate = useNavigate();
-    const { handleCloseSearch } = props;
 
     const SearchRouter = ({ item, type }: any) => {
         const [openModalState, setOpenModalState] = useState(false);
@@ -113,73 +119,74 @@ const SearchCardContainer = (props: any) => {
             setOpenModalState(false);
         };
 
-        const handleOnListItemClick = () => {
-            handleCloseSearch();
-            navigate(`/${type}/${item.tmdb_id}`);
-        };
-
-        return type == 'movie' ? (
-            <SearchItemButton>
-                <ListItemAvatar sx={{ marginRight: '5px' }} onClick={handleOnListItemClick}>
-                    <Avatar
-                        sx={{ width: '50px', height: '70px' }}
-                        variant='rounded'
-                        src={
-                            APP_API_PATH +
-                            APP_API_VERSION_PATH +
-                            '/assets/image/' +
-                            APP_POSTER_QUALITY +
-                            item.poster_path
-                        }
+        return type === 'movie' && item ? (
+            <SearchRouterLink to={`/${type}/${item.tmdb_id}`}>
+                <SearchItemButton>
+                    <ListItemAvatar sx={{ marginRight: '5px' }}>
+                        <Avatar
+                            sx={{ width: '50px', height: '70px' }}
+                            variant='rounded'
+                            src={
+                                item.poster_path
+                                    ? APP_API_PATH +
+                                      APP_API_VERSION_PATH +
+                                      '/assets/image/' +
+                                      APP_POSTER_QUALITY +
+                                      item.poster_path
+                                    : APP_NO_IMAGE_POSTER
+                            }
+                        />
+                    </ListItemAvatar>
+                    <ListItemText primary={item.title} secondary={item.year} />
+                    <IconButton
+                        onClick={openInfoModal}
+                        onContextMenu={(e) => e.preventDefault()}
+                        aria-label='more'
+                    >
+                        <i className='ri-more-2-fill'></i>
+                    </IconButton>
+                    <DInfoModal
+                        item={item}
+                        currentState={openModalState}
+                        closeInfoModal={closeInfoModal}
                     />
-                </ListItemAvatar>
-                <ListItemText
-                    primary={item.title}
-                    secondary={item.year}
-                    onClick={handleOnListItemClick}
-                />
-                <IconButton
-                    onClick={openInfoModal}
-                    onContextMenu={(e) => e.preventDefault()}
-                    aria-label='more'
-                >
-                    <i className='ri-more-2-fill'></i>
-                </IconButton>
-                <DInfoModal
-                    item={item}
-                    currentState={openModalState}
-                    closeInfoModal={closeInfoModal}
-                />
-            </SearchItemButton>
-        ) : type == 'serie' ? (
-            <Box>
-                <ListItemAvatar sx={{ marginRight: '5px' }}>
-                    <Avatar
-                        sx={{ width: '50px', height: '70px' }}
-                        variant='rounded'
-                        src={
-                            APP_API_PATH +
-                            APP_API_VERSION_PATH +
-                            '/assets/image/' +
-                            APP_POSTER_QUALITY +
-                            item.poster_path
-                        }
+                </SearchItemButton>
+            </SearchRouterLink>
+        ) : type === 'series' && item ? (
+            <SearchRouterLink to={`/${type}/${item.tmdb_id}`}>
+                <SearchItemButton>
+                    <ListItemAvatar sx={{ marginRight: '5px' }}>
+                        <>
+                            <Avatar
+                                sx={{ width: '50px', height: '70px' }}
+                                variant='rounded'
+                                src={
+                                    item.poster_path
+                                        ? APP_API_PATH +
+                                          APP_API_VERSION_PATH +
+                                          '/assets/image/' +
+                                          APP_POSTER_QUALITY +
+                                          item.poster_path
+                                        : APP_NO_IMAGE_POSTER
+                                }
+                            />
+                        </>
+                    </ListItemAvatar>
+                    <ListItemText primary={item.title} secondary={item.year} />
+                    <IconButton
+                        onClick={openInfoModal}
+                        onContextMenu={(e) => e.preventDefault()}
+                        aria-label='more'
+                    >
+                        <i className='ri-more-2-fill'></i>
+                    </IconButton>
+                    <DInfoModal
+                        item={item}
+                        currentState={openModalState}
+                        closeInfoModal={closeInfoModal}
                     />
-                </ListItemAvatar>
-                <ListItemText primary={item.title} secondary={item.year} />
-                <IconButton
-                    onClick={openInfoModal}
-                    onContextMenu={(e) => e.preventDefault()}
-                    aria-label='more'
-                >
-                    <i className='ri-more-2-fill'></i>
-                </IconButton>
-                <DInfoModal
-                    item={item}
-                    currentState={openModalState}
-                    closeInfoModal={closeInfoModal}
-                />
-            </Box>
+                </SearchItemButton>
+            </SearchRouterLink>
         ) : null;
     };
 
@@ -219,13 +226,13 @@ const SearchCardContainer = (props: any) => {
                         }}
                         variant='subtitle2'
                     >
-                        <i style={{ paddingRight: '5px' }} className='ri-tv-fill'></i>
-                        TV Series
+                        <i style={{ paddingRight: '5px' }} className='ri-movie-2-fill'></i>
+                        Series
                     </Typography>
                     {seriesData.length ? (
                         <SearchList>
                             {seriesData.map((item: any, index: number) => (
-                                <SearchRouter type='serie' key={index} id={item.tmdb_id} />
+                                <SearchRouter item={item} type='series' key={index} />
                             ))}
                         </SearchList>
                     ) : data.ok ? (

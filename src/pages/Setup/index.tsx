@@ -1,10 +1,19 @@
+import { Paper, ThemeProvider } from '@mui/material';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 import Stepper from '@mui/material/Stepper';
 import Typography from '@mui/material/Typography';
-import * as React from 'react';
+import { useTheme } from '@mui/system';
+import React, { useEffect, useState } from 'react';
+
+import DButton from '../../components/DButton';
+import { APP_API_PATH, APP_API_VERSION_PATH } from '../../config';
+import AdditionalSlide from './Slides/additional';
+import MainSlide from './Slides/main';
+import StorageSlide from './Slides/storage';
+import UISlide from './Slides/ui';
 
 const steps = ['Main Configuration', 'Storage', 'UI Configuration', 'Additional'];
 
@@ -53,7 +62,133 @@ const SetupPage = () => {
         setActiveStep(0);
     };
 
-    console.log(activeStep > 1);
+    const theme = useTheme();
+
+    const [isLoaded, setIsLoaded] = useState<boolean>(false);
+    const [config, setConfig] = useState<any>({});
+    const [refresh, setRefresh] = useState<number>(0);
+
+    useEffect(() => {
+        const getData = async () => {
+            const res = await fetch(`${APP_API_PATH}${APP_API_VERSION_PATH}/settings`);
+            const data = (await res.json()) || {};
+            var tempConfig = data.result || {};
+            if (!tempConfig.app) {
+                tempConfig['app'] = {};
+            }
+            if (!tempConfig.auth0) {
+                tempConfig['auth0'] = {};
+            }
+            if (!tempConfig.categories) {
+                tempConfig['categories'] = [];
+            }
+            if (!tempConfig.gdrive) {
+                tempConfig['gdrive'] = {};
+            }
+            if (!tempConfig.onedrive) {
+                tempConfig['onedrive'] = {};
+            }
+            if (!tempConfig.sharepoint) {
+                tempConfig['sharepoint'] = {};
+            }
+            if (!tempConfig.tmdb) {
+                tempConfig['tmdb'] = {};
+            }
+            if (!tempConfig.build) {
+                tempConfig['build'] = {};
+            }
+            if (!tempConfig.rclone) {
+                tempConfig['rclone'] = {};
+            }
+            setConfig(tempConfig);
+            setIsLoaded(true);
+        };
+        getData();
+    }, []);
+
+    const setApp = (appConfig: any) => {
+        var newConfig = config;
+        newConfig['app'] = appConfig;
+        setConfig(newConfig);
+    };
+
+    const setAuth0 = (auth0Config: any) => {
+        var newConfig = config;
+        newConfig['auth0'] = auth0Config;
+        setConfig(newConfig);
+    };
+
+    const setCategories = (categoriesConfig: any) => {
+        var newConfig = config;
+        newConfig['categories'] = categoriesConfig;
+        setConfig(newConfig);
+    };
+
+    const setUi = (uiConfig: any) => {
+        var newConfig = config;
+        newConfig['ui'] = uiConfig;
+        setConfig(newConfig);
+    };
+
+    const setGdrive = (gdriveConfig: any) => {
+        var newConfig = config;
+        newConfig['gdrive'] = gdriveConfig;
+        setConfig(newConfig);
+    };
+
+    const setOnedrive = (onedriveConfig: any) => {
+        var newConfig = config;
+        newConfig['onedrive'] = onedriveConfig;
+        setConfig(newConfig);
+    };
+
+    const setSharepoint = (sharepointConfig: any) => {
+        var newConfig = config;
+        newConfig['sharepoint'] = sharepointConfig;
+        setConfig(newConfig);
+    };
+
+    const setTmdb = (tmdbConfig: any) => {
+        var newConfig = config;
+        newConfig['tmdb'] = tmdbConfig;
+        setConfig(newConfig);
+    };
+
+    const setBuild = (buildConfig: any) => {
+        var newConfig = config;
+        newConfig['build'] = buildConfig;
+        setConfig(newConfig);
+    };
+
+    const handleSave = () => {
+        fetch(`${APP_API_PATH}${APP_API_VERSION_PATH}/settings`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(config),
+        });
+        setRefresh(refresh + 1);
+    };
+
+    const Navigation = () => {
+        return (
+            <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
+                {(activeStep > 0 || activeStep !== 0) && (
+                    <DButton color='secondary' onClick={handleBack} sx={{ mr: 1 }}>
+                        Back
+                    </DButton>
+                )}
+                <Box sx={{ flex: '1 1 auto' }} />
+                {isStepOptional(activeStep) && (
+                    <Button color='inherit' onClick={handleSkip} sx={{ mr: 1 }}>
+                        Skip
+                    </Button>
+                )}
+                <DButton onClick={handleNext}>
+                    {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                </DButton>
+            </Box>
+        );
+    };
 
     return (
         <Box
@@ -62,6 +197,7 @@ const SetupPage = () => {
                 width: 'calc(100% - 100px)',
                 marginLeft: 'auto',
                 marginRight: 'auto',
+                marginBottom: '20px'
             }}
         >
             <Stepper activeStep={activeStep}>
@@ -94,88 +230,27 @@ const SetupPage = () => {
                     </Box>
                 </Box>
             )}
-            {activeStep === 0 && (
-                <Box>
-                    <Typography sx={{ mt: 2, mb: 1 }}>This is step 1</Typography>
-                    <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-                        <Button
-                            color='inherit'
-                            disabled={activeStep > 1}
-                            onClick={handleBack}
-                            sx={{ mr: 1 }}
-                        >
-                            Back
-                        </Button>
-                        <Box sx={{ flex: '1 1 auto' }} />
-                        {isStepOptional(activeStep) && (
-                            <Button color='inherit' onClick={handleSkip} sx={{ mr: 1 }}>
-                                Skip
-                            </Button>
-                        )}
-                        <Button onClick={handleNext}>
-                            {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-                        </Button>
-                    </Box>
-                </Box>
-            )}
-            {activeStep === 1 && (
-                <Box>
-                    <Typography sx={{ mt: 2, mb: 1 }}>This is step 1</Typography>
-                    <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-                        <Button
-                            color='inherit'
-                            disabled={activeStep > 1}
-                            onClick={handleBack}
-                            sx={{ mr: 1 }}
-                        >
-                            Back
-                        </Button>
-                        <Box sx={{ flex: '1 1 auto' }} />
-                        {isStepOptional(activeStep) && (
-                            <Button color='inherit' onClick={handleSkip} sx={{ mr: 1 }}>
-                                Skip
-                            </Button>
-                        )}
-                        <Button onClick={handleNext}>
-                            {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-                        </Button>
-                    </Box>
-                </Box>
-            )}
-            {/* {activeStep === steps.length ? (
-                <Box>
-                    <Typography sx={{ mt: 2, mb: 1 }}>
-                        All steps completed - you&apos;re finished
-                    </Typography>
-                    <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-                        <Box sx={{ flex: '1 1 auto' }} />
-                        <Button onClick={handleReset}>Reset</Button>
-                    </Box>
-                </Box>
-            ) : (
-                <Box>
-                    <Typography sx={{ mt: 2, mb: 1 }}>Step {activeStep + 1}</Typography>
-                    <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-                        <Button
-                            color='inherit'
-                            disabled={activeStep === 0}
-                            onClick={handleBack}
-                            sx={{ mr: 1 }}
-                        >
-                            Back
-                        </Button>
-                        <Box sx={{ flex: '1 1 auto' }} />
-                        {isStepOptional(activeStep) && (
-                            <Button color='inherit' onClick={handleSkip} sx={{ mr: 1 }}>
-                                Skip
-                            </Button>
-                        )}
-                        <Button onClick={handleNext}>
-                            {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-                        </Button>
-                    </Box>
-                </Box>
-            )} */}
+            <Paper sx={{ margin: '20px auto', width: 'fit-content', padding: '20px', background: `linear-gradient(45deg, ${theme.palette.background.paper} 0%, ${theme.palette.background.default} 100%)` }}>
+                {activeStep === 0 && <MainSlide />}
+                {activeStep === 1 && <StorageSlide config={config.categories} updateConfig={setCategories} />}
+                {activeStep === 2 && <UISlide />}
+                {activeStep === 3 && <AdditionalSlide />}
+                <a
+                    style={{
+                        color: theme.palette.primary.main,
+                        textDecoration: 'none',
+                        display: 'flex',
+                        justifyContent: 'right',
+                    }}
+                    target='_blank'
+                    href='https://dester.gq'
+                    rel='noreferrer'
+                >
+                    <i className='ri-attachment-line' style={{ marginRight: '5px' }}></i>Checkout
+                    Docs
+                </a>
+                {activeStep !== steps.length && <Navigation />}
+            </Paper>
         </Box>
     );
 };

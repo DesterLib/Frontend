@@ -6,7 +6,7 @@ import { createPortal } from 'react-dom';
 import DPlayerBase from './DPlayerBase';
 import DPlaylist from './DPlaylist';
 
-const DPlayer = ({ videoData }: any) => {
+const DPlayer = ({ videoData, aspectRatio }: any) => {
     const [show, setShow] = React.useState(false);
     const [art, setArt] = React.useState<any>({});
 
@@ -19,7 +19,6 @@ const DPlayer = ({ videoData }: any) => {
     }
 
     const settings = {
-        autoSize: true,
         fullscreen: true,
         setting: true,
         loop: true,
@@ -41,16 +40,19 @@ const DPlayer = ({ videoData }: any) => {
                 name: 'title',
             },
         ],
-        controls: [
-            {
-                tooltip: 'Playlist',
-                position: 'right',
-                html: '<i class="ri-play-list-2-fill"></i>',
-                click: function () {
-                    setShow((state: any) => !state);
-                },
-            },
-        ],
+        controls:
+            videoData.playlist && videoData.playlist.length > 0
+                ? [
+                      {
+                          tooltip: 'Playlist',
+                          position: 'right',
+                          html: '<i class="ri-play-list-2-fill"></i>',
+                          click: function () {
+                              setShow((state: any) => !state);
+                          },
+                      },
+                  ]
+                : [],
         icons: {
             play: '<i class="ri-play-fill"></i>',
             volume: '<i class="ri-volume-up-fill"></i>',
@@ -75,20 +77,21 @@ const DPlayer = ({ videoData }: any) => {
             indicator: '<i class="ri-checkbox-blank-circle-fill"></i>',
         },
     };
-    // prettier-ignore
     return (
-        <Box sx={{ width: '100%', marginLeft: 'auto', marginRight: 'auto', marginTop: '20px' }}>
+        <Box sx={{ marginLeft: 'auto', marginRight: 'auto', marginTop: '20px' }}>
             <>
                 <DPlayerBase
                     style={{
-                        aspectRatio: 16 / 9,
+                        width: '100% !important',
+                        aspectRatio: aspectRatio,
                     }}
-                    src={videoData.src}
+                    src={videoData.url}
                     settings={settings}
                     getInstance={(art: any) => {
                         art.on('ready', () => setArt(art));
                     }}
                 />
+                {/* prettier-ignore */}
                 {Object.keys(art).length !== 0 &&
                     createPortal(
                         <Box
@@ -103,15 +106,19 @@ const DPlayer = ({ videoData }: any) => {
                         />,
                         art.layers.close,
                     )}
+                {/* prettier-ignore */}
                 {Object.keys(art).length !== 0 &&
                     createPortal(
                         <DPlaylist
                             show={show}
+                            videoData={videoData}
+                            playlistData={videoData.playlist}
                             handleClose={handleClose}
                             handleShitchUrl={handleShitchUrl}
                         />,
                         art.layers.playlist,
                     )}
+                {/* prettier-ignore */}
                 {Object.keys(art).length !== 0 &&
                     createPortal(
                         <Box sx={{ padding: '20px !important' }}>

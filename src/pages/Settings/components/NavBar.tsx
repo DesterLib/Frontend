@@ -19,7 +19,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import DButton from '../../../components/DButton';
@@ -32,12 +32,16 @@ const drawerWidth = 240;
 interface Props {
     children: JSX.Element;
     handleSave: () => void;
+    colorModeContext: any;
+    themeMode: any;
 }
 
 export default function NavBar(props: Props) {
-    const { children, handleSave } = props;
+    const { children, handleSave, colorModeContext, themeMode } = props;
     const [mobileOpen, setMobileOpen] = useState(false);
     const theme = useTheme();
+
+    const colorMode: any = useContext(colorModeContext);
 
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
@@ -159,12 +163,15 @@ export default function NavBar(props: Props) {
                     <Typography variant='h6' noWrap component='div'>
                         Dester Admin Panel
                     </Typography>
-                    {/* <Button onClick={handleClearLocalStorage} color='warning' variant='outlined'>
-                        Reset
-                    </Button> */}
-                    <DButton variant='contained' onClick={handleSave}>
-                        Save
-                    </DButton>
+                    <Box sx={{display: 'flex'}}>
+                        <IconButton sx={{marginRight: '10px'}} onClick={colorMode.toggleColorMode}>
+                            {themeMode === 'dark' && <i className='ri-sun-fill'></i>}
+                            {themeMode === 'light' && <i className='ri-sun-fill'></i>}
+                        </IconButton>
+                        <DButton variant='contained' onClick={handleSave}>
+                            Save
+                        </DButton>
+                    </Box>
                 </Toolbar>
             </AppBar>
             <Box

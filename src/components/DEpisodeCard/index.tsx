@@ -39,7 +39,7 @@ const DEpisodeCard = ({ item, rclone_index }: any) => {
             id: '1',
             title: item.title,
             subTitle: item.title,
-            src: `${APP_API_PATH}${APP_API_VERSION_PATH}/stream/${rclone_index}/${item.path}`,
+            url: `${APP_API_PATH}${APP_API_VERSION_PATH}/stream/${rclone_index}/${item.path}`,
             playlist: [],
         };
         setVideoData(videoData);
