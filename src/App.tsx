@@ -6,7 +6,9 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './MuiClassNameSetup';
 import DBottomBar from './components/DBottomBar';
 import DNavbar from './components/DNavbar';
+import BrowsePage from './pages/Browse';
 import DisconnectedPage from './pages/Disconnected';
+import EpisodePage from './pages/Episode';
 import HomePage from './pages/Home';
 import MoviePage from './pages/Movie';
 import NotFoundPage from './pages/NotFound';
@@ -16,7 +18,6 @@ import Settings from './pages/Settings';
 import SetupPage from './pages/Setup';
 import darkTheme from './theme/darkTheme';
 import lightTheme from './theme/lightTheme';
-import EpisodePage from './pages/Episode';
 
 // eslint-disable-next-line
 const ColorModeContext = createContext({ toggleColorMode: () => {} });
@@ -111,6 +112,7 @@ const App = () => {
                     <Routes>
                         <Route path='*' element={<NotFoundPage />} />
                         <Route path='/' element={<HomePage />} />
+                        <Route path='/browse' element={<BrowsePage />} />
                         <Route path='/movie/:movieId' element={<MoviePage />} />
                         <Route path='/series/:seriesId' element={<SeriePage />} />
                         <Route

@@ -4,7 +4,7 @@ import DCarousel from '../../components/DCarousel';
 import { Helmet } from '../../components/DHelmet';
 import DLoader from '../../components/DLoader';
 import DSlider from '../../components/DSlider';
-import { APP_API_PATH } from '../../config';
+import { APP_API_PATH, APP_API_VERSION_PATH } from '../../config';
 import { MainContainer, MainWrapper } from './styles';
 
 // import useNetworkStatus from '../utilities/useNetworkStatus';
@@ -16,7 +16,7 @@ const HomePage = () => {
 
     useEffect(() => {
         const getData = async () => {
-            const res = await fetch(`${APP_API_PATH}/api/v1/home`);
+            const res = await fetch(`${APP_API_PATH}${APP_API_VERSION_PATH}/home`);
             const data = (await res.json()) || { ok: false };
             if (data.code == 428) {
                 const appFetch = await fetch(`${APP_API_PATH}/api/v1/settings`);
