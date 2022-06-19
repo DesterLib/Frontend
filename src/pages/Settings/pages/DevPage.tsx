@@ -8,21 +8,19 @@ import { APP_API_PATH, APP_API_VERSION_PATH } from '../../../config';
 
 const DevPage = () => {
     const [refresh, setRefresh] = useState<number>(0);
-    const [isLoaded, setIsLoaded] = useState<boolean>(false);
-    const [data, setData] = useState<any>('');
+    const [data, setData] = useState<string>('');
 
     useEffect(() => {
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', `${APP_API_PATH}/api/v1/logs/live`);
+        xhr.send();
         const getData = async () => {
-            const res = await fetch(`${APP_API_PATH}/api/v1/logs`);
-            const data = (await res.json()) || { ok: false };
-            setData(data.result);
-            setIsLoaded(true);
+            setData(xhr.responseText);
         };
-        getData();
-        const interval = setInterval(() => getData(), 1000);
-        return () => {
-            clearInterval(interval);
-        };
+
+        setInterval(() => {
+            getData();
+        }, 1000);
     }, []);
 
     const handleRebuild = () => {
@@ -41,7 +39,7 @@ const DevPage = () => {
                         flexDirection: 'column-reverse',
                     }}
                 >
-                    <p style={{ whiteSpace: 'pre-line' }}>{data}</p>
+                    <p dangerouslySetInnerHTML={{ __html: data }} />
                 </Box>
             </Paper>
             <DButton color='warning' startIcon={<ConstructionIcon />} onClick={handleRebuild}>
