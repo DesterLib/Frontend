@@ -276,7 +276,8 @@ const MoviePage = () => {
                                     data.genres.map((genre: any) => (
                                         <Link
                                             style={{ textDecoration: 'none' }}
-                                            to={`/browse?genre=${genre.name}`}
+                                            to={'/browse'}
+                                            state={{ genre: genre.name, mediaType: 'movies' }}
                                             key={genre.id}
                                         >
                                             <StyledChipGenre
