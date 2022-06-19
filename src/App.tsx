@@ -24,7 +24,7 @@ const App = () => {
     const [mode, setMode] = useState<PaletteMode>('dark');
 
     useEffect(() => {
-        document.title = 'DesterLib';
+        document.title = 'Dester';
         let localTheme = localStorage.getItem('theme') || 'dark';
         localTheme = localTheme === 'light' ? 'light' : 'dark';
         setMode(localTheme as PaletteMode);

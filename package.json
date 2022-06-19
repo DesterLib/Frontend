@@ -1,7 +1,7 @@
 {
     "name": "dester-frontend",
     "version": "1.0.0",
-    "description": "DesterLib's frontend",
+    "description": "Dester's frontend",
     "license": "MIT",
     "scripts": {
         "start": "react-scripts start",
