@@ -1,4 +1,4 @@
-import { Box, TextField } from '@mui/material';
+import { Box, FormControl, FormControlLabel, FormGroup, Switch, TextField } from '@mui/material';
 import React, { useState } from 'react';
 
 const OtherPage = (props: any) => {
@@ -13,17 +13,24 @@ const OtherPage = (props: any) => {
         setRefresh(refresh + 1);
     };
 
-    const handleChangeOpenSubtitlesKey = (event: any) => {
-        var newOs = subtitles;
-        newOs['api_key'] = event.target.value;
-        updateSubtitles(newOs);
-        setRefresh(refresh + 1);
-    };
-
     const handleChangeBuildCron = (event: any) => {
         var newBuild = build;
         newBuild['cron'] = event.target.value;
         updateBuild(newBuild);
+        setRefresh(refresh + 1);
+    };
+
+    const handleChangeOpenSubtitlesKey = (event: any) => {
+        var newSubtitles = subtitles;
+        newSubtitles['api_key'] = event.target.value;
+        updateSubtitles(newSubtitles);
+        setRefresh(refresh + 1);
+    };
+
+    const handleChangeLocalSubtitles = () => {
+        var newSubtitles = subtitles;
+        newSubtitles['local'] = !newSubtitles.local;
+        updateSubtitles(newSubtitles);
         setRefresh(refresh + 1);
     };
 
@@ -44,15 +51,6 @@ const OtherPage = (props: any) => {
             />
             <TextField
                 sx={textFiledStyles}
-                helperText='Enter the API key from your OpenSubtitles account'
-                fullWidth
-                label='OpenSubtitles API Key'
-                variant='outlined'
-                onChange={handleChangeOpenSubtitlesKey}
-                value={subtitles.api_key}
-            />
-            <TextField
-                sx={textFiledStyles}
                 helperText='Enter the cron formatted build time/interval for metadata generation'
                 fullWidth
                 label='Build Cron'
@@ -60,6 +58,30 @@ const OtherPage = (props: any) => {
                 onChange={handleChangeBuildCron}
                 value={build.cron}
             />
+            <TextField
+                sx={textFiledStyles}
+                helperText='Enter the API key from your OpenSubtitles account'
+                fullWidth
+                label='OpenSubtitles API Key'
+                variant='outlined'
+                onChange={handleChangeOpenSubtitlesKey}
+                value={subtitles.api_key}
+            />
+            <FormControl component='fieldset'>
+                <FormGroup aria-label='position' row>
+                    <FormControlLabel
+                        control={
+                            <Switch
+                                color='primary'
+                                checked={subtitles.local}
+                                onChange={handleChangeLocalSubtitles}
+                            />
+                        }
+                        label='Local Subtitles'
+                        labelPlacement='start'
+                    />
+                </FormGroup>
+            </FormControl>
         </Box>
     );
 };

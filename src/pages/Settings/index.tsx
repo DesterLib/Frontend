@@ -112,7 +112,7 @@ const Settings = (props: any) => {
         setConfig(newConfig);
     };
 
-    const setOpenSubtitles = (subtitlesConfig: any) => {
+    const setSubtitles = (subtitlesConfig: any) => {
         var newConfig = config;
         newConfig['subtitles'] = subtitlesConfig;
         setConfig(newConfig);
@@ -182,7 +182,7 @@ const Settings = (props: any) => {
                             subtitles={config.subtitles}
                             build={config.build}
                             updateTmdb={setTmdb}
-                            updateSubtitles={setOpenSubtitles}
+                            updateSubtitles={setSubtitles}
                             updateBuild={setBuild}
                         />
                     }
