@@ -6,16 +6,30 @@ import DLoader from '../../components/DLoader';
 import { get } from '../../utilities/requests';
 import { MainContainer } from './styles';
 
+interface BrowseParams {
+    query: string;
+    genre: string;
+    year: number;
+    sort: string;
+    category: number;
+    page: number;
+    limit: number;
+    mediaType: 'movies' | 'series';
+}
 const BrowsePage = () => {
+    const tempParams: BrowseParams = {
+        query: '',
+        genre: '',
+        year: 0,
+        sort: 'title:1',
+        category: -1,
+        page: 0,
+        limit: 20,
+        mediaType: 'movies',
+    };
+
     const [data, setData] = useState<any>({});
-    const [query, setQuery] = useState<string>('');
-    const [genre, setGenre] = useState<string>('');
-    const [year, setYear] = useState<number>(0);
-    const [sort, setSort] = useState<string>('title:1');
-    const [category, setCategory] = useState<number>(-1);
-    const [page, setPage] = useState<number>(0);
-    const [limit, setLimit] = useState<number>(20);
-    const [mediaType, setMediaType] = useState<string>('movies');
+    const [params, setParams] = useState<BrowseParams>(tempParams);
     const [requestInfo, setRequestInfo] = useState<any>({});
     const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
@@ -31,67 +45,81 @@ const BrowsePage = () => {
             'limit',
             'mediaType',
         ];
-        const wanted_setters = [
-            setQuery,
-            setGenre,
-            setYear,
-            setSort,
-            setCategory,
-            setPage,
-            setLimit,
-            setMediaType,
-        ];
         if (location.state) {
             for (let i = 0; i < wanted_keys.length; i++) {
                 if (location.state[wanted_keys[i]]) {
-                    wanted_setters[i](location.state[wanted_keys[i]]);
+                    params[wanted_keys[i]] = location.state[wanted_keys[i]];
                 }
             }
+            setParams(params);
+            handleSearch();
+        } else {
+            setIsLoaded(true);
         }
-        setIsLoaded(true);
-    }, []);
+    }, [location.state]);
 
     const handleSearch = () => {
-        const params = `?query=${encodeURIComponent(query)}&genre=${encodeURIComponent(
-            genre,
-        )}&year=${year}&sort=${encodeURIComponent(
-            sort,
-        )}&category=${category}&media_type=${encodeURIComponent(
-            mediaType,
-        )}&page=${page}&limit=${limit}`;
-        get(`/browse/${category}/${page}${params}`, setData, setRequestInfo, setIsLoaded);
+        const queryParams = `?query=${encodeURIComponent(params.query)}&genre=${encodeURIComponent(
+            params.genre,
+        )}&year=${params.year}&sort=${encodeURIComponent(params.sort)}&category=${
+            params.category
+        }&media_type=${encodeURIComponent(params.mediaType)}&page=${params.page}&limit=${
+            params.limit
+        }`;
+        get(
+            `/browse/${params.category}/${params.page}${queryParams}`,
+            setData,
+            setRequestInfo,
+            setIsLoaded,
+        );
     };
 
     const handleChangeQuery = (event: any) => {
-        setQuery(event.target.value || '');
+        var newParams = params;
+        newParams.query = event.target.value || '';
+        setParams(newParams);
     };
 
     const handleChangeGenre = (event: any) => {
-        setGenre(event.target.value || '');
+        var newParams = params;
+        newParams.genre = event.target.value || '';
+        setParams(newParams);
     };
 
     const handleChangeYear = (event: any) => {
-        setYear(event.target.value || '');
+        var newParams = params;
+        newParams.year = event.target.value || 0;
+        setParams(newParams);
     };
 
     const handleChangeSort = (event: any) => {
-        setSort(event.target.value || 'title:1');
+        var newParams = params;
+        newParams.sort = event.target.value || 'title:1';
+        setParams(newParams);
     };
 
     const handleChangeCategory = (event: any) => {
-        setCategory(event.target.value || -1);
+        var newParams = params;
+        newParams.category = event.target.value || -1;
+        setParams(newParams);
     };
 
     const handleChangeMediaType = (event: any) => {
-        setMediaType(event.target.value || 'movies');
+        var newParams = params;
+        newParams.mediaType = event.target.value || 'movies';
+        setParams(newParams);
     };
 
     const handleChangePage = (event: any) => {
-        setLimit(event.target.value || 0);
+        var newParams = params;
+        newParams.page = event.target.value || 0;
+        setParams(newParams);
     };
 
     const handleChangeLimit = (event: any) => {
-        setPage(event.target.value || 20);
+        var newParams = params;
+        newParams.limit = event.target.value || 20;
+        setParams(newParams);
     };
 
     console.log(data);

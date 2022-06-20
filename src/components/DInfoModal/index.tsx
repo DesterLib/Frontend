@@ -79,24 +79,42 @@ const DInfoModal = ({ item, type, currentState, closeInfoModal }: any) => {
                         size='small'
                     />
                     <ChipContainer>
-                        <StyledChip className='year' label={item.year} />
+                        <Link
+                            style={{ textDecoration: 'none' }}
+                            to={'/browse'}
+                            state={{
+                                year: item.year,
+                                mediaType: item.number_of_files ? 'movies' : 'series',
+                            }}
+                            key={`${item.id}-year`}
+                        >
+                            <StyledChip className='year' clickable label={item.year} />
+                        </Link>
                         <StyledChip
                             className='rating'
                             icon={<i style={{ color: '#ffd000' }} className='ri-star-fill'></i>}
                             label={item.rating}
                         />
-                        <StyledChip
-                            className='type'
-                            icon={
-                                <i
-                                    style={{ color: '#ffd000' }}
-                                    className={
-                                        item.number_of_files ? 'ri-movie-2-fill' : 'ri-tv-fill'
-                                    }
-                                ></i>
-                            }
-                            label={item.number_of_files ? 'Movie' : 'Series'}
-                        />
+                        <Link
+                            style={{ textDecoration: 'none' }}
+                            to={'/browse'}
+                            state={{ mediaType: item.number_of_files ? 'movies' : 'series' }}
+                            key={`${item.id}-type`}
+                        >
+                            <StyledChip
+                                className='type'
+                                clickable
+                                icon={
+                                    <i
+                                        style={{ color: '#ffd000' }}
+                                        className={
+                                            item.number_of_files ? 'ri-movie-2-fill' : 'ri-tv-fill'
+                                        }
+                                    ></i>
+                                }
+                                label={item.number_of_files ? 'Movie' : 'Series'}
+                            />
+                        </Link>
                     </ChipContainer>
                 </ButtonWrapper>
                 <Box>

@@ -243,10 +243,16 @@ const MoviePage = () => {
                             </Typography>
                             <Typography variant='body2'>{data.description}</Typography>
                             <Box sx={{ marginTop: '20px' }}>
-                                <StyledChipInfo className='year' clickable label={data.year} />
+                                <Link
+                                    style={{ textDecoration: 'none' }}
+                                    to={'/browse'}
+                                    state={{ mediaType: 'movies', year: data.year }}
+                                    key={`${data.id}-year`}
+                                >
+                                    <StyledChipInfo className='year' clickable label={data.year} />
+                                </Link>
                                 <StyledChipInfo
                                     className='rating'
-                                    clickable
                                     icon={
                                         <i
                                             style={{ color: '#ffd000' }}
@@ -255,21 +261,24 @@ const MoviePage = () => {
                                     }
                                     label={data.rating}
                                 />
-                                <StyledChipInfo
-                                    className='type'
-                                    clickable
-                                    icon={
-                                        <i
-                                            style={{ color: '#ffd000' }}
-                                            className={
-                                                data.number_of_files
-                                                    ? 'ri-movie-2-fill'
-                                                    : 'ri-tv-fill'
-                                            }
-                                        ></i>
-                                    }
-                                    label={data.number_of_files ? 'Movie' : 'Series'}
-                                />
+                                <Link
+                                    style={{ textDecoration: 'none' }}
+                                    to={'/browse'}
+                                    state={{ mediaType: 'movies' }}
+                                    key={`${data.id}-type`}
+                                >
+                                    <StyledChipInfo
+                                        className='type'
+                                        clickable
+                                        icon={
+                                            <i
+                                                style={{ color: '#ffd000' }}
+                                                className={'ri-movie-2-fill'}
+                                            ></i>
+                                        }
+                                        label={data.number_of_files ? 'Movie' : 'Series'}
+                                    />
+                                </Link>
                             </Box>
                             <Box sx={{ marginTop: '10px' }}>
                                 {data.genres &&
