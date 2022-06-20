@@ -12,6 +12,7 @@ import Typography from '@mui/material/Typography';
 import React from 'react';
 
 const DPlaylist = ({ videoData, playlistData, show, handleClose, handleShitchUrl }: any) => {
+    console.log(videoData.playlist);
     return (
         <Box
             sx={{

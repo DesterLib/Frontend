@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import { APP_NO_IMAGE_POSTER } from '../../config';
 import { APP_API_PATH, APP_API_VERSION_PATH, APP_POSTER_QUALITY } from '../../config';
 import DInfoModal from '../DInfoModal';
-import DStreamModal from '../DStreamModal';
 import {
     BottomButtonWrapper,
     Button,
@@ -18,9 +17,8 @@ import {
     TopContentWrapper,
 } from './styles';
 
-const DEpisodeCard = ({ item, rclone_index }: any) => {
+const DEpisodeCard = ({ data, item, season_index }: any) => {
     const [openModalState, setOpenModalState] = useState(false);
-    const [streamModalState, setStreamModalState] = useState(false);
     const [videoData, setVideoData] = useState<any>({});
 
     // eslint-disable-next-line
@@ -30,23 +28,6 @@ const DEpisodeCard = ({ item, rclone_index }: any) => {
     };
     const closeInfoModal = () => {
         setOpenModalState(false);
-    };
-
-    // eslint-disable-next-line
-    const openStreamModal = (event: any) => {
-        event.preventDefault();
-        const videoData = {
-            id: '1',
-            title: item.title,
-            subTitle: item.title,
-            url: `${APP_API_PATH}${APP_API_VERSION_PATH}/stream/${rclone_index}/${item.path}`,
-            playlist: [],
-        };
-        setVideoData(videoData);
-        setStreamModalState(true);
-    };
-    const closeStreamModal = () => {
-        setStreamModalState(false);
     };
 
     return (
@@ -63,9 +44,15 @@ const DEpisodeCard = ({ item, rclone_index }: any) => {
                         }
                         alt=''
                     />
-                    <PlayButton className='playButton' onClick={openStreamModal}>
-                        <i className='ri-play-mini-fill'></i>
-                    </PlayButton>
+                    <Link
+                        to={`episode/${item.episode_number}`}
+                        state={{ data: data, item: item, season_index: season_index }}
+                        key={`episode-${item.episode_number}`}
+                    >
+                        <PlayButton className='playButton'>
+                            <i className='ri-play-mini-fill'></i>
+                        </PlayButton>
+                    </Link>
                 </ImageWrapper>
                 <TopContentWrapper className='topContentWrapper'>
                     <EpisodeTag size='small' label={'E' + item.episode_number} />
@@ -92,11 +79,6 @@ const DEpisodeCard = ({ item, rclone_index }: any) => {
                 type='movie'
                 currentState={openModalState}
                 closeInfoModal={closeInfoModal}
-            />
-            <DStreamModal
-                videoData={videoData}
-                currentState={streamModalState}
-                closeInfoModal={closeStreamModal}
             />
         </Card>
     );

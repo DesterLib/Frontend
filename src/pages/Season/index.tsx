@@ -46,11 +46,12 @@ const SeasonPage = () => {
         }
     }, [seriesId, seasonNumber]);
 
+    let season_index;
     let prev_season;
     let next_season;
     if (isLoaded) {
         const season_keys = Object.keys(data.seasons);
-        const season_index = season_keys.indexOf(seasonNumber);
+        season_index = season_keys.indexOf(seasonNumber);
         prev_season = season_keys[season_index - 1];
         next_season = season_keys[season_index + 1];
     }
@@ -220,7 +221,7 @@ const SeasonPage = () => {
                     <Grid container spacing={3}>
                         {Object.entries(item.episodes).map(([key, val]) => (
                             <Grid key={key} item xs={6} lg={3} xl={2}>
-                                <DEpisodeCard item={val} rclone_index={data.rclone_index} />
+                                <DEpisodeCard data={data} item={val} season_index={season_index} />
                             </Grid>
                         ))}
                     </Grid>
