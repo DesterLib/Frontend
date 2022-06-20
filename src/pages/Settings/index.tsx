@@ -49,6 +49,9 @@ const Settings = (props: any) => {
             if (!tempConfig.tmdb) {
                 tempConfig['tmdb'] = {};
             }
+            if (!tempConfig.subtitles) {
+                tempConfig['subtitles'] = {};
+            }
             if (!tempConfig.build) {
                 tempConfig['build'] = {};
             }
@@ -106,6 +109,12 @@ const Settings = (props: any) => {
     const setTmdb = (tmdbConfig: any) => {
         var newConfig = config;
         newConfig['tmdb'] = tmdbConfig;
+        setConfig(newConfig);
+    };
+
+    const setOpenSubtitles = (subtitlesConfig: any) => {
+        var newConfig = config;
+        newConfig['subtitles'] = subtitlesConfig;
         setConfig(newConfig);
     };
 
@@ -170,8 +179,10 @@ const Settings = (props: any) => {
                     element={
                         <OtherPage
                             tmdb={config.tmdb}
+                            subtitles={config.subtitles}
                             build={config.build}
                             updateTmdb={setTmdb}
+                            updateSubtitles={setOpenSubtitles}
                             updateBuild={setBuild}
                         />
                     }
