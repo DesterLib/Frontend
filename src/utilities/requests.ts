@@ -8,12 +8,16 @@ export const get = async (path: string, setData: any, setRequestInfo: any, setIs
         ok: false,
         result: null,
         time_taken: 0,
+        title: 'Dester',
+        description: 'Dester',
     };
     const info = {
         code: data.code,
         message: data.message,
         ok: data.ok,
         time_taken: data.time_taken,
+        title: data.title,
+        description: data.description,
     };
     setData(data.result);
     setRequestInfo(info);

@@ -4,7 +4,7 @@ import DCarousel from '../../components/DCarousel';
 import { Helmet } from '../../components/DHelmet';
 import DLoader from '../../components/DLoader';
 import DSlider from '../../components/DSlider';
-import { APP_API_PATH, APP_API_VERSION_PATH } from '../../config';
+import { get } from '../../utilities/requests';
 import { MainContainer, MainWrapper } from './styles';
 
 // import useNetworkStatus from '../utilities/useNetworkStatus';
@@ -12,22 +12,10 @@ import { MainContainer, MainWrapper } from './styles';
 const HomePage = () => {
     const [isLoaded, setIsLoaded] = useState<boolean>(false);
     const [data, setData] = useState<any>({});
-    const [appInfo, setAppInfo] = useState<any>({});
+    const [requestInfo, setRequestInfo] = useState<any>({});
 
     useEffect(() => {
-        const getData = async () => {
-            const res = await fetch(`${APP_API_PATH}${APP_API_VERSION_PATH}/home`);
-            const data = (await res.json()) || { ok: false };
-            if (data.code == 428) {
-                const appFetch = await fetch(`${APP_API_PATH}/api/v1/settings`);
-                const appData = (await appFetch.json()) || { ok: false };
-                setAppInfo(appData.result.app);
-            } else {
-                setData(data.result);
-            }
-            setIsLoaded(true);
-        };
-        getData();
+        get('/home', setData, setRequestInfo, setIsLoaded);
     }, []);
 
     // const network = useNetworkStatus();
@@ -39,8 +27,8 @@ const HomePage = () => {
     return isLoaded ? (
         <MainContainer>
             <Helmet>
-                <meta name='description' content={appInfo.description} />
-                <title>{appInfo.name}</title>
+                <meta name='description' content={requestInfo.description} />
+                <title>{requestInfo.title}</title>
             </Helmet>
             <MainWrapper>
                 <Fragment>

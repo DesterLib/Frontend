@@ -26,7 +26,9 @@ const EpisodePage = () => {
                         episode: currEpisode.episode_number,
                         title: currEpisode.name,
                         description: currEpisode.overview,
-                        src: [`${APP_API_PATH}${APP_API_VERSION_PATH}/stream/${seriesData.rclone_index}/${currEpisode.path}`],
+                        src: [
+                            `${APP_API_PATH}${APP_API_VERSION_PATH}/stream/${seriesData.rclone_index}/${currEpisode.path}`,
+                        ],
                     });
                 }
                 playlist.push({

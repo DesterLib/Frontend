@@ -163,8 +163,11 @@ export default function NavBar(props: Props) {
                     <Typography variant='h6' noWrap component='div'>
                         Dester Admin Panel
                     </Typography>
-                    <Box sx={{display: 'flex'}}>
-                        <IconButton sx={{marginRight: '10px'}} onClick={colorMode.toggleColorMode}>
+                    <Box sx={{ display: 'flex' }}>
+                        <IconButton
+                            sx={{ marginRight: '10px' }}
+                            onClick={colorMode.toggleColorMode}
+                        >
                             {themeMode === 'dark' && <i className='ri-sun-fill'></i>}
                             {themeMode === 'light' && <i className='ri-sun-fill'></i>}
                         </IconButton>

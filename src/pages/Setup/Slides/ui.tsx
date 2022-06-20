@@ -64,18 +64,22 @@ const UISlide = () => {
                     ))}
                 </Box>
             )}
-            {lightThemeUIConfig && lightThemeUIConfig.secondary && lightThemeUIConfig.secondary.colors && (
-                <Box sx={{ padding: '20px' }}>
-                    <Typography variant='body1'>{lightThemeUIConfig.secondary.title}</Typography>
-                    {lightThemeUIConfig.secondary.colors.map((color: any) => (
-                        <ColorSelector
-                            key={color.id}
-                            title={color.title}
-                            defaultColor={color.value}
-                        />
-                    ))}
-                </Box>
-            )}
+            {lightThemeUIConfig &&
+                lightThemeUIConfig.secondary &&
+                lightThemeUIConfig.secondary.colors && (
+                    <Box sx={{ padding: '20px' }}>
+                        <Typography variant='body1'>
+                            {lightThemeUIConfig.secondary.title}
+                        </Typography>
+                        {lightThemeUIConfig.secondary.colors.map((color: any) => (
+                            <ColorSelector
+                                key={color.id}
+                                title={color.title}
+                                defaultColor={color.value}
+                            />
+                        ))}
+                    </Box>
+                )}
         </Box>
     );
 };

@@ -45,12 +45,18 @@ export const LinearGradient = styled(Box)<BoxProps>(({ theme }) => ({
     height: '100%',
     zIndex: '10',
     [theme.breakpoints.up('md')]: {
-        background:
-            `linear-gradient( 45deg, ${theme.palette.background.default} 20%, ${alpha(theme.palette.background.paper, 0.5)} 70%, rgba(0, 0, 0, 0) 100% )`,
+        background: `linear-gradient( 45deg, ${theme.palette.background.default} 20%, ${alpha(
+            theme.palette.background.paper,
+            0.5,
+        )} 70%, rgba(0, 0, 0, 0) 100% )`,
     },
     [theme.breakpoints.down('md')]: {
-        background:
-        `linear-gradient( 45deg, ${theme.palette.background.default} 20%, ${alpha(theme.palette.background.paper, 0.5)} 70%, rgba(0, 0, 0, 0) 100% ), linear-gradient( 325deg, ${theme.palette.background.paper} 20%, ${alpha(theme.palette.background.paper, 0.5)} 70%, rgba(0, 0, 0, 0) 100% )`,
+        background: `linear-gradient( 45deg, ${theme.palette.background.default} 20%, ${alpha(
+            theme.palette.background.paper,
+            0.5,
+        )} 70%, rgba(0, 0, 0, 0) 100% ), linear-gradient( 325deg, ${
+            theme.palette.background.paper
+        } 20%, ${alpha(theme.palette.background.paper, 0.5)} 70%, rgba(0, 0, 0, 0) 100% )`,
     },
 }));
 

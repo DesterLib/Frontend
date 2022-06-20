@@ -1,6 +1,8 @@
+import { Box } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
+import { Helmet } from '../../components/DHelmet';
 import DLoader from '../../components/DLoader';
 import { APP_API_PATH, APP_API_VERSION_PATH } from '../../config';
 import NavBar from './components/NavBar';
@@ -16,11 +18,11 @@ import SharePointPage from './pages/SharePointPage';
 import UIPage from './pages/UIPage';
 
 const Settings = (props: any) => {
-
     const { colorModeContext, themeMode } = props;
 
     const [isLoaded, setIsLoaded] = useState<boolean>(false);
     const [config, setConfig] = useState<any>({});
+    const [requestInfo, setRequestInfo] = useState<any>({});
     const [refresh, setRefresh] = useState<number>(0);
 
     useEffect(() => {
@@ -59,6 +61,15 @@ const Settings = (props: any) => {
                 tempConfig['rclone'] = {};
             }
             setConfig(tempConfig);
+            const info = {
+                code: data.code,
+                message: data.message,
+                ok: data.ok,
+                time_taken: data.time_taken,
+                title: data.title,
+                description: data.description,
+            };
+            setRequestInfo(info);
             setIsLoaded(true);
         };
         getData();
@@ -134,62 +145,84 @@ const Settings = (props: any) => {
     };
 
     return isLoaded ? (
-        <NavBar themeMode={themeMode} colorModeContext={colorModeContext} handleSave={handleSave}>
-            <Routes>
-                <Route path='/' element={<HomePage config={config.app} updateConfig={setApp} />} />
-                <Route
-                    path='/auth0'
-                    element={<Auth0Page config={config.auth0} updateConfig={setAuth0} />}
-                />
-                <Route
-                    path='/categories'
-                    element={
-                        <CategoryPage config={config.categories} updateConfig={setCategories} />
-                    }
-                />
-                <Route path='/ui' element={<UIPage config={config.io} updateConfig={setUi} />} />
-                <Route
-                    path='/gdrive'
-                    element={
-                        <GDrive
-                            config={config.gdrive}
-                            updateConfig={setGdrive}
-                            updateStateConfig={setConfig}
-                        />
-                    }
-                />
-                <Route
-                    path='/gdrive/tokens'
-                    element={
-                        <GDriveTokenGeneratorPage config={config.gdrive} stateConfig={config} />
-                    }
-                />
-                <Route
-                    path='/onedrive'
-                    element={<OneDrivePage config={config.onedrive} updateConfig={setOnedrive} />}
-                />
-                <Route
-                    path='/sharepoint'
-                    element={
-                        <SharePointPage config={config.sharepoint} updateConfig={setSharepoint} />
-                    }
-                />
-                <Route
-                    path='/other'
-                    element={
-                        <OtherPage
-                            tmdb={config.tmdb}
-                            subtitles={config.subtitles}
-                            build={config.build}
-                            updateTmdb={setTmdb}
-                            updateSubtitles={setSubtitles}
-                            updateBuild={setBuild}
-                        />
-                    }
-                />
-                <Route path='/dev' element={<DevPage />} />
-            </Routes>
-        </NavBar>
+        <Box>
+            {' '}
+            <Helmet>
+                <meta name='description' content={requestInfo.description} />
+                <title>{requestInfo.title}</title>
+            </Helmet>
+            <NavBar
+                themeMode={themeMode}
+                colorModeContext={colorModeContext}
+                handleSave={handleSave}
+            >
+                <Routes>
+                    <Route
+                        path='/'
+                        element={<HomePage config={config.app} updateConfig={setApp} />}
+                    />
+                    <Route
+                        path='/auth0'
+                        element={<Auth0Page config={config.auth0} updateConfig={setAuth0} />}
+                    />
+                    <Route
+                        path='/categories'
+                        element={
+                            <CategoryPage config={config.categories} updateConfig={setCategories} />
+                        }
+                    />
+                    <Route
+                        path='/ui'
+                        element={<UIPage config={config.io} updateConfig={setUi} />}
+                    />
+                    <Route
+                        path='/gdrive'
+                        element={
+                            <GDrive
+                                config={config.gdrive}
+                                updateConfig={setGdrive}
+                                updateStateConfig={setConfig}
+                            />
+                        }
+                    />
+                    <Route
+                        path='/gdrive/tokens'
+                        element={
+                            <GDriveTokenGeneratorPage config={config.gdrive} stateConfig={config} />
+                        }
+                    />
+                    <Route
+                        path='/onedrive'
+                        element={
+                            <OneDrivePage config={config.onedrive} updateConfig={setOnedrive} />
+                        }
+                    />
+                    <Route
+                        path='/sharepoint'
+                        element={
+                            <SharePointPage
+                                config={config.sharepoint}
+                                updateConfig={setSharepoint}
+                            />
+                        }
+                    />
+                    <Route
+                        path='/other'
+                        element={
+                            <OtherPage
+                                tmdb={config.tmdb}
+                                subtitles={config.subtitles}
+                                build={config.build}
+                                updateTmdb={setTmdb}
+                                updateSubtitles={setSubtitles}
+                                updateBuild={setBuild}
+                            />
+                        }
+                    />
+                    <Route path='/dev' element={<DevPage />} />
+                </Routes>
+            </NavBar>
+        </Box>
     ) : (
         <DLoader />
     );

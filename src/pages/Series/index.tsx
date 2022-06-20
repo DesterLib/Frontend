@@ -9,6 +9,7 @@ import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
 import DButton from '../../components/DButton';
+import { Helmet } from '../../components/DHelmet';
 import DItemLogo from '../../components/DItemLogo';
 import DLoader from '../../components/DLoader';
 import DReviewList from '../../components/DReview';
@@ -51,6 +52,10 @@ const SeriePage = () => {
 
     return isLoaded && requestInfo.ok ? (
         <Box>
+            <Helmet>
+                <meta name='description' content={requestInfo.description} />
+                <title>{requestInfo.title}</title>
+            </Helmet>
             <Box>
                 <Box sx={{ width: '100%', position: 'relative' }}>
                     <ItemBackground>

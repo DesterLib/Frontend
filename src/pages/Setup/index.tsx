@@ -197,7 +197,7 @@ const SetupPage = () => {
                 width: 'calc(100% - 100px)',
                 marginLeft: 'auto',
                 marginRight: 'auto',
-                marginBottom: '20px'
+                marginBottom: '20px',
             }}
         >
             <Stepper activeStep={activeStep}>
@@ -230,9 +230,18 @@ const SetupPage = () => {
                     </Box>
                 </Box>
             )}
-            <Paper sx={{ margin: '20px auto', width: 'fit-content', padding: '20px', background: `linear-gradient(45deg, ${theme.palette.background.paper} 0%, ${theme.palette.background.default} 100%)` }}>
+            <Paper
+                sx={{
+                    margin: '20px auto',
+                    width: 'fit-content',
+                    padding: '20px',
+                    background: `linear-gradient(45deg, ${theme.palette.background.paper} 0%, ${theme.palette.background.default} 100%)`,
+                }}
+            >
                 {activeStep === 0 && <MainSlide />}
-                {activeStep === 1 && <StorageSlide config={config.categories} updateConfig={setCategories} />}
+                {activeStep === 1 && (
+                    <StorageSlide config={config.categories} updateConfig={setCategories} />
+                )}
                 {activeStep === 2 && <UISlide />}
                 {activeStep === 3 && <AdditionalSlide />}
                 <a

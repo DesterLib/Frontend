@@ -1,7 +1,9 @@
+import { Box } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import DButton from '../../components/DButton';
+import { Helmet } from '../../components/DHelmet';
 import DLoader from '../../components/DLoader';
 import { get } from '../../utilities/requests';
 import { MainContainer } from './styles';
@@ -126,7 +128,13 @@ const BrowsePage = () => {
 
     return isLoaded ? (
         <MainContainer>
-            <DButton onClick={handleSearch}>Search</DButton>
+            <Helmet>
+                <meta name='description' content={requestInfo.description} />
+                <title>{requestInfo.title}</title>
+            </Helmet>
+            <Box>
+                <DButton onClick={handleSearch}>Search</DButton>
+            </Box>
         </MainContainer>
     ) : (
         <DLoader />

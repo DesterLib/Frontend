@@ -42,6 +42,8 @@ const MoviePage = () => {
         message: 'An unknown error has occurred.',
         ok: false,
         time_taken: 0,
+        title: 'Dester',
+        description: 'Dester',
     });
     const theme = useTheme();
     const breakpoint = useBreakpoint();
@@ -76,7 +78,8 @@ const MoviePage = () => {
     return isLoaded && requestInfo.ok ? (
         <Box>
             <Helmet>
-                <title>{data.title}</title>
+                <meta name='description' content={requestInfo.description} />
+                <title>{requestInfo.title}</title>
             </Helmet>
             <Box>
                 <Box sx={{ width: '100%', position: 'relative' }}>

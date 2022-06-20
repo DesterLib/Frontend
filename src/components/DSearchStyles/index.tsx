@@ -95,7 +95,7 @@ const Search404 = styled(Box)<BoxProps>(({ theme }) => ({
 
 const SearchRouterLink = styled(Link)(() => ({
     textDecoration: 'none',
-    color: 'inherit'
+    color: 'inherit',
 }));
 
 const SearchCardContainer = (props: any) => {

@@ -34,7 +34,7 @@ const AdditionalSlide = () => {
                         label='Google API CLient Secret'
                         variant='outlined'
                     ></TextField>
-                    <Box sx={{marginBottom: '20px'}}>
+                    <Box sx={{ marginBottom: '20px' }}>
                         <DButton fullwidth>
                             Auto Generate: Refresh Token, Access Token, Auth Token
                         </DButton>

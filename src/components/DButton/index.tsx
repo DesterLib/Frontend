@@ -29,7 +29,12 @@ const DButton = ({ startIcon, color, children, variant, onClick, disabled, fullw
                 </DButtonPrimary>
             ) : null}
             {color === 'secondary' ? (
-                <DButtonSecondary fullwidth={fullwidth} disabled={disabled} color={color} onClick={onClick}>
+                <DButtonSecondary
+                    fullwidth={fullwidth}
+                    disabled={disabled}
+                    color={color}
+                    onClick={onClick}
+                >
                     {startIcon && (
                         <DButtonStartIcon
                             className='DButton-startIcon'
@@ -43,7 +48,12 @@ const DButton = ({ startIcon, color, children, variant, onClick, disabled, fullw
                 </DButtonSecondary>
             ) : null}
             {color === 'warning' ? (
-                <DButtonSecondary fullwidth={fullwidth} disabled={disabled} color={color} onClick={onClick}>
+                <DButtonSecondary
+                    fullwidth={fullwidth}
+                    disabled={disabled}
+                    color={color}
+                    onClick={onClick}
+                >
                     {startIcon && (
                         <DButtonStartIcon
                             className='DButton-startIcon'
@@ -57,7 +67,12 @@ const DButton = ({ startIcon, color, children, variant, onClick, disabled, fullw
                 </DButtonSecondary>
             ) : null}
             {color === 'danger' ? (
-                <DButtonSecondary fullwidth={fullwidth} disabled={disabled} color={color} onClick={onClick}>
+                <DButtonSecondary
+                    fullwidth={fullwidth}
+                    disabled={disabled}
+                    color={color}
+                    onClick={onClick}
+                >
                     {startIcon && (
                         <DButtonStartIcon
                             className='DButton-startIcon'

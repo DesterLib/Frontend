@@ -1,7 +1,7 @@
 import Box, { BoxProps } from '@mui/material/Box';
+import Chip, { ChipProps } from '@mui/material/Chip';
 import IconButton, { IconButtonProps } from '@mui/material/IconButton';
 import Typography, { TypographyProps } from '@mui/material/Typography';
-import Chip, { ChipProps } from '@mui/material/Chip';
 import { alpha, styled } from '@mui/material/styles';
 
 export const PlayButton = styled(Box)<BoxProps>(({ theme }) => ({
@@ -85,7 +85,7 @@ export const EpisodeTag = styled(Chip)<ChipProps>(({ theme }) => ({
     padding: '5px',
     background: `linear-gradient(45deg, ${theme.palette.error.dark} 0%, ${theme.palette.error.light} 100%)`,
     borderRadius: theme.shape.borderRadius,
-    boxShadow: '0px 0px 70px 20px rgba(0,0,0,0.75)'
+    boxShadow: '0px 0px 70px 20px rgba(0,0,0,0.75)',
 }));
 
 export const CardTitle = styled(Typography)<TypographyProps>(() => ({
