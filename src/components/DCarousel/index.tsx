@@ -1,3 +1,4 @@
+import { useTheme } from '@mui/material';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import React from 'react';
@@ -32,6 +33,7 @@ import {
 const DSlide = ({ item, type }: any) => {
     const breakpoint = useBreakpoint();
     const navigate = useNavigate();
+    const theme = useTheme();
     return (
         <CarouselWrapper>
             <ItemBackground>
@@ -116,7 +118,7 @@ const DSlide = ({ item, type }: any) => {
                             />
                         </Link>
                     </StyledGridContainerChild>
-                    <Grid sx={{ marginRight: '15px' }} item>
+                    <Grid sx={{ marginRight: '5px' }} item>
                         <DButton
                             color='primary'
                             startIcon={
@@ -130,7 +132,15 @@ const DSlide = ({ item, type }: any) => {
                             PLAY
                         </DButton>
                     </Grid>
-                    <Grid sx={{ marginRight: '15px' }} item>
+                    <Grid
+                        sx={{
+                            marginRight: '5px',
+                            [theme.breakpoints.down('sm')]: {
+                                display: 'none',
+                            },
+                        }}
+                        item
+                    >
                         <DButton
                             startIcon={
                                 <i style={{ pointerEvents: 'none' }} className='ri-heart-line'></i>
@@ -142,7 +152,7 @@ const DSlide = ({ item, type }: any) => {
                             FAVORITE
                         </DButton>
                     </Grid>
-                    <Grid sx={{ marginRight: '15px' }} item>
+                    <Grid sx={{ marginRight: '5px' }} item>
                         <DButton
                             startIcon={
                                 <i

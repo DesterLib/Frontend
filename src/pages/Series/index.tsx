@@ -126,12 +126,6 @@ const SeriePage = () => {
                         >
                             {data.title}
                         </Typography>
-                        {/* <Grid container>
-                            <Grid item></Grid>
-                            <Grid item></Grid>
-                            <Grid item></Grid>
-                            <Grid item></Grid>
-                        </Grid> */}
                         <Grid
                             container
                             sx={{
@@ -141,7 +135,7 @@ const SeriePage = () => {
                                 },
                             }}
                         >
-                            <Grid sx={{ marginRight: '15px' }} item>
+                            <Grid sx={{ marginRight: '5px' }} item>
                                 <DButton
                                     startIcon={<i className='ri-play-mini-fill'></i>}
                                     variant='contained'
@@ -149,26 +143,16 @@ const SeriePage = () => {
                                     PLAY
                                 </DButton>
                             </Grid>
-                            <Grid sx={{ marginRight: '15px' }} item>
+                            <Grid sx={{ marginRight: '5px' }} item>
                                 <DButton
                                     startIcon={<i className='ri-heart-line'></i>}
-                                    sx={{
-                                        span: {
-                                            margin: '0px',
-                                        },
-                                    }}
                                     color='secondary'
                                     variant='icon'
                                 />
                             </Grid>
-                            <Grid sx={{ marginRight: '15px' }} item>
+                            <Grid sx={{ marginRight: '5px' }} item>
                                 <DButton
                                     startIcon={<i className='ri-movie-2-line'></i>}
-                                    sx={{
-                                        span: {
-                                            margin: '0px',
-                                        },
-                                    }}
                                     color='secondary'
                                     variant='icon'
                                 />
@@ -176,11 +160,6 @@ const SeriePage = () => {
                             <Grid item>
                                 <DButton
                                     startIcon={<i className='ri-more-2-fill'></i>}
-                                    sx={{
-                                        span: {
-                                            margin: '0px',
-                                        },
-                                    }}
                                     color='secondary'
                                     variant='icon'
                                 />

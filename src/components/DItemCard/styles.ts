@@ -51,6 +51,17 @@ export const BottomButtonWrapper = styled(Box)<BoxProps>(({ theme }) => ({
     opacity: '0',
 }));
 
+export const TopButtonWrapper = styled(Box)<BoxProps>(() => ({
+    position: 'absolute',
+    top: '0',
+    padding: '5px',
+    display: 'flex',
+    justifyContent: 'space-between',
+    transition: '0.2s ease-out',
+    width: '100%',
+    zIndex: '1'
+}));
+
 export const Button = styled(IconButton)<IconButtonProps>(({ theme }) => ({
     height: '40px',
     width: '40px',

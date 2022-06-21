@@ -7,6 +7,7 @@ import {
     APP_NO_IMAGE_POSTER,
     APP_POSTER_QUALITY,
 } from '../../config';
+import CircularRating from '../DCircularRating';
 import DInfoModal from '../DInfoModal';
 import {
     BottomButtonWrapper,
@@ -17,6 +18,7 @@ import {
     ImageWrapper,
     ItemImage,
     PlayButton,
+    TopButtonWrapper,
 } from './styles';
 
 const DItemCard = ({ item, type }: any) => {
@@ -32,6 +34,9 @@ const DItemCard = ({ item, type }: any) => {
     return (
         <Card>
             <CardWrapper className='cardWrapper'>
+                <TopButtonWrapper>
+                    <CircularRating value={item.rating * 10} />
+                </TopButtonWrapper>
                 <ImageWrapper className='imageWrapper'>
                     <ItemImage
                         className='image'
