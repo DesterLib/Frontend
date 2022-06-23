@@ -24,6 +24,7 @@ const SeasonPage = () => {
     const { seriesId, seasonNumber }: any = useParams();
     const [data, setData] = useState<any>({});
     const [item, setItem] = useState<any>({});
+    const [navigator, setNavigator] = useState<any>({});
     const [isLoaded, setIsLoaded] = useState<boolean>(false);
     const navigate = useNavigate();
     const location: any = useLocation();
@@ -36,25 +37,58 @@ const SeasonPage = () => {
         }
     };
 
+    const handleSwitchSeason = (seasonNumber: string) => {
+        const season_index = data.seasons.findIndex(
+            ({ season_number }) => season_number == seasonNumber,
+        );
+        const newState = location.state;
+        newState.seasonKey = season_index;
+        navigate(`/series/${seriesId}/season/${seasonNumber}`, { state: newState });
+    };
+
     useEffect(() => {
         if (location.state) {
             setData(location.state.data);
             setItem(location.state.data.seasons[location.state.seasonKey]);
+            setNavigator(getNavigator(location.state.data));
             setIsLoaded(true);
         } else {
             navigate(`/series/${seriesId}`);
         }
     }, [seriesId, seasonNumber]);
 
-    let season_index;
-    let prev_season;
-    let next_season;
-    if (isLoaded) {
-        const season_keys = Object.keys(data.seasons);
-        season_index = season_keys.indexOf(seasonNumber);
-        prev_season = season_keys[season_index - 1];
-        next_season = season_keys[season_index + 1];
-    }
+    const getNavigator = (data: any) => {
+        const season_index = data.seasons.findIndex(
+            ({ season_number }) => season_number == seasonNumber,
+        );
+        const prev_season_index = data.seasons.findIndex(
+            ({ season_number }) => season_number == parseInt(seasonNumber) - 1,
+        );
+        let prev_season;
+        let is_prev_season = false;
+        if (prev_season_index >= 0) {
+            prev_season = data.seasons[prev_season_index];
+            is_prev_season = true;
+        }
+        const next_season_index = data.seasons.findIndex(
+            ({ season_number }) => season_number == parseInt(seasonNumber) + 1,
+        );
+        let next_season;
+        let is_next_season = false;
+        if (next_season_index < data.seasons.length && next_season_index != -1) {
+            next_season = data.seasons[next_season_index];
+            is_next_season = true;
+        }
+        return {
+            season_index: season_index,
+            prev_season: prev_season,
+            is_prev_season: is_prev_season,
+            prev_season_index: prev_season_index,
+            next_season: next_season,
+            is_next_season: is_next_season,
+            next_season_index: next_season_index,
+        };
+    };
 
     return isLoaded ? (
         <Box>
@@ -129,7 +163,7 @@ const SeasonPage = () => {
                         margin: 'auto',
                     }}
                 >
-                    {prev_season && (
+                    {navigator.is_prev_season && (
                         <Link
                             style={{
                                 textDecoration: 'none',
@@ -137,9 +171,9 @@ const SeasonPage = () => {
                                 marginLeft: '0',
                                 marginRight: 'auto',
                             }}
-                            to={`/series/${data.tmdb_id}/season/${prev_season}`}
-                            state={{ data: data, seasonKey: prev_season }}
-                            key={data.seasons[prev_season].id}
+                            to={`/series/${data.tmdb_id}/season/${navigator.prev_season.season_number}`}
+                            state={{ data: data, seasonKey: navigator.prev_season_index }}
+                            key={navigator.prev_season.id}
                         >
                             <Box sx={{ display: 'flex', alignItems: 'center' }}>
                                 <IconButton
@@ -154,7 +188,7 @@ const SeasonPage = () => {
                             </Box>
                         </Link>
                     )}
-                    {next_season && (
+                    {navigator.is_next_season && (
                         <Link
                             style={{
                                 textDecoration: 'none',
@@ -162,9 +196,9 @@ const SeasonPage = () => {
                                 marginLeft: 'auto',
                                 marginRight: '0',
                             }}
-                            to={`/series/${data.tmdb_id}/season/${next_season}`}
-                            state={{ data: data, seasonKey: next_season }}
-                            key={data.seasons[next_season].id}
+                            to={`/series/${data.tmdb_id}/season/${navigator.next_season.season_number}`}
+                            state={{ data: data, seasonKey: navigator.next_season_index }}
+                            key={navigator.next_season.id}
                         >
                             <Box sx={{ display: 'flex', alignItems: 'center' }}>
                                 <Typography>Next Season</Typography>
@@ -190,7 +224,12 @@ const SeasonPage = () => {
                         display: 'flex',
                     }}
                 >
-                    <DSelect width='300px' />
+                    <DSelect
+                        options={data.seasons.map(({ season_number }) => season_number.toString())}
+                        width='300px'
+                        onChange={handleSwitchSeason}
+                        currentOption={item.season_number.toString()}
+                    />
                     <ToggleButtonGroup
                         value={alignment}
                         exclusive
@@ -219,9 +258,9 @@ const SeasonPage = () => {
                 </Box>
                 <Box sx={{ padding: '30px' }}>
                     <Grid container spacing={3}>
-                        {Object.entries(item.episodes).map(([key, val]) => (
-                            <Grid key={key} item xs={6} lg={3} xl={2}>
-                                <DEpisodeCard data={data} item={val} season_index={season_index} />
+                        {item.episodes.map((item, index) => (
+                            <Grid key={index} item xs={6} lg={3} xl={2}>
+                                <DEpisodeCard data={data} item={item} season_index={navigator.season_index} />
                             </Grid>
                         ))}
                     </Grid>
