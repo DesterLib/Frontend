@@ -19,9 +19,7 @@ import {
 
 const DEpisodeCard = ({ data, item, season_index }: any) => {
     const [openModalState, setOpenModalState] = useState(false);
-    const [videoData, setVideoData] = useState<any>({});
 
-    // eslint-disable-next-line
     const openInfoModal = (event: any) => {
         event.preventDefault();
         setOpenModalState(true);
@@ -76,7 +74,7 @@ const DEpisodeCard = ({ data, item, season_index }: any) => {
             </CardTitle>
             <DInfoModal
                 item={item}
-                type='movie'
+                type='episode'
                 currentState={openModalState}
                 closeInfoModal={closeInfoModal}
             />

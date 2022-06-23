@@ -24,7 +24,7 @@ interface GenreChipProps {
 }
 
 const DInfoModal = ({ item, type, currentState, closeInfoModal }: any) => {
-    return (
+    return type == 'series' || type == 'movie' ? (
         <InfoModal
             onClose={closeInfoModal}
             aria-labelledby='customized-dialog-title'
@@ -84,7 +84,7 @@ const DInfoModal = ({ item, type, currentState, closeInfoModal }: any) => {
                             to={'/browse'}
                             state={{
                                 year: item.year,
-                                mediaType: item.number_of_files ? 'movies' : 'series',
+                                mediaType: item == 'movie' ? 'movies' : 'series',
                             }}
                             key={`${item.id}-year`}
                         >
@@ -98,7 +98,7 @@ const DInfoModal = ({ item, type, currentState, closeInfoModal }: any) => {
                         <Link
                             style={{ textDecoration: 'none' }}
                             to={'/browse'}
-                            state={{ mediaType: item.number_of_files ? 'movies' : 'series' }}
+                            state={{ mediaType: type == 'movie' ? 'movies' : 'series' }}
                             key={`${item.id}-type`}
                         >
                             <StyledChip
@@ -108,11 +108,11 @@ const DInfoModal = ({ item, type, currentState, closeInfoModal }: any) => {
                                     <i
                                         style={{ color: '#ffd000' }}
                                         className={
-                                            item.number_of_files ? 'ri-movie-2-fill' : 'ri-tv-fill'
+                                            type == 'movie' ? 'ri-movie-2-fill' : 'ri-tv-fill'
                                         }
                                     ></i>
                                 }
-                                label={item.number_of_files ? 'Movie' : 'Series'}
+                                label={item == 'movie' ? 'Movie' : 'Series'}
                             />
                         </Link>
                     </ChipContainer>
@@ -140,7 +140,90 @@ const DInfoModal = ({ item, type, currentState, closeInfoModal }: any) => {
                 </Box>
             </DialogContent>
         </InfoModal>
-    );
+    ) : type == 'season' ? (
+        <div></div>
+    ) : type == 'episode' ? (
+        <InfoModal
+            onClose={closeInfoModal}
+            aria-labelledby='customized-dialog-title'
+            open={currentState}
+        >
+            <InfoModalBackdrop>
+                <ModalImage
+                    src={`${APP_API_PATH}${APP_API_VERSION_PATH}/assets/image/${APP_BACKDROP_QUALITY}${item.thumbnail_path}`}
+                    alt=''
+                />
+                <InfoModalBackdropWrapper />
+            </InfoModalBackdrop>
+            {closeInfoModal ? (
+                <CloseButton aria-label='close' onClick={closeInfoModal}>
+                    <i className='ri-close-line'></i>
+                </CloseButton>
+            ) : null}
+            <DialogContent dividers>
+                <ButtonWrapper>
+                    <Link
+                        style={{ textDecoration: 'none' }}
+                        to={`/${type}/${item.tmdb_id}`}
+                        key={item.id}
+                    >
+                        <DButton
+                            sx={{ marginRight: 1 }}
+                            variant='contained'
+                            color='primary'
+                            size='small'
+                            startIcon={<i className='ri-play-mini-fill'></i>}
+                        >
+                            PLAY
+                        </DButton>
+                    </Link>
+                    <DButton
+                        sx={{
+                            '& .Dester-Button-startIcon': { marginRight: '0px' },
+                        }}
+                        startIcon={<i className='ri-add-circle-line'></i>}
+                        variant='contained'
+                        color='secondary'
+                        size='small'
+                    />
+                    <ChipContainer>
+                        <StyledChip className='year' label={new Date(item.air_date).toDateString().slice(4)} />
+                        <StyledChip
+                            className='rating'
+                            icon={<i style={{ color: '#ffd000' }} className='ri-star-fill'></i>}
+                            label={item.rating}
+                        />
+                        <Link
+                            style={{ textDecoration: 'none' }}
+                            to={'/browse'}
+                            state={{ mediaType: type == 'movie' ? 'movies' : 'series' }}
+                            key={`${item.id}-type`}
+                        >
+                            <StyledChip
+                                className='type'
+                                clickable
+                                icon={
+                                    <i
+                                        style={{ color: '#ffd000' }}
+                                        className={
+                                            type == 'movie' ? 'ri-movie-2-fill' : 'ri-tv-fill'
+                                        }
+                                    ></i>
+                                }
+                                label={item == 'movie' ? 'Movie' : 'Series'}
+                            />
+                        </Link>
+                    </ChipContainer>
+                </ButtonWrapper>
+                <Box>
+                    <Typography sx={{ fontWeight: '400' }} variant='h5' gutterBottom>
+                        {item.title}
+                    </Typography>
+                    <Typography gutterBottom>{item.description}</Typography>
+                </Box>
+            </DialogContent>
+        </InfoModal>
+    ) : null;
 };
 
 export default DInfoModal;

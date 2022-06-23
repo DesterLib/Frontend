@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 
 import {
@@ -7,10 +7,8 @@ import {
     APP_NO_IMAGE_POSTER,
     APP_POSTER_QUALITY,
 } from '../../config';
-import DInfoModal from '../DInfoModal';
+// import DInfoModal from '../DInfoModal';
 import {
-    BottomButtonWrapper,
-    Button,
     Card,
     CardTitle,
     CardWrapper,
@@ -20,6 +18,7 @@ import {
 } from './styles';
 
 const DSeasonCard = ({ data, type, seasonKey }: any) => {
+    /*
     const [openModalState, setOpenModalState] = useState(false);
     const openInfoModal = (event: any) => {
         event.preventDefault();
@@ -28,6 +27,13 @@ const DSeasonCard = ({ data, type, seasonKey }: any) => {
     const closeInfoModal = () => {
         setOpenModalState(false);
     };
+
+    <BottomButtonWrapper className='bottomButtonWrapper'>
+        <Button onClick={openInfoModal} onContextMenu={(e) => e.preventDefault()}>
+            <i className='ri-more-2-fill'></i>
+        </Button>
+    </BottomButtonWrapper>
+    */
     const item = data.seasons[seasonKey];
 
     return (
@@ -55,22 +61,11 @@ const DSeasonCard = ({ data, type, seasonKey }: any) => {
                         </PlayButton>
                     </Link>
                 </ImageWrapper>
-                <BottomButtonWrapper className='bottomButtonWrapper'>
-                    <Button onClick={openInfoModal} onContextMenu={(e) => e.preventDefault()}>
-                        <i className='ri-more-2-fill'></i>
-                    </Button>
-                </BottomButtonWrapper>
             </CardWrapper>
             <CardTitle>
                 {(item && item.title && (item.title || null)) ||
                     (item && item.name && (item.name || null))}
             </CardTitle>
-            <DInfoModal
-                item={item}
-                type={type}
-                currentState={openModalState}
-                closeInfoModal={closeInfoModal}
-            />
         </Card>
     );
 };
