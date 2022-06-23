@@ -1,6 +1,7 @@
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import React, { useState } from 'react';
+import DMPV from '@desterlib/dplayer';
 
 const HomePage = (props: any) => {
     const textFiledStyles = {
@@ -40,6 +41,7 @@ const HomePage = (props: any) => {
 
     return (
         <Box>
+            <DMPV />
             <TextField
                 sx={textFiledStyles}
                 helperText='Enter the name of your Dester instance'

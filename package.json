@@ -4,11 +4,12 @@
     "description": "Dester's frontend",
     "license": "MIT",
     "scripts": {
-        "start": "react-scripts start",
+        "start": "react-app-rewired start",
         "build": "react-scripts build",
         "lint": "eslint src/**/*.{js,jsx,ts,tsx,json}",
         "lint:fix": "eslint --fix src/**/*.{js,jsx,ts,tsx,json}",
-        "format": "prettier --write src/**/*.{js,jsx,ts,tsx,css,md,json} .eslintrc.json .prettierrc.json package.json tsconfig.json --config .prettierrc.json"
+        "format": "prettier --write src/**/*.{js,jsx,ts,tsx,css,md,json} .eslintrc.json .prettierrc.json package.json tsconfig.json --config .prettierrc.json",
+        "electron:start": "concurrently -k \"cross-env BROWSER=none npm start\" \"wait-on http://localhost:3000 && electronmon .\""
     },
     "dependencies": {
         "@mui/icons-material": "^5.8.4",
@@ -21,6 +22,7 @@
         "buffer": "^6.0.3",
         "html-react-parser": "^2.0.0",
         "lodash": "^4.17.21",
+        "path-browserify": "^1.0.1",
         "react": "^18.2.0",
         "react-color": "^2.19.3",
         "react-colorful": "^5.5.1",
@@ -33,15 +35,23 @@
         "use-resize-observer": "^9.0.2"
     },
     "devDependencies": {
+        "@desterlib/dplayer": "^0.1.6",
         "@trivago/prettier-plugin-sort-imports": "^3.2.0",
         "@types/lodash": "^4.14.182",
         "@typescript-eslint/eslint-plugin": "^5.29.0",
         "@typescript-eslint/parser": "^5.29.0",
+        "concurrently": "^7.2.2",
+        "cross-env": "^7.0.3",
+        "dester-dplayer": "github:DesterLib/DPlayer",
+        "electron": "^19.0.6",
+        "electronmon": "^2.0.2",
         "eslint": "^8.18.0",
         "eslint-config-prettier": "^8.5.0",
         "eslint-plugin-prettier": "^4.0.0",
         "eslint-plugin-react": "^7.30.0",
-        "prettier": "^2.7.1"
+        "prettier": "^2.7.1",
+        "react-app-rewired": "^2.2.1",
+        "wait-on": "^6.0.1"
     },
     "contributors": [
         {
