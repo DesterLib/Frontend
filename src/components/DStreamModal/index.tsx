@@ -1,3 +1,4 @@
+import DMPV from '@desterlib/dplayer';
 import Box from '@mui/material/Box';
 import DialogContent from '@mui/material/DialogContent';
 import React from 'react';
@@ -22,6 +23,7 @@ const DStreamModal = ({ videoData, currentState, closeInfoModal }: any) => {
             <DialogContent dividers>
                 <Box>
                     <DPlayer aspectRatio='21/9' videoData={videoData} />
+                    <DMPV />
                 </Box>
             </DialogContent>
         </InfoModal>
