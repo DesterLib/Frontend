@@ -5,7 +5,12 @@ import Typography from '@mui/material/Typography';
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import { APP_API_PATH, APP_API_VERSION_PATH, APP_BACKDROP_QUALITY } from '../../config';
+import {
+    APP_API_PATH,
+    APP_API_VERSION_PATH,
+    APP_BACKDROP_QUALITY,
+    APP_THUMBNAIL_QUALITY,
+} from '../../config';
 import DButton from '../DButton';
 import {
     ButtonWrapper,
@@ -150,7 +155,7 @@ const DInfoModal = ({ item, type, currentState, closeInfoModal }: any) => {
         >
             <InfoModalBackdrop>
                 <ModalImage
-                    src={`${APP_API_PATH}${APP_API_VERSION_PATH}/assets/image/${APP_BACKDROP_QUALITY}${item.thumbnail_path}`}
+                    src={`${APP_API_PATH}${APP_API_VERSION_PATH}/assets/image/${APP_THUMBNAIL_QUALITY}${item.thumbnail_path}`}
                     alt=''
                 />
                 <InfoModalBackdropWrapper />
@@ -187,7 +192,10 @@ const DInfoModal = ({ item, type, currentState, closeInfoModal }: any) => {
                         size='small'
                     />
                     <ChipContainer>
-                        <StyledChip className='year' label={new Date(item.air_date).toDateString().slice(4)} />
+                        <StyledChip
+                            className='year'
+                            label={new Date(item.air_date).toDateString().slice(4)}
+                        />
                         <StyledChip
                             className='rating'
                             icon={<i style={{ color: '#ffd000' }} className='ri-star-fill'></i>}

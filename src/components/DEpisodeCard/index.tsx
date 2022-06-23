@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { APP_NO_IMAGE_POSTER } from '../../config';
-import { APP_API_PATH, APP_API_VERSION_PATH, APP_POSTER_QUALITY } from '../../config';
+import { APP_API_PATH, APP_API_VERSION_PATH, APP_THUMBNAIL_QUALITY } from '../../config';
 import DInfoModal from '../DInfoModal';
 import {
     BottomButtonWrapper,
@@ -37,7 +37,7 @@ const DEpisodeCard = ({ data, item, season_index }: any) => {
                         src={
                             (item &&
                                 item.thumbnail_path &&
-                                `${APP_API_PATH}${APP_API_VERSION_PATH}/assets/image/${APP_POSTER_QUALITY}${item.thumbnail_path}`) ||
+                                `${APP_API_PATH}${APP_API_VERSION_PATH}/assets/image/${APP_THUMBNAIL_QUALITY}${item.thumbnail_path}`) ||
                             APP_NO_IMAGE_POSTER
                         }
                         alt=''
