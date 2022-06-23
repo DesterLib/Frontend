@@ -22,7 +22,7 @@ import {
     APP_BACKDROP_QUALITY,
     APP_POSTER_QUALITY,
 } from '../../config';
-import humanSize from '../../utilities/humanSize';
+import {humanSize, humanTime} from '../../utilities/human';
 import { get } from '../../utilities/requests';
 import useBreakpoint from '../../utilities/useBreakpoint';
 import {
@@ -634,22 +634,10 @@ const MoviePage = () => {
                                                 }}
                                                 variant='body1'
                                             >
-                                                Qualities
+                                                Movie Runtime
                                             </Typography>
-                                            <Typography
-                                                sx={{
-                                                    fontWeight: '500',
-                                                    display: 'flex',
-                                                    alignItems: 'center',
-                                                }}
-                                                variant='body1'
-                                                component={'span'}
-                                            >
-                                                1080p
-                                                <DSpacer />
-                                                720p
-                                                <DSpacer />
-                                                480p
+                                            <Typography sx={{ fontWeight: '500' }} variant='body1'>
+                                                {humanTime(data.runtime)}
                                             </Typography>
                                         </Box>
                                         <Box sx={{ display: 'flex' }}>
