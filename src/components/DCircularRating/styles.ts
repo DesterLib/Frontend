@@ -9,7 +9,7 @@ export const CircularRatingWrapper = styled(Box)<BoxProps>(({ theme }) => ({
     padding: '2px',
 }));
 
-export const RatingTypographyWrapper = styled(Box)<BoxProps>(({ theme }) => ({
+export const RatingTypographyWrapper = styled(Box)<BoxProps>(() => ({
     top: 0,
     left: 0,
     bottom: 0,

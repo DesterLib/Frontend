@@ -1,4 +1,4 @@
-import ButtonUnstyled, { buttonUnstyledClasses } from '@mui/base/ButtonUnstyled';
+import ButtonUnstyled from '@mui/base/ButtonUnstyled';
 import Box from '@mui/material/Box';
 import { alpha, styled } from '@mui/material/styles';
 

@@ -11,37 +11,37 @@
         "format": "prettier --write src/**/*.{js,jsx,ts,tsx,css,md,json} .eslintrc.json .prettierrc.json package.json tsconfig.json --config .prettierrc.json"
     },
     "dependencies": {
-        "@mui/icons-material": "^5.8.2",
-        "@mui/material": "^5.8.1",
+        "@mui/icons-material": "^5.8.4",
+        "@mui/material": "^5.8.5",
         "@mui/styled-engine": "^5.8.0",
-        "@types/node": "^16.11.36",
-        "@types/react": "^18.0.9",
+        "@types/node": "^18.0.0",
+        "@types/react": "^18.0.14",
         "@types/react-dom": "^18.0.5",
-        "artplayer": "^4.4.5",
+        "artplayer": "^4.5.2",
         "buffer": "^6.0.3",
-        "html-react-parser": "^1.4.14",
+        "html-react-parser": "^2.0.0",
         "lodash": "^4.17.21",
-        "react": "^18.1.0",
+        "react": "^18.2.0",
         "react-color": "^2.19.3",
         "react-colorful": "^5.5.1",
-        "react-dom": "^18.1.0",
+        "react-dom": "^18.2.0",
         "react-fast-compare": "^3.2.0",
         "react-router-dom": "^6.3.0",
         "react-scripts": "5.0.1",
-        "swiper": "^8.1.6",
-        "typescript": "^4.7.2",
-        "use-resize-observer": "^9.0.0"
+        "swiper": "^8.2.4",
+        "typescript": "^4.7.4",
+        "use-resize-observer": "^9.0.2"
     },
     "devDependencies": {
         "@trivago/prettier-plugin-sort-imports": "^3.2.0",
         "@types/lodash": "^4.14.182",
-        "@typescript-eslint/eslint-plugin": "^5.26.0",
-        "@typescript-eslint/parser": "^5.26.0",
-        "eslint": "^8.16.0",
+        "@typescript-eslint/eslint-plugin": "^5.29.0",
+        "@typescript-eslint/parser": "^5.29.0",
+        "eslint": "^8.18.0",
         "eslint-config-prettier": "^8.5.0",
         "eslint-plugin-prettier": "^4.0.0",
         "eslint-plugin-react": "^7.30.0",
-        "prettier": "^2.6.2"
+        "prettier": "^2.7.1"
     },
     "contributors": [
         {

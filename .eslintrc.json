@@ -31,7 +31,7 @@
             "typescript": {}
         },
         "react": {
-            "version": "18.1"
+            "version": "18"
         }
     }
 }
