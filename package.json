@@ -34,7 +34,7 @@
         "use-resize-observer": "^9.0.2"
     },
     "devDependencies": {
-        "@desterlib/dplayer": "^0.0.9",
+        "@desterlib/dplayer": "^0.0.10",
         "@trivago/prettier-plugin-sort-imports": "^3.2.0",
         "@types/lodash": "^4.14.182",
         "@typescript-eslint/eslint-plugin": "^5.29.0",
