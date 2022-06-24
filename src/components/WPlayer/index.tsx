@@ -3,8 +3,8 @@ import Typography from '@mui/material/Typography';
 import React from 'react';
 import { createPortal } from 'react-dom';
 
-import DPlayerBase from './DPlayerBase';
-import DPlaylist from './DPlaylist';
+import DPlayerBase from './WPlayerBase';
+import DPlaylist from './WPlaylist';
 
 const DPlayer = ({ videoData, aspectRatio }: any) => {
     const [show, setShow] = React.useState(false);

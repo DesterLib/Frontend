@@ -1,12 +1,12 @@
+import DPlayer from '@desterlib/dplayer';
 import { Box, Toolbar } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
 import DLoader from '../../components/DLoader';
-import DPlayer from '../../components/DPlayer';
-import isElectron from '../../utilities/isElectron';
-import DMPV from '@desterlib/dplayer';
+import WPlayer from '../../components/WPlayer';
 import { APP_API_PATH, APP_API_VERSION_PATH } from '../../config';
+import isElectron from '../../utilities/isElectron';
 
 const EpisodePage = () => {
     const { seriesId, seasonNumber, episodeNumber }: any = useParams();
@@ -58,8 +58,16 @@ const EpisodePage = () => {
         <Box>
             <Toolbar />
             <Box>
-                <DPlayer aspectRatio='21/9' videoData={videoData} />
-                {isElectron() && <DMPV />}
+                {isElectron() ? (
+                    <DPlayer
+                        url={videoData.url}
+                        title={videoData.title}
+                        subTitle={videoData.subtitle}
+                        id={videoData.id}
+                    />
+                ) : (
+                    <WPlayer aspectRatio='21/9' videoData={videoData} />
+                )}
             </Box>
         </Box>
     ) : (
