@@ -4,6 +4,8 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
 import DLoader from '../../components/DLoader';
 import DPlayer from '../../components/DPlayer';
+import isElectron from '../../utilities/isElectron';
+import DMPV from '@desterlib/dplayer';
 import { APP_API_PATH, APP_API_VERSION_PATH } from '../../config';
 
 const EpisodePage = () => {
@@ -57,6 +59,7 @@ const EpisodePage = () => {
             <Toolbar />
             <Box>
                 <DPlayer aspectRatio='21/9' videoData={videoData} />
+                {isElectron() && <DMPV />}
             </Box>
         </Box>
     ) : (

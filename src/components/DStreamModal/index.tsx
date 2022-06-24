@@ -3,6 +3,7 @@ import Box from '@mui/material/Box';
 import DialogContent from '@mui/material/DialogContent';
 import React from 'react';
 
+import isElectron from '../../utilities/isElectron';
 import DPlayer from '../DPlayer';
 import { CloseButton, InfoModal } from './styles';
 
@@ -23,7 +24,7 @@ const DStreamModal = ({ videoData, currentState, closeInfoModal }: any) => {
             <DialogContent dividers>
                 <Box>
                     <DPlayer aspectRatio='21/9' videoData={videoData} />
-                    <DMPV />
+                    {isElectron() && <DMPV />}
                 </Box>
             </DialogContent>
         </InfoModal>
