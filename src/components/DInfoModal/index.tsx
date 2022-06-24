@@ -55,7 +55,9 @@ const DInfoModal = ({ item, type, currentState, closeInfoModal }: any) => {
                         key={item.id}
                     >
                         <DButton
-                            sx={{ marginRight: 1 }}
+                            sx={{
+                                marginRight: '5px',
+                            }}
                             variant='contained'
                             color='primary'
                             size='small'
@@ -66,22 +68,19 @@ const DInfoModal = ({ item, type, currentState, closeInfoModal }: any) => {
                     </Link>
                     <DButton
                         sx={{
-                            '& .Dester-Button-startIcon': { marginRight: '0px' },
-                            marginRight: 1,
+                            marginRight: '5px',
                         }}
                         startIcon={<i className='ri-heart-line'></i>}
-                        variant='contained'
+                        variant='icon'
                         color='secondary'
-                        size='small'
                     />
                     <DButton
                         sx={{
-                            '& .Dester-Button-startIcon': { marginRight: '0px' },
+                            marginRight: '5px',
                         }}
                         startIcon={<i className='ri-add-circle-line'></i>}
-                        variant='contained'
+                        variant='icon'
                         color='secondary'
-                        size='small'
                     />
                     <ChipContainer>
                         <Link

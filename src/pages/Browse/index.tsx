@@ -133,7 +133,11 @@ const BrowsePage = () => {
                 <title>{requestInfo.title}</title>
             </Helmet>
             <Box>
-                <DButton onClick={handleSearch}>Search</DButton>
+                <Box>
+                    <Box>
+                        
+                    </Box>
+                </Box>
             </Box>
         </MainContainer>
     ) : (

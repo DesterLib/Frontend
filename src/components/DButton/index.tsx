@@ -11,11 +11,20 @@ import { DButtonPrimary, DButtonSecondary, DButtonStartIcon } from './styles';
 //     return yiq >= 128 ? 'black' : 'white';
 // }
 
-const DButton = ({ startIcon, color, children, variant, onClick, disabled, fullwidth }: any) => {
+const DButton = ({
+    startIcon,
+    color,
+    children,
+    variant,
+    onClick,
+    disabled,
+    fullwidth,
+    sx,
+}: any) => {
     return (
         <>
             {color === 'primary' || color === undefined ? (
-                <DButtonPrimary fullwidth={fullwidth} disabled={disabled} onClick={onClick}>
+                <DButtonPrimary fullwidth={fullwidth} disabled={disabled} onClick={onClick} sx={sx}>
                     {startIcon && (
                         <DButtonStartIcon
                             className='DButton-startIcon'
@@ -34,6 +43,7 @@ const DButton = ({ startIcon, color, children, variant, onClick, disabled, fullw
                     disabled={disabled}
                     color={color}
                     onClick={onClick}
+                    sx={sx}
                 >
                     {startIcon && (
                         <DButtonStartIcon
@@ -53,6 +63,7 @@ const DButton = ({ startIcon, color, children, variant, onClick, disabled, fullw
                     disabled={disabled}
                     color={color}
                     onClick={onClick}
+                    sx={sx}
                 >
                     {startIcon && (
                         <DButtonStartIcon
@@ -72,6 +83,7 @@ const DButton = ({ startIcon, color, children, variant, onClick, disabled, fullw
                     disabled={disabled}
                     color={color}
                     onClick={onClick}
+                    sx={sx}
                 >
                     {startIcon && (
                         <DButtonStartIcon
