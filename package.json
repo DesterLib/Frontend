@@ -9,7 +9,8 @@
         "lint": "eslint src/**/*.{js,jsx,ts,tsx,json}",
         "lint:fix": "eslint --fix src/**/*.{js,jsx,ts,tsx,json}",
         "format": "prettier --write src/**/*.{js,jsx,ts,tsx,css,md,json} .eslintrc.json .prettierrc.json package.json tsconfig.json --config .prettierrc.json",
-        "electron:start": "concurrently -k \"cross-env BROWSER=none npm start\" \"wait-on http://localhost:35510 && electronmon .\""
+        "electron:start": "concurrently -k \"cross-env BROWSER=none npm start\" \"wait-on http://localhost:35510 && electronmon .\"",
+        "electron:mon": "electronmon ."
     },
     "dependencies": {
         "@mui/icons-material": "^5.8.4",
@@ -34,7 +35,7 @@
         "use-resize-observer": "^9.0.2"
     },
     "devDependencies": {
-        "@desterlib/dplayer": "^0.0.10",
+        "@desterlib/dplayer": "^0.0.12",
         "@trivago/prettier-plugin-sort-imports": "^3.2.0",
         "@types/lodash": "^4.14.182",
         "@typescript-eslint/eslint-plugin": "^5.29.0",
@@ -64,7 +65,7 @@
             "url": "https://elias.eu.org"
         }
     ],
-    "main": "./public/electron.js",
+    "main": "./public/electron.ts",
     "homepage": "./",
     "browserslist": {
         "production": [
