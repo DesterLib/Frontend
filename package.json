@@ -4,9 +4,10 @@
     "description": "Dester's frontend",
     "license": "MIT",
     "scripts": {
-        "react:start": "electron-forge start",
-        "react:build": "react-app-rewired build",
+        "start": "react-app-rewired start",
+        "build": "react-app-rewired build",
         "electron:start": "concurrently -k \"cross-env BROWSER=none npm start\" \"wait-on http://localhost:35510 && electronmon .\"",
+        "electron:mon": "electronmon .",
         "electron:build": "electron-forge package",
         "electron:make": "electron-forge make",
         "lint:check": "eslint src/**/*.{js,jsx,ts,tsx,json}",
@@ -14,7 +15,7 @@
         "lint:format": "prettier --write src/**/*.{js,jsx,ts,tsx,css,md,json} .eslintrc.json .prettierrc.json package.json tsconfig.json --config .prettierrc.json"
     },
     "dependencies": {
-        "@desterlib/dplayer": "^0.0.16",
+        "@desterlib/dplayer": "^0.0.17",
         "@mui/icons-material": "^5.8.4",
         "@mui/material": "^5.8.5",
         "@mui/styled-engine": "^5.8.0",
@@ -93,22 +94,8 @@
                 {
                     "name": "@electron-forge/maker-squirrel",
                     "config": {
-                        "name": "@desterlib/frontend"
+                        "name": "Dester.Desktop"
                     }
-                },
-                {
-                    "name": "@electron-forge/maker-zip",
-                    "platforms": [
-                        "darwin"
-                    ]
-                },
-                {
-                    "name": "@electron-forge/maker-deb",
-                    "config": {}
-                },
-                {
-                    "name": "@electron-forge/maker-rpm",
-                    "config": {}
                 }
             ]
         }

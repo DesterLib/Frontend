@@ -4,6 +4,8 @@ const { app, BrowserWindow, protocol } = require('electron');
 const path = require('path');
 const url = require('url');
 
+if (require('electron-squirrel-startup')) app.quit();
+
 const PLUGIN_MIME_TYPE = 'application/x-mpvjs';
 
 function containsNonASCII(str) {
@@ -111,7 +113,7 @@ app.on('window-all-closed', function () {
     }
 });
 
-const allowedNavigationDestinations = 'https://auth0.com';
+const allowedNavigationDestinations = 'https://dester.gq';
 app.on('web-contents-created', (event, contents) => {
     contents.on('will-navigate', (event, navigationUrl) => {
         const parsedUrl = new URL(navigationUrl);
