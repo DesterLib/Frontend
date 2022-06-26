@@ -6,7 +6,7 @@ const url = require('url');
 
 if (require('electron-squirrel-startup')) app.quit();
 
-const PLUGIN_MIME_TYPE = 'application/x-mpvjs';
+const PLUGIN_MIME_TYPE = 'application/x-mpv';
 
 function containsNonASCII(str) {
     for (let i = 0; i < str.length; i++) {
@@ -17,7 +17,7 @@ function containsNonASCII(str) {
     return false;
 }
 
-function getPluginEntry(pluginDir, pluginName = 'mpvjs.node') {
+function getPluginEntry(pluginDir, pluginName = 'mpv.node') {
     const fullPluginPath = path.join(pluginDir, pluginName);
     let pluginPath = path.relative(process.cwd(), fullPluginPath);
     if (path.dirname(pluginPath) === '.') {
@@ -49,15 +49,16 @@ switch (process.platform) {
         break;
 }
 
-const pdir = path.join(__dirname, '..', 'node_modules', '@desterlib', 'dplayer', 'dist');
+const pluginDir = path.join(path.dirname(require.resolve("@desterlib/dplayer")));
+console.log(pluginDir);
 
 if (process.platform !== 'linux') {
-    process.chdir(pdir);
+    process.chdir(pluginDir);
 }
 
 app.commandLine.appendSwitch('no-sandbox');
 app.commandLine.appendSwitch('ignore-gpu-blacklist');
-app.commandLine.appendSwitch('register-pepper-plugins', getPluginEntry(pdir));
+app.commandLine.appendSwitch('register-pepper-plugins', getPluginEntry(pluginDir));
 
 function createWindow() {
     const mainWindow = new BrowserWindow({
