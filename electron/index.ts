@@ -48,9 +48,7 @@ switch (process.platform) {
         os = 'win';
         break;
 }
-
-const pluginDir = path.join(path.dirname(require.resolve("@desterlib/dplayer")));
-console.log(pluginDir);
+const pluginDir = path.join(path.dirname(require.resolve('@desterlib/mpv')), 'dist');
 
 if (process.platform !== 'linux') {
     process.chdir(pluginDir);

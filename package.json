@@ -15,7 +15,9 @@
         "lint:format": "prettier --write src/**/*.{js,jsx,ts,tsx,css,md,json} .eslintrc.json .prettierrc.json package.json tsconfig.json --config .prettierrc.json"
     },
     "dependencies": {
-        "@desterlib/dplayer": "^0.0.19",
+        "@desterlib/dplayer": "^0.0.21",
+        "@emotion/react": "^11.9.3",
+        "@emotion/styled": "^11.9.3",
         "@mui/icons-material": "^5.8.4",
         "@mui/material": "^5.8.5",
         "@mui/styled-engine": "^5.8.0",
