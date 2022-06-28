@@ -1,6 +1,7 @@
 import { Box } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { Helmet } from '../../components/DHelmet';
 import DLoader from '../../components/DLoader';
@@ -19,15 +20,19 @@ import UIPage from './pages/UIPage';
 
 const Settings = (props: any) => {
     const { colorModeContext, themeMode } = props;
+    const navigate = useNavigate();
 
     const [isLoaded, setIsLoaded] = useState<boolean>(false);
     const [config, setConfig] = useState<any>({});
+    const [secretKey, setSecretKey] = useState<string>('');
     const [requestInfo, setRequestInfo] = useState<any>({});
     const [refresh, setRefresh] = useState<number>(0);
 
     useEffect(() => {
-        const getData = async () => {
-            const res = await fetch(`${APP_API_PATH}${APP_API_VERSION_PATH}/settings`);
+        const getData = async (secretKey: string) => {
+            const res = await fetch(
+                `${APP_API_PATH}${APP_API_VERSION_PATH}/settings?secret_key=${secretKey}`,
+            );
             const data = (await res.json()) || {};
             var tempConfig = data.result || {};
             if (!tempConfig.app) {
@@ -62,17 +67,26 @@ const Settings = (props: any) => {
             }
             setConfig(tempConfig);
             const info = {
-                code: data.code,
-                message: data.message,
-                ok: data.ok,
-                time_taken: data.time_taken,
+                code: data.code || 500,
+                message: data.message || '',
+                ok: data.ok || false,
+                time_taken: data.time_taken || 0,
                 title: data.title,
                 description: data.description,
             };
             setRequestInfo(info);
-            setIsLoaded(true);
+            if (info.ok) {
+                setIsLoaded(true);
+            } else if (info.code == 401) {
+                alert('The secret key was incorrect.');
+                navigate('/');
+            } else {
+                alert('Something went wrong.');
+            }
         };
-        getData();
+        const secretKey = window.prompt('Secret Key') || '';
+        setSecretKey(secretKey);
+        getData(secretKey);
     }, []);
 
     const setApp = (appConfig: any) => {
@@ -136,11 +150,12 @@ const Settings = (props: any) => {
     };
 
     const handleSave = () => {
-        fetch(`${APP_API_PATH}${APP_API_VERSION_PATH}/settings`, {
+        fetch(`${APP_API_PATH}${APP_API_VERSION_PATH}/settings?secret_key=${secretKey}`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(config),
         });
+        setSecretKey(config.app.secret_key || '');
         setRefresh(refresh + 1);
     };
 

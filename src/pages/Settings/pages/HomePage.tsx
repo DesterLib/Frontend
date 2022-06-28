@@ -38,6 +38,13 @@ const HomePage = (props: any) => {
         setRefresh(refresh + 1);
     };
 
+    const handleChangeSecretKey = (event: any) => {
+        var newConfig = config;
+        newConfig['secret_key'] = event.target.value;
+        updateConfig(newConfig);
+        setRefresh(refresh + 1);
+    };
+
     return (
         <Box>
             <TextField
@@ -75,6 +82,15 @@ const HomePage = (props: any) => {
                 variant='outlined'
                 onChange={handleChangeDomain}
                 value={config.domain}
+            />
+            <TextField
+                sx={textFiledStyles}
+                helperText='Enter a password to access the settings page with'
+                fullWidth
+                label='Secret Key'
+                variant='outlined'
+                onChange={handleChangeSecretKey}
+                value={config.secret_key}
             />
         </Box>
     );
