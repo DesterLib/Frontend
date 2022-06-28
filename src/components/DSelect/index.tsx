@@ -1,6 +1,6 @@
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 
 import { DropDownSelectItem } from './styles';
 

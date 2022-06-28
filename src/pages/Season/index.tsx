@@ -260,7 +260,11 @@ const SeasonPage = () => {
                     <Grid container spacing={3}>
                         {item.episodes.map((item, index) => (
                             <Grid key={index} item xs={6} lg={3} xl={2}>
-                                <DEpisodeCard data={data} item={item} season_index={navigator.season_index} />
+                                <DEpisodeCard
+                                    data={data}
+                                    item={item}
+                                    season_index={navigator.season_index}
+                                />
                             </Grid>
                         ))}
                     </Grid>

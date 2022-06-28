@@ -6,12 +6,12 @@
     "scripts": {
         "start": "react-app-rewired start",
         "build": "react-app-rewired build",
-        "electron:start": "concurrently -k \"cross-env BROWSER=none npm start\" \"wait-on http://localhost:35510 && electronmon .\"",
-        "electron:mon": "electronmon .",
+        "electron:start": "concurrently -k \"cross-env BROWSER=none npm start\" \"wait-on http://localhost:35510 && cross-env NODE_ENV=development electronmon .\"",
+        "electron:mon": "cross-env NODE_ENV=development electronmon .",
         "electron:build": "npm run build && rm -rf dist && electron-builder --config electron/electron-builder.json --win --x64",
-        "lint:check": "eslint src/**/*.{js,jsx,ts,tsx,json}",
-        "lint:fix": "eslint --fix src/**/*.{js,jsx,ts,tsx,json}",
-        "lint:format": "prettier --write src/**/*.{js,jsx,ts,tsx,css,md,json} .eslintrc.json .prettierrc.json package.json tsconfig.json --config .prettierrc.json"
+        "lint:check": "eslint src/**/*.{js,jsx,ts,tsx} electron/*.{js,jsx,ts,tsx}",
+        "lint:fix": "eslint --fix src/**/*.{js,jsx,ts,tsx} electron/*.{js,jsx,ts,tsx}",
+        "lint:format": "prettier --write src/**/*.{js,jsx,ts,tsx,css,md,json} electron/*.{js,jsx,ts,tsx,css,md,json} .eslintrc.json .prettierrc.json package.json tsconfig.json --config .prettierrc.json"
     },
     "dependencies": {
         "@desterlib/dplayer": "^0.0.21",
@@ -46,6 +46,7 @@
         "@typescript-eslint/parser": "^5.29.0",
         "concurrently": "^7.2.2",
         "cross-env": "^7.0.3",
+        "custom-electron-titlebar": "^4.1.0",
         "electron": "^19.0.6",
         "electron-builder": "^23.1.0",
         "electronmon": "^2.0.2",

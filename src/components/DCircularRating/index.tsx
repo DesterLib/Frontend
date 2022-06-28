@@ -1,4 +1,7 @@
-import CircularProgress, { CircularProgressProps, circularProgressClasses } from '@mui/material/CircularProgress';
+import CircularProgress, {
+    CircularProgressProps,
+    circularProgressClasses,
+} from '@mui/material/CircularProgress';
 import Typography from '@mui/material/Typography';
 import React from 'react';
 

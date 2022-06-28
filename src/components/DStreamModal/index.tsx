@@ -30,7 +30,9 @@ const DStreamModal = ({ videoData, currentState, closeInfoModal }: any) => {
                             subTitle={videoData.subtitle}
                             id={videoData.id}
                         />
-                    ) : <WPlayer aspectRatio='21/9' videoData={videoData} />}
+                    ) : (
+                        <WPlayer aspectRatio='21/9' videoData={videoData} />
+                    )}
                 </Box>
             </DialogContent>
         </InfoModal>

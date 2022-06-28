@@ -62,8 +62,10 @@ app.commandLine.appendSwitch('register-pepper-plugins', getPluginEntry(pluginDir
 
 function createWindow() {
     const mainWindow = new BrowserWindow({
-        width: 1280,
-        height: 720,
+        title: 'Dester Desktop',
+        show: false,
+        frame: true,
+        backgroundColor: '#00151C',
         webPreferences: {
             preload: path.join(__dirname, 'preload.ts'),
             enableRemoteModule: true,
@@ -79,8 +81,9 @@ function createWindow() {
           })
         : 'http://localhost:35510';
     mainWindow.loadURL(appURL);
-
+    mainWindow.maximize();
     if (!app.isPackaged) {
+        mainWindow.setIcon(path.join(__dirname, 'icons', '512x512.ico'));
         mainWindow.webContents.openDevTools();
     }
 }

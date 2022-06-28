@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 const { remote, shell } = require('electron');
 const fs = require('fs');
 

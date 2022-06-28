@@ -8,14 +8,7 @@ import {
     APP_POSTER_QUALITY,
 } from '../../config';
 // import DInfoModal from '../DInfoModal';
-import {
-    Card,
-    CardTitle,
-    CardWrapper,
-    ImageWrapper,
-    ItemImage,
-    PlayButton,
-} from './styles';
+import { Card, CardTitle, CardWrapper, ImageWrapper, ItemImage, PlayButton } from './styles';
 
 const DSeasonCard = ({ data, type, seasonKey }: any) => {
     /*

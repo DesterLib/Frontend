@@ -59,7 +59,7 @@ export const TopButtonWrapper = styled(Box)<BoxProps>(() => ({
     justifyContent: 'space-between',
     transition: '0.2s ease-out',
     width: '100%',
-    zIndex: '1'
+    zIndex: '1',
 }));
 
 export const Button = styled(IconButton)<IconButtonProps>(({ theme }) => ({
