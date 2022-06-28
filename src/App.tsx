@@ -6,6 +6,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './MuiClassNameSetup';
 import DBottomBar from './components/DBottomBar';
 import DNavbar from './components/DNavbar';
+import { APP_NAME } from './config';
 import BrowsePage from './pages/Browse';
 import DisconnectedPage from './pages/Disconnected';
 import EpisodePage from './pages/Episode';
@@ -26,7 +27,7 @@ const App = () => {
     const [mode, setMode] = useState<PaletteMode>('dark');
 
     useEffect(() => {
-        document.title = 'Dester';
+        document.title = APP_NAME;
         let localTheme = localStorage.getItem('theme') || 'dark';
         localTheme = localTheme === 'light' ? 'light' : 'dark';
         setMode(localTheme as PaletteMode);

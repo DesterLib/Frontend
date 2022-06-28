@@ -19,6 +19,8 @@ import {
     APP_API_PATH,
     APP_API_VERSION_PATH,
     APP_BACKDROP_QUALITY,
+    APP_DESCRIPTION,
+    APP_NAME,
     APP_POSTER_QUALITY,
 } from '../../config';
 import { humanSize, humanTime } from '../../utilities/human';
@@ -53,8 +55,8 @@ const SeriePage = () => {
     return isLoaded && requestInfo.ok ? (
         <Box>
             <Helmet>
-                <meta name='description' content={requestInfo.description} />
-                <title>{requestInfo.title}</title>
+                <title>{`${APP_NAME} | ${data.title}`}</title>
+                <meta name='description' content={APP_DESCRIPTION} />
             </Helmet>
             <Box>
                 <Box sx={{ width: '100%', position: 'relative' }}>

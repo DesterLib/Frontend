@@ -4,6 +4,7 @@ import DCarousel from '../../components/DCarousel';
 import { Helmet } from '../../components/DHelmet';
 import DLoader from '../../components/DLoader';
 import DSlider from '../../components/DSlider';
+import { APP_DESCRIPTION, APP_NAME } from '../../config';
 import { get } from '../../utilities/requests';
 import { MainContainer, MainWrapper } from './styles';
 
@@ -27,8 +28,8 @@ const HomePage = () => {
     return isLoaded ? (
         <MainContainer>
             <Helmet>
-                <meta name='description' content={requestInfo.description} />
-                <title>{requestInfo.title}</title>
+                <title>{APP_NAME}</title>
+                <meta name='description' content={APP_DESCRIPTION} />
             </Helmet>
             <MainWrapper>
                 <Fragment>

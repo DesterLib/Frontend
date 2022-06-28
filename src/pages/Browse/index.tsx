@@ -5,6 +5,7 @@ import { useLocation } from 'react-router-dom';
 import DButton from '../../components/DButton';
 import { Helmet } from '../../components/DHelmet';
 import DLoader from '../../components/DLoader';
+import { APP_DESCRIPTION, APP_NAME } from '../../config';
 import { get } from '../../utilities/requests';
 import { MainContainer } from './styles';
 
@@ -124,19 +125,15 @@ const BrowsePage = () => {
         setParams(newParams);
     };
 
-    console.log(data);
-
     return isLoaded ? (
         <MainContainer>
             <Helmet>
-                <meta name='description' content={requestInfo.description} />
-                <title>{requestInfo.title}</title>
+                <title>{APP_NAME}</title>
+                <meta name='description' content={APP_DESCRIPTION} />
             </Helmet>
             <Box>
                 <Box>
-                    <Box>
-                        
-                    </Box>
+                    <Box></Box>
                 </Box>
             </Box>
         </MainContainer>

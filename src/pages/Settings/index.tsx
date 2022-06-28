@@ -4,7 +4,7 @@ import { Route, Routes } from 'react-router-dom';
 
 import { Helmet } from '../../components/DHelmet';
 import DLoader from '../../components/DLoader';
-import { APP_API_PATH, APP_API_VERSION_PATH } from '../../config';
+import { APP_API_PATH, APP_API_VERSION_PATH, APP_DESCRIPTION, APP_NAME } from '../../config';
 import NavBar from './components/NavBar';
 import Auth0Page from './pages/Auth0Page';
 import CategoryPage from './pages/CategoryPage';
@@ -148,8 +148,8 @@ const Settings = (props: any) => {
         <Box>
             {' '}
             <Helmet>
-                <meta name='description' content={requestInfo.description} />
-                <title>{requestInfo.title}</title>
+                <title>{APP_NAME}</title>
+                <meta name='description' content={APP_DESCRIPTION} />
             </Helmet>
             <NavBar
                 themeMode={themeMode}

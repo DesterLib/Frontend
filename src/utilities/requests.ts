@@ -1,4 +1,4 @@
-import { APP_API_PATH, APP_API_VERSION_PATH } from '../config';
+import { APP_API_PATH, APP_API_VERSION_PATH, APP_DESCRIPTION, APP_NAME } from '../config';
 
 export const get = async (path: string, setData: any, setRequestInfo: any, setIsLoaded: any) => {
     const res = await fetch(`${APP_API_PATH}${APP_API_VERSION_PATH}${path}`);
@@ -8,8 +8,8 @@ export const get = async (path: string, setData: any, setRequestInfo: any, setIs
         ok: false,
         result: null,
         time_taken: 0,
-        title: 'Dester',
-        description: 'Dester',
+        title: APP_NAME,
+        description: APP_DESCRIPTION,
     };
     const info = {
         code: data.code,
@@ -19,6 +19,12 @@ export const get = async (path: string, setData: any, setRequestInfo: any, setIs
         title: data.title,
         description: data.description,
     };
+    if (info.title !== localStorage.getItem('APP_NAME')) {
+        localStorage.setItem('APP_NAME', info.title);
+    }
+    if (info.description !== localStorage.getItem('APP_DESCRIPTION')) {
+        localStorage.setItem('APP_DESCRIPTION', info.description);
+    }
     setData(data.result);
     setRequestInfo(info);
     setIsLoaded(true);
