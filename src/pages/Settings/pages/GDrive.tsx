@@ -40,7 +40,7 @@ const GDrive = (props: any) => {
     const tradeAuthCode = async () => {
         const body = {
             grant_type: 'authorization_code',
-            redirect_uri: `${window.location.origin}/settings/gdrive`,
+            redirect_uri: `${window.location.origin}/#/settings/gdrive`,
             code: authCode,
         };
         await requestTokens(body);

@@ -46,7 +46,11 @@ switch (process.platform) {
         os = 'win';
         break;
 }
-const pluginDir = path.join(path.dirname(require.resolve('@desterlib/mpv')), 'dist');
+
+const pluginDir =
+    process.env.NODE_ENV === 'development'
+        ? path.join(path.dirname(require.resolve('@desterlib/mpv')), 'dist') // @ts-ignore
+        : path.join(process.resourcesPath, 'app.asar.unpacked', 'node_modules', '@desterlib', 'mpv', 'dist');
 
 if (process.platform !== 'linux') {
     process.chdir(pluginDir);

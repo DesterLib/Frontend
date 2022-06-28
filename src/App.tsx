@@ -1,7 +1,7 @@
 import { CssBaseline, PaletteMode } from '@mui/material';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import React, { createContext, useEffect, useMemo, useState } from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { HashRouter, Route, Routes } from 'react-router-dom';
 
 import './MuiClassNameSetup';
 import DBottomBar from './components/DBottomBar';
@@ -108,7 +108,7 @@ const App = () => {
         <ColorModeContext.Provider value={colorMode}>
             <ThemeProvider theme={theme}>
                 <CssBaseline />
-                <BrowserRouter>
+                <HashRouter>
                     <DNavbar colorModeContext={ColorModeContext} themeMode={mode} />
                     <Routes>
                         <Route path='*' element={<NotFoundPage />} />
@@ -134,7 +134,7 @@ const App = () => {
                         <Route path='/disconnected' element={<DisconnectedPage />} />
                     </Routes>
                     <DBottomBar />
-                </BrowserRouter>
+                </HashRouter>
             </ThemeProvider>
         </ColorModeContext.Provider>
     );
