@@ -8,8 +8,7 @@
         "build": "react-app-rewired build",
         "electron:start": "concurrently -k \"cross-env BROWSER=none npm start\" \"wait-on http://localhost:35510 && electronmon .\"",
         "electron:mon": "electronmon .",
-        "electron:build": "electron-forge package",
-        "electron:make": "electron-forge make",
+        "electron:build": "electron-builder --config electron/electron-builder.json --win --x64",
         "lint:check": "eslint src/**/*.{js,jsx,ts,tsx,json}",
         "lint:fix": "eslint --fix src/**/*.{js,jsx,ts,tsx,json}",
         "lint:format": "prettier --write src/**/*.{js,jsx,ts,tsx,css,md,json} .eslintrc.json .prettierrc.json package.json tsconfig.json --config .prettierrc.json"
@@ -26,7 +25,6 @@
         "@types/react-dom": "^18.0.5",
         "artplayer": "^4.5.2",
         "buffer": "^6.0.3",
-        "electron-squirrel-startup": "^1.0.0",
         "html-react-parser": "^2.0.0",
         "lodash": "^4.17.21",
         "path-browserify": "^1.0.1",
@@ -41,11 +39,6 @@
         "use-resize-observer": "^9.0.2"
     },
     "devDependencies": {
-        "@electron-forge/cli": "^6.0.0-beta.64",
-        "@electron-forge/maker-deb": "^6.0.0-beta.64",
-        "@electron-forge/maker-rpm": "^6.0.0-beta.64",
-        "@electron-forge/maker-squirrel": "^6.0.0-beta.64",
-        "@electron-forge/maker-zip": "^6.0.0-beta.64",
         "@trivago/prettier-plugin-sort-imports": "^3.2.0",
         "@types/lodash": "^4.14.182",
         "@typescript-eslint/eslint-plugin": "^5.29.0",
@@ -53,6 +46,7 @@
         "concurrently": "^7.2.2",
         "cross-env": "^7.0.3",
         "electron": "^19.0.6",
+        "electron-builder": "^23.1.0",
         "electronmon": "^2.0.2",
         "eslint": "^8.18.0",
         "eslint-config-prettier": "^8.5.0",
@@ -88,18 +82,5 @@
             "last 1 firefox version",
             "last 1 safari version"
         ]
-    },
-    "config": {
-        "forge": {
-            "packagerConfig": {},
-            "makers": [
-                {
-                    "name": "@electron-forge/maker-squirrel",
-                    "config": {
-                        "name": "Dester.Desktop"
-                    }
-                }
-            ]
-        }
     }
 }

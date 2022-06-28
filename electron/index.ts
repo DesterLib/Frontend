@@ -4,8 +4,6 @@ const { app, BrowserWindow, protocol } = require('electron');
 const path = require('path');
 const url = require('url');
 
-if (require('electron-squirrel-startup')) app.quit();
-
 const PLUGIN_MIME_TYPE = 'application/x-mpv';
 
 function containsNonASCII(str) {
