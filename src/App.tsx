@@ -19,11 +19,13 @@ import Settings from './pages/Settings';
 import SetupPage from './pages/Setup';
 import darkTheme from './theme/darkTheme';
 import lightTheme from './theme/lightTheme';
+import electronServer from './utilities/electronServer';
 
 // eslint-disable-next-line
 const ColorModeContext = createContext({ toggleColorMode: () => {} });
 
 const App = () => {
+    electronServer();
     const [mode, setMode] = useState<PaletteMode>('dark');
 
     useEffect(() => {

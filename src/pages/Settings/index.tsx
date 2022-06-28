@@ -1,7 +1,8 @@
-import { Box } from '@mui/material';
+import { Box, useTheme } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 import { Helmet } from '../../components/DHelmet';
 import DLoader from '../../components/DLoader';
@@ -21,6 +22,7 @@ import UIPage from './pages/UIPage';
 const Settings = (props: any) => {
     const { colorModeContext, themeMode } = props;
     const navigate = useNavigate();
+    const theme = useTheme();
 
     const [isLoaded, setIsLoaded] = useState<boolean>(false);
     const [config, setConfig] = useState<any>({});
@@ -29,7 +31,16 @@ const Settings = (props: any) => {
     const [refresh, setRefresh] = useState<number>(0);
 
     useEffect(() => {
-        const getData = async (secretKey: string) => {
+        const getData = async () => {
+            const { value: secretKey } = await Swal.fire({
+                title: 'Secret Key',
+                input: 'text',
+                inputLabel: 'Your secret key',
+                inputValue: '',
+                showCancelButton: true,
+                confirmButtonColor: theme.palette.primary.dark,
+            });
+            setSecretKey(secretKey);
             const res = await fetch(
                 `${APP_API_PATH}${APP_API_VERSION_PATH}/settings?secret_key=${secretKey}`,
             );
@@ -78,15 +89,25 @@ const Settings = (props: any) => {
             if (info.ok) {
                 setIsLoaded(true);
             } else if (info.code == 401) {
-                alert('The secret key was incorrect.');
+                Swal.fire({
+                    title: 'Error!',
+                    text: 'The secret key was incorrect.',
+                    icon: 'error',
+                    confirmButtonText: 'Ok',
+                    confirmButtonColor: theme.palette.primary.dark,
+                });
                 navigate('/');
             } else {
-                alert('Something went wrong.');
+                Swal.fire({
+                    title: 'Error!',
+                    text: 'Something went wrong.',
+                    icon: 'error',
+                    confirmButtonText: 'Ok',
+                    confirmButtonColor: theme.palette.primary.dark,
+                });
             }
         };
-        const secretKey = window.prompt('Secret Key') || '';
-        setSecretKey(secretKey);
-        getData(secretKey);
+        getData();
     }, []);
 
     const setApp = (appConfig: any) => {
