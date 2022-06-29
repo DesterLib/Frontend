@@ -227,6 +227,7 @@ const SeasonPage = () => {
                     <DSelect
                         options={data.seasons.map(({ season_number }) => season_number.toString())}
                         width='300px'
+                        fixedValue='Season'
                         onChange={handleSwitchSeason}
                         currentOption={item.season_number.toString()}
                     />

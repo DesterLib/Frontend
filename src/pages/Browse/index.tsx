@@ -1,10 +1,14 @@
-import { Box } from '@mui/material';
+import { IconButton, Toolbar } from '@mui/material';
+import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import DButton from '../../components/DButton';
 import { Helmet } from '../../components/DHelmet';
 import DLoader from '../../components/DLoader';
+import { SearchIconWrapper, SearchInputBase, SearchWrapper } from '../../components/DSearchStyles';
+import DSelect from '../../components/DSelect';
 import { APP_DESCRIPTION, APP_NAME } from '../../config';
 import { get } from '../../utilities/requests';
 import { MainContainer } from './styles';
@@ -125,15 +129,95 @@ const BrowsePage = () => {
         setParams(newParams);
     };
 
+    const genres = [
+        {
+            genre: 'Action',
+        },
+        {
+            genre: 'Adventure',
+        },
+        {
+            genre: 'Fantasy',
+        },
+    ];
+
     return isLoaded ? (
         <MainContainer>
+            <Toolbar />
             <Helmet>
                 <title>{APP_NAME}</title>
                 <meta name='description' content={APP_DESCRIPTION} />
             </Helmet>
-            <Box>
+            <Box sx={{ marginTop: '20px' }}>
                 <Box>
-                    <Box></Box>
+                    <Grid
+                        container
+                        sx={{ display: 'flex', justifyContent: 'center', padding: '10px' }}
+                    >
+                        <Grid item sm={10}>
+                            <SearchWrapper fullWidth standalone>
+                                <SearchIconWrapper>
+                                    <i className='ri-search-2-line'></i>
+                                </SearchIconWrapper>
+                                <SearchInputBase
+                                    fullWidth
+                                    placeholder='Search…'
+                                    inputProps={{ 'aria-label': 'search' }}
+                                />
+                            </SearchWrapper>
+                        </Grid>
+                    </Grid>
+                    <Grid
+                        spacing={4}
+                        container
+                        sx={{
+                            display: 'flex',
+                            justifyContent: 'center',
+                            marginTop: '0px',
+                            padding: '5px',
+                        }}
+                    >
+                        <Grid item sm={2}>
+                            <DSelect
+                                fullWidth
+                                title='Genre'
+                                currentOption={'Any'}
+                                options={genres.map(({ genre }) => genre)}
+                            />
+                        </Grid>
+                        <Grid item sm={2}>
+                            <DSelect
+                                fullWidth
+                                title='Year'
+                                currentOption={'Any'}
+                                options={genres.map(({ genre }) => genre)}
+                            />
+                        </Grid>
+                        <Grid item sm={2}>
+                            <DSelect
+                                fullWidth
+                                title='Type'
+                                currentOption={'Any'}
+                                options={genres.map(({ genre }) => genre)}
+                            />
+                        </Grid>
+                        <Grid item sm={2}>
+                            <DSelect
+                                fullWidth
+                                title='Language'
+                                currentOption={'Any'}
+                                options={genres.map(({ genre }) => genre)}
+                            />
+                        </Grid>
+                        <Grid item sm={2}>
+                            <DSelect
+                                fullWidth
+                                title='Sort'
+                                currentOption={'Any'}
+                                options={genres.map(({ genre }) => genre)}
+                            />
+                        </Grid>
+                    </Grid>
                 </Box>
             </Box>
         </MainContainer>

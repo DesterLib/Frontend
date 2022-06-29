@@ -20,11 +20,11 @@ import {
 } from '../../config';
 import DInfoModal from '../DInfoModal';
 
-const SearchWrapper = styled(Box)<BoxProps>(({ theme }) => ({
+const SearchWrapper = styled(Box)<any>(({ theme, fullWidth, standalone }) => ({
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
     transition: '0.2s ease-out',
-    width: '400px',
+    width: fullWidth ? '100%' : '400px',
     height: '40px',
     backgroundColor: alpha(theme.palette.background.default, 0.7),
     backgroundImage: 'linear-gradient(rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.09))',
@@ -36,7 +36,7 @@ const SearchWrapper = styled(Box)<BoxProps>(({ theme }) => ({
         width: '100%',
     },
     [theme.breakpoints.down('md')]: {
-        display: 'none',
+        display: standalone ? 'block' : 'none',
     },
 }));
 

@@ -3,10 +3,6 @@ import Box, { BoxProps } from '@mui/system/Box';
 
 export const MainContainer = styled(Box)<BoxProps>(() => ({
     width: '100%',
-    height: '100vh',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexDirection: 'column',
+    height: '100%',
     padding: '20px',
 }));

@@ -53,6 +53,7 @@ export const DButtonSecondary = styled(ButtonUnstyled)<DButtonProps>(({ theme })
     background: `linear-gradient(45deg, ${theme.palette.secondary.dark} 0%, ${theme.palette.secondary.main} 100%)`,
     boxShadow: `0px 0px 0px 1px ${alpha(theme.palette.secondary.main, 0.7)}`,
     '&:hover': {
+        transition: '0.2s ease-out',
         backgroundColor: theme.palette.secondary.main,
         boxShadow: `0px 0px 0px 2px ${alpha(theme.palette.secondary.main, 0.7)}`,
     },
