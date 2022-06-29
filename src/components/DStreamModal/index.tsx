@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import DialogContent from '@mui/material/DialogContent';
 import React from 'react';
 
-import isElectron from '../../utilities/isElectron';
+import { APP_IS_ELECTRON } from '../../config';
 import WPlayer from '../WPlayer';
 import { CloseButton, InfoModal } from './styles';
 
@@ -23,7 +23,7 @@ const DStreamModal = ({ videoData, currentState, closeInfoModal }: any) => {
             ) : null}
             <DialogContent dividers>
                 <Box>
-                    {isElectron() ? (
+                    {APP_IS_ELECTRON ? (
                         <DPlayer
                             url={videoData.url}
                             title={videoData.title}

@@ -1,11 +1,10 @@
 import { useTheme } from '@mui/material';
 import Swal from 'sweetalert2';
 
-import { APP_API_PATH } from '../config';
-import isElectron from './isElectron';
+import { APP_API_PATH, APP_IS_ELECTRON } from '../config';
 
 const electronServer = async () => {
-    if (isElectron() && !APP_API_PATH) {
+    if (APP_IS_ELECTRON && !APP_API_PATH) {
         const theme = useTheme();
         const { value: serverUrl } = await Swal.fire({
             title: 'Server URL',

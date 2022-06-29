@@ -5,8 +5,7 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
 import DLoader from '../../components/DLoader';
 import WPlayer from '../../components/WPlayer';
-import { APP_API_PATH, APP_API_VERSION_PATH } from '../../config';
-import isElectron from '../../utilities/isElectron';
+import { APP_API_PATH, APP_API_VERSION_PATH, APP_IS_ELECTRON } from '../../config';
 
 const EpisodePage = () => {
     const { seriesId, seasonNumber, episodeNumber }: any = useParams();
@@ -58,7 +57,7 @@ const EpisodePage = () => {
         <Box>
             <Toolbar />
             <Box>
-                {isElectron() ? (
+                {APP_IS_ELECTRON ? (
                     <DPlayer
                         url={videoData.url}
                         title={videoData.title}
