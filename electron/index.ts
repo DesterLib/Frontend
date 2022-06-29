@@ -37,20 +37,10 @@ function getPluginEntry(pluginDir, pluginName = 'mpv.node') {
     return `${pluginPath};${PLUGIN_MIME_TYPE}`;
 }
 
-let os;
-switch (process.platform) {
-    case 'darwin':
-        os = 'mac';
-        break;
-    case 'win32':
-        os = 'win';
-        break;
-}
-
 const pluginDir =
     process.env.NODE_ENV === 'development'
         ? path.join(path.dirname(require.resolve('@desterlib/mpv')), 'dist') // @ts-ignore
-        : path.join(process.resourcesPath, 'app.asar.unpacked', 'node_modules', '@desterlib', 'mpv', 'dist');
+        : path.join(process.resourcesPath, 'libs');
 
 if (process.platform !== 'linux') {
     process.chdir(pluginDir);

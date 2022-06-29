@@ -2,7 +2,7 @@
     "appId": "gq.dester.desktop",
     "productName": "Dester Desktop",
     "executableName": "${productName}",
-    "artifactName": "Dester.Desktop.${version}.${ext}",
+    "artifactName": "Dester.Desktop.v${version}.${ext}",
     "copyright": "Copyright © 2022 Dester",
     "win": {
         "icon": "electron/icons/512x512.ico",
@@ -11,22 +11,6 @@
             "arch": ["x64"]
         }
     },
-    "files": [
-        "**/*",
-        "./build/**/*",
-        "./electron/*",
-        "!**/node_modules/@desterlib/mpv",
-        "!**/node_modules/*/{CHANGELOG.md,README.md,README,readme.md,readme}",
-        "!**/node_modules/*/{test,__tests__,tests,powered-test,example,examples}",
-        "!**/node_modules/*.d.ts",
-        "!**/node_modules/.bin",
-        "!**/*.{iml,o,hprof,orig,pyc,pyo,rbc,swp,csproj,sln,xproj}",
-        "!.editorconfig",
-        "!**/._*",
-        "!**/{.DS_Store,.git,.hg,.svn,CVS,RCS,SCCS,.gitignore,.gitattributes}",
-        "!**/{__pycache__,thumbs.db,.flowconfig,.idea,.vs,.nyc_output}",
-        "!**/{appveyor.yml,.travis.yml,circle.yml}",
-        "!**/{npm-debug.log,yarn.lock,.yarn-integrity,.yarn-metadata.json}"
-    ],
-    "extraResources": ["/node_modules/@desterlib/mpv/*"]
+    "files": ["**/*", "./build/**/*", "./electron/*"],
+    "extraResources": [{ "from": "./node_modules/@desterlib/mpv/dist", "to": "libs" }]
 }

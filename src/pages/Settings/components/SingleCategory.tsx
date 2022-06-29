@@ -101,7 +101,7 @@ const SingleCategory = (props: any) => {
         }
         if (
             config[index].provider &&
-            !['gdrive', 'onedrive', 'sharepoint'].includes(config[index].provider)
+            !['gdrive', 'onedrive', 'sharepoint', 'local'].includes(config[index].provider)
         ) {
             handleChangeCategoryProvider({ target: { value: '' } });
         }
@@ -167,9 +167,10 @@ const SingleCategory = (props: any) => {
                             onChange={handleChangeCategoryProvider}
                             sx={textFieldStyles}
                         >
-                            <MenuItem value={'gdrive'}>Google Drive</MenuItem>
-                            <MenuItem value={'onedrive'}>OneDrive</MenuItem>
-                            <MenuItem value={'sharepoint'}>SharePoint</MenuItem>
+                            <MenuItem value='gdrive'>Google Drive</MenuItem>
+                            <MenuItem value='onedrive'>OneDrive</MenuItem>
+                            <MenuItem value='sharepoint'>SharePoint</MenuItem>
+                            <MenuItem value='local'>Local</MenuItem>
                         </Select>
                     </FormControl>
                 </Grid>
@@ -222,16 +223,18 @@ const SingleCategory = (props: any) => {
             <TextField
                 sx={textFieldStyles}
                 fullWidth
-                label='Folder ID'
+                label={config[index].provider == 'local' ? 'Path' : 'Folder ID'}
                 value={config[index].id}
                 onChange={handleChangeCategoryId}
             />
-            <TextField
-                fullWidth
-                label='Drive ID'
-                value={config[index].drive_id}
-                onChange={handleChangeCategoryDriveId}
-            />
+            {!(config[index].provider == 'local') && (
+                <TextField
+                    fullWidth
+                    label='Drive ID'
+                    value={config[index].drive_id}
+                    onChange={handleChangeCategoryDriveId}
+                />
+            )}
         </Box>
     );
 };

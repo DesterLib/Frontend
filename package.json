@@ -46,7 +46,6 @@
         "@typescript-eslint/parser": "^5.29.0",
         "concurrently": "^7.2.2",
         "cross-env": "^7.0.3",
-        "custom-electron-titlebar": "^4.1.0",
         "electron": "^19.0.6",
         "electron-builder": "^23.1.0",
         "electronmon": "^2.0.2",
