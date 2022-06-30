@@ -1,6 +1,5 @@
 import { Box, Button, Typography, useTheme } from '@mui/material';
 import TextField from '@mui/material/TextField';
-import { Buffer } from 'buffer';
 import React, { useState } from 'react';
 
 const GDriveTokenGenerator = (props: any) => {
@@ -18,6 +17,7 @@ const GDriveTokenGenerator = (props: any) => {
 
     const getAuthCode = async (event: any) => {
         event.preventDefault();
+        const state = Date.now().toString();
         const query = objToFormEncoded({
             response_type: 'code',
             redirect_uri: `${window.location.origin}/settings/gdrive`,
@@ -25,8 +25,9 @@ const GDriveTokenGenerator = (props: any) => {
             scope: 'https://www.googleapis.com/auth/drive',
             access_type: 'offline',
             prompt: 'consent',
-            state: Buffer.from(JSON.stringify(stateConfig)).toString('base64'),
+            state: state,
         });
+        sessionStorage.setItem(state, JSON.stringify(stateConfig));
         window.location.href = `https://accounts.google.com/o/oauth2/v2/auth?${query}`;
     };
 

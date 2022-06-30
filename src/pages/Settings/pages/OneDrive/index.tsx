@@ -1,5 +1,4 @@
 import { Alert, Box, Button, Snackbar, TextField } from '@mui/material';
-import { Buffer } from 'buffer';
 import React, { SyntheticEvent, useEffect, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 
@@ -19,7 +18,7 @@ const OneDrivePage = (props: any) => {
 
     useEffect(() => {
         if (state) {
-            const newConfig = JSON.parse(Buffer.from(state, 'base64').toString('ascii'));
+            const newConfig = JSON.parse(sessionStorage.getItem(state) || config);
             updateStateConfig(newConfig);
             setIsLoaded(true);
         } else {

@@ -1,6 +1,5 @@
 import { Box, Button, Typography, useTheme } from '@mui/material';
 import TextField from '@mui/material/TextField';
-import { Buffer } from 'buffer';
 import React, { useState } from 'react';
 
 const OneDriveTokenGenerator = (props: any) => {
@@ -18,6 +17,7 @@ const OneDriveTokenGenerator = (props: any) => {
 
     const getAuthCode = async (event: any) => {
         event.preventDefault();
+        const state = Date.now().toString();
         const query = objToFormEncoded({
             response_type: 'code',
             redirect_uri: `${window.location.origin}/settings/onedrive`,
@@ -27,8 +27,9 @@ const OneDriveTokenGenerator = (props: any) => {
             code_challenge_method: 'S256',
             access_type: 'offline',
             prompt: 'consent',
-            state: Buffer.from(JSON.stringify(stateConfig)).toString('base64'),
+            state: state,
         });
+        sessionStorage.setItem(state, JSON.stringify(stateConfig));
         window.location.href = `https://login.microsoftonline.com/common/oauth2/v2.0/authorize?${query}`;
     };
 

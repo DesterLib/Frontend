@@ -33,12 +33,7 @@ const CategoriesPage = (props: any) => {
     const handleAddCategory = () => {
         setCategories(
             categories.concat(
-                <Category
-                    key={guid()}
-                    index={index}
-                    config={config}
-                    updateConfig={updateConfig}
-                />,
+                <Category key={guid()} index={index} config={config} updateConfig={updateConfig} />,
             ),
         );
         index += 1;
