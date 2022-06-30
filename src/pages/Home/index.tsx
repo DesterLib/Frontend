@@ -7,6 +7,7 @@ import DSlider from '../../components/DSlider';
 import { APP_DESCRIPTION, APP_NAME } from '../../config';
 import { get } from '../../utilities/requests';
 import { MainContainer, MainWrapper } from './styles';
+import { useNavigate } from 'react-router-dom';
 
 // import useNetworkStatus from '../utilities/useNetworkStatus';
 
@@ -14,16 +15,15 @@ const HomePage = () => {
     const [isLoaded, setIsLoaded] = useState<boolean>(false);
     const [data, setData] = useState<any>({});
     const [requestInfo, setRequestInfo] = useState<any>({});
+    const navigate = useNavigate();
 
     useEffect(() => {
         get('/home', setData, setRequestInfo, setIsLoaded);
     }, []);
 
-    // const network = useNetworkStatus();
-
-    // console.log(data.result);
-
-    // if (!network.online) return <div>No internet connection</div>;
+    if (requestInfo.code === 428) {
+        navigate('/setup');
+    };
 
     return isLoaded ? (
         <MainContainer>

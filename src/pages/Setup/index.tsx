@@ -12,17 +12,18 @@ import DButton from '../../components/DButton';
 import { APP_API_PATH, APP_API_VERSION_PATH } from '../../config';
 import AdditionalSlide from './Slides/additional';
 import MainSlide from './Slides/main';
+import ProvidersSlide from './Slides/providers';
 import StorageSlide from './Slides/storage';
 import UISlide from './Slides/ui';
 
-const steps = ['Main Configuration', 'Storage', 'UI Configuration', 'Additional'];
+const steps = ['App', 'Storage', 'Providers', 'Interface', 'Additional'];
 
 const SetupPage = () => {
     const [activeStep, setActiveStep] = React.useState(0);
     const [skipped, setSkipped] = React.useState(new Set<number>());
 
     const isStepOptional = (step: number) => {
-        return step === 2;
+        return step === 2 || step === 3;
     };
 
     const isStepSkipped = (step: number) => {
@@ -239,24 +240,28 @@ const SetupPage = () => {
                 }}
             >
                 {activeStep === 0 && <MainSlide />}
-                {activeStep === 1 && (
+                {activeStep === 2 && (
                     <StorageSlide config={config.categories} updateConfig={setCategories} />
                 )}
-                {activeStep === 2 && <UISlide />}
-                {activeStep === 3 && <AdditionalSlide />}
+                {activeStep === 1 && (
+                    <ProvidersSlide config={config.gdrive} updateConfig={setGdrive} />
+                )}
+                {activeStep === 3 && <UISlide />}
+                {activeStep === 4 && <AdditionalSlide />}
                 <a
                     style={{
                         color: theme.palette.primary.main,
                         textDecoration: 'none',
                         display: 'flex',
                         justifyContent: 'right',
+                        alignItems: 'center',
+                        marginRight: '10px',
                     }}
                     target='_blank'
                     href='https://dester.gq'
                     rel='noreferrer'
                 >
-                    <i className='ri-attachment-line' style={{ marginRight: '5px' }}></i>Checkout
-                    Docs
+                    <i className='ri-attachment-line' style={{ marginRight: '8px' }}></i><Typography variant='body1'>Docs</Typography>
                 </a>
                 {activeStep !== steps.length && <Navigation />}
             </Paper>
