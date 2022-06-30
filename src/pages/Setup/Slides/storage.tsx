@@ -5,8 +5,8 @@ import { Box, Typography } from '@mui/material';
 import React, { useState } from 'react';
 
 import DButton from '../../../components/DButton';
-import SingleCategory from '../../Settings/components/SingleCategory';
-import guid from '../../Settings/utilities/guid';
+import Category from '../../Settings/pages/Categories/Category';
+import guid from '../../../utilities/guid';
 
 const StorageSlide = (props: any) => {
     const { config, updateConfig } = props;
@@ -17,7 +17,7 @@ const StorageSlide = (props: any) => {
         for (let i = 0; i < config.length; i++) {
             const item = config[i];
             tempCategories.push(
-                <SingleCategory
+                <Category
                     key={guid()}
                     item={item}
                     index={i}
@@ -36,7 +36,7 @@ const StorageSlide = (props: any) => {
     const handleAddCategory = () => {
         setCategories(
             categories.concat(
-                <SingleCategory
+                <Category
                     key={guid()}
                     index={index}
                     config={config}

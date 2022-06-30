@@ -3,8 +3,8 @@ import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import React, { useEffect, useState } from 'react';
 
-import DButton from '../../../components/DButton';
-import { APP_API_PATH, APP_API_VERSION_PATH } from '../../../config';
+import DButton from '../../../../components/DButton';
+import { APP_API_PATH, APP_API_VERSION_PATH } from '../../../../config';
 
 const DevPage = () => {
     const [refresh, setRefresh] = useState<number>(0);

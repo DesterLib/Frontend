@@ -8,16 +8,16 @@ import { Helmet } from '../../components/DHelmet';
 import DLoader from '../../components/DLoader';
 import { APP_API_PATH, APP_API_VERSION_PATH, APP_DESCRIPTION, APP_NAME } from '../../config';
 import NavBar from './components/NavBar';
-import Auth0Page from './pages/Auth0Page';
-import CategoryPage from './pages/CategoryPage';
-import DevPage from './pages/DevPage';
-import GDrive from './pages/GDrive';
-import GDriveTokenGeneratorPage from './pages/GDriveTokenGeneratorPage';
-import HomePage from './pages/HomePage';
-import OneDrivePage from './pages/OneDrivePage';
-import OtherPage from './pages/OtherPage';
-import SharePointPage from './pages/SharePointPage';
-import UIPage from './pages/UIPage';
+import AppPage from './pages/App';
+import Auth0Page from './pages/Auth0';
+import CategoriesPage from './pages/Categories';
+import DevPage from './pages/Dev';
+import GDrivePage from './pages/GDrive';
+import GDriveTokenGeneratorPage from './pages/GDrive/GDriveTokenGeneratorPage';
+import InterfacePage from './pages/Interface';
+import OneDrivePage from './pages/OneDrive';
+import OtherPage from './pages/Other';
+import SharePointPage from './pages/SharePoint';
 
 const Settings = (props: any) => {
     const { colorModeContext, themeMode } = props;
@@ -27,6 +27,7 @@ const Settings = (props: any) => {
     const [isLoaded, setIsLoaded] = useState<boolean>(false);
     const [config, setConfig] = useState<any>({});
     const [secretKey, setSecretKey] = useState<string>('');
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [requestInfo, setRequestInfo] = useState<any>({});
     const [refresh, setRefresh] = useState<number>(0);
 
@@ -195,7 +196,7 @@ const Settings = (props: any) => {
                 <Routes>
                     <Route
                         path='/'
-                        element={<HomePage config={config.app} updateConfig={setApp} />}
+                        element={<AppPage config={config.app} updateConfig={setApp} />}
                     />
                     <Route
                         path='/auth0'
@@ -204,17 +205,20 @@ const Settings = (props: any) => {
                     <Route
                         path='/categories'
                         element={
-                            <CategoryPage config={config.categories} updateConfig={setCategories} />
+                            <CategoriesPage
+                                config={config.categories}
+                                updateConfig={setCategories}
+                            />
                         }
                     />
                     <Route
-                        path='/ui'
-                        element={<UIPage config={config.io} updateConfig={setUi} />}
+                        path='/interface'
+                        element={<InterfacePage config={config.io} updateConfig={setUi} />}
                     />
                     <Route
                         path='/gdrive'
                         element={
-                            <GDrive
+                            <GDrivePage
                                 config={config.gdrive}
                                 updateConfig={setGdrive}
                                 updateStateConfig={setConfig}

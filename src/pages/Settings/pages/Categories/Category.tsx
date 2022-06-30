@@ -12,7 +12,7 @@ import {
 import { Box } from '@mui/system';
 import React, { useState } from 'react';
 
-const SingleCategory = (props: any) => {
+const Category = (props: any) => {
     const { config, index, updateConfig } = props;
 
     const [refresh, setRefresh] = useState<number>(0);
@@ -239,4 +239,4 @@ const SingleCategory = (props: any) => {
     );
 };
 
-export default SingleCategory;
+export default Category;

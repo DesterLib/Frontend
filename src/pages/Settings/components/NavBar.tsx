@@ -49,8 +49,8 @@ export default function NavBar(props: Props) {
 
     const sideBarContents = [
         {
-            id: 'home',
-            text: 'Home',
+            id: 'app',
+            text: 'App',
             slug: '',
         },
         {
@@ -64,9 +64,9 @@ export default function NavBar(props: Props) {
             slug: 'categories',
         },
         {
-            id: 'ui',
+            id: 'interface',
             text: 'Interface',
-            slug: 'ui',
+            slug: 'interface',
         },
         {
             id: 'gdrive',
@@ -117,10 +117,10 @@ export default function NavBar(props: Props) {
                                 }}
                             >
                                 <ListItemIcon>
-                                    {item.id === 'home' && <HomeRoundedIcon />}
+                                    {item.id === 'app' && <HomeRoundedIcon />}
                                     {item.id === 'auth0' && <LocalPoliceIcon />}
                                     {item.id === 'categories' && <CategoryRoundedIcon />}
-                                    {item.id === 'ui' && <PaletteRoundedIcon />}
+                                    {item.id === 'interface' && <PaletteRoundedIcon />}
                                     {item.id === 'gdrive' && <GoogleIcon />}
                                     {item.id === 'onedrive' && <img src={OneDriveIcon} />}
                                     {item.id === 'sharepoint' && <img src={SharePointIcon} />}

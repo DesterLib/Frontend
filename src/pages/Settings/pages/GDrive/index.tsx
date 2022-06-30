@@ -3,7 +3,7 @@ import { Buffer } from 'buffer';
 import React, { SyntheticEvent, useEffect, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 
-const GDrive = (props: any) => {
+const GDrivePage = (props: any) => {
     const [searchParams] = useSearchParams();
     const tempAuthCode = searchParams.get('code') || '';
     const state = searchParams.get('state');
@@ -40,7 +40,7 @@ const GDrive = (props: any) => {
     const tradeAuthCode = async () => {
         const body = {
             grant_type: 'authorization_code',
-            redirect_uri: `${window.location.origin}/#/settings/gdrive`,
+            redirect_uri: `${window.location.origin}/settings/gdrive`,
             code: authCode,
         };
         await requestTokens(body);
@@ -158,4 +158,4 @@ const GDrive = (props: any) => {
         </Box>
     );
 };
-export default GDrive;
+export default GDrivePage;

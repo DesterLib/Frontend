@@ -2,7 +2,7 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import React, { useState } from 'react';
 
-const HomePage = (props: any) => {
+const AppPage = (props: any) => {
     const textFiledStyles = {
         marginBottom: '20px',
     };
@@ -96,4 +96,4 @@ const HomePage = (props: any) => {
     );
 };
 
-export default HomePage;
+export default AppPage;

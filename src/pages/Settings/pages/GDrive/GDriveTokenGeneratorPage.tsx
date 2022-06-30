@@ -20,7 +20,7 @@ const GDriveTokenGenerator = (props: any) => {
         event.preventDefault();
         const query = objToFormEncoded({
             response_type: 'code',
-            redirect_uri: `${window.location.origin}/#/settings/gdrive`,
+            redirect_uri: `${window.location.origin}/settings/gdrive`,
             client_id: clientId,
             scope: 'https://www.googleapis.com/auth/drive',
             access_type: 'offline',

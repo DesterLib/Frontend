@@ -5,17 +5,17 @@ import { Button } from '@mui/material';
 import { Box } from '@mui/system';
 import React, { useState } from 'react';
 
-import SingleCategory from '../components/SingleCategory';
-import guid from '../utilities/guid';
+import guid from '../../../../utilities/guid';
+import Category from './Category';
 
-const CategoryPage = (props: any) => {
+const CategoriesPage = (props: any) => {
     const { config, updateConfig } = props;
 
     var tempCategories: any = [];
     for (let i = 0; i < config.length; i++) {
         const item = config[i];
         tempCategories.push(
-            <SingleCategory
+            <Category
                 key={guid()}
                 item={item}
                 index={i}
@@ -33,7 +33,7 @@ const CategoryPage = (props: any) => {
     const handleAddCategory = () => {
         setCategories(
             categories.concat(
-                <SingleCategory
+                <Category
                     key={guid()}
                     index={index}
                     config={config}
@@ -99,4 +99,4 @@ const CategoryPage = (props: any) => {
     );
 };
 
-export default CategoryPage;
+export default CategoriesPage;
