@@ -5,6 +5,7 @@ import { BrowserRouter, HashRouter, Route, Routes } from 'react-router-dom';
 
 import './MuiClassNameSetup';
 import DBottomBar from './components/DBottomBar';
+import CallbackPage from './pages/Callback';
 import DNavbar from './components/DNavbar';
 import { APP_IS_ELECTRON } from './config';
 import { APP_NAME } from './config';
@@ -143,6 +144,7 @@ const App = () => {
                         />
                         <Route path='/setup' element={<SetupPage />} />
                         <Route path='/disconnected' element={<DisconnectedPage />} />
+                        <Route path='/callback' element={<CallbackPage />} />
                     </Routes>
                     <DBottomBar />
                 </Router>

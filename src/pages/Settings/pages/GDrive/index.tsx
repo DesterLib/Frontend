@@ -18,7 +18,8 @@ const GDrivePage = (props: any) => {
 
     useEffect(() => {
         if (state) {
-            const newConfig = JSON.parse(sessionStorage.getItem(state) || config);
+            const stateConfig = JSON.parse(state) || {};
+            const newConfig = JSON.parse(sessionStorage.getItem(stateConfig.uid) || config);
             updateStateConfig(newConfig);
             setIsLoaded(true);
         } else {
@@ -39,7 +40,7 @@ const GDrivePage = (props: any) => {
     const tradeAuthCode = async () => {
         const body = {
             grant_type: 'authorization_code',
-            redirect_uri: `${window.location.origin}/settings/gdrive`,
+            redirect_uri: `${window.location.origin}/callback`,
             code: authCode,
         };
         await requestTokens(body);

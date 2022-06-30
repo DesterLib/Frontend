@@ -18,7 +18,8 @@ const OneDrivePage = (props: any) => {
 
     useEffect(() => {
         if (state) {
-            const newConfig = JSON.parse(sessionStorage.getItem(state) || config);
+            const stateConfig = JSON.parse(state) || {};
+            const newConfig = JSON.parse(sessionStorage.getItem(stateConfig.uid) || config);
             updateStateConfig(newConfig);
             setIsLoaded(true);
         } else {
@@ -39,7 +40,7 @@ const OneDrivePage = (props: any) => {
     const tradeAuthCode = async () => {
         const body = {
             grant_type: 'authorization_code',
-            redirect_uri: `${window.location.origin}/settings/onedrive`,
+            redirect_uri: `${window.location.origin}/callback`,
             code: authCode,
             client_id: config.client_id,
             code_verifier:

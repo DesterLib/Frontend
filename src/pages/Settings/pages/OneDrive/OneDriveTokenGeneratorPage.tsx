@@ -2,6 +2,8 @@ import { Box, Button, Typography, useTheme } from '@mui/material';
 import TextField from '@mui/material/TextField';
 import React, { useState } from 'react';
 
+import guid from '../../../../utilities/guid';
+
 const OneDriveTokenGenerator = (props: any) => {
     const { config, stateConfig } = props;
     const theme = useTheme();
@@ -17,19 +19,19 @@ const OneDriveTokenGenerator = (props: any) => {
 
     const getAuthCode = async (event: any) => {
         event.preventDefault();
-        const state = Date.now().toString();
+        const state = { uid: guid(), provider: 'onedrive', setup: false };
         const query = objToFormEncoded({
             response_type: 'code',
-            redirect_uri: `${window.location.origin}/settings/onedrive`,
+            redirect_uri: `${window.location.origin}/callback`,
             client_id: clientId,
             scope: 'Files.Read Files.ReadWrite Files.Read.All Files.ReadWrite.All Sites.Read.All offline_access',
             code_challenge: 'ehti8jnG5bgwl38yzORUxLr3c9FJdFv37ScKK6SJDV8',
             code_challenge_method: 'S256',
             access_type: 'offline',
             prompt: 'consent',
-            state: state,
+            state: JSON.stringify(state),
         });
-        sessionStorage.setItem(state, JSON.stringify(stateConfig));
+        sessionStorage.setItem(state.uid, JSON.stringify(stateConfig));
         window.location.href = `https://login.microsoftonline.com/common/oauth2/v2.0/authorize?${query}`;
     };
 
