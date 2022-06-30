@@ -16,6 +16,7 @@ import GDrivePage from './pages/GDrive';
 import GDriveTokenGeneratorPage from './pages/GDrive/GDriveTokenGeneratorPage';
 import InterfacePage from './pages/Interface';
 import OneDrivePage from './pages/OneDrive';
+import OneDriveTokenGenerator from './pages/OneDrive/OneDriveTokenGeneratorPage';
 import OtherPage from './pages/Other';
 import SharePointPage from './pages/SharePoint';
 
@@ -234,7 +235,17 @@ const Settings = (props: any) => {
                     <Route
                         path='/onedrive'
                         element={
-                            <OneDrivePage config={config.onedrive} updateConfig={setOnedrive} />
+                            <OneDrivePage
+                                config={config.onedrive}
+                                updateConfig={setOnedrive}
+                                updateStateConfig={setConfig}
+                            />
+                        }
+                    />
+                    <Route
+                        path='/onedrive/tokens'
+                        element={
+                            <OneDriveTokenGenerator config={config.onedrive} stateConfig={config} />
                         }
                     />
                     <Route
