@@ -1,5 +1,6 @@
-import { Box, TextField } from '@mui/material';
+import Box from '@mui/material/Box';
 import React, { useState } from 'react';
+import DTextField from '../../../../components/DTextField';
 
 const Auth0Page = (props: any) => {
     const textFiledStyles = {
@@ -32,7 +33,7 @@ const Auth0Page = (props: any) => {
 
     return (
         <Box>
-            <TextField
+            <DTextField
                 sx={textFiledStyles}
                 helperText='Auth0 domain'
                 fullWidth
@@ -41,7 +42,7 @@ const Auth0Page = (props: any) => {
                 onChange={handleChangeDomain}
                 value={config.domain}
             />
-            <TextField
+            <DTextField
                 sx={textFiledStyles}
                 helperText='Auth0 client id'
                 fullWidth
@@ -50,7 +51,7 @@ const Auth0Page = (props: any) => {
                 onChange={handleChangeClientId}
                 value={config.client_id}
             />
-            <TextField
+            <DTextField
                 sx={textFiledStyles}
                 helperText='Auth0 client secret'
                 fullWidth

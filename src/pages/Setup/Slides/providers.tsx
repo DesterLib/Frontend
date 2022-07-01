@@ -31,7 +31,7 @@ const PorvidersSlide = (props: any) => {
                     </AccordionSummary>
                     <AccordionDetails>
                         <Box sx={{ marginBottom: '10px', marginTop: '-10px' }}>
-                            <DButton fullwidth>Auto Generate {provider} Tokens</DButton>
+                            <DButton fullWidth>Auto Generate {provider} Tokens</DButton>
                         </Box>
                         <TextField
                             fullWidth

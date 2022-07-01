@@ -7,10 +7,11 @@ import {
     MenuItem,
     Select,
     Switch,
-    TextField,
 } from '@mui/material';
 import { Box } from '@mui/system';
 import React, { useState } from 'react';
+import DSelect from '../../../../components/DSelect';
+import DTextField from '../../../../components/DTextField';
 
 const Category = (props: any) => {
     const { config, index, updateConfig } = props;
@@ -120,7 +121,7 @@ const Category = (props: any) => {
     }
 
     return (
-        <Box sx={{ marginBottom: '20px' }}>
+        <Box sx={{ margin: 'auto', marginBottom: '20px' }}>
             <Box sx={{ marginBottom: '20px' }}>
                 <FormControl component='fieldset'>
                     <FormGroup aria-label='position' row>
@@ -194,7 +195,7 @@ const Category = (props: any) => {
                 <Grid item xs={6} md={4}>
                     <FormControl fullWidth>
                         <InputLabel id='category-language-label'>Language</InputLabel>
-                        <Select
+                        <DSelect
                             labelId='category-language-label'
                             id='category-language-select'
                             value={config[index].language}
@@ -209,30 +210,33 @@ const Category = (props: any) => {
                             <MenuItem value={'ja'}>Japanese</MenuItem>
                             <MenuItem value={'pt'}>Portuguese</MenuItem>
                             <MenuItem value={'es'}>Spanish</MenuItem>
-                        </Select>
+                        </DSelect>
                     </FormControl>
                 </Grid>
             </Grid>
-            <TextField
+            <DTextField
                 sx={textFieldStyles}
                 fullWidth
-                label='Category Name'
+                placeholder='Category Name'
                 value={config[index].name}
                 onChange={handleChangeCategoryName}
+                helperText='Enter the Category Name'
             />
-            <TextField
+            <DTextField
                 sx={textFieldStyles}
                 fullWidth
-                label={config[index].provider == 'local' ? 'Path' : 'Folder ID'}
+                placeholder={config[index].provider == 'local' ? 'Path' : 'Folder ID'}
                 value={config[index].id}
                 onChange={handleChangeCategoryId}
+                helperText='Enter the Folder Id'
             />
             {!(config[index].provider == 'local') && (
-                <TextField
+                <DTextField
                     fullWidth
-                    label='Drive ID'
+                    placeholder='Drive ID'
                     value={config[index].drive_id}
                     onChange={handleChangeCategoryDriveId}
+                    helperText='Enter the Drive Id'
                 />
             )}
         </Box>

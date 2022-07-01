@@ -59,7 +59,7 @@ const CategoriesPage = (props: any) => {
     };
 
     return (
-        <Box>
+        <Box sx={{ width: '700px', margin: 'auto'}}>
             <Box sx={{ paddingBottom: '20px' }}>
                 <Button
                     color='error'

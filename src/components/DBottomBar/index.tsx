@@ -7,6 +7,7 @@ import { BottomNavMenuItem, DBottomBarWrapper } from './styles';
 const DBottomBar = () => {
     const navigate = useNavigate();
     const [value, setValue] = useState<number>(0);
+    const [isActive, setIsActive] = useState<boolean>(false);
 
     return (
         <DBottomBarWrapper>
@@ -17,6 +18,7 @@ const DBottomBar = () => {
                     setValue(val);
                     if (val == 0) {
                         navigate('/');
+                        setIsActive(true);
                     } else if (val == 1) {
                         navigate('/search');
                     } else if (val == 2) {

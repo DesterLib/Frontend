@@ -27,7 +27,7 @@ import Logo from '../assets/logo-full-light.svg';
 import OneDriveIcon from '../assets/onedrive.png';
 import SharePointIcon from '../assets/sharepoint.png';
 
-const drawerWidth = 240;
+const drawerWidth = 300;
 
 interface Props {
     children: JSX.Element;
@@ -96,10 +96,12 @@ export default function NavBar(props: Props) {
     ];
 
     const drawer = (
-        <Box>
+        <Box sx={{position: 'relative', height: '100%'}}>
             <Toolbar>
                 <Link style={{ textDecoration: 'none' }} to='/'>
-                    <img style={{ margin: 'auto' }} width='80%' src={Logo} alt='' />
+                    <Box sx={{ width: '50%', margin: 'auto', marginTop: '10px' }}>
+                        <img style={{ width: '100%' }} src={Logo} alt='' />
+                    </Box>
                 </Link>
             </Toolbar>
             <List>
@@ -110,29 +112,44 @@ export default function NavBar(props: Props) {
                             to={item.slug}
                         >
                             <ListItemButton
-                                sx={{
+                                style={{
                                     margin: '5px 10px',
                                     padding: '5px 15px',
                                     borderRadius: theme.shape.borderRadius,
                                 }}
                             >
-                                <ListItemIcon>
-                                    {item.id === 'app' && <HomeRoundedIcon />}
-                                    {item.id === 'auth0' && <LocalPoliceIcon />}
-                                    {item.id === 'categories' && <CategoryRoundedIcon />}
-                                    {item.id === 'interface' && <PaletteRoundedIcon />}
-                                    {item.id === 'gdrive' && <GoogleIcon />}
-                                    {item.id === 'onedrive' && <img src={OneDriveIcon} />}
-                                    {item.id === 'sharepoint' && <img src={SharePointIcon} />}
-                                    {item.id === 'other' && <SettingsIcon />}
-                                    {item.id === 'dev' && <CodeRoundedIcon />}
-                                </ListItemIcon>
-                                <ListItemText primary={item.text} />
+                                <Box
+                                    sx={{
+                                        display: 'flex',
+                                        justifyContent: 'space-between',
+                                        alignItems: 'center',
+                                        width: '100%',
+                                    }}
+                                >
+                                    <ListItemIcon>
+                                        {item.id === 'app' && <HomeRoundedIcon />}
+                                        {item.id === 'auth0' && <LocalPoliceIcon />}
+                                        {item.id === 'categories' && <CategoryRoundedIcon />}
+                                        {item.id === 'interface' && <PaletteRoundedIcon />}
+                                        {item.id === 'gdrive' && <GoogleIcon />}
+                                        {item.id === 'onedrive' && <img src={OneDriveIcon} />}
+                                        {item.id === 'sharepoint' && <img src={SharePointIcon} />}
+                                        {item.id === 'other' && <SettingsIcon />}
+                                        {item.id === 'dev' && <CodeRoundedIcon />}
+                                    </ListItemIcon>
+                                    <ListItemText primary={item.text} />
+                                    <ListItemIcon sx={{ minWidth: '0px' }}>
+                                        <i className='ri-arrow-right-s-line'></i>
+                                    </ListItemIcon>
+                                </Box>
                             </ListItemButton>
                         </Link>
                     </ListItem>
                 ))}
             </List>
+            <Box sx={{position: 'absolute', bottom: '10px', left: '0', right: '0', display: 'flex', justifyContent: 'center'}}>
+                <Typography variant='overline'>v.0.9.0</Typography>
+            </Box>
         </Box>
     );
 
@@ -160,7 +177,7 @@ export default function NavBar(props: Props) {
                     >
                         <MenuIcon />
                     </IconButton>
-                    <Typography variant='h6' noWrap component='div'>
+                    <Typography variant='body1' noWrap component='div'>
                         Dester Admin Panel
                     </Typography>
                     <Box sx={{ display: 'flex' }}>

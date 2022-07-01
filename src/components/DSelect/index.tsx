@@ -29,6 +29,7 @@ const DSelect = ({
     };
 
     const theme = useTheme();
+
     return (
         <FormControl sx={{ width: width, minWidth: fullWidth ? '100%' : '0px' }}>
             <FormHelperText
@@ -49,8 +50,8 @@ const DSelect = ({
                 variant='outlined'
                 displayEmpty
                 MenuProps={{ disablePortal: true }}
+                IconComponent={() => <i style={{ color: theme.palette.primary.main, paddingRight: '10px', fontSize: '24px'}} className='ri-arrow-down-s-line' />}
                 sx={{
-                    color: '#000000',
                     height: '40px',
                     border: '0px',
                     transition: '0.2s ease-out',

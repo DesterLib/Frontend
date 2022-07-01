@@ -1,6 +1,7 @@
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import React, { useState } from 'react';
+import DTextField from '../../../../components/DTextField';
 
 const AppPage = (props: any) => {
     const textFiledStyles = {
@@ -46,48 +47,48 @@ const AppPage = (props: any) => {
     };
 
     return (
-        <Box>
-            <TextField
+        <Box sx={{maxWidth: '700px', margin: 'auto', marginTop: '20px'}}>
+            <DTextField
                 sx={textFiledStyles}
                 helperText='Enter the name of your Dester instance'
                 fullWidth
-                label='App Name'
+                placeholder='App Name'
                 variant='outlined'
                 onChange={handleChangeName}
                 value={config.name}
             />
-            <TextField
+            <DTextField
                 sx={textFiledStyles}
                 helperText='Enter the Title for your Dester instance'
                 fullWidth
-                label='App Title'
+                placeholder='App Title'
                 variant='outlined'
                 onChange={handleChangeTitle}
                 value={config.title}
             />
-            <TextField
+            <DTextField
                 sx={textFiledStyles}
                 helperText='Enter the description for your Dester instance'
                 fullWidth
-                label='App Description'
+                placeholder='App Description'
                 variant='outlined'
                 onChange={handleChangeDescription}
                 value={config.description}
             />
-            <TextField
+            <DTextField
                 sx={textFiledStyles}
                 helperText='Enter the domain where Dester will be deployed'
                 fullWidth
-                label='Domain'
+                placeholder='Domain'
                 variant='outlined'
                 onChange={handleChangeDomain}
                 value={config.domain}
             />
-            <TextField
+            <DTextField
                 sx={textFiledStyles}
                 helperText='Enter a password to access the settings page with'
                 fullWidth
-                label='Secret Key'
+                placeholder='Secret Key'
                 variant='outlined'
                 onChange={handleChangeSecretKey}
                 value={config.secret_key}
