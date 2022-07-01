@@ -49,7 +49,7 @@ const SeriePage = () => {
     const { seriesId } = useParams();
 
     useEffect(() => {
-        get(`/serie/${seriesId}`, setData, setRequestInfo, setIsLoaded);
+        get(`/series/${seriesId}`, setData, setRequestInfo, setIsLoaded);
     }, [seriesId]);
 
     return isLoaded && requestInfo.ok ? (

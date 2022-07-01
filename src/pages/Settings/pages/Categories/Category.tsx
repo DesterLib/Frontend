@@ -1,15 +1,7 @@
-import {
-    FormControl,
-    FormControlLabel,
-    FormGroup,
-    Grid,
-    InputLabel,
-    MenuItem,
-    Select,
-    Switch,
-} from '@mui/material';
+import { FormControl, FormControlLabel, FormGroup, Grid, MenuItem, Switch } from '@mui/material';
 import { Box } from '@mui/system';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+
 import DSelect from '../../../../components/DSelect';
 import DTextField from '../../../../components/DTextField';
 
@@ -18,6 +10,41 @@ const Category = (props: any) => {
 
     const [refresh, setRefresh] = useState<number>(0);
     const [isInitial, setIsInitial] = useState(true);
+
+    useEffect(() => {
+        if (props.item) {
+            if (typeof config[index].adult !== 'boolean') {
+                handleChangeCategoryAdult(false);
+            }
+            if (typeof config[index].anime !== 'boolean') {
+                handleChangeCategoryAnime(false);
+            }
+            if (config[index].type && !['movies', 'series', 'music'].includes(config[index].type)) {
+                handleChangeCategoryType({ target: { value: '' } });
+            }
+            if (config[index].language && !['en', 'hi', 'ja'].includes(config[index].language)) {
+                handleChangeCategoryLanguage({ target: { value: '' } });
+            }
+            if (
+                config[index].provider &&
+                !['gdrive', 'onedrive', 'sharepoint', 'local'].includes(config[index].provider)
+            ) {
+                handleChangeCategoryProvider({ target: { value: '' } });
+            }
+            if (typeof props.item.name !== 'string') {
+                handleChangeCategoryName({ target: { value: '' } });
+            }
+            if (typeof props.item.id !== 'string') {
+                handleChangeCategoryId({ target: { value: '' } });
+            }
+            if (typeof props.item.drive_id !== 'string') {
+                handleChangeCategoryDriveId({ target: { value: '' } });
+            }
+            setIsInitial(false);
+        } else if (isInitial) {
+            setIsInitial(false);
+        }
+    }, [props.item]);
 
     const handleChangeCategoryAdult = (event: any) => {
         var newConfig = config;
@@ -87,39 +114,6 @@ const Category = (props: any) => {
         marginBottom: '20px',
     };
 
-    if (isInitial && props.item) {
-        if (typeof config[index].adult !== 'boolean') {
-            handleChangeCategoryAdult(false);
-        }
-        if (typeof config[index].anime !== 'boolean') {
-            handleChangeCategoryAnime(false);
-        }
-        if (config[index].type && !['movies', 'series', 'music'].includes(config[index].type)) {
-            handleChangeCategoryType({ target: { value: '' } });
-        }
-        if (config[index].language && !['en', 'hi', 'ja'].includes(config[index].language)) {
-            handleChangeCategoryLanguage({ target: { value: '' } });
-        }
-        if (
-            config[index].provider &&
-            !['gdrive', 'onedrive', 'sharepoint', 'local'].includes(config[index].provider)
-        ) {
-            handleChangeCategoryProvider({ target: { value: '' } });
-        }
-        if (typeof props.item.name !== 'string') {
-            handleChangeCategoryName({ target: { value: '' } });
-        }
-        if (typeof props.item.id !== 'string') {
-            handleChangeCategoryId({ target: { value: '' } });
-        }
-        if (typeof props.item.drive_id !== 'string') {
-            handleChangeCategoryDriveId({ target: { value: '' } });
-        }
-        setIsInitial(false);
-    } else if (isInitial) {
-        setIsInitial(false);
-    }
-
     return (
         <Box sx={{ margin: 'auto', marginBottom: '20px' }}>
             <Box sx={{ marginBottom: '20px' }}>
@@ -156,62 +150,47 @@ const Category = (props: any) => {
                     </FormGroup>
                 </FormControl>
             </Box>
-            <Grid container spacing={2}>
+            <Grid container spacing={2} sx={{ marginBottom: '20px' }}>
                 <Grid item xs={12} md={4}>
-                    <FormControl fullWidth>
-                        <InputLabel id='category-provider-label'>Provider</InputLabel>
-                        <Select
-                            labelId='category-provider-label'
-                            id='category-provider-select'
-                            value={config[index].provider}
-                            label='Provider'
-                            onChange={handleChangeCategoryProvider}
-                            sx={textFieldStyles}
-                        >
-                            <MenuItem value='gdrive'>Google Drive</MenuItem>
-                            <MenuItem value='onedrive'>OneDrive</MenuItem>
-                            <MenuItem value='sharepoint'>SharePoint</MenuItem>
-                            <MenuItem value='local'>Local</MenuItem>
-                        </Select>
-                    </FormControl>
+                    <DSelect
+                        currentOption={config[index].provider}
+                        title='Provider'
+                        onChange={handleChangeCategoryProvider}
+                        sx={textFieldStyles}
+                    >
+                        <MenuItem value='gdrive'>Google Drive</MenuItem>
+                        <MenuItem value='onedrive'>OneDrive</MenuItem>
+                        <MenuItem value='sharepoint'>SharePoint</MenuItem>
+                        <MenuItem value='local'>Local</MenuItem>
+                    </DSelect>
                 </Grid>
                 <Grid item xs={6} md={4}>
-                    <FormControl fullWidth>
-                        <InputLabel id='category-type-label'>Type</InputLabel>
-                        <Select
-                            labelId='category-type-label'
-                            id='category-type-select'
-                            value={config[index].type}
-                            label='Type'
-                            onChange={handleChangeCategoryType}
-                            sx={textFieldStyles}
-                        >
-                            <MenuItem value={'movies'}>Movies</MenuItem>
-                            <MenuItem value={'series'}>TV Series</MenuItem>
-                            <MenuItem value={'music'}>Music</MenuItem>
-                        </Select>
-                    </FormControl>
+                    <DSelect
+                        currentOption={config[index].type}
+                        title='Type'
+                        onChange={handleChangeCategoryType}
+                        sx={textFieldStyles}
+                    >
+                        <MenuItem value='movies'>Movies</MenuItem>
+                        <MenuItem value='series'>TV Series</MenuItem>
+                        <MenuItem value='music'>Music</MenuItem>
+                    </DSelect>
                 </Grid>
                 <Grid item xs={6} md={4}>
-                    <FormControl fullWidth>
-                        <InputLabel id='category-language-label'>Language</InputLabel>
-                        <DSelect
-                            labelId='category-language-label'
-                            id='category-language-select'
-                            value={config[index].language}
-                            label='Language'
-                            onChange={handleChangeCategoryLanguage}
-                            sx={textFieldStyles}
-                        >
-                            <MenuItem value={'ar'}>Arabic</MenuItem>
-                            <MenuItem value={'en'}>English</MenuItem>
-                            <MenuItem value={'zh'}>Chinese</MenuItem>
-                            <MenuItem value={'hi'}>Hindi</MenuItem>
-                            <MenuItem value={'ja'}>Japanese</MenuItem>
-                            <MenuItem value={'pt'}>Portuguese</MenuItem>
-                            <MenuItem value={'es'}>Spanish</MenuItem>
-                        </DSelect>
-                    </FormControl>
+                    <DSelect
+                        currentOption={config[index].language}
+                        title='Language'
+                        onChange={handleChangeCategoryLanguage}
+                        sx={textFieldStyles}
+                    >
+                        <MenuItem value='ar'>Arabic</MenuItem>
+                        <MenuItem value='en'>English</MenuItem>
+                        <MenuItem value='zh'>Chinese</MenuItem>
+                        <MenuItem value='hi'>Hindi</MenuItem>
+                        <MenuItem value='ja'>Japanese</MenuItem>
+                        <MenuItem value='pt'>Portuguese</MenuItem>
+                        <MenuItem value='es'>Spanish</MenuItem>
+                    </DSelect>
                 </Grid>
             </Grid>
             <DTextField

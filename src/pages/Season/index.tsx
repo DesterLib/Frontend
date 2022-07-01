@@ -37,13 +37,13 @@ const SeasonPage = () => {
         }
     };
 
-    const handleSwitchSeason = (seasonNumber: string) => {
+    const handleSwitchSeason = (event: any) => {
         const season_index = data.seasons.findIndex(
-            ({ season_number }) => season_number == seasonNumber,
+            ({ season_number }) => season_number == event.target.value,
         );
         const newState = location.state;
         newState.seasonKey = season_index;
-        navigate(`/series/${seriesId}/season/${seasonNumber}`, { state: newState });
+        navigate(`/series/${seriesId}/season/${event.target.value}`, { state: newState });
     };
 
     useEffect(() => {

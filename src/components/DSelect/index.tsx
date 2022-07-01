@@ -2,36 +2,23 @@ import FormControl from '@mui/material/FormControl';
 import FormHelperText from '@mui/material/FormHelperText';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { alpha, useTheme } from '@mui/material/styles';
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import { DropDownSelectItem } from './styles';
 
-const DSelect = ({
-    title,
-    fixedValue,
-    fullWidth,
-    options,
-    width,
-    onChange = () => {
-        null;
-    },
-    currentOption = '',
-}: any) => {
+const DSelect = (props: any) => {
+    const { title, options, currentOption, width, fullWidth, fixedValue, onChange }: any = props;
     const [option, setOption] = React.useState(currentOption);
-
-    useEffect(() => {
-        setOption(currentOption);
-    }, [currentOption]);
 
     const handleChange = (event: SelectChangeEvent) => {
         setOption(event.target.value as string);
-        onChange(event.target.value);
+        onChange ? onChange(event) : null;
     };
 
     const theme = useTheme();
 
     return (
-        <FormControl sx={{ width: width, minWidth: fullWidth ? '100%' : '0px' }}>
+        <FormControl sx={{ width: width || '100%', minWidth: fullWidth ? '100%' : '0px' }}>
             <FormHelperText
                 sx={{
                     margin: '0px',
@@ -50,7 +37,16 @@ const DSelect = ({
                 variant='outlined'
                 displayEmpty
                 MenuProps={{ disablePortal: true }}
-                IconComponent={() => <i style={{ color: theme.palette.primary.main, paddingRight: '10px', fontSize: '24px'}} className='ri-arrow-down-s-line' />}
+                IconComponent={() => (
+                    <i
+                        style={{
+                            color: theme.palette.primary.main,
+                            paddingRight: '10px',
+                            fontSize: '24px',
+                        }}
+                        className='ri-arrow-down-s-line'
+                    />
+                )}
                 sx={{
                     height: '40px',
                     border: '0px',
@@ -67,12 +63,15 @@ const DSelect = ({
                     },
                 }}
             >
-                {options &&
-                    options.map((item) => (
-                        <DropDownSelectItem value={item} key={item}>
-                            {fixedValue} {item}
-                        </DropDownSelectItem>
-                    ))}
+                {options
+                    ? options.map((item) => (
+                          <DropDownSelectItem value={item} key={item}>
+                              {fixedValue ? `${fixedValue} ${item}` : item}
+                          </DropDownSelectItem>
+                      ))
+                    : props.children
+                    ? props.children
+                    : null}
             </Select>
         </FormControl>
     );

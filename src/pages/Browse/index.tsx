@@ -131,6 +131,9 @@ const BrowsePage = () => {
 
     const genres = [
         {
+            genre: 'Any'
+        },
+        {
             genre: 'Action',
         },
         {
@@ -179,42 +182,42 @@ const BrowsePage = () => {
                     >
                         <Grid item sm={2}>
                             <DSelect
-                                fullWidth
                                 title='Genre'
-                                currentOption={'Any'}
+                                currentOption='Any'
                                 options={genres.map(({ genre }) => genre)}
+                                fullWidth
                             />
                         </Grid>
                         <Grid item sm={2}>
                             <DSelect
-                                fullWidth
                                 title='Year'
-                                currentOption={'Any'}
+                                currentOption='Any'
                                 options={genres.map(({ genre }) => genre)}
+                                fullWidth
                             />
                         </Grid>
                         <Grid item sm={2}>
                             <DSelect
-                                fullWidth
                                 title='Type'
-                                currentOption={'Any'}
+                                currentOption='Any'
                                 options={genres.map(({ genre }) => genre)}
+                                fullWidth
                             />
                         </Grid>
                         <Grid item sm={2}>
                             <DSelect
-                                fullWidth
                                 title='Language'
-                                currentOption={'Any'}
+                                currentOption='Any'
                                 options={genres.map(({ genre }) => genre)}
+                                fullWidth
                             />
                         </Grid>
                         <Grid item sm={2}>
                             <DSelect
-                                fullWidth
                                 title='Sort'
-                                currentOption={'Any'}
+                                currentOption='Any'
                                 options={genres.map(({ genre }) => genre)}
+                                fullWidth
                             />
                         </Grid>
                     </Grid>

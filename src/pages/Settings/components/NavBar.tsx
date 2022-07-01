@@ -22,12 +22,13 @@ import Typography from '@mui/material/Typography';
 import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 
+import packageJson from '../../../../package.json';
 import DButton from '../../../components/DButton';
 import Logo from '../assets/logo-full-light.svg';
 import OneDriveIcon from '../assets/onedrive.png';
 import SharePointIcon from '../assets/sharepoint.png';
 
-const drawerWidth = 300;
+const drawerWidth = 250;
 
 interface Props {
     children: JSX.Element;
@@ -96,7 +97,7 @@ export default function NavBar(props: Props) {
     ];
 
     const drawer = (
-        <Box sx={{position: 'relative', height: '100%'}}>
+        <Box sx={{ position: 'relative', height: '100%' }}>
             <Toolbar>
                 <Link style={{ textDecoration: 'none' }} to='/'>
                     <Box sx={{ width: '50%', margin: 'auto', marginTop: '10px' }}>
@@ -147,8 +148,17 @@ export default function NavBar(props: Props) {
                     </ListItem>
                 ))}
             </List>
-            <Box sx={{position: 'absolute', bottom: '10px', left: '0', right: '0', display: 'flex', justifyContent: 'center'}}>
-                <Typography variant='overline'>v.0.9.0</Typography>
+            <Box
+                sx={{
+                    position: 'absolute',
+                    bottom: '10px',
+                    left: '0',
+                    right: '0',
+                    display: 'flex',
+                    justifyContent: 'center',
+                }}
+            >
+                <Typography variant='overline'>v{packageJson.version}</Typography>
             </Box>
         </Box>
     );
