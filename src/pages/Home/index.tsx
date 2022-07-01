@@ -1,4 +1,5 @@
 import React, { Fragment, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import DCarousel from '../../components/DCarousel';
 import { Helmet } from '../../components/DHelmet';
@@ -7,7 +8,6 @@ import DSlider from '../../components/DSlider';
 import { APP_DESCRIPTION, APP_NAME } from '../../config';
 import { get } from '../../utilities/requests';
 import { MainContainer, MainWrapper } from './styles';
-import { useNavigate } from 'react-router-dom';
 
 // import useNetworkStatus from '../utilities/useNetworkStatus';
 
@@ -22,8 +22,8 @@ const HomePage = () => {
     }, []);
 
     if (requestInfo.code === 428) {
-        navigate('/setup');
-    };
+        navigate('/settings', { state: { hasSecretKey: false } });
+    }
 
     return isLoaded ? (
         <MainContainer>

@@ -1,7 +1,7 @@
 import { Box, useTheme } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
 import { Helmet } from '../../components/DHelmet';
@@ -31,17 +31,24 @@ const Settings = (props: any) => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [requestInfo, setRequestInfo] = useState<any>({});
     const [refresh, setRefresh] = useState<number>(0);
+    const location: any = useLocation();
 
     useEffect(() => {
         const getData = async () => {
-            const { value: secretKey } = await Swal.fire({
-                title: 'Secret Key',
-                input: 'text',
-                inputLabel: 'Your secret key',
-                inputValue: '',
-                showCancelButton: true,
-                confirmButtonColor: theme.palette.primary.dark,
-            });
+            let secretKey = '';
+            if (location.state && location.state.hasSecretKey) {
+                const { value: key } = await Swal.fire({
+                    title: 'Secret Key',
+                    input: 'text',
+                    inputLabel: 'Your secret key',
+                    inputValue: '',
+                    showCancelButton: true,
+                    confirmButtonColor: theme.palette.primary.dark,
+                });
+                secretKey = key;
+            } else {
+                secretKey = '';
+            }
             setSecretKey(secretKey);
             const res = await fetch(
                 `${APP_API_PATH}${APP_API_VERSION_PATH}/settings?secret_key=${secretKey}`,
