@@ -41,14 +41,16 @@ const PorvidersSlide = (props: any) => {
                             label='Client ID'
                             variant='outlined'
                         ></TextField>
-                        <TextField
-                            fullWidth
-                            required
-                            sx={{ margin: '10px auto' }}
-                            id='outlined-basic'
-                            label='Client Secret'
-                            variant='outlined'
-                        ></TextField>
+                        {provider === 'gdrive' && (
+                            <TextField
+                                fullWidth
+                                required
+                                sx={{ margin: '10px auto' }}
+                                id='outlined-basic'
+                                label='Client Secret'
+                                variant='outlined'
+                            ></TextField>
+                        )}
                         <TextField
                             fullWidth
                             required

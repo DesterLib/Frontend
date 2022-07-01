@@ -261,7 +261,8 @@ const SetupPage = () => {
                     href='https://dester.gq'
                     rel='noreferrer'
                 >
-                    <i className='ri-attachment-line' style={{ marginRight: '8px' }}></i><Typography variant='body1'>Docs</Typography>
+                    <i className='ri-attachment-line' style={{ marginRight: '8px' }}></i>
+                    <Typography variant='body1'>Docs</Typography>
                 </a>
                 {activeStep !== steps.length && <Navigation />}
             </Paper>

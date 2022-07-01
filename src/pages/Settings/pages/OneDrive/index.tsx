@@ -83,13 +83,6 @@ const OneDrivePage = (props: any) => {
         setRefresh(refresh + 1);
     };
 
-    const handleChangeClientSecret = (event: any) => {
-        var newConfig = config;
-        newConfig['client_secret'] = event.target.value;
-        updateConfig(newConfig);
-        setRefresh(refresh + 1);
-    };
-
     const handleChangeAccessToken = (event: any) => {
         var newConfig = config;
         newConfig['access_token'] = event.target.value;
@@ -132,13 +125,6 @@ const OneDrivePage = (props: any) => {
                     label='Client ID'
                     value={config.client_id}
                     onChange={handleChangeClientId}
-                />
-                <TextField
-                    sx={textFieldStyles}
-                    fullWidth
-                    label='Client Secret'
-                    value={config.client_secret}
-                    onChange={handleChangeClientSecret}
                 />
                 <TextField
                     sx={textFieldStyles}

@@ -9,7 +9,6 @@ const OneDriveTokenGenerator = (props: any) => {
     const theme = useTheme();
 
     const [clientId, setClientId] = useState<string>(config.client_id || '');
-    const [clientSecret, setClientSecret] = useState<string>(config.client_secret || '');
 
     const objToFormEncoded = (object: object) => {
         return Object.entries(object)
@@ -39,10 +38,6 @@ const OneDriveTokenGenerator = (props: any) => {
         setClientId(event.target.value);
     };
 
-    const handleChangeClientSecret = (event: any) => {
-        setClientSecret(event.target.value);
-    };
-
     const boxContainer = {
         padding: '20px',
         borderRadius: theme.shape.borderRadius,
@@ -69,14 +64,6 @@ const OneDriveTokenGenerator = (props: any) => {
                         variant='outlined'
                         value={clientId}
                         onChange={handleChangeClientId}
-                    />
-                    <TextField
-                        sx={textFieldStyles}
-                        fullWidth
-                        label='Client Secret'
-                        variant='outlined'
-                        value={clientSecret}
-                        onChange={handleChangeClientSecret}
                     />
                     <TextField
                         sx={textFieldStyles}
