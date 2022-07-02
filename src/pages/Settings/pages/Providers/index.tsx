@@ -18,7 +18,6 @@ const ProvidersPage = (props: any) => {
 
     const navigate = useNavigate();
 
-    console.log(onNavigate ? true : false);
     const [searchParams] = useSearchParams();
     const tempAuthCode = searchParams.get('code') || '';
     const state = searchParams.get('state');
@@ -67,8 +66,8 @@ const ProvidersPage = (props: any) => {
                 tempExpandAccordian.onedrive = true;
                 setExpandAccordian(tempExpandAccordian);
             }
+            navigate('', { replace: true });
         }
-        window.history.pushState({}, document.title, '');
     }, [state, isLoaded]);
 
     const handleChangeClientId = (event: any, key: string) => {

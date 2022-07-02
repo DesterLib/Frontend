@@ -7,6 +7,7 @@ import Stepper from '@mui/material/Stepper';
 import Typography from '@mui/material/Typography';
 import { useTheme } from '@mui/system';
 import React, { useEffect, useState } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 import DButton from '../../components/DButton';
 import DLoader from '../../components/DLoader';
@@ -25,6 +26,9 @@ const SetupPage = () => {
     const [activeStep, setActiveStep] = React.useState(0);
     const [activeProvider, setActiveProvider] = React.useState<string>('');
     const [skipped, setSkipped] = React.useState(new Set<number>());
+
+    const [searchParams] = useSearchParams();
+    const state = searchParams.get('state');
 
     const isStepOptional = (step: number) => {
         return step === 1 || step === 4;
@@ -72,6 +76,7 @@ const SetupPage = () => {
     };
 
     const theme = useTheme();
+    const navigate = useNavigate();
 
     const [isLoaded, setIsLoaded] = useState<boolean>(false);
     const [config, setConfig] = useState<any>({});
@@ -81,6 +86,9 @@ const SetupPage = () => {
         const getData = async () => {
             const res = await fetch(`${APP_API_PATH}${APP_API_VERSION_PATH}/settings`);
             const data = (await res.json()) || {};
+            if (data.code === 401) {
+                navigate('/');
+            }
             var tempConfig = data.result || {};
             if (!tempConfig.app) {
                 tempConfig['app'] = {};
@@ -110,9 +118,12 @@ const SetupPage = () => {
                 tempConfig['rclone'] = {};
             }
             setConfig(tempConfig);
+            if (state) {
+                setActiveStep(1);
+            }
+            setIsLoaded(true);
         };
         getData();
-        if ()
     }, []);
 
     const setApp = (appConfig: any) => {
@@ -174,9 +185,11 @@ const SetupPage = () => {
                         Skip
                     </Button>
                 )}
-                <DButton onClick={handleNext}>
-                    {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-                </DButton>
+                {activeStep === steps.length - 1 ? (
+                    <DButton onClick={handleSave}>Finish</DButton>
+                ) : (
+                    <DButton onClick={handleNext}>Next</DButton>
+                )}
             </Box>
         );
     };

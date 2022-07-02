@@ -22,7 +22,7 @@ const HomePage = () => {
     }, []);
 
     if (requestInfo.code === 428) {
-        navigate('/settings', { state: { hasSecretKey: false } });
+        navigate('/setup');
     }
 
     return isLoaded ? (

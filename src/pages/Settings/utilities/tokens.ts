@@ -11,7 +11,6 @@ const GDriveToken = async (
     client_secret: string,
     authCode: string,
 ) => {
-    console.log(client_id, client_secret);
     const body = {
         grant_type: 'authorization_code',
         redirect_uri: `${window.location.origin}/callback`,

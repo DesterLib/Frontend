@@ -1,7 +1,7 @@
 import { Box, useTheme } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
 import { Helmet } from '../../components/DHelmet';
@@ -29,24 +29,17 @@ const Settings = (props: any) => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [requestInfo, setRequestInfo] = useState<any>({});
     const [refresh, setRefresh] = useState<number>(0);
-    const location: any = useLocation();
 
     useEffect(() => {
         const getData = async () => {
-            let secretKey = '';
-            if (location.state && location.state.hasSecretKey) {
-                const { value: key } = await Swal.fire({
-                    title: 'Secret Key',
-                    input: 'text',
-                    inputLabel: 'Your secret key',
-                    inputValue: '',
-                    showCancelButton: true,
-                    confirmButtonColor: theme.palette.primary.dark,
-                });
-                secretKey = key;
-            } else {
-                secretKey = '';
-            }
+            const { value: secretKey } = await Swal.fire({
+                title: 'Secret Key',
+                input: 'text',
+                inputLabel: 'Your secret key',
+                inputValue: '',
+                showCancelButton: true,
+                confirmButtonColor: theme.palette.primary.dark,
+            });
             setSecretKey(secretKey);
             const res = await fetch(
                 `${APP_API_PATH}${APP_API_VERSION_PATH}/settings?secret_key=${secretKey}`,
@@ -98,7 +91,7 @@ const Settings = (props: any) => {
             } else if (info.code == 401) {
                 Swal.fire({
                     title: 'Error!',
-                    text: 'The secret key was incorrect.',
+                    text: info.message,
                     icon: 'error',
                     confirmButtonText: 'Ok',
                     confirmButtonColor: theme.palette.primary.dark,
@@ -209,15 +202,11 @@ const Settings = (props: any) => {
                     />
                     <Route
                         path='/providers/gdrive'
-                        element={
-                            <GDriveTokenGeneratorPage config={config} />
-                        }
+                        element={<GDriveTokenGeneratorPage config={config} />}
                     />
                     <Route
                         path='/providers/onedrive'
-                        element={
-                            <OneDriveTokenGenerator config={config} />
-                        }
+                        element={<OneDriveTokenGenerator config={config} />}
                     />
                     <Route
                         path='/other'
