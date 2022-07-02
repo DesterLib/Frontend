@@ -5,10 +5,10 @@ import React, { useState } from 'react';
 import guid from '../../../../utilities/guid';
 
 const OneDriveTokenGenerator = (props: any) => {
-    const { config, stateConfig } = props;
+    const { config } = props;
     const theme = useTheme();
 
-    const [clientId, setClientId] = useState<string>(config.client_id || '');
+    const [clientId, setClientId] = useState<string>(config.onedrive.client_id || '');
 
     const objToFormEncoded = (object: object) => {
         return Object.entries(object)
@@ -18,7 +18,11 @@ const OneDriveTokenGenerator = (props: any) => {
 
     const getAuthCode = async (event: any) => {
         event.preventDefault();
-        const state = { uid: guid(), provider: 'onedrive', setup: false };
+        const state = {
+            uid: guid(),
+            provider: 'onedrive',
+            setup: window.location.pathname.includes('setup'),
+        };
         const query = objToFormEncoded({
             response_type: 'code',
             redirect_uri: `${window.location.origin}/callback`,
@@ -30,7 +34,7 @@ const OneDriveTokenGenerator = (props: any) => {
             prompt: 'consent',
             state: JSON.stringify(state),
         });
-        sessionStorage.setItem(state.uid, JSON.stringify(stateConfig));
+        sessionStorage.setItem(state.uid, JSON.stringify(config));
         window.location.href = `https://login.microsoftonline.com/common/oauth2/v2.0/authorize?${query}`;
     };
 

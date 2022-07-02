@@ -8,14 +8,17 @@ import {
     Typography,
 } from '@mui/material';
 import React, { useEffect, useState } from 'react';
-import { Link, useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 import DButton from '../../../../components/DButton';
 import { GDriveToken, OneDriveToken } from '../../utilities/tokens';
 
 const ProvidersPage = (props: any) => {
-    const { config, updateConfig } = props;
+    const { config, updateConfig, onNavigate } = props;
 
+    const navigate = useNavigate();
+
+    console.log(onNavigate ? true : false);
     const [searchParams] = useSearchParams();
     const tempAuthCode = searchParams.get('code') || '';
     const state = searchParams.get('state');
@@ -65,7 +68,7 @@ const ProvidersPage = (props: any) => {
                 setExpandAccordian(tempExpandAccordian);
             }
         }
-        window.history.pushState({}, document.title, '/settings/providers');
+        window.history.pushState({}, document.title, '');
     }, [state, isLoaded]);
 
     const handleChangeClientId = (event: any, key: string) => {
@@ -96,10 +99,21 @@ const ProvidersPage = (props: any) => {
         setRefresh(refresh + 1);
     };
 
+    const handleClickAccordian = (provider: string) => {
+        const tempExpandAccordian = expandAccordian;
+        tempExpandAccordian[provider] = !expandAccordian[provider];
+        setExpandAccordian(tempExpandAccordian);
+        setRefresh(refresh + 1);
+    };
+
     return (
         <Box sx={{ padding: '20px', maxWidth: '1000px', margin: 'auto auto', marginTop: '40px' }}>
             {Object.keys(providers).map((provider: string) => (
-                <Accordion key={provider} expanded={expandAccordian[providers[provider]]}>
+                <Accordion
+                    key={provider}
+                    expanded={expandAccordian[providers[provider]]}
+                    onChange={(e: any) => handleClickAccordian(providers[provider])}
+                >
                     <AccordionSummary
                         expandIcon={<ExpandMoreIcon />}
                         aria-controls='panel1a-content'
@@ -109,12 +123,16 @@ const ProvidersPage = (props: any) => {
                     </AccordionSummary>
                     <AccordionDetails>
                         <Box sx={{ marginBottom: '10px', marginTop: '-10px' }}>
-                            <Link
-                                style={{ textDecoration: 'none', width: '100%', color: '#ffffff' }}
-                                to={providers[provider]}
+                            <DButton
+                                onClick={(e) =>
+                                    onNavigate
+                                        ? onNavigate(providers[provider])
+                                        : navigate(providers[provider])
+                                }
+                                fullWidth
                             >
-                                <DButton fullWidth>Auto Generate {provider} Tokens</DButton>
-                            </Link>
+                                Auto Generate {provider} Tokens
+                            </DButton>
                         </Box>
                         <TextField
                             fullWidth

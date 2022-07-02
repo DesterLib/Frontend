@@ -10,7 +10,7 @@ const CallbackPage = () => {
         if (state) {
             const stateConfig = JSON.parse(state);
             navigate({
-                pathname: `/${stateConfig.setup ? 'setup' : 'settings'}/providers`,
+                pathname: stateConfig.setup ? '/setup' : '/settings/providers',
                 search: window.location.search,
             });
         } else {

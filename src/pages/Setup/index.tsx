@@ -16,11 +16,14 @@ import CategoriesPage from '../Settings/pages/Categories';
 import InterfacePage from '../Settings/pages/Interface';
 import OtherPage from '../Settings/pages/Other';
 import ProvidersPage from '../Settings/pages/Providers';
+import GDriveTokenGenerator from '../Settings/pages/Providers/GDriveTokenGeneratorPage';
+import OneDriveTokenGenerator from '../Settings/pages/Providers/OneDriveTokenGeneratorPage';
 
 const steps = ['App', 'Providers', 'Storage', 'Other', 'Interface'];
 
 const SetupPage = () => {
     const [activeStep, setActiveStep] = React.useState(0);
+    const [activeProvider, setActiveProvider] = React.useState<string>('');
     const [skipped, setSkipped] = React.useState(new Set<number>());
 
     const isStepOptional = (step: number) => {
@@ -43,7 +46,11 @@ const SetupPage = () => {
     };
 
     const handleBack = () => {
-        setActiveStep((prevActiveStep) => prevActiveStep - 1);
+        if (activeProvider) {
+            setActiveProvider('');
+        } else {
+            setActiveStep((prevActiveStep) => prevActiveStep - 1);
+        }
     };
 
     const handleSkip = () => {
@@ -103,9 +110,9 @@ const SetupPage = () => {
                 tempConfig['rclone'] = {};
             }
             setConfig(tempConfig);
-            setIsLoaded(true);
         };
         getData();
+        if ()
     }, []);
 
     const setApp = (appConfig: any) => {
@@ -223,7 +230,19 @@ const SetupPage = () => {
                 }}
             >
                 {activeStep === 0 && <AppPage config={config.app} updateConfig={setApp} />}
-                {activeStep === 1 && <ProvidersPage config={config} updateConfig={setConfig} />}
+                {activeStep === 1 ? (
+                    activeProvider === 'gdrive' ? (
+                        <GDriveTokenGenerator config={config} />
+                    ) : activeProvider === 'onedrive' ? (
+                        <OneDriveTokenGenerator config={config} />
+                    ) : (
+                        <ProvidersPage
+                            config={config}
+                            updateConfig={setConfig}
+                            onNavigate={setActiveProvider}
+                        />
+                    )
+                ) : null}
                 {activeStep === 2 && (
                     <CategoriesPage config={config.categories} updateConfig={setCategories} />
                 )}

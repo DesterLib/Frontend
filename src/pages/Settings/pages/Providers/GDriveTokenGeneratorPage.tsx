@@ -5,11 +5,11 @@ import React, { useState } from 'react';
 import guid from '../../../../utilities/guid';
 
 const GDriveTokenGenerator = (props: any) => {
-    const { config, stateConfig } = props;
+    const { config } = props;
     const theme = useTheme();
 
-    const [clientId, setClientId] = useState<string>(config.client_id || '');
-    const [clientSecret, setClientSecret] = useState<string>(config.client_secret || '');
+    const [clientId, setClientId] = useState<string>(config.gdrive.client_id || '');
+    const [clientSecret, setClientSecret] = useState<string>(config.gdrive.client_secret || '');
 
     const objToFormEncoded = (object: object) => {
         return Object.entries(object)
@@ -19,7 +19,11 @@ const GDriveTokenGenerator = (props: any) => {
 
     const getAuthCode = async (event: any) => {
         event.preventDefault();
-        const state = { uid: guid(), provider: 'gdrive', setup: false };
+        const state = {
+            uid: guid(),
+            provider: 'gdrive',
+            setup: window.location.pathname.includes('setup'),
+        };
         const query = objToFormEncoded({
             response_type: 'code',
             redirect_uri: `${window.location.origin}/callback`,
@@ -29,7 +33,7 @@ const GDriveTokenGenerator = (props: any) => {
             prompt: 'consent',
             state: JSON.stringify(state),
         });
-        sessionStorage.setItem(state.uid, JSON.stringify(stateConfig));
+        sessionStorage.setItem(state.uid, JSON.stringify(config));
         window.location.href = `https://accounts.google.com/o/oauth2/v2/auth?${query}`;
     };
 
