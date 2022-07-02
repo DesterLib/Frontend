@@ -11,7 +11,13 @@ import { debounce } from 'lodash';
 import React, { useContext, useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
-import { APP_API_PATH, APP_LOGO_DARK, APP_LOGO_LIGHT, APP_NAME } from '../../config';
+import {
+    APP_API_PATH,
+    APP_IS_ELECTRON,
+    APP_LOGO_DARK,
+    APP_LOGO_LIGHT,
+    APP_NAME,
+} from '../../config';
 import {
     SearchCardContainer,
     SearchIconWrapper,
@@ -71,6 +77,11 @@ const DNavbar = ({ colorModeContext, themeMode }: any) => {
 
     const handleCloseSearch = () => {
         setSearchAnchor(null);
+    };
+
+    const handleEditServerUrl = () => {
+        localStorage.removeItem('SERVER_URL');
+        window.location.reload();
     };
 
     const theme = useTheme();
@@ -240,6 +251,14 @@ const DNavbar = ({ colorModeContext, themeMode }: any) => {
                                     <Typography textAlign='center'>Settings</Typography>
                                 </MenuItem>
                             </Link>
+                            {APP_IS_ELECTRON && (
+                                <MenuItem onClick={handleEditServerUrl} sx={menuItemStyles}>
+                                    <Avatar sx={{ marginRight: '10px' }}>
+                                        <i className='icon ri-settings-2-fill'></i>
+                                    </Avatar>
+                                    <Typography textAlign='center'>Server URL</Typography>
+                                </MenuItem>
+                            )}
                             <Link to='/logout' style={{ textDecoration: 'none' }}>
                                 <MenuItem sx={{ ...menuItemStyles, ...menuLastItemStyles }}>
                                     <Avatar sx={{ marginRight: '10px' }}>

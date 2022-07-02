@@ -1,10 +1,10 @@
 import { useTheme } from '@mui/material';
 import Swal from 'sweetalert2';
 
-import { APP_API_PATH, APP_IS_ELECTRON } from '../config';
+import { APP_API_PATH, APP_IS_ELECTRON, APP_IS_SEPERATE } from '../config';
 
 const electronServer = async () => {
-    if (APP_IS_ELECTRON && !APP_API_PATH) {
+    if ((APP_IS_ELECTRON || APP_IS_SEPERATE) && !APP_API_PATH) {
         const theme = useTheme();
         const { value: serverUrl } = await Swal.fire({
             title: 'Server URL',
@@ -13,8 +13,10 @@ const electronServer = async () => {
             inputValue: '',
             confirmButtonColor: theme.palette.primary.dark,
         });
-        if (serverUrl) {
-            localStorage.setItem('SERVER_URL', serverUrl);
+        if (serverUrl && serverUrl.startsWith('http')) {
+            localStorage.setItem('SERVER_URL', serverUrl.replace(/\/+$/g, ''));
+            window.location.reload();
+        } else {
             window.location.reload();
         }
     }

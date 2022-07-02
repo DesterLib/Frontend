@@ -6,6 +6,7 @@ import noImagePoster from './assets/no-image-poster.svg';
 import isElectron from './utilities/isElectron';
 
 const APP_IS_ELECTRON = isElectron();
+const APP_IS_SEPERATE = process.env.REACT_APP_SEPERATE === 'true';
 const APP_LOGO_LIGHT = LogoFullLight;
 const APP_LOGO_DARK = LogoFullDark;
 const APP_NAME = localStorage.getItem('APP_NAME') || 'Dester';
@@ -26,6 +27,7 @@ const APP_DISCONNECTED_IMAGE = disconnectedImage;
 
 export {
     APP_IS_ELECTRON,
+    APP_IS_SEPERATE,
     APP_LOGO_LIGHT,
     APP_LOGO_DARK,
     APP_NAME,
