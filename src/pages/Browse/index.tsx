@@ -1,11 +1,12 @@
-import { IconButton, Toolbar } from '@mui/material';
+import { Toolbar } from '@mui/material';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
+import { debounce } from 'lodash';
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
-import DButton from '../../components/DButton';
 import { Helmet } from '../../components/DHelmet';
+import DItemCard from '../../components/DItemCard';
 import DLoader from '../../components/DLoader';
 import { SearchIconWrapper, SearchInputBase, SearchWrapper } from '../../components/DSearchStyles';
 import DSelect from '../../components/DSelect';
@@ -23,6 +24,11 @@ interface BrowseParams {
     limit: number;
     mediaType: 'movies' | 'series';
 }
+
+const handleDebouncedSearch = debounce(async function (queryParams, setData, setRequestInfo) {
+    await get(`/browse${queryParams}`, setData, setRequestInfo, (e: any) => null);
+}, 1500);
+
 const BrowsePage = () => {
     const tempParams: BrowseParams = {
         query: '',
@@ -35,7 +41,7 @@ const BrowsePage = () => {
         mediaType: 'movies',
     };
 
-    const [data, setData] = useState<any>({});
+    const [data, setData] = useState<any>([]);
     const [params, setParams] = useState<BrowseParams>(tempParams);
     const [requestInfo, setRequestInfo] = useState<any>({});
     const [isLoaded, setIsLoaded] = useState<boolean>(false);
@@ -73,76 +79,122 @@ const BrowsePage = () => {
         }&media_type=${encodeURIComponent(params.mediaType)}&page=${params.page}&limit=${
             params.limit
         }`;
-        get(
-            `/browse/${params.category}/${params.page}${queryParams}`,
+        handleDebouncedSearch(
+            `/${params.category}/${params.page}${queryParams}`,
             setData,
             setRequestInfo,
-            setIsLoaded,
         );
     };
 
     const handleChangeQuery = (event: any) => {
         var newParams = params;
-        newParams.query = event.target.value || '';
+        if (event.target.value === 'Any') {
+            newParams.query = '';
+        } else {
+            newParams.query = event.target.value || '';
+        }
         setParams(newParams);
+        handleSearch();
     };
 
     const handleChangeGenre = (event: any) => {
         var newParams = params;
-        newParams.genre = event.target.value || '';
+        if (event.target.value === 'Any') {
+            newParams.genre = '';
+        } else {
+            newParams.genre = event.target.value || '';
+        }
         setParams(newParams);
+        handleSearch();
     };
 
     const handleChangeYear = (event: any) => {
         var newParams = params;
-        newParams.year = event.target.value || 0;
+        if (event.target.value === 'Any') {
+            newParams.year = 0;
+        } else {
+            newParams.year = event.target.value || 0;
+        }
         setParams(newParams);
+        handleSearch();
     };
 
     const handleChangeSort = (event: any) => {
         var newParams = params;
-        newParams.sort = event.target.value || 'title:1';
+        if (event.target.value === 'Any') {
+            newParams.sort = 'title:1';
+        } else {
+            newParams.sort = (event.target.value || 'title').toLowerCase() + ':1';
+        }
         setParams(newParams);
+        handleSearch();
     };
 
     const handleChangeCategory = (event: any) => {
         var newParams = params;
-        newParams.category = event.target.value || -1;
+        if (event.target.value === 'Any') {
+            newParams.category = -1;
+        } else {
+            newParams.category = event.target.value || -1;
+        }
         setParams(newParams);
+        handleSearch();
     };
 
     const handleChangeMediaType = (event: any) => {
         var newParams = params;
-        newParams.mediaType = event.target.value || 'movies';
+        if (event.target.value === 'Any') {
+            newParams.mediaType = 'movies';
+        } else {
+            newParams.mediaType = (event.target.value || 'movies').toLowerCase();
+        }
         setParams(newParams);
+        handleSearch();
     };
 
     const handleChangePage = (event: any) => {
         var newParams = params;
         newParams.page = event.target.value || 0;
         setParams(newParams);
-    };
-
-    const handleChangeLimit = (event: any) => {
-        var newParams = params;
-        newParams.limit = event.target.value || 20;
-        setParams(newParams);
+        handleSearch();
     };
 
     const genres = [
-        {
-            genre: 'Any',
-        },
-        {
-            genre: 'Action',
-        },
-        {
-            genre: 'Adventure',
-        },
-        {
-            genre: 'Fantasy',
-        },
+        'Any',
+        'Action',
+        'Adventure',
+        'Action & Adventure',
+        'Animation',
+        'Comedy',
+        'Crime',
+        'Documentary',
+        'Drama',
+        'Family',
+        'Fantasy',
+        'History',
+        'Horror',
+        'Kids',
+        'Music',
+        'Mystery',
+        'News',
+        'Reality',
+        'Romance',
+        'Science Fiction',
+        'Sci-Fi & Fantasy',
+        'Soap',
+        'Talk',
+        'Thriller',
+        'TV Movie',
+        'War',
+        'War & Politics',
+        'Western',
     ];
+
+    const range = (start, stop) => Array.from({ length: stop - start + 1 }, (_, i) => start + i);
+    const years = range(1920, new Date().getFullYear()).reverse();
+    years.unshift('Any');
+
+    const sortings = ['Title', 'Popularity', 'Rating', 'Release Date', 'Size', 'Runtime'];
 
     return isLoaded ? (
         <MainContainer>
@@ -166,6 +218,7 @@ const BrowsePage = () => {
                                     fullWidth
                                     placeholder='Search…'
                                     inputProps={{ 'aria-label': 'search' }}
+                                    onChange={handleChangeQuery}
                                 />
                             </SearchWrapper>
                         </Grid>
@@ -184,7 +237,8 @@ const BrowsePage = () => {
                             <DSelect
                                 title='Genre'
                                 currentOption='Any'
-                                options={genres.map(({ genre }) => genre)}
+                                options={genres}
+                                onChange={handleChangeGenre}
                                 fullWidth
                             />
                         </Grid>
@@ -192,7 +246,8 @@ const BrowsePage = () => {
                             <DSelect
                                 title='Year'
                                 currentOption='Any'
-                                options={genres.map(({ genre }) => genre)}
+                                options={years}
+                                onChange={handleChangeYear}
                                 fullWidth
                             />
                         </Grid>
@@ -200,28 +255,46 @@ const BrowsePage = () => {
                             <DSelect
                                 title='Type'
                                 currentOption='Any'
-                                options={genres.map(({ genre }) => genre)}
+                                options={['Any', 'Movies', 'Series']}
+                                onChange={handleChangeMediaType}
                                 fullWidth
                             />
                         </Grid>
                         <Grid item sm={2}>
                             <DSelect
-                                title='Language'
+                                title='Category'
                                 currentOption='Any'
-                                options={genres.map(({ genre }) => genre)}
+                                options={['Any']}
+                                onChange={handleChangeCategory}
                                 fullWidth
                             />
                         </Grid>
                         <Grid item sm={2}>
                             <DSelect
                                 title='Sort'
-                                currentOption='Any'
-                                options={genres.map(({ genre }) => genre)}
+                                currentOption='Title'
+                                options={sortings}
+                                onChange={handleChangeSort}
                                 fullWidth
                             />
                         </Grid>
                     </Grid>
                 </Box>
+                <Grid
+                    container
+                    sx={{ display: 'flex', justifyContent: 'center', padding: '10px' }}
+                    spacing={2}
+                >
+                    {data.length > 0 &&
+                        data.map((item) => (
+                            <Grid item xs={6} sm={2} key={item.tmdb_id}>
+                                <DItemCard
+                                    item={item}
+                                    type={item.number_of_files ? 'movie' : 'series'}
+                                />
+                            </Grid>
+                        ))}
+                </Grid>
             </Box>
         </MainContainer>
     ) : (

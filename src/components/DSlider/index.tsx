@@ -4,7 +4,7 @@ import React, { Fragment, useRef } from 'react';
 import SwiperCore, { Navigation } from 'swiper';
 import { SwiperSlide } from 'swiper/react';
 
-import DCard from '../DItemCard';
+import DItemCard from '../DItemCard';
 import DPersonCard from '../DPersonCard';
 import DSeasonCard from '../DSeasonCard';
 import DVideoCard from '../DVideoCard';
@@ -74,7 +74,7 @@ const DSlider = ({ title, type, itemData, variant }: any) => {
                             >
                                 {itemData.map((item: any) => (
                                     <SwiperSlide key={item.id}>
-                                        <DCard item={item} type={type} />
+                                        <DItemCard item={item} type={type} />
                                     </SwiperSlide>
                                 ))}
                             </DSwiper>
