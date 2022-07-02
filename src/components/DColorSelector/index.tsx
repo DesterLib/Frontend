@@ -1,4 +1,4 @@
-import { Box, IconButton, OutlinedInput, TextField } from '@mui/material';
+import { Box, IconButton, TextField } from '@mui/material';
 import InputAdornment from '@mui/material/InputAdornment';
 import React from 'react';
 import { HexColorPicker } from 'react-colorful';

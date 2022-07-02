@@ -9,21 +9,22 @@ import { useTheme } from '@mui/system';
 import React, { useEffect, useState } from 'react';
 
 import DButton from '../../components/DButton';
+import DLoader from '../../components/DLoader';
 import { APP_API_PATH, APP_API_VERSION_PATH } from '../../config';
-import AdditionalSlide from './Slides/additional';
-import MainSlide from './Slides/main';
-import ProvidersSlide from './Slides/providers';
-import StorageSlide from './Slides/storage';
-import UISlide from './Slides/ui';
+import AppPage from '../Settings/pages/App';
+import CategoriesPage from '../Settings/pages/Categories';
+import InterfacePage from '../Settings/pages/Interface';
+import OtherPage from '../Settings/pages/Other';
+import ProvidersPage from '../Settings/pages/Providers';
 
-const steps = ['App', 'Storage', 'Providers', 'Interface', 'Additional'];
+const steps = ['App', 'Providers', 'Storage', 'Other', 'Interface'];
 
 const SetupPage = () => {
     const [activeStep, setActiveStep] = React.useState(0);
     const [skipped, setSkipped] = React.useState(new Set<number>());
 
     const isStepOptional = (step: number) => {
-        return step === 2 || step === 3;
+        return step === 1 || step === 4;
     };
 
     const isStepSkipped = (step: number) => {
@@ -113,45 +114,27 @@ const SetupPage = () => {
         setConfig(newConfig);
     };
 
-    const setAuth0 = (auth0Config: any) => {
-        var newConfig = config;
-        newConfig['auth0'] = auth0Config;
-        setConfig(newConfig);
-    };
-
     const setCategories = (categoriesConfig: any) => {
         var newConfig = config;
         newConfig['categories'] = categoriesConfig;
         setConfig(newConfig);
     };
 
-    const setUi = (uiConfig: any) => {
+    const setInterface = (uiConfig: any) => {
         var newConfig = config;
         newConfig['ui'] = uiConfig;
-        setConfig(newConfig);
-    };
-
-    const setGdrive = (gdriveConfig: any) => {
-        var newConfig = config;
-        newConfig['gdrive'] = gdriveConfig;
-        setConfig(newConfig);
-    };
-
-    const setOnedrive = (onedriveConfig: any) => {
-        var newConfig = config;
-        newConfig['onedrive'] = onedriveConfig;
-        setConfig(newConfig);
-    };
-
-    const setSharepoint = (sharepointConfig: any) => {
-        var newConfig = config;
-        newConfig['sharepoint'] = sharepointConfig;
         setConfig(newConfig);
     };
 
     const setTmdb = (tmdbConfig: any) => {
         var newConfig = config;
         newConfig['tmdb'] = tmdbConfig;
+        setConfig(newConfig);
+    };
+
+    const setSubtitles = (subtitlesConfig: any) => {
+        var newConfig = config;
+        newConfig['subtitles'] = subtitlesConfig;
         setConfig(newConfig);
     };
 
@@ -191,7 +174,7 @@ const SetupPage = () => {
         );
     };
 
-    return (
+    return isLoaded ? (
         <Box
             sx={{
                 marginTop: '50px',
@@ -239,15 +222,24 @@ const SetupPage = () => {
                     background: `linear-gradient(45deg, ${theme.palette.background.paper} 0%, ${theme.palette.background.default} 100%)`,
                 }}
             >
-                {activeStep === 0 && <MainSlide />}
+                {activeStep === 0 && <AppPage config={config.app} updateConfig={setApp} />}
+                {activeStep === 1 && <ProvidersPage config={config} updateConfig={setConfig} />}
                 {activeStep === 2 && (
-                    <StorageSlide config={config.categories} updateConfig={setCategories} />
+                    <CategoriesPage config={config.categories} updateConfig={setCategories} />
                 )}
-                {activeStep === 1 && (
-                    <ProvidersSlide config={config.gdrive} updateConfig={setGdrive} />
+                {activeStep === 3 && (
+                    <OtherPage
+                        tmdb={config.tmdb}
+                        subtitles={config.subtitles}
+                        build={config.build}
+                        updateTmdb={setTmdb}
+                        updateSubtitles={setSubtitles}
+                        updateBuild={setBuild}
+                    />
                 )}
-                {activeStep === 3 && <UISlide />}
-                {activeStep === 4 && <AdditionalSlide />}
+                {activeStep === 4 && (
+                    <InterfacePage conifg={config.ui} updateConfig={setInterface} />
+                )}
                 <a
                     style={{
                         color: theme.palette.primary.main,
@@ -267,6 +259,8 @@ const SetupPage = () => {
                 {activeStep !== steps.length && <Navigation />}
             </Paper>
         </Box>
+    ) : (
+        <DLoader />
     );
 };
 

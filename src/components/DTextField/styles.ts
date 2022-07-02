@@ -8,8 +8,7 @@ export const StyledTextField = styled(TextField)<TextFieldProps>(({ theme }) => 
         borderRadius: theme.shape.borderRadius,
         transition: '0.2s ease-out',
         backgroundColor: alpha(theme.palette.background.default, 0.7),
-        backgroundImage:
-            'linear-gradient(rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.09))',
+        backgroundImage: 'linear-gradient(rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.09))',
     },
     '.Dester-InputBase-root:hover': {
         backgroundColor: alpha(theme.palette.background.paper, 1),
@@ -19,6 +18,6 @@ export const StyledTextField = styled(TextField)<TextFieldProps>(({ theme }) => 
         border: '0px',
     },
     '.Dester-InputLabel-root.Mui-focused': {
-        display: 'none'
-    }
+        display: 'none',
+    },
 }));

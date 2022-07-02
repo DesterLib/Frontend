@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 import DButton from '../../components/DButton';
 import { APP_DISCONNECTED_IMAGE } from '../../config';

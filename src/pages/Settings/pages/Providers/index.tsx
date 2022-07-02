@@ -7,20 +7,51 @@ import {
     TextField,
     Typography,
 } from '@mui/material';
-import React from 'react';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
-import DButton from '../../../components/DButton';
+import DButton from '../../../../components/DButton';
 
-const PorvidersSlide = (props: any) => {
+const ProvidersPage = (props: any) => {
     const { config, updateConfig } = props;
-    const providers = ['Google Drive', 'OneDrive', 'SharePoint'];
+    const [refresh, setRefresh] = useState<number>(0);
+
+    const providers = { 'Google Drive': 'gdrive', OneDrive: 'onedrive', SharePoint: 'sharepoint' };
+
+    const handleChangeClientId = (event: any, key: string) => {
+        const tempConfig = config;
+        tempConfig[key].client_id = event.target.value;
+        updateConfig(tempConfig);
+        setRefresh(refresh + 1);
+    };
+
+    const handleChangeClientSecret = (event: any, key: string) => {
+        const tempConfig = config;
+        tempConfig[key].client_secret = event.target.value;
+        updateConfig(tempConfig);
+        setRefresh(refresh + 1);
+    };
+
+    const handleChangeAccessToken = (event: any, key: string) => {
+        const tempConfig = config;
+        tempConfig[key].access_token = event.target.value;
+        updateConfig(tempConfig);
+        setRefresh(refresh + 1);
+    };
+
+    const handleChangeRefreshToken = (event: any, key: string) => {
+        const tempConfig = config;
+        tempConfig[key].refresh_token = event.target.value;
+        updateConfig(tempConfig);
+        setRefresh(refresh + 1);
+    };
 
     return (
         <Box sx={{ padding: '20px', maxWidth: '500px', margin: 'auto', textAlign: 'center' }}>
             <Typography sx={{ marginBottom: '30px' }} variant='h5'>
                 Credentials for Storage Providers
             </Typography>
-            {providers.map((provider: string) => (
+            {Object.keys(providers).map((provider: string) => (
                 <Accordion key={provider}>
                     <AccordionSummary
                         expandIcon={<ExpandMoreIcon />}
@@ -31,7 +62,12 @@ const PorvidersSlide = (props: any) => {
                     </AccordionSummary>
                     <AccordionDetails>
                         <Box sx={{ marginBottom: '10px', marginTop: '-10px' }}>
-                            <DButton fullWidth>Auto Generate {provider} Tokens</DButton>
+                            <Link
+                                style={{ textDecoration: 'none', width: '100%', color: '#ffffff' }}
+                                to={providers[provider]}
+                            >
+                                <DButton fullWidth>Auto Generate {provider} Tokens</DButton>
+                            </Link>
                         </Box>
                         <TextField
                             fullWidth
@@ -40,8 +76,10 @@ const PorvidersSlide = (props: any) => {
                             id='outlined-basic'
                             label='Client ID'
                             variant='outlined'
+                            onChange={(e) => handleChangeClientId(e, providers[provider])}
+                            value={config[providers[provider]].client_id || ''}
                         ></TextField>
-                        {provider === 'gdrive' && (
+                        {provider === 'Google Drive' && (
                             <TextField
                                 fullWidth
                                 required
@@ -49,6 +87,8 @@ const PorvidersSlide = (props: any) => {
                                 id='outlined-basic'
                                 label='Client Secret'
                                 variant='outlined'
+                                onChange={(e) => handleChangeClientSecret(e, providers[provider])}
+                                value={config[providers[provider]].client_secret || ''}
                             ></TextField>
                         )}
                         <TextField
@@ -58,6 +98,8 @@ const PorvidersSlide = (props: any) => {
                             id='outlined-basic'
                             label='Access Token'
                             variant='outlined'
+                            onChange={(e) => handleChangeAccessToken(e, providers[provider])}
+                            value={config[providers[provider]].access_token || ''}
                         ></TextField>
                         <TextField
                             fullWidth
@@ -66,6 +108,8 @@ const PorvidersSlide = (props: any) => {
                             id='outlined-basic'
                             label='Refresh Token'
                             variant='outlined'
+                            onChange={(e) => handleChangeRefreshToken(e, providers[provider])}
+                            value={config[providers[provider]].refresh_token || ''}
                         ></TextField>
                     </AccordionDetails>
                 </Accordion>
@@ -74,4 +118,4 @@ const PorvidersSlide = (props: any) => {
     );
 };
 
-export default PorvidersSlide;
+export default ProvidersPage;

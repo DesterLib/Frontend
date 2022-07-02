@@ -1,5 +1,6 @@
 import Box from '@mui/material/Box';
 import React, { useState } from 'react';
+
 import DTextField from '../../../../components/DTextField';
 
 const Auth0Page = (props: any) => {
@@ -40,7 +41,7 @@ const Auth0Page = (props: any) => {
                 label='Domain'
                 variant='outlined'
                 onChange={handleChangeDomain}
-                value={config.domain}
+                value={config.domain || ''}
             />
             <DTextField
                 sx={textFiledStyles}
@@ -49,7 +50,7 @@ const Auth0Page = (props: any) => {
                 label='Client Id'
                 variant='outlined'
                 onChange={handleChangeClientId}
-                value={config.client_id}
+                value={config.client_id || ''}
             />
             <DTextField
                 sx={textFiledStyles}
@@ -58,7 +59,7 @@ const Auth0Page = (props: any) => {
                 label='Client Secret'
                 variant='outlined'
                 onChange={handleChangeClientSecret}
-                value={config.client_secret}
+                value={config.client_secret || ''}
             />
         </Box>
     );

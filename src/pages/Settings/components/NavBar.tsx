@@ -25,8 +25,6 @@ import { Link } from 'react-router-dom';
 import packageJson from '../../../../package.json';
 import DButton from '../../../components/DButton';
 import Logo from '../assets/logo-full-light.svg';
-import OneDriveIcon from '../assets/onedrive.png';
-import SharePointIcon from '../assets/sharepoint.png';
 
 const drawerWidth = 250;
 
@@ -70,19 +68,9 @@ export default function NavBar(props: Props) {
             slug: 'interface',
         },
         {
-            id: 'gdrive',
-            text: 'Google Drive',
-            slug: 'gdrive',
-        },
-        {
-            id: 'onedrive',
-            text: 'OneDrive',
-            slug: 'onedrive',
-        },
-        {
-            id: 'sharepoint',
-            text: 'SharePoint',
-            slug: 'sharepoint',
+            id: 'providers',
+            text: 'Providers',
+            slug: 'providers',
         },
         {
             id: 'other',
@@ -132,9 +120,7 @@ export default function NavBar(props: Props) {
                                         {item.id === 'auth0' && <LocalPoliceIcon />}
                                         {item.id === 'categories' && <CategoryRoundedIcon />}
                                         {item.id === 'interface' && <PaletteRoundedIcon />}
-                                        {item.id === 'gdrive' && <GoogleIcon />}
-                                        {item.id === 'onedrive' && <img src={OneDriveIcon} />}
-                                        {item.id === 'sharepoint' && <img src={SharePointIcon} />}
+                                        {item.id === 'providers' && <GoogleIcon />}
                                         {item.id === 'other' && <SettingsIcon />}
                                         {item.id === 'dev' && <CodeRoundedIcon />}
                                     </ListItemIcon>

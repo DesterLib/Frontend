@@ -131,7 +131,7 @@ const BrowsePage = () => {
 
     const genres = [
         {
-            genre: 'Any'
+            genre: 'Any',
         },
         {
             genre: 'Action',

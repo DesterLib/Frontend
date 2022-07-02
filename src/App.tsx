@@ -5,11 +5,11 @@ import { BrowserRouter, HashRouter, Route, Routes } from 'react-router-dom';
 
 import './MuiClassNameSetup';
 import DBottomBar from './components/DBottomBar';
-import CallbackPage from './pages/Callback';
 import DNavbar from './components/DNavbar';
 import { APP_IS_ELECTRON } from './config';
 import { APP_NAME } from './config';
 import BrowsePage from './pages/Browse';
+import CallbackPage from './pages/Callback';
 import DisconnectedPage from './pages/Disconnected';
 import EpisodePage from './pages/Episode';
 import HomePage from './pages/Home';

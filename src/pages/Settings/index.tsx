@@ -12,13 +12,11 @@ import AppPage from './pages/App';
 import Auth0Page from './pages/Auth0';
 import CategoriesPage from './pages/Categories';
 import DevPage from './pages/Dev';
-import GDrivePage from './pages/GDrive';
-import GDriveTokenGeneratorPage from './pages/GDrive/GDriveTokenGeneratorPage';
 import InterfacePage from './pages/Interface';
-import OneDrivePage from './pages/OneDrive';
-import OneDriveTokenGenerator from './pages/OneDrive/OneDriveTokenGeneratorPage';
 import OtherPage from './pages/Other';
-import SharePointPage from './pages/SharePoint';
+import ProvidersPage from './pages/Providers';
+import GDriveTokenGeneratorPage from './pages/Providers/GDriveTokenGeneratorPage';
+import OneDriveTokenGenerator from './pages/Providers/OneDriveTokenGeneratorPage';
 
 const Settings = (props: any) => {
     const { colorModeContext, themeMode } = props;
@@ -143,24 +141,6 @@ const Settings = (props: any) => {
         setConfig(newConfig);
     };
 
-    const setGdrive = (gdriveConfig: any) => {
-        var newConfig = config;
-        newConfig['gdrive'] = gdriveConfig;
-        setConfig(newConfig);
-    };
-
-    const setOnedrive = (onedriveConfig: any) => {
-        var newConfig = config;
-        newConfig['onedrive'] = onedriveConfig;
-        setConfig(newConfig);
-    };
-
-    const setSharepoint = (sharepointConfig: any) => {
-        var newConfig = config;
-        newConfig['sharepoint'] = sharepointConfig;
-        setConfig(newConfig);
-    };
-
     const setTmdb = (tmdbConfig: any) => {
         var newConfig = config;
         newConfig['tmdb'] = tmdbConfig;
@@ -224,44 +204,19 @@ const Settings = (props: any) => {
                         element={<InterfacePage config={config.io} updateConfig={setUi} />}
                     />
                     <Route
-                        path='/gdrive'
-                        element={
-                            <GDrivePage
-                                config={config.gdrive}
-                                updateConfig={setGdrive}
-                                updateStateConfig={setConfig}
-                            />
-                        }
+                        path='/providers'
+                        element={<ProvidersPage config={config} updateConfig={setConfig} />}
                     />
                     <Route
-                        path='/gdrive/tokens'
+                        path='/providers/gdrive'
                         element={
                             <GDriveTokenGeneratorPage config={config.gdrive} stateConfig={config} />
                         }
                     />
                     <Route
-                        path='/onedrive'
-                        element={
-                            <OneDrivePage
-                                config={config.onedrive}
-                                updateConfig={setOnedrive}
-                                updateStateConfig={setConfig}
-                            />
-                        }
-                    />
-                    <Route
-                        path='/onedrive/tokens'
+                        path='/providers/onedrive'
                         element={
                             <OneDriveTokenGenerator config={config.onedrive} stateConfig={config} />
-                        }
-                    />
-                    <Route
-                        path='/sharepoint'
-                        element={
-                            <SharePointPage
-                                config={config.sharepoint}
-                                updateConfig={setSharepoint}
-                            />
                         }
                     />
                     <Route

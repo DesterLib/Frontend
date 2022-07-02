@@ -47,7 +47,7 @@ const OtherPage = (props: any) => {
                 label='TMDB API Key'
                 variant='outlined'
                 onChange={handleChangeTmdbKey}
-                value={tmdb.api_key}
+                value={tmdb.api_key || ''}
             />
             <TextField
                 sx={textFiledStyles}
@@ -56,7 +56,7 @@ const OtherPage = (props: any) => {
                 label='Build Cron'
                 variant='outlined'
                 onChange={handleChangeBuildCron}
-                value={build.cron}
+                value={build.cron || ''}
             />
             <TextField
                 sx={textFiledStyles}
@@ -65,7 +65,7 @@ const OtherPage = (props: any) => {
                 label='OpenSubtitles API Key'
                 variant='outlined'
                 onChange={handleChangeOpenSubtitlesKey}
-                value={subtitles.api_key}
+                value={subtitles.api_key || ''}
             />
             <FormControl component='fieldset'>
                 <FormGroup aria-label='position' row>
@@ -73,7 +73,7 @@ const OtherPage = (props: any) => {
                         control={
                             <Switch
                                 color='primary'
-                                checked={subtitles.local}
+                                checked={subtitles.local || false}
                                 onChange={handleChangeLocalSubtitles}
                             />
                         }

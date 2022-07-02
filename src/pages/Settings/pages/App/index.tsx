@@ -1,6 +1,6 @@
 import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
 import React, { useState } from 'react';
+
 import DTextField from '../../../../components/DTextField';
 
 const AppPage = (props: any) => {
@@ -47,7 +47,7 @@ const AppPage = (props: any) => {
     };
 
     return (
-        <Box sx={{maxWidth: '700px', margin: 'auto', marginTop: '20px'}}>
+        <Box sx={{ maxWidth: '700px', margin: 'auto', marginTop: '20px' }}>
             <DTextField
                 sx={textFiledStyles}
                 helperText='Enter the name of your Dester instance'
@@ -55,7 +55,7 @@ const AppPage = (props: any) => {
                 placeholder='App Name'
                 variant='outlined'
                 onChange={handleChangeName}
-                value={config.name}
+                value={config.name || ''}
             />
             <DTextField
                 sx={textFiledStyles}
@@ -64,7 +64,7 @@ const AppPage = (props: any) => {
                 placeholder='App Title'
                 variant='outlined'
                 onChange={handleChangeTitle}
-                value={config.title}
+                value={config.title || ''}
             />
             <DTextField
                 sx={textFiledStyles}
@@ -73,7 +73,7 @@ const AppPage = (props: any) => {
                 placeholder='App Description'
                 variant='outlined'
                 onChange={handleChangeDescription}
-                value={config.description}
+                value={config.description || ''}
             />
             <DTextField
                 sx={textFiledStyles}
@@ -82,7 +82,7 @@ const AppPage = (props: any) => {
                 placeholder='Domain'
                 variant='outlined'
                 onChange={handleChangeDomain}
-                value={config.domain}
+                value={config.domain || ''}
             />
             <DTextField
                 sx={textFiledStyles}
@@ -91,7 +91,7 @@ const AppPage = (props: any) => {
                 placeholder='Secret Key'
                 variant='outlined'
                 onChange={handleChangeSecretKey}
-                value={config.secret_key}
+                value={config.secret_key || ''}
             />
         </Box>
     );
