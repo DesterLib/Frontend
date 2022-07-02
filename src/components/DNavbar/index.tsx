@@ -14,6 +14,7 @@ import { Link, useLocation } from 'react-router-dom';
 import {
     APP_API_PATH,
     APP_IS_ELECTRON,
+    APP_IS_SEPERATE,
     APP_LOGO_DARK,
     APP_LOGO_LIGHT,
     APP_NAME,
@@ -251,7 +252,7 @@ const DNavbar = ({ colorModeContext, themeMode }: any) => {
                                     <Typography textAlign='center'>Settings</Typography>
                                 </MenuItem>
                             </Link>
-                            {APP_IS_ELECTRON && (
+                            {(APP_IS_ELECTRON || APP_IS_SEPERATE) && (
                                 <MenuItem onClick={handleEditServerUrl} sx={menuItemStyles}>
                                     <Avatar sx={{ marginRight: '10px' }}>
                                         <i className='icon ri-settings-2-fill'></i>

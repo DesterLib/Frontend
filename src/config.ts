@@ -14,9 +14,10 @@ const APP_DESCRIPTION =
     localStorage.getItem('APP_DESCRIPTION') ||
     'Dester is a powerful and lightweight media solution to interface your movie and TV libraries in a goddamn gorgeous way';
 const APP_VERSION = '';
-const APP_API_PATH = APP_IS_ELECTRON
-    ? localStorage.getItem('SERVER_URL')
-    : process.env.REACT_APP_SERVER_URL || '';
+const APP_API_PATH =
+    APP_IS_ELECTRON || APP_IS_SEPERATE
+        ? localStorage.getItem('SERVER_URL')
+        : process.env.REACT_APP_SERVER_URL || '';
 const APP_API_VERSION_PATH = '/api/v1';
 const APP_NO_IMAGE_POSTER = noImagePoster;
 const APP_POSTER_QUALITY = 'w300';
