@@ -1,4 +1,12 @@
-import { Box, FormControl, FormControlLabel, FormGroup, Switch, TextField } from '@mui/material';
+import {
+    Box,
+    FormControl,
+    FormControlLabel,
+    FormGroup,
+    Switch,
+    TextField,
+    useTheme,
+} from '@mui/material';
 import React, { useState } from 'react';
 
 const OtherPage = (props: any) => {
@@ -38,8 +46,18 @@ const OtherPage = (props: any) => {
         marginBottom: '20px',
     };
 
+    const theme = useTheme();
+
+    const boxContainer = {
+        padding: '20px',
+        borderRadius: theme.shape.borderRadius,
+        maxWidth: '1000px',
+        margin: 'auto auto',
+        marginTop: '40px',
+    };
+
     return (
-        <Box>
+        <Box sx={boxContainer}>
             <TextField
                 sx={textFiledStyles}
                 helperText='Enter the API key from your TMDB account'

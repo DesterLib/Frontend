@@ -53,7 +53,6 @@ const InterfacePage = (props: any) => {
 
     return (
         <Box sx={{ padding: '20px', maxWidth: '500px', margin: 'auto', textAlign: 'center' }}>
-            <Typography variant='h5'>Provide your Dester Instance details</Typography>
             {lightThemeUIConfig && lightThemeUIConfig.primary && lightThemeUIConfig.primary.colors && (
                 <Box sx={{ padding: '20px' }}>
                     <Typography variant='body1'>{lightThemeUIConfig.primary.title}</Typography>

@@ -1,4 +1,4 @@
-import Box from '@mui/material/Box';
+import { Box, useTheme } from '@mui/material';
 import React, { useState } from 'react';
 
 import DTextField from '../../../../components/DTextField';
@@ -32,8 +32,18 @@ const Auth0Page = (props: any) => {
         setRefresh(refresh + 1);
     };
 
+    const theme = useTheme();
+
+    const boxContainer = {
+        padding: '20px',
+        borderRadius: theme.shape.borderRadius,
+        maxWidth: '1000px',
+        margin: 'auto auto',
+        marginTop: '40px',
+    };
+
     return (
-        <Box>
+        <Box sx={boxContainer}>
             <DTextField
                 sx={textFiledStyles}
                 helperText='Auth0 domain'

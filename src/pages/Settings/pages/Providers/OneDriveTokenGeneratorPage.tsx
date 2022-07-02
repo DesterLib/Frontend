@@ -41,7 +41,7 @@ const OneDriveTokenGenerator = (props: any) => {
     const boxContainer = {
         padding: '20px',
         borderRadius: theme.shape.borderRadius,
-        maxWidth: '800px',
+        maxWidth: '1000px',
         margin: 'auto auto',
         marginTop: '40px',
     };

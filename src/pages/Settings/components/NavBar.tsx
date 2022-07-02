@@ -1,11 +1,11 @@
 import CategoryRoundedIcon from '@mui/icons-material/CategoryRounded';
 import CodeRoundedIcon from '@mui/icons-material/CodeRounded';
-import GoogleIcon from '@mui/icons-material/Google';
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import LocalPoliceIcon from '@mui/icons-material/LocalPolice';
 import MenuIcon from '@mui/icons-material/Menu';
 import PaletteRoundedIcon from '@mui/icons-material/PaletteRounded';
 import SettingsIcon from '@mui/icons-material/Settings';
+import StorageRoundedIcon from '@mui/icons-material/StorageRounded';
 import { useTheme } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -120,7 +120,7 @@ export default function NavBar(props: Props) {
                                         {item.id === 'auth0' && <LocalPoliceIcon />}
                                         {item.id === 'categories' && <CategoryRoundedIcon />}
                                         {item.id === 'interface' && <PaletteRoundedIcon />}
-                                        {item.id === 'providers' && <GoogleIcon />}
+                                        {item.id === 'providers' && <StorageRoundedIcon />}
                                         {item.id === 'other' && <SettingsIcon />}
                                         {item.id === 'dev' && <CodeRoundedIcon />}
                                     </ListItemIcon>

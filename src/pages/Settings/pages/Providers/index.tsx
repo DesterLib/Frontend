@@ -47,10 +47,7 @@ const ProvidersPage = (props: any) => {
     };
 
     return (
-        <Box sx={{ padding: '20px', maxWidth: '500px', margin: 'auto', textAlign: 'center' }}>
-            <Typography sx={{ marginBottom: '30px' }} variant='h5'>
-                Credentials for Storage Providers
-            </Typography>
+        <Box sx={{ padding: '20px', maxWidth: '1000px', margin: 'auto auto', marginTop: '40px' }}>
             {Object.keys(providers).map((provider: string) => (
                 <Accordion key={provider}>
                     <AccordionSummary
