@@ -111,6 +111,7 @@ const ProvidersPage = (props: any) => {
                 <Accordion
                     key={provider}
                     expanded={expandAccordian[providers[provider]]}
+                    // eslint-disable-next-line @typescript-eslint/no-unused-vars
                     onChange={(e: any) => handleClickAccordian(providers[provider])}
                 >
                     <AccordionSummary
@@ -123,6 +124,7 @@ const ProvidersPage = (props: any) => {
                     <AccordionDetails>
                         <Box sx={{ marginBottom: '10px', marginTop: '-10px' }}>
                             <DButton
+                                // eslint-disable-next-line @typescript-eslint/no-unused-vars
                                 onClick={(e) =>
                                     onNavigate
                                         ? onNavigate(providers[provider])

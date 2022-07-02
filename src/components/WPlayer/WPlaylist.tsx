@@ -11,6 +11,7 @@ import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import React from 'react';
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const DPlaylist = ({ videoData, playlistData, show, handleClose, handleShitchUrl }: any) => {
     return (
         <Box

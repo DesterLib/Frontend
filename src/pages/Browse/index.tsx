@@ -26,6 +26,7 @@ interface BrowseParams {
 }
 
 const handleDebouncedSearch = debounce(async function (queryParams, setData, setRequestInfo) {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     await get(`/browse${queryParams}`, setData, setRequestInfo, (e: any) => null);
 }, 1500);
 
@@ -43,6 +44,7 @@ const BrowsePage = () => {
 
     const [data, setData] = useState<any>([]);
     const [params, setParams] = useState<BrowseParams>(tempParams);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [requestInfo, setRequestInfo] = useState<any>({});
     const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
@@ -152,6 +154,7 @@ const BrowsePage = () => {
         handleSearch();
     };
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const handleChangePage = (event: any) => {
         var newParams = params;
         newParams.page = event.target.value || 0;

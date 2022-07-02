@@ -7,6 +7,7 @@ import { BottomNavMenuItem, DBottomBarWrapper } from './styles';
 const DBottomBar = () => {
     const navigate = useNavigate();
     const [value, setValue] = useState<number>(0);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [isActive, setIsActive] = useState<boolean>(false);
 
     return (
