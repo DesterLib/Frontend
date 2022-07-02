@@ -8,10 +8,9 @@ const CallbackPage = () => {
 
     useEffect(() => {
         if (state) {
-            console.log(state);
             const stateConfig = JSON.parse(state);
             navigate({
-                pathname: `/${stateConfig.setup ? 'setup' : 'settings'}/${stateConfig.provider}`,
+                pathname: `/${stateConfig.setup ? 'setup' : 'settings'}/providers`,
                 search: window.location.search,
             });
         } else {

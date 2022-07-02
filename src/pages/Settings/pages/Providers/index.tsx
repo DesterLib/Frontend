@@ -7,16 +7,66 @@ import {
     TextField,
     Typography,
 } from '@mui/material';
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, useSearchParams } from 'react-router-dom';
 
 import DButton from '../../../../components/DButton';
+import { GDriveToken, OneDriveToken } from '../../utilities/tokens';
 
 const ProvidersPage = (props: any) => {
     const { config, updateConfig } = props;
+
+    const [searchParams] = useSearchParams();
+    const tempAuthCode = searchParams.get('code') || '';
+    const state = searchParams.get('state');
+
+    const [authCode] = useState<string>(tempAuthCode);
     const [refresh, setRefresh] = useState<number>(0);
+    const [isLoaded, setIsLoaded] = useState<boolean>(false);
 
     const providers = { 'Google Drive': 'gdrive', OneDrive: 'onedrive', SharePoint: 'sharepoint' };
+    const [expandAccordian, setExpandAccordian] = useState<any>({
+        gdrive: false,
+        onedrive: false,
+        sharepoint: false,
+    });
+
+    useEffect(() => {
+        if (state) {
+            const stateConfig = JSON.parse(state) || {};
+            const newConfig = JSON.parse(sessionStorage.getItem(stateConfig.uid) || config);
+            updateConfig(newConfig);
+            setIsLoaded(true);
+        } else {
+            setIsLoaded(true);
+        }
+        if (authCode && isLoaded && state) {
+            const stateConfig = JSON.parse(state) || {};
+            if (stateConfig.provider === 'gdrive') {
+                GDriveToken(
+                    handleChangeAccessToken,
+                    handleChangeRefreshToken,
+                    config.gdrive.client_id,
+                    config.gdrive.client_secret,
+                    authCode,
+                );
+                const tempExpandAccordian = expandAccordian;
+                tempExpandAccordian.gdrive = true;
+                setExpandAccordian(tempExpandAccordian);
+            } else if (stateConfig.provider === 'onedrive') {
+                OneDriveToken(
+                    handleChangeAccessToken,
+                    handleChangeRefreshToken,
+                    config.onedrive.client_id,
+                    authCode,
+                );
+                const tempExpandAccordian = expandAccordian;
+                tempExpandAccordian.onedrive = true;
+                setExpandAccordian(tempExpandAccordian);
+            }
+        }
+        window.history.pushState({}, document.title, '/settings/providers');
+    }, [state, isLoaded]);
 
     const handleChangeClientId = (event: any, key: string) => {
         const tempConfig = config;
@@ -49,7 +99,7 @@ const ProvidersPage = (props: any) => {
     return (
         <Box sx={{ padding: '20px', maxWidth: '1000px', margin: 'auto auto', marginTop: '40px' }}>
             {Object.keys(providers).map((provider: string) => (
-                <Accordion key={provider}>
+                <Accordion key={provider} expanded={expandAccordian[providers[provider]]}>
                     <AccordionSummary
                         expandIcon={<ExpandMoreIcon />}
                         aria-controls='panel1a-content'
