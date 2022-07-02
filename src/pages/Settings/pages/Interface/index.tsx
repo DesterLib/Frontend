@@ -48,7 +48,10 @@ const lightThemeUIConfig = {
     },
 };
 
-const InterfacePage = () => {
+const InterfacePage = (props: any) => {
+    const { config, updateConfig } = props;
+    console.log(config, updateConfig);
+
     return (
         <Box sx={{ padding: '20px', maxWidth: '500px', margin: 'auto', textAlign: 'center' }}>
             {lightThemeUIConfig && lightThemeUIConfig.primary && lightThemeUIConfig.primary.colors && (

@@ -194,7 +194,7 @@ const Settings = (props: any) => {
                     />
                     <Route
                         path='/interface'
-                        element={<InterfacePage config={config.io} updateConfig={setUi} />}
+                        element={<InterfacePage config={config.ui} updateConfig={setUi} />}
                     />
                     <Route
                         path='/providers'
