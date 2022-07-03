@@ -20,6 +20,7 @@ import {
     APP_API_VERSION_PATH,
     APP_BACKDROP_QUALITY,
     APP_DESCRIPTION,
+    APP_LOGO_QUALITY,
     APP_NAME,
     APP_POSTER_QUALITY,
 } from '../../config';
@@ -114,7 +115,15 @@ const SeriePage = () => {
                             },
                         }}
                     >
-                        <DItemLogo src={`https://www.themoviedb.org/t/p/w1280/${data.logo_path}`} />
+                        <DItemLogo
+                            src={
+                                APP_API_PATH +
+                                APP_API_VERSION_PATH +
+                                '/assets/image/' +
+                                APP_LOGO_QUALITY +
+                                data.logo_path
+                            }
+                        />
                         <Typography
                             sx={{
                                 fontWeight: '500',

@@ -3,7 +3,7 @@ import { alpha } from '@mui/material/styles';
 import { useTheme } from '@mui/system';
 import React from 'react';
 
-import { APP_API_PATH, APP_API_VERSION_PATH, APP_POSTER_QUALITY } from '../../config';
+import { APP_API_PATH, APP_API_VERSION_PATH, APP_AVATAR_QUALITY } from '../../config';
 import {
     Container,
     InfoWrapper,
@@ -57,7 +57,7 @@ const DPersonCard = ({ item }: any) => {
                             APP_API_PATH +
                             APP_API_VERSION_PATH +
                             '/assets/image/' +
-                            APP_POSTER_QUALITY +
+                            APP_AVATAR_QUALITY +
                             item.profile_path
                         }
                         alt={item.name}

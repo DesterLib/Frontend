@@ -10,6 +10,7 @@ import {
     APP_API_PATH,
     APP_API_VERSION_PATH,
     APP_BACKDROP_QUALITY,
+    APP_LOGO_QUALITY,
     APP_POSTER_QUALITY,
 } from '../../config';
 import styles from '../../styles/DCarousel.module.css';
@@ -69,7 +70,15 @@ const DSlide = ({ item, type }: any) => {
                 )}
             </ItemBackground>
             <ItemContentWrapper>
-                <DItemLogo src={`https://www.themoviedb.org/t/p/w1280/${item.logo_path}`} />
+                <DItemLogo
+                    src={
+                        APP_API_PATH +
+                        APP_API_VERSION_PATH +
+                        '/assets/image/' +
+                        APP_LOGO_QUALITY +
+                        item.logo_path
+                    }
+                />
                 {(breakpoint === 'xs' || breakpoint === 'sm') && (
                     <ItemContentTitleDown variant='h5'>{item.title}</ItemContentTitleDown>
                 )}
