@@ -23,7 +23,7 @@ interface BrowseParams {
 }
 
 const handleDebouncedSearch = debounce(
-    async (queryParams, setData, setRequestInfo, setIsLoaded, breakpoint, oldData) => {
+    async (queryParams, setData, setRequestInfo, setIsLoaded, breakpoint, oldData, limit) => {
         const get = async (path: string) => {
             const res = await fetch(`${APP_API_PATH}${APP_API_VERSION_PATH}${path}`);
             const data = (await res.json()) || {
@@ -50,9 +50,13 @@ const handleDebouncedSearch = debounce(
                 localStorage.setItem('APP_DESCRIPTION', info.description);
             }
             const newData = oldData.concat(data.result);
-            const breakVals = { lg: 6, md: 4, sm: 3, xs: 2 };
-            const rem = newData.length % breakVals[breakpoint];
-            setData(newData.splice(0, newData.length - rem));
+            const breakVals = { xl: 6, lg: 6, md: 4, sm: 3, xs: 2 };
+            if (newData.length >= limit) {
+                const rem = newData.length % breakVals[breakpoint];
+                setData(newData.splice(0, newData.length - rem));
+            } else {
+                setData(newData);
+            }
             setRequestInfo(info);
             setIsLoaded(true);
         };
@@ -125,6 +129,7 @@ const BrowsePage = () => {
             setIsLoaded,
             breakpoint,
             oldData,
+            params.limit || 20,
         );
     };
 
