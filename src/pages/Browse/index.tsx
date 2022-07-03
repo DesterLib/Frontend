@@ -7,9 +7,8 @@ import { Helmet } from '../../components/DHelmet';
 import DItemCard from '../../components/DItemCard';
 import { SearchIconWrapper, SearchInputBase, SearchWrapper } from '../../components/DSearchStyles';
 import DSelect from '../../components/DSelect';
-import { APP_DESCRIPTION, APP_NAME } from '../../config';
-import { get } from '../../utilities/requests';
-import { MainContainer } from './styles';
+import { APP_API_PATH, APP_API_VERSION_PATH, APP_DESCRIPTION, APP_NAME } from '../../config';
+import { MainContainer, ShowMoreButton } from './styles';
 
 interface BrowseParams {
     query: string;
@@ -23,9 +22,41 @@ interface BrowseParams {
 }
 
 const handleDebouncedSearch = debounce(
-    async (queryParams, setData, setRequestInfo, setIsLoaded) => {
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        await get(`/browse${queryParams}`, setData, setRequestInfo, setIsLoaded);
+    async (queryParams, setData, setRequestInfo, setIsLoaded, append, oldData) => {
+        const get = async (path: string) => {
+            const res = await fetch(`${APP_API_PATH}${APP_API_VERSION_PATH}${path}`);
+            const data = (await res.json()) || {
+                code: null,
+                message: 'The server could not be reached.',
+                ok: false,
+                result: null,
+                time_taken: 0,
+                title: APP_NAME,
+                description: APP_DESCRIPTION,
+            };
+            const info = {
+                code: data.code,
+                message: data.message,
+                ok: data.ok,
+                time_taken: data.time_taken,
+                title: data.title,
+                description: data.description,
+            };
+            if (info.title !== localStorage.getItem('APP_NAME')) {
+                localStorage.setItem('APP_NAME', info.title);
+            }
+            if (info.description !== localStorage.getItem('APP_DESCRIPTION')) {
+                localStorage.setItem('APP_DESCRIPTION', info.description);
+            }
+            if (append) {
+                setData([...oldData, ...data.result]);
+            } else {
+                setData(data.result);
+            }
+            setRequestInfo(info);
+            setIsLoaded(true);
+        };
+        await get(`/browse${queryParams}`);
     },
     1500,
 );
@@ -61,7 +92,6 @@ const BrowsePage = () => {
             'mediaType',
         ];
         if (location.state) {
-            console.log(location.state);
             for (let i = 0; i < wanted_keys.length; i++) {
                 if (location.state[wanted_keys[i]]) {
                     params[wanted_keys[i]] = location.state[wanted_keys[i]];
@@ -72,8 +102,10 @@ const BrowsePage = () => {
         handleSearch();
     }, [location.state]);
 
-    const handleSearch = () => {
-        setIsLoaded(false);
+    const handleSearch = (append = false, oldData = []) => {
+        if (!append) {
+            setIsLoaded(false);
+        }
         const queryParams = `?query=${encodeURIComponent(params.query)}&genre=${encodeURIComponent(
             params.genre,
         )}&year=${params.year}&sort=${encodeURIComponent(params.sort)}&category=${
@@ -86,6 +118,8 @@ const BrowsePage = () => {
             setData,
             setRequestInfo,
             setIsLoaded,
+            append,
+            oldData,
         );
     };
 
@@ -155,12 +189,11 @@ const BrowsePage = () => {
         handleSearch();
     };
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const handleChangePage = (event: any) => {
+    const handleChangePage = () => {
         var newParams = params;
-        newParams.page = event.target.value || 0;
+        newParams.page += 1;
         setParams(newParams);
-        handleSearch();
+        handleSearch(true, data);
     };
 
     const genres = [
@@ -321,6 +354,14 @@ const BrowsePage = () => {
                               </Grid>
                           ))}
                 </Grid>
+                <ShowMoreButton
+                    disableElevation
+                    variant='contained'
+                    sx={{ marginLeft: '10%' }}
+                    onClick={handleChangePage}
+                >
+                    Show More
+                </ShowMoreButton>
             </Box>
         </MainContainer>
     );
