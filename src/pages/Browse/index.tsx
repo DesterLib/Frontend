@@ -1,13 +1,10 @@
-import { Toolbar } from '@mui/material';
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
+import { Box, Grid, Skeleton, Toolbar } from '@mui/material';
 import { debounce } from 'lodash';
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import { Helmet } from '../../components/DHelmet';
 import DItemCard from '../../components/DItemCard';
-import DLoader from '../../components/DLoader';
 import { SearchIconWrapper, SearchInputBase, SearchWrapper } from '../../components/DSearchStyles';
 import DSelect from '../../components/DSelect';
 import { APP_DESCRIPTION, APP_NAME } from '../../config';
@@ -76,6 +73,7 @@ const BrowsePage = () => {
     }, [location.state]);
 
     const handleSearch = () => {
+        setIsLoaded(false);
         const queryParams = `?query=${encodeURIComponent(params.query)}&genre=${encodeURIComponent(
             params.genre,
         )}&year=${params.year}&sort=${encodeURIComponent(params.sort)}&category=${
@@ -202,7 +200,7 @@ const BrowsePage = () => {
 
     const sortings = ['Title', 'Popularity', 'Rating', 'Release Date', 'Size', 'Runtime'];
 
-    return isLoaded ? (
+    return (
         <MainContainer>
             <Toolbar />
             <Helmet>
@@ -288,23 +286,43 @@ const BrowsePage = () => {
                 </Box>
                 <Grid
                     container
-                    sx={{ display: 'flex', justifyContent: 'center', padding: '10px' }}
+                    sx={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                        padding: '10px',
+                        alignItems: 'center',
+                        width: '85%',
+                        margin: 'auto',
+                    }}
                     spacing={2}
                 >
-                    {data.length > 0 &&
-                        data.map((item) => (
-                            <Grid item xs={6} sm={2} key={item.tmdb_id}>
-                                <DItemCard
-                                    item={item}
-                                    type={item.number_of_files ? 'movie' : 'series'}
-                                />
-                            </Grid>
-                        ))}
+                    {isLoaded
+                        ? data.length > 0 &&
+                          data.map((item) => (
+                              <Grid item xs={6} sm={2} key={item.tmdb_id}>
+                                  <DItemCard
+                                      item={item}
+                                      type={item.number_of_files ? 'movie' : 'series'}
+                                  />
+                              </Grid>
+                          ))
+                        : [...Array(params.limit)].map((_, item) => (
+                              <Grid item xs={6} sm={2} key={item}>
+                                  <Skeleton
+                                      variant='rectangular'
+                                      animation='wave'
+                                      sx={{
+                                          aspectRatio: '1/1.33',
+                                          width: '100%',
+                                          height: '100%',
+                                          borderRadius: '10px',
+                                      }}
+                                  />
+                              </Grid>
+                          ))}
                 </Grid>
             </Box>
         </MainContainer>
-    ) : (
-        <DLoader />
     );
 };
 
