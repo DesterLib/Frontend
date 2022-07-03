@@ -1,7 +1,4 @@
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
-import Stack from '@mui/material/Stack';
-import Typography from '@mui/material/Typography';
+import { Box, Grid, Stack, Typography } from '@mui/material';
 import { alpha } from '@mui/material/styles';
 import { useTheme } from '@mui/system';
 import React, { useEffect, useState } from 'react';
@@ -9,6 +6,7 @@ import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
 import DButton from '../../components/DButton';
+import DExternalModal from '../../components/DExternalModal';
 import { Helmet } from '../../components/DHelmet';
 import DItemLogo from '../../components/DItemLogo';
 import DLoader from '../../components/DLoader';
@@ -57,13 +55,21 @@ const MoviePage = () => {
     }, [movieId]);
 
     const [streamModalState, setStreamModalState] = useState(false);
-    // eslint-disable-next-line
     const openStreamModal = (event: any) => {
         event.preventDefault();
         setStreamModalState(true);
     };
     const closeStreamModal = () => {
         setStreamModalState(false);
+    };
+
+    const [externalModalState, setExternalModalState] = useState(false);
+    const openExternalModal = (event: any) => {
+        event.preventDefault();
+        setExternalModalState(true);
+    };
+    const closeExternalModal = () => {
+        setExternalModalState(false);
     };
 
     let videoData;
@@ -196,9 +202,10 @@ const MoviePage = () => {
                             </Grid>
                             <Grid item>
                                 <DButton
-                                    startIcon={<i className='ri-more-2-fill'></i>}
+                                    startIcon={<i className='ri-external-link-line'></i>}
                                     color='secondary'
                                     variant='icon'
+                                    onClick={openExternalModal}
                                 />
                             </Grid>
                         </Grid>
@@ -690,6 +697,7 @@ const MoviePage = () => {
                 currentState={streamModalState}
                 closeInfoModal={closeStreamModal}
             />
+            <DExternalModal videoData={videoData} currentState={externalModalState} closeInfoModal={closeExternalModal} />
         </Box>
     ) : isLoaded && !requestInfo.ok ? (
         <p style={{ marginTop: '200px' }}>{requestInfo.message}</p>

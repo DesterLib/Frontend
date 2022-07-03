@@ -3,6 +3,7 @@ import errorImage from './assets/error.png';
 import LogoFullDark from './assets/logo-full-dark.svg';
 import LogoFullLight from './assets/logo-full-light.svg';
 import noImagePoster from './assets/no-image-poster.svg';
+import getOs from './utilities/getOs';
 import isElectron from './utilities/isElectron';
 
 const APP_IS_ELECTRON = isElectron();
@@ -27,6 +28,7 @@ const APP_THUMBNAIL_QUALITY = 'w500';
 const APP_BACKDROP_QUALITY = 'w1280';
 const APP_ERROR_IMAGE = errorImage;
 const APP_DISCONNECTED_IMAGE = disconnectedImage;
+const APP_OS = getOs();
 
 export {
     APP_IS_ELECTRON,
@@ -46,4 +48,5 @@ export {
     APP_BACKDROP_QUALITY,
     APP_ERROR_IMAGE,
     APP_DISCONNECTED_IMAGE,
+    APP_OS,
 };
