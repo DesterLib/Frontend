@@ -1,4 +1,5 @@
 /* eslint-disable */
+// @ts-nocheck
 
 const { remote, shell } = require('electron');
 const fs = require('fs');

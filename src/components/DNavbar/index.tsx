@@ -184,7 +184,7 @@ const DNavbar = ({ colorModeContext, themeMode }: any) => {
                     >
                         {/* <DButton variant="contained" color="primary">Login</DButton> */}
                         <AvatarButtonWrapper onClick={handleOpenUserMenu}>
-                            <Avatar alt='Alken Dester' />
+                            <Avatar alt='Dester' />
                         </AvatarButtonWrapper>
                         <Menu
                             disableScrollLock={true}
@@ -210,11 +210,11 @@ const DNavbar = ({ colorModeContext, themeMode }: any) => {
                                         width: 60,
                                         height: 60,
                                     }}
-                                    alt='Alken Dester'
+                                    alt='Dester'
                                 />
                                 <Box>
-                                    <Typography>Alken Dester</Typography>
-                                    <Typography>desteralken@gmail.com</Typography>
+                                    <Typography>Dester</Typography>
+                                    <Typography>desterlib@gmail.com</Typography>
                                 </Box>
                             </MenuItem>
                             <Divider />
@@ -224,6 +224,14 @@ const DNavbar = ({ colorModeContext, themeMode }: any) => {
                                         <i className='ri-user-fill'></i>
                                     </Avatar>
                                     <Typography textAlign='center'>Account</Typography>
+                                </MenuItem>
+                            </Link>
+                            <Link to='/browse' style={{ textDecoration: 'none' }}>
+                                <MenuItem sx={menuItemStyles}>
+                                    <Avatar sx={{ marginRight: '10px' }}>
+                                        <i className='ri-database-2-fill'></i>
+                                    </Avatar>
+                                    <Typography textAlign='center'>Browse</Typography>
                                 </MenuItem>
                             </Link>
                             <MenuItem onClick={colorMode.toggleColorMode} sx={menuItemStyles}>
@@ -255,7 +263,7 @@ const DNavbar = ({ colorModeContext, themeMode }: any) => {
                             {(APP_IS_ELECTRON || APP_IS_SEPERATE) && (
                                 <MenuItem onClick={handleEditServerUrl} sx={menuItemStyles}>
                                     <Avatar sx={{ marginRight: '10px' }}>
-                                        <i className='icon ri-settings-2-fill'></i>
+                                        <i className='icon ri-server-fill'></i>
                                     </Avatar>
                                     <Typography textAlign='center'>Server URL</Typography>
                                 </MenuItem>

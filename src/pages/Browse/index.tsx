@@ -25,10 +25,13 @@ interface BrowseParams {
     mediaType: 'movies' | 'series';
 }
 
-const handleDebouncedSearch = debounce(async function (queryParams, setData, setRequestInfo) {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    await get(`/browse${queryParams}`, setData, setRequestInfo, (e: any) => null);
-}, 1500);
+const handleDebouncedSearch = debounce(
+    async (queryParams, setData, setRequestInfo, setIsLoaded) => {
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        await get(`/browse${queryParams}`, setData, setRequestInfo, setIsLoaded);
+    },
+    1500,
+);
 
 const BrowsePage = () => {
     const tempParams: BrowseParams = {
@@ -61,16 +64,15 @@ const BrowsePage = () => {
             'mediaType',
         ];
         if (location.state) {
+            console.log(location.state);
             for (let i = 0; i < wanted_keys.length; i++) {
                 if (location.state[wanted_keys[i]]) {
                     params[wanted_keys[i]] = location.state[wanted_keys[i]];
                 }
             }
             setParams(params);
-            handleSearch();
-        } else {
-            setIsLoaded(true);
         }
+        handleSearch();
     }, [location.state]);
 
     const handleSearch = () => {
@@ -85,6 +87,7 @@ const BrowsePage = () => {
             `/${params.category}/${params.page}${queryParams}`,
             setData,
             setRequestInfo,
+            setIsLoaded,
         );
     };
 

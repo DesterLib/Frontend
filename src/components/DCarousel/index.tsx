@@ -166,21 +166,6 @@ const DSlide = ({ item, type }: any) => {
                             ADD TO LIST
                         </DButton>
                     </Grid>
-                    <Grid item>
-                        <DButton
-                            startIcon={
-                                <i style={{ pointerEvents: 'none' }} className='ri-more-2-fill'></i>
-                            }
-                            sx={{
-                                span: {
-                                    margin: '0px',
-                                },
-                            }}
-                            variant='icon'
-                            color='secondary'
-                            iconcolor={true}
-                        />
-                    </Grid>
                 </StyledGridContainerParent>
             </ItemContentWrapper>
         </CarouselWrapper>
