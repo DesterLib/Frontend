@@ -8,6 +8,7 @@ import DItemCard from '../../components/DItemCard';
 import { SearchIconWrapper, SearchInputBase, SearchWrapper } from '../../components/DSearchStyles';
 import DSelect from '../../components/DSelect';
 import { APP_API_PATH, APP_API_VERSION_PATH, APP_DESCRIPTION, APP_NAME } from '../../config';
+import useBreakpoint from '../../utilities/useBreakpoint';
 import { MainContainer, ShowMoreButton } from './styles';
 
 interface BrowseParams {
@@ -22,7 +23,7 @@ interface BrowseParams {
 }
 
 const handleDebouncedSearch = debounce(
-    async (queryParams, setData, setRequestInfo, setIsLoaded, append, oldData) => {
+    async (queryParams, setData, setRequestInfo, setIsLoaded, breakpoint, oldData) => {
         const get = async (path: string) => {
             const res = await fetch(`${APP_API_PATH}${APP_API_VERSION_PATH}${path}`);
             const data = (await res.json()) || {
@@ -48,11 +49,10 @@ const handleDebouncedSearch = debounce(
             if (info.description !== localStorage.getItem('APP_DESCRIPTION')) {
                 localStorage.setItem('APP_DESCRIPTION', info.description);
             }
-            if (append) {
-                setData([...oldData, ...data.result]);
-            } else {
-                setData(data.result);
-            }
+            const newData = oldData.concat(data.result);
+            const breakVals = { lg: 6, md: 4, sm: 3, xs: 2 };
+            const rem = newData.length % breakVals[breakpoint];
+            setData(newData.splice(0, newData.length - rem));
             setRequestInfo(info);
             setIsLoaded(true);
         };
@@ -78,8 +78,10 @@ const BrowsePage = () => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [requestInfo, setRequestInfo] = useState<any>({});
     const [isLoaded, setIsLoaded] = useState<boolean>(false);
+    const [numOfSkeletons, setNumOfSkeletons] = useState<number>(18);
 
     const location: any = useLocation();
+    const breakpoint = useBreakpoint();
     useEffect(() => {
         const wanted_keys = [
             'query',
@@ -99,13 +101,16 @@ const BrowsePage = () => {
             }
             setParams(params);
         }
-        handleSearch();
-    }, [location.state]);
-
-    const handleSearch = (append = false, oldData = []) => {
-        if (!append) {
-            setIsLoaded(false);
+        const breakVals = { lg: 6, md: 4, sm: 3, xs: 2 };
+        const rem = params.limit % breakVals[breakpoint];
+        if (rem) {
+            setNumOfSkeletons(params.limit - rem);
         }
+        handleSearch();
+    }, [location.state, breakpoint]);
+
+    const handleSearch = (oldData = []) => {
+        setIsLoaded(false);
         const queryParams = `?query=${encodeURIComponent(params.query)}&genre=${encodeURIComponent(
             params.genre,
         )}&year=${params.year}&sort=${encodeURIComponent(params.sort)}&category=${
@@ -118,7 +123,7 @@ const BrowsePage = () => {
             setData,
             setRequestInfo,
             setIsLoaded,
-            append,
+            breakpoint,
             oldData,
         );
     };
@@ -193,7 +198,7 @@ const BrowsePage = () => {
         var newParams = params;
         newParams.page += 1;
         setParams(newParams);
-        handleSearch(true, data);
+        handleSearch(data);
     };
 
     const genres = [
@@ -332,14 +337,14 @@ const BrowsePage = () => {
                     {isLoaded
                         ? data.length > 0 &&
                           data.map((item) => (
-                              <Grid item xs={6} sm={2} key={item.tmdb_id}>
+                              <Grid item lg={2} md={3} sm={4} xs={5} key={item.tmdb_id}>
                                   <DItemCard
                                       item={item}
                                       type={item.number_of_files ? 'movie' : 'series'}
                                   />
                               </Grid>
                           ))
-                        : [...Array(params.limit)].map((_, item) => (
+                        : [...Array(numOfSkeletons)].map((_, item) => (
                               <Grid item xs={6} sm={2} key={item}>
                                   <Skeleton
                                       variant='rectangular'

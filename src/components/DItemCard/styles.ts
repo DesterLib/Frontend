@@ -78,6 +78,9 @@ export const Button = styled(IconButton)<IconButtonProps>(({ theme }) => ({
 
 export const CardTitle = styled(Typography)<TypographyProps>(() => ({
     padding: '10px',
+    overflow: 'hidden',
+    whiteSpace: 'nowrap',
+    textOverflow: 'ellipsis',
 }));
 
 export const Card = styled(Box)<BoxProps>(({ theme }) => ({

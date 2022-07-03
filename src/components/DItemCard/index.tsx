@@ -71,10 +71,7 @@ const DItemCard = ({ item, type }: any) => {
                     </Button>
                 </BottomButtonWrapper>
             </CardWrapper>
-            <CardTitle className='cardTitle'>
-                {(item && item.title && (item.title || null)) ||
-                    (item && item.name && (item.name || null))}
-            </CardTitle>
+            <CardTitle className='cardTitle'>{item.title || item.name}</CardTitle>
             <DInfoModal
                 item={item}
                 type={type}
