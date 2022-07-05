@@ -1,4 +1,15 @@
-import { Box, Grid, Skeleton, Toolbar, Typography } from '@mui/material';
+import {
+    Box,
+    FormControl,
+    FormHelperText,
+    Grid,
+    MenuItem,
+    Select,
+    Skeleton,
+    Toolbar,
+    Typography,
+} from '@mui/material';
+import { alpha, useTheme } from '@mui/material/styles';
 import { debounce } from 'lodash';
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
@@ -9,6 +20,7 @@ import DItemCard from '../../components/DItemCard';
 import { SearchIconWrapper, SearchInputBase, SearchWrapper } from '../../components/DSearchStyles';
 import DSelect from '../../components/DSelect';
 import { APP_API_PATH, APP_API_VERSION_PATH, APP_DESCRIPTION, APP_NAME } from '../../config';
+import { get } from '../../utilities/requests';
 import useBreakpoint from '../../utilities/useBreakpoint';
 import { MainContainer } from './styles';
 
@@ -25,7 +37,7 @@ interface BrowseParams {
 
 const handleDebouncedSearch = debounce(
     async (queryParams, setData, setRequestInfo, setIsLoaded, breakpoint, oldData, limit) => {
-        const get = async (path: string) => {
+        const getData = async (path: string) => {
             const res = await fetch(`${APP_API_PATH}${APP_API_VERSION_PATH}${path}`);
             const data = (await res.json()) || {
                 code: null,
@@ -61,7 +73,7 @@ const handleDebouncedSearch = debounce(
             setRequestInfo(info);
             setIsLoaded(true);
         };
-        await get(`/browse${queryParams}`);
+        await getData(`/browse${queryParams}`);
     },
     1500,
 );
@@ -79,6 +91,9 @@ const BrowsePage = () => {
     };
 
     const [data, setData] = useState<any>([]);
+    const [categories, setsCategories] = useState<any>({});
+    const [category, setCategory] = useState<number>(-1);
+    const [isCategoriesLoaded, setIsCategoriesLoaded] = useState<boolean>(false);
     const [params, setParams] = useState<BrowseParams>(tempParams);
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [requestInfo, setRequestInfo] = useState<any>({});
@@ -87,32 +102,37 @@ const BrowsePage = () => {
 
     const location: any = useLocation();
     const breakpoint = useBreakpoint();
+    const theme = useTheme();
     useEffect(() => {
-        const wanted_keys = [
-            'query',
-            'genre',
-            'year',
-            'sort',
-            'category',
-            'page',
-            'limit',
-            'mediaType',
-        ];
-        if (location.state) {
-            for (let i = 0; i < wanted_keys.length; i++) {
-                if (location.state[wanted_keys[i]]) {
-                    params[wanted_keys[i]] = location.state[wanted_keys[i]];
+        if (isCategoriesLoaded) {
+            const wanted_keys = [
+                'query',
+                'genre',
+                'year',
+                'sort',
+                'category',
+                'page',
+                'limit',
+                'mediaType',
+            ];
+            if (location.state) {
+                for (let i = 0; i < wanted_keys.length; i++) {
+                    if (location.state[wanted_keys[i]]) {
+                        params[wanted_keys[i]] = location.state[wanted_keys[i]];
+                    }
                 }
+                setParams(params);
             }
-            setParams(params);
+            const breakVals = { lg: 6, md: 4, sm: 3, xs: 2 };
+            const rem = params.limit % breakVals[breakpoint];
+            if (rem) {
+                setNumOfSkeletons(params.limit - rem);
+            }
+            handleSearch();
+        } else {
+            get('/browse', setsCategories, (e) => null, setIsCategoriesLoaded);
         }
-        const breakVals = { lg: 6, md: 4, sm: 3, xs: 2 };
-        const rem = params.limit % breakVals[breakpoint];
-        if (rem) {
-            setNumOfSkeletons(params.limit - rem);
-        }
-        handleSearch();
-    }, [location.state, breakpoint]);
+    }, [location.state, breakpoint, isCategoriesLoaded]);
 
     const handleSearch = (oldData = []) => {
         setIsLoaded(false);
@@ -180,22 +200,15 @@ const BrowsePage = () => {
 
     const handleChangeCategory = (event: any) => {
         var newParams = params;
-        if (event.target.value === 'Any') {
-            newParams.category = -1;
-        } else {
-            newParams.category = event.target.value || -1;
-        }
+        newParams.category = event.target.value;
+        setCategory(event.target.value);
         setParams(newParams);
         handleSearch();
     };
 
     const handleChangeMediaType = (event: any) => {
         var newParams = params;
-        if (event.target.value === 'Any') {
-            newParams.mediaType = 'movies';
-        } else {
-            newParams.mediaType = (event.target.value || 'movies').toLowerCase();
-        }
+        newParams.mediaType = (event.target.value || 'movies').toLowerCase();
         setParams(newParams);
         handleSearch();
     };
@@ -253,15 +266,17 @@ const BrowsePage = () => {
             </Helmet>
             <Box sx={{ marginTop: '20px' }}>
                 <Box>
-                    <Box sx={{display: 'flex', marginBottom: '20px'}}>
-                        <Typography variant='h3' sx={{marginRight: '20px'}}>Browse</Typography>
+                    <Box sx={{ display: 'flex', marginBottom: '20px' }}>
+                        <Typography variant='h3' sx={{ marginRight: '20px' }}>
+                            Browse
+                        </Typography>
                         <DSelect
-                            currentOption='Any'
-                            options={['Any', 'Movies', 'Series']}
+                            currentOption='Movies'
+                            options={['Movies', 'Series']}
                             onChange={handleChangeMediaType}
                             width='200px'
                             fontSize='40px'
-                            style={{height: '50px'}}
+                            style={{ height: '50px' }}
                         />
                     </Box>
                     <Grid
@@ -321,13 +336,97 @@ const BrowsePage = () => {
                             />
                         </Grid> */}
                         <Grid sx={{ padding: '8px 8px !important' }} item sm={3}>
-                            <DSelect
-                                title='Category'
-                                currentOption='Any'
-                                options={['Any']}
-                                onChange={handleChangeCategory}
-                                fullWidth
-                            />
+                            <FormControl
+                                sx={{
+                                    width: '100%',
+                                    minWidth: '100%',
+                                }}
+                            >
+                                <FormHelperText
+                                    sx={{
+                                        margin: '0px',
+                                        fontSize: '16px',
+                                        fontWeight: '500',
+                                        paddingBottom: '5px',
+                                    }}
+                                >
+                                    Category
+                                </FormHelperText>
+                                <Select
+                                    labelId='demo-simple-select-label'
+                                    id='demo-simple-select'
+                                    value={category}
+                                    onChange={handleChangeCategory}
+                                    variant='outlined'
+                                    displayEmpty
+                                    MenuProps={{ disablePortal: true }}
+                                    IconComponent={() => (
+                                        <i
+                                            style={{
+                                                color: theme.palette.primary.main,
+                                                paddingRight: '10px',
+                                                fontSize: '24px',
+                                                pointerEvents: 'none',
+                                                cursor: 'pointer',
+                                            }}
+                                            className='ri-arrow-down-s-line'
+                                        />
+                                    )}
+                                    sx={{
+                                        fontSize: 'inherit',
+                                        height: '40px',
+                                        border: '0px',
+                                        transition: '0.2s ease-out',
+                                        backgroundColor: alpha(
+                                            theme.palette.background.default,
+                                            0.7,
+                                        ),
+                                        backgroundImage:
+                                            'linear-gradient(rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.09))',
+                                        '&:hover': {
+                                            backgroundColor: alpha(
+                                                theme.palette.background.paper,
+                                                1,
+                                            ),
+                                            boxShadow: `0px 0px 0px 2px ${alpha(
+                                                theme.palette.background.paper,
+                                                0.5,
+                                            )}`,
+                                        },
+                                        '& .Dester-OutlinedInput-notchedOutline': {
+                                            border: '0px',
+                                        },
+                                    }}
+                                >
+                                    <MenuItem value={-1} key={-1}>
+                                        Any
+                                    </MenuItem>
+                                    {isCategoriesLoaded &&
+                                    categories.movies &&
+                                    categories.movies.length
+                                        ? categories.movies.map((item) => (
+                                              <MenuItem
+                                                  value={item.rclone_index}
+                                                  key={item.rclone_index}
+                                              >
+                                                  {item.name}
+                                              </MenuItem>
+                                          ))
+                                        : null}
+                                    {isCategoriesLoaded &&
+                                    categories.series &&
+                                    categories.series.length
+                                        ? categories.series.map((item) => (
+                                              <MenuItem
+                                                  value={item.rclone_index}
+                                                  key={item.rclone_index}
+                                              >
+                                                  {item.name}
+                                              </MenuItem>
+                                          ))
+                                        : null}
+                                </Select>
+                            </FormControl>
                         </Grid>
                         <Grid sx={{ padding: '8px 8px !important' }} item sm={3}>
                             <DSelect
