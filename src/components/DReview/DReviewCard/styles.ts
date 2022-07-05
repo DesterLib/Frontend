@@ -71,12 +71,14 @@ export const FeaturedTitleWrapper = styled(Box)<BoxProps>(({ theme }) => ({
 
 export const ContentWrapper = styled(Box)<BoxProps>(() => ({
     overflow: 'hidden',
-    maxHeight: '100px',
+    maxHeight: 'auto',
+    wordBreak: 'break-all',
+    paddingRight: '20px'
 }));
 
 export const DateWrapper = styled(Box)<BoxProps>(() => ({
-    paddingTop: '10px',
-    textAlign: 'end',
+    paddingTop: '20px',
+    textAlign: 'left',
 }));
 
 export const AvatarTitle = styled(Typography)<TypographyProps>(({ theme }) => ({

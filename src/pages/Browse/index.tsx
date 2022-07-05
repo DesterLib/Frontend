@@ -1,15 +1,16 @@
-import { Box, Grid, Skeleton, Toolbar } from '@mui/material';
+import { Box, Grid, Skeleton, Toolbar, Typography } from '@mui/material';
 import { debounce } from 'lodash';
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
+import DButton from '../../components/DButton';
 import { Helmet } from '../../components/DHelmet';
 import DItemCard from '../../components/DItemCard';
 import { SearchIconWrapper, SearchInputBase, SearchWrapper } from '../../components/DSearchStyles';
 import DSelect from '../../components/DSelect';
 import { APP_API_PATH, APP_API_VERSION_PATH, APP_DESCRIPTION, APP_NAME } from '../../config';
 import useBreakpoint from '../../utilities/useBreakpoint';
-import { MainContainer, ShowMoreButton } from './styles';
+import { MainContainer } from './styles';
 
 interface BrowseParams {
     query: string;
@@ -252,11 +253,22 @@ const BrowsePage = () => {
             </Helmet>
             <Box sx={{ marginTop: '20px' }}>
                 <Box>
+                    <Box sx={{display: 'flex', marginBottom: '20px'}}>
+                        <Typography variant='h3' sx={{marginRight: '20px'}}>Browse</Typography>
+                        <DSelect
+                            currentOption='Any'
+                            options={['Any', 'Movies', 'Series']}
+                            onChange={handleChangeMediaType}
+                            width='200px'
+                            fontSize='40px'
+                            style={{height: '50px'}}
+                        />
+                    </Box>
                     <Grid
                         container
                         sx={{ display: 'flex', justifyContent: 'center', padding: '10px' }}
                     >
-                        <Grid item sm={10}>
+                        <Grid item sm={12}>
                             <SearchWrapper fullWidth standalone>
                                 <SearchIconWrapper>
                                     <i className='ri-search-2-line'></i>
@@ -271,16 +283,17 @@ const BrowsePage = () => {
                         </Grid>
                     </Grid>
                     <Grid
-                        spacing={4}
+                        spacing={2}
                         container
                         sx={{
                             display: 'flex',
                             justifyContent: 'center',
+                            margin: 'auto',
                             marginTop: '0px',
-                            padding: '5px',
+                            width: '100%',
                         }}
                     >
-                        <Grid item sm={2}>
+                        <Grid sx={{ padding: '8px 8px !important' }} item sm={3}>
                             <DSelect
                                 title='Genre'
                                 currentOption='Any'
@@ -289,7 +302,7 @@ const BrowsePage = () => {
                                 fullWidth
                             />
                         </Grid>
-                        <Grid item sm={2}>
+                        <Grid sx={{ padding: '8px 8px !important' }} item sm={3}>
                             <DSelect
                                 title='Year'
                                 currentOption='Any'
@@ -298,7 +311,7 @@ const BrowsePage = () => {
                                 fullWidth
                             />
                         </Grid>
-                        <Grid item sm={2}>
+                        {/* <Grid sx={{ padding: '8px 8px !important' }} item sm={2}>
                             <DSelect
                                 title='Type'
                                 currentOption='Any'
@@ -306,8 +319,8 @@ const BrowsePage = () => {
                                 onChange={handleChangeMediaType}
                                 fullWidth
                             />
-                        </Grid>
-                        <Grid item sm={2}>
+                        </Grid> */}
+                        <Grid sx={{ padding: '8px 8px !important' }} item sm={3}>
                             <DSelect
                                 title='Category'
                                 currentOption='Any'
@@ -316,7 +329,7 @@ const BrowsePage = () => {
                                 fullWidth
                             />
                         </Grid>
-                        <Grid item sm={2}>
+                        <Grid sx={{ padding: '8px 8px !important' }} item sm={3}>
                             <DSelect
                                 title='Sort'
                                 currentOption='Title'
@@ -332,9 +345,9 @@ const BrowsePage = () => {
                     sx={{
                         display: 'flex',
                         justifyContent: 'center',
-                        padding: '10px',
+                        padding: '15px',
                         alignItems: 'center',
-                        width: '85%',
+                        width: '100%',
                         margin: 'auto',
                     }}
                     spacing={2}
@@ -342,7 +355,15 @@ const BrowsePage = () => {
                     {isLoaded
                         ? data.length > 0 &&
                           data.map((item) => (
-                              <Grid item lg={2} md={3} sm={4} xs={5} key={item.tmdb_id}>
+                              <Grid
+                                  sx={{ padding: '8px 8px !important' }}
+                                  item
+                                  lg={2}
+                                  md={3}
+                                  sm={4}
+                                  xs={5}
+                                  key={item.tmdb_id}
+                              >
                                   <DItemCard
                                       item={item}
                                       type={item.number_of_files ? 'movie' : 'series'}
@@ -350,28 +371,47 @@ const BrowsePage = () => {
                               </Grid>
                           ))
                         : [...Array(numOfSkeletons)].map((_, item) => (
-                              <Grid item xs={6} sm={2} key={item}>
+                              <Grid
+                                  sx={{ padding: '8px 8px !important' }}
+                                  item
+                                  lg={2}
+                                  md={3}
+                                  sm={4}
+                                  xs={5}
+                                  key={item}
+                              >
                                   <Skeleton
                                       variant='rectangular'
                                       animation='wave'
                                       sx={{
-                                          aspectRatio: '1/1.33',
+                                          aspectRatio: '2/3',
                                           width: '100%',
                                           height: '100%',
                                           borderRadius: '10px',
                                       }}
                                   />
+                                  <Skeleton
+                                      variant='rectangular'
+                                      animation='wave'
+                                      sx={{
+                                          marginTop: '10px',
+                                          height: '15px',
+                                          width: '80%',
+                                          borderRadius: '4px',
+                                      }}
+                                  />
                               </Grid>
                           ))}
                 </Grid>
-                <ShowMoreButton
+                <DButton
                     disableElevation
                     variant='contained'
-                    sx={{ marginLeft: '10%' }}
+                    sx={{ margin: 'auto' }}
                     onClick={handleChangePage}
+                    endIcon={<span className='material-symbols-rounded'>arrow_downward</span>}
                 >
                     Show More
-                </ShowMoreButton>
+                </DButton>
             </Box>
         </MainContainer>
     );

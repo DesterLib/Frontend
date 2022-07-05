@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { DButtonPrimary, DButtonSecondary, DButtonStartIcon } from './styles';
+import { DButtonEndIcon, DButtonPrimary, DButtonSecondary, DButtonStartIcon } from './styles';
 
 // function generateTextColor(hexcolor: any) {
 //     hexcolor = hexcolor.replace('#', '');
@@ -13,6 +13,7 @@ import { DButtonPrimary, DButtonSecondary, DButtonStartIcon } from './styles';
 
 const DButton = ({
     startIcon,
+    endIcon,
     color,
     children,
     variant,
@@ -35,6 +36,15 @@ const DButton = ({
                         </DButtonStartIcon>
                     )}
                     {children}
+                    {endIcon && (
+                        <DButtonEndIcon
+                            className='DButton-endIcon'
+                            color={color}
+                            variant={variant}
+                        >
+                            {endIcon}
+                        </DButtonEndIcon>
+                    )}
                 </DButtonPrimary>
             ) : null}
             {color === 'secondary' ? (
@@ -55,6 +65,15 @@ const DButton = ({
                         </DButtonStartIcon>
                     )}
                     {children}
+                    {endIcon && (
+                        <DButtonEndIcon
+                            className='DButton-endIcon'
+                            color={color}
+                            variant={variant}
+                        >
+                            {endIcon}
+                        </DButtonEndIcon>
+                    )}
                 </DButtonSecondary>
             ) : null}
             {color === 'warning' ? (
@@ -75,6 +94,15 @@ const DButton = ({
                         </DButtonStartIcon>
                     )}
                     {children}
+                    {endIcon && (
+                        <DButtonEndIcon
+                            className='DButton-endIcon'
+                            color={color}
+                            variant={variant}
+                        >
+                            {endIcon}
+                        </DButtonEndIcon>
+                    )}
                 </DButtonSecondary>
             ) : null}
             {color === 'danger' ? (
@@ -95,6 +123,15 @@ const DButton = ({
                         </DButtonStartIcon>
                     )}
                     {children}
+                    {endIcon && (
+                        <DButtonEndIcon
+                            className='DButton-endIcon'
+                            color={color}
+                            variant={variant}
+                        >
+                            {endIcon}
+                        </DButtonEndIcon>
+                    )}
                 </DButtonSecondary>
             ) : null}
         </>

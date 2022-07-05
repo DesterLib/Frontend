@@ -55,7 +55,7 @@ const DReviewCard = ({ item }: any) => {
                     <Typography variant='body2'>{item.content}</Typography>
                 </ContentWrapper>
                 <DateWrapper>
-                    <Typography variant='body2'>
+                    <Typography variant='overline'>
                         {new Date(
                             Date.parse(item.updated_at || item.created_at),
                         ).toLocaleDateString('en-US')}

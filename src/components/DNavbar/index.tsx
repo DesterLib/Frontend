@@ -226,14 +226,6 @@ const DNavbar = ({ colorModeContext, themeMode }: any) => {
                                     <Typography textAlign='center'>Account</Typography>
                                 </MenuItem>
                             </Link>
-                            <Link to='/browse' style={{ textDecoration: 'none' }}>
-                                <MenuItem sx={menuItemStyles}>
-                                    <Avatar sx={{ marginRight: '10px' }}>
-                                        <i className='ri-database-2-fill'></i>
-                                    </Avatar>
-                                    <Typography textAlign='center'>Browse</Typography>
-                                </MenuItem>
-                            </Link>
                             <MenuItem onClick={colorMode.toggleColorMode} sx={menuItemStyles}>
                                 {themeMode === 'dark' && (
                                     <>

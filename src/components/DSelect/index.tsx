@@ -7,7 +7,17 @@ import React from 'react';
 import { DropDownSelectItem } from './styles';
 
 const DSelect = (props: any) => {
-    const { title, options, currentOption, width, fullWidth, fixedValue, onChange }: any = props;
+    const {
+        title,
+        options,
+        currentOption,
+        width,
+        fullWidth,
+        fixedValue,
+        fontSize,
+        onChange,
+        style,
+    }: any = props;
     const [option, setOption] = React.useState(currentOption);
 
     const handleChange = (event: SelectChangeEvent) => {
@@ -18,7 +28,12 @@ const DSelect = (props: any) => {
     const theme = useTheme();
 
     return (
-        <FormControl sx={{ width: width || '100%', minWidth: fullWidth ? '100%' : '0px' }}>
+        <FormControl
+            sx={{
+                width: width || '100%',
+                minWidth: fullWidth || fullWidth === !undefined ? '100%' : '0px',
+            }}
+        >
             <FormHelperText
                 sx={{
                     margin: '0px',
@@ -43,12 +58,15 @@ const DSelect = (props: any) => {
                             color: theme.palette.primary.main,
                             paddingRight: '10px',
                             fontSize: '24px',
+                            pointerEvents: 'none',
+                            cursor: 'pointer',
                         }}
                         className='ri-arrow-down-s-line'
                     />
                 )}
                 sx={{
-                    height: '40px',
+                    fontSize: fontSize || 'inherit',
+                    height: style && style.height ? style.height : '40px',
                     border: '0px',
                     transition: '0.2s ease-out',
                     backgroundColor: alpha(theme.palette.background.default, 0.7),
@@ -61,6 +79,7 @@ const DSelect = (props: any) => {
                     '& .Dester-OutlinedInput-notchedOutline': {
                         border: '0px',
                     },
+                    ...style,
                 }}
             >
                 {options

@@ -12,6 +12,11 @@ type DButtonStartIcon = {
     variant?: string;
 };
 
+type DButtonEndIcon = {
+    color?: string;
+    variant?: string;
+}
+
 const ButtonBaseStyles = {
     border: '0px',
     cursor: 'pointer',
@@ -64,6 +69,9 @@ export const DButtonSecondary = styled(ButtonUnstyled)<DButtonProps>(({ theme })
     '&:hover .DButton-startIcon': {
         color: theme.palette.primary.main,
     },
+    '&:hover .DButton-endIcon': {
+        color: theme.palette.primary.main,
+    },
     '&:disabled, [disabled]': {
         cursor: 'default',
         background: `${alpha(theme.palette.secondary.main, 0.2)}`,
@@ -74,6 +82,19 @@ export const DButtonSecondary = styled(ButtonUnstyled)<DButtonProps>(({ theme })
 export const DButtonStartIcon = styled(Box)<DButtonStartIcon>(({ theme, variant, color }) => ({
     border: '0px',
     marginRight: variant === 'icon' ? '0px' : '8px',
+    fontSize: '20px',
+    display: 'flex',
+    alignItems: 'center',
+    transition: '0.2s ease-out',
+    color: `${
+        (variant === 'icon' && theme.palette.primary.main,
+        (color === 'primary' || color === undefined) && 'inherit')
+    }`,
+}));
+
+export const DButtonEndIcon = styled(Box)<DButtonEndIcon>(({ theme, variant, color }) => ({
+    border: '0px',
+    marginLeft: variant === 'icon' ? '0px' : '8px',
     fontSize: '20px',
     display: 'flex',
     alignItems: 'center',

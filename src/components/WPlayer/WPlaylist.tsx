@@ -93,9 +93,9 @@ const DPlaylist = ({ videoData, playlistData, show, handleClose, handleShitchUrl
                                                     }}
                                                     primary={item.title}
                                                     secondary={
-                                                        'Season ' +
-                                                        item.season +
-                                                        ' Episode ' +
+                                                        'S' +
+                                                        season.season +
+                                                        ' E' +
                                                         item.episode
                                                     }
                                                 />
