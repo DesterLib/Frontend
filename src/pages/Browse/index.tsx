@@ -14,6 +14,7 @@ import { debounce } from 'lodash';
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
+import DBottomFilter from '../../components/DBottomFilter';
 import DButton from '../../components/DButton';
 import { Helmet } from '../../components/DHelmet';
 import DItemCard from '../../components/DItemCard';
@@ -264,7 +265,14 @@ const BrowsePage = () => {
                 <title>{APP_NAME}</title>
                 <meta name='description' content={APP_DESCRIPTION} />
             </Helmet>
-            <Box sx={{ marginTop: '20px' }}>
+            <Box
+                sx={{
+                    marginTop: '20px',
+                    [theme.breakpoints.down('md')]: {
+                        marginTop: '0px',
+                    },
+                }}
+            >
                 <Box>
                     <Box sx={{ display: 'flex', marginBottom: '20px' }}>
                         <Typography variant='h3' sx={{ marginRight: '20px' }}>
@@ -279,24 +287,19 @@ const BrowsePage = () => {
                             style={{ height: '50px' }}
                         />
                     </Box>
-                    <Grid
-                        container
-                        sx={{ display: 'flex', justifyContent: 'center', padding: '10px' }}
-                    >
-                        <Grid item sm={12}>
-                            <SearchWrapper fullWidth standalone>
-                                <SearchIconWrapper>
-                                    <i className='ri-search-2-line'></i>
-                                </SearchIconWrapper>
-                                <SearchInputBase
-                                    fullWidth
-                                    placeholder='Search…'
-                                    inputProps={{ 'aria-label': 'search' }}
-                                    onChange={handleChangeQuery}
-                                />
-                            </SearchWrapper>
-                        </Grid>
-                    </Grid>
+                    <Box sx={{ display: 'flex', justifyContent: 'center', padding: '5px' }}>
+                        <SearchWrapper fullWidth standalone>
+                            <SearchIconWrapper>
+                                <i className='ri-search-2-line'></i>
+                            </SearchIconWrapper>
+                            <SearchInputBase
+                                fullWidth
+                                placeholder='Search…'
+                                inputProps={{ 'aria-label': 'search' }}
+                                onChange={handleChangeQuery}
+                            />
+                        </SearchWrapper>
+                    </Box>
                     <Grid
                         spacing={2}
                         container
@@ -306,9 +309,12 @@ const BrowsePage = () => {
                             margin: 'auto',
                             marginTop: '0px',
                             width: '100%',
+                            [theme.breakpoints.down('md')]: {
+                                display: 'none',
+                            },
                         }}
                     >
-                        <Grid sx={{ padding: '8px 8px !important' }} item sm={3}>
+                        <Grid sx={{ padding: '8px 8px !important' }} item md={3} sm={6} xs={12}>
                             <DSelect
                                 title='Genre'
                                 currentOption='Any'
@@ -317,7 +323,7 @@ const BrowsePage = () => {
                                 fullWidth
                             />
                         </Grid>
-                        <Grid sx={{ padding: '8px 8px !important' }} item sm={3}>
+                        <Grid sx={{ padding: '8px 8px !important' }} item md={3} sm={6} xs={12}>
                             <DSelect
                                 title='Year'
                                 currentOption='Any'
@@ -335,7 +341,7 @@ const BrowsePage = () => {
                                 fullWidth
                             />
                         </Grid> */}
-                        <Grid sx={{ padding: '8px 8px !important' }} item sm={3}>
+                        {/* <Grid sx={{ padding: '8px 8px !important' }} item sm={3}>
                             <FormControl
                                 sx={{
                                     width: '100%',
@@ -427,8 +433,8 @@ const BrowsePage = () => {
                                         : null}
                                 </Select>
                             </FormControl>
-                        </Grid>
-                        <Grid sx={{ padding: '8px 8px !important' }} item sm={3}>
+                        </Grid> */}
+                        <Grid sx={{ padding: '8px 8px !important' }} item md={3} sm={6} xs={12}>
                             <DSelect
                                 title='Sort'
                                 currentOption='Title'
@@ -448,6 +454,9 @@ const BrowsePage = () => {
                         alignItems: 'center',
                         width: '100%',
                         margin: 'auto',
+                        [theme.breakpoints.down('md')]: {
+                            padding: '0px',
+                        },
                     }}
                     spacing={2}
                 >
@@ -460,7 +469,7 @@ const BrowsePage = () => {
                                   lg={2}
                                   md={3}
                                   sm={4}
-                                  xs={5}
+                                  xs={6}
                                   key={item.tmdb_id}
                               >
                                   <DItemCard
@@ -476,7 +485,7 @@ const BrowsePage = () => {
                                   lg={2}
                                   md={3}
                                   sm={4}
-                                  xs={5}
+                                  xs={6}
                                   key={item}
                               >
                                   <Skeleton
@@ -505,13 +514,22 @@ const BrowsePage = () => {
                 <DButton
                     disableElevation
                     variant='contained'
-                    sx={{ margin: 'auto' }}
+                    sx={{ margin: '20px auto 70px auto' }}
                     onClick={handleChangePage}
                     endIcon={<span className='material-symbols-rounded'>arrow_downward</span>}
                 >
                     Show More
                 </DButton>
             </Box>
+            <DBottomFilter
+                genres={genres}
+                years={years}
+                sortings={sortings}
+                handleChangeGenre={handleChangeGenre}
+                handleChangeYear={handleChangeYear}
+                handleChangeCategory={handleChangeCategory}
+                handleChangeSort={handleChangeSort}
+            />
         </MainContainer>
     );
 };

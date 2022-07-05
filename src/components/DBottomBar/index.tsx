@@ -14,7 +14,7 @@ const DBottomBar = () => {
 
     return (
         <DBottomBarWrapper>
-            <ButtonBase disableRipple sx={{ display: 'block', width: '100%' }}>
+            <ButtonBase component='div' disableRipple sx={{ display: 'block', width: '100%' }}>
                 <BottomNavigation
                     showLabels
                     value={value}

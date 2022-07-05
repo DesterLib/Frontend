@@ -1,10 +1,11 @@
-import styled from '@emotion/styled';
-import Box, { BoxProps } from '@mui/system/Box';
+import Box, { BoxProps } from '@mui/material/Box';
+import { styled } from '@mui/material/styles';
 
-import DButton from '../../components/DButton';
-
-export const MainContainer = styled(Box)<BoxProps>(() => ({
+export const MainContainer = styled(Box)<BoxProps>(({ theme }) => ({
     width: '100%',
     height: '100%',
     padding: '30px 60px',
+    [theme.breakpoints.down('md')]: {
+        padding: '20px 20px',
+    },
 }));

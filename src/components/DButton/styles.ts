@@ -85,6 +85,7 @@ export const DButtonStartIcon = styled(Box)<DButtonStartIcon>(({ theme, variant,
     fontSize: '20px',
     display: 'flex',
     alignItems: 'center',
+    justifyContent: variant === 'icon' ? 'center' : 'inherit',
     transition: '0.2s ease-out',
     color: `${
         (variant === 'icon' && theme.palette.primary.main,
