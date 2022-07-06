@@ -111,6 +111,7 @@ const SeriePage = () => {
                             [theme.breakpoints.down('md')]: {
                                 alignItems: 'center',
                                 marginLeft: 'auto',
+                                marginRight: 'auto',
                                 marginBottom: '10px',
                             },
                         }}

@@ -42,7 +42,7 @@ const DevPage = () => {
                     <p dangerouslySetInnerHTML={{ __html: data }} />
                 </Box>
             </Paper>
-            <DButton color='warning' startIcon={<ConstructionIcon />} onClick={handleRebuild}>
+            <DButton sx={{marginBottom: '60px'}} color='warning' startIcon={<ConstructionIcon />} onClick={handleRebuild}>
                 Rebuild Metadata
             </DButton>
         </Box>

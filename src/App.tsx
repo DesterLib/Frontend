@@ -78,7 +78,7 @@ const App = () => {
                             root: {
                                 padding: '20px',
                                 maxHeight: '400px',
-                                cursor: 'pointer'
+                                cursor: 'pointer',
                             },
                             paper: {
                                 margin: '0px',

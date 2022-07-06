@@ -1,12 +1,19 @@
+import { IconButton } from '@mui/material';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
+import Drawer from '@mui/material/Drawer';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import { alpha } from '@mui/material/styles';
-import { useTheme } from '@mui/system';
+import { CSSObject, Theme, styled, useTheme } from '@mui/material/styles';
 import { debounce } from 'lodash';
 import React, { useContext, useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
@@ -19,6 +26,7 @@ import {
     APP_LOGO_LIGHT,
     APP_NAME,
 } from '../../config';
+import DButton from '../DButton';
 import {
     SearchCardContainer,
     SearchIconWrapper,
@@ -45,6 +53,7 @@ const DNavbar = ({ colorModeContext, themeMode }: any) => {
     const [searchQuery, setSearchQuery] = useState<string>('');
     const [searchResult, setSearchResult] = useState<object>({ ok: false });
     const [searchAnchor, setSearchAnchor] = useState<null | HTMLElement>(null);
+    const [isSideBarOpen, setIsSideBarOpen] = useState<boolean>(false);
 
     const location = useLocation();
 
@@ -88,6 +97,18 @@ const DNavbar = ({ colorModeContext, themeMode }: any) => {
     const theme = useTheme();
 
     const colorMode: any = useContext(colorModeContext);
+
+    const toggleDrawer = (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
+        if (
+            event.type === 'keydown' &&
+            ((event as React.KeyboardEvent).key === 'Tab' ||
+                (event as React.KeyboardEvent).key === 'Shift')
+        ) {
+            return;
+        }
+
+        setIsSideBarOpen(!isSideBarOpen);
+    };
 
     const menuStyles = {
         marginTop: '45px',
@@ -140,7 +161,13 @@ const DNavbar = ({ colorModeContext, themeMode }: any) => {
         <Box>
             <StyledAppBar elevation={0} position='fixed'>
                 <Toolbar variant='dense'>
-                    <LeftMenuToggle size='large' edge='start' color='inherit' aria-label='menu'>
+                    <LeftMenuToggle
+                        onClick={toggleDrawer(true)}
+                        size='large'
+                        edge='start'
+                        color='inherit'
+                        aria-label='menu'
+                    >
                         <i className='ri-menu-line'></i>
                     </LeftMenuToggle>
                     <LogoWrapper>
@@ -182,7 +209,9 @@ const DNavbar = ({ colorModeContext, themeMode }: any) => {
                             justifyContent: 'right',
                         }}
                     >
-                        {/* <DButton variant="contained" color="primary">Login</DButton> */}
+                        {/* <DButton variant='contained' color='primary'>
+                            Login
+                        </DButton> */}
                         <AvatarButtonWrapper onClick={handleOpenUserMenu}>
                             <Avatar alt='Dester' />
                         </AvatarButtonWrapper>
@@ -272,6 +301,26 @@ const DNavbar = ({ colorModeContext, themeMode }: any) => {
                     </Box>
                 </Toolbar>
             </StyledAppBar>
+            <Drawer anchor='left' open={isSideBarOpen} onClose={toggleDrawer(false)}>
+                <List sx={{ width: '250px' }}>
+                    <ListItem>
+                        <ListItemButton>
+                            <ListItemIcon>
+                                <span className='material-symbols-rounded'>history</span>
+                            </ListItemIcon>
+                            <ListItemText primary='History' />
+                        </ListItemButton>
+                    </ListItem>
+                    <ListItem>
+                        <ListItemButton>
+                            <ListItemIcon>
+                                <span className='material-symbols-rounded'>category</span>{' '}
+                            </ListItemIcon>
+                            <ListItemText primary='Categories' />
+                        </ListItemButton>
+                    </ListItem>
+                </List>
+            </Drawer>
         </Box>
     );
 };

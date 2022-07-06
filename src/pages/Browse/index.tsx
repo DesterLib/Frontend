@@ -332,7 +332,7 @@ const BrowsePage = () => {
                                 fullWidth
                             />
                         </Grid>
-                        {/* <Grid sx={{ padding: '8px 8px !important' }} item sm={2}>
+                        <Grid sx={{ padding: '8px 8px !important' }} item sm={3}>
                             <DSelect
                                 title='Type'
                                 currentOption='Any'
@@ -340,7 +340,7 @@ const BrowsePage = () => {
                                 onChange={handleChangeMediaType}
                                 fullWidth
                             />
-                        </Grid> */}
+                        </Grid>
                         {/* <Grid sx={{ padding: '8px 8px !important' }} item sm={3}>
                             <FormControl
                                 sx={{

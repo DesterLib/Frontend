@@ -51,24 +51,27 @@ const DSelect = (props: any) => {
                 onChange={handleChange}
                 variant='outlined'
                 displayEmpty
-                MenuProps={{ disablePortal: true }}
                 IconComponent={() => (
-                    <i
+                    <span
                         style={{
                             color: theme.palette.primary.main,
                             paddingRight: '10px',
-                            fontSize: '24px',
+                            fontSize: '34px',
+                            fontWeight: 'light',
                             pointerEvents: 'none',
                             cursor: 'pointer',
                         }}
-                        className='ri-arrow-down-s-line'
-                    />
+                        className='material-symbols-rounded'
+                    >
+                        expand_more
+                    </span>
                 )}
                 sx={{
                     fontSize: fontSize || 'inherit',
                     height: style && style.height ? style.height : '40px',
                     border: '0px',
                     transition: '0.2s ease-out',
+                    paddingRight: '0px',
                     backgroundColor: alpha(theme.palette.background.default, 0.7),
                     backgroundImage:
                         'linear-gradient(rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.09))',
@@ -78,6 +81,9 @@ const DSelect = (props: any) => {
                     },
                     '& .Dester-OutlinedInput-notchedOutline': {
                         border: '0px',
+                    },
+                    '& .Dester-InputBase-input': {
+                        textOverflow: 'clip !important',
                     },
                     ...style,
                 }}

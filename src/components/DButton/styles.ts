@@ -20,7 +20,7 @@ type DButtonEndIcon = {
 const ButtonBaseStyles = {
     border: '0px',
     cursor: 'pointer',
-    padding: '12px 20px',
+    padding: '12px 12px',
     transition: '0.2s ease-out',
     lineHeight: '1',
     display: 'flex',

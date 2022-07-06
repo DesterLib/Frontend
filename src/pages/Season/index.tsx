@@ -117,11 +117,6 @@ const SeasonPage = () => {
                         paddingTop: '100px',
                     }}
                 >
-                    <Box sx={{ width: '100%', marginBottom: '20px' }}>
-                        <Typography sx={{ fontWeight: '500' }} variant='h4'>
-                            {data.title}
-                        </Typography>
-                    </Box>
                     <Box sx={{ maxWidth: '220px', margin: 'auto' }}>
                         <img
                             style={{ borderRadius: '10px' }}
@@ -135,6 +130,11 @@ const SeasonPage = () => {
                             }
                             alt=''
                         />
+                    </Box>
+                    <Box sx={{ width: '100%', marginTop: '20px' }}>
+                        <Typography sx={{ fontWeight: '500' }} variant='h4'>
+                            {data.title}
+                        </Typography>
                     </Box>
                     <Box
                         sx={{
