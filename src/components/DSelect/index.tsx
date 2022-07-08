@@ -50,6 +50,7 @@ const DSelect = (props: any) => {
                 value={option}
                 onChange={handleChange}
                 variant='outlined'
+                MenuProps={{ keepMounted: true, disablePortal: true }}
                 displayEmpty
                 IconComponent={() => (
                     <span

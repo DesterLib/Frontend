@@ -19,28 +19,21 @@ export default function DBottomFilter({
     handleChangeCategory,
     handleChangeSort,
 }) {
-    const [state, setState] = React.useState({
-        top: false,
-        left: false,
-        bottom: false,
-        right: false,
-    });
+    const [isSideBarOpen, setIsSideBarOpen] = React.useState<boolean>(false);
 
     const theme = useTheme();
 
-    const toggleDrawer =
-        (anchor: Anchor, open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
-            if (
-                event &&
-                event.type === 'keydown' &&
-                ((event as React.KeyboardEvent).key === 'Tab' ||
-                    (event as React.KeyboardEvent).key === 'Shift')
-            ) {
-                return;
-            }
+    const toggleDrawer = (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
+        if (
+            event.type === 'keydown' &&
+            ((event as React.KeyboardEvent).key === 'Tab' ||
+                (event as React.KeyboardEvent).key === 'Shift')
+        ) {
+            return;
+        }
 
-            setState({ ...state, [anchor]: open });
-        };
+        setIsSideBarOpen(!isSideBarOpen);
+    };
 
     const list = (anchor: Anchor) => (
         <Box
@@ -49,7 +42,7 @@ export default function DBottomFilter({
                 padding: '10px 20px',
             }}
             role='presentation'
-            onKeyDown={toggleDrawer(anchor, false)}
+            onKeyDown={toggleDrawer(false)}
         >
             <List>
                 <ListItem>
@@ -130,13 +123,13 @@ export default function DBottomFilter({
                     minWidth: '0px',
                     textAlign: 'center',
                 }}
-                onClick={toggleDrawer('bottom', true)}
+                onClick={toggleDrawer(true)}
             />
             <SwipeableDrawer
                 anchor='bottom'
-                open={state['bottom']}
-                onClose={toggleDrawer('bottom', false)}
-                onOpen={toggleDrawer('bottom', true)}
+                open={isSideBarOpen}
+                onOpen={toggleDrawer(true)}
+                onClose={toggleDrawer(false)}
             >
                 {list('bottom')}
             </SwipeableDrawer>
