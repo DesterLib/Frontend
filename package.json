@@ -71,7 +71,6 @@
         }
     ],
     "main": "./electron/index.ts",
-    "homepage": "./",
     "browserslist": {
         "production": [
             ">0.2%",
