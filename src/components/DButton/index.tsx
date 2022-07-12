@@ -37,11 +37,7 @@ const DButton = ({
                     )}
                     {children}
                     {endIcon && (
-                        <DButtonEndIcon
-                            className='DButton-endIcon'
-                            color={color}
-                            variant={variant}
-                        >
+                        <DButtonEndIcon className='DButton-endIcon' color={color} variant={variant}>
                             {endIcon}
                         </DButtonEndIcon>
                     )}
@@ -66,11 +62,7 @@ const DButton = ({
                     )}
                     {children}
                     {endIcon && (
-                        <DButtonEndIcon
-                            className='DButton-endIcon'
-                            color={color}
-                            variant={variant}
-                        >
+                        <DButtonEndIcon className='DButton-endIcon' color={color} variant={variant}>
                             {endIcon}
                         </DButtonEndIcon>
                     )}
@@ -95,11 +87,7 @@ const DButton = ({
                     )}
                     {children}
                     {endIcon && (
-                        <DButtonEndIcon
-                            className='DButton-endIcon'
-                            color={color}
-                            variant={variant}
-                        >
+                        <DButtonEndIcon className='DButton-endIcon' color={color} variant={variant}>
                             {endIcon}
                         </DButtonEndIcon>
                     )}
@@ -124,11 +112,7 @@ const DButton = ({
                     )}
                     {children}
                     {endIcon && (
-                        <DButtonEndIcon
-                            className='DButton-endIcon'
-                            color={color}
-                            variant={variant}
-                        >
+                        <DButtonEndIcon className='DButton-endIcon' color={color} variant={variant}>
                             {endIcon}
                         </DButtonEndIcon>
                     )}

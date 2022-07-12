@@ -698,7 +698,11 @@ const MoviePage = () => {
                 currentState={streamModalState}
                 closeInfoModal={closeStreamModal}
             />
-            <DExternalModal videoData={videoData} currentState={externalModalState} closeInfoModal={closeExternalModal} />
+            <DExternalModal
+                videoData={videoData}
+                currentState={externalModalState}
+                closeInfoModal={closeExternalModal}
+            />
         </Box>
     ) : isLoaded && !requestInfo.ok ? (
         <p style={{ marginTop: '200px' }}>{requestInfo.message}</p>

@@ -2,10 +2,10 @@ import DPlayer from '@desterlib/dplayer';
 import { Box, Toolbar } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-
 import DLoader from '../../components/DLoader';
-import WPlayer from '../../components/WPlayer';
+import WPlayer from '../../components/DWebPlayer';
 import { APP_API_PATH, APP_API_VERSION_PATH, APP_IS_ELECTRON } from '../../config';
+import useBreakpoint from '../../utilities/useBreakpoint';
 
 const EpisodePage = () => {
     const { seriesId, seasonNumber, episodeNumber }: any = useParams();
@@ -13,6 +13,8 @@ const EpisodePage = () => {
     const [isLoaded, setIsLoaded] = useState<boolean>(false);
     const navigate = useNavigate();
     const location: any = useLocation();
+    const breakpoint = useBreakpoint();
+
     useEffect(() => {
         if (location.state) {
             const seriesData = location.state.data;
@@ -56,7 +58,7 @@ const EpisodePage = () => {
     return isLoaded ? (
         <Box>
             <Toolbar />
-            <Box>
+            <Box sx={{ marginTop: breakpoint !== 'xs' && breakpoint !== 'sm' ? '20px' : '0px' }}>
                 {APP_IS_ELECTRON ? (
                     <DPlayer
                         url={videoData.url}

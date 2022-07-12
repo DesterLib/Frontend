@@ -10,7 +10,7 @@ const DPlayerBase = React.memo(
             const art = new Artplayer({
                 ...settings,
                 container: artRef.current,
-                url: src,
+                url: src || '',
                 subtitle: {
                     url: subtitle || '',
                     type: 'srt',
@@ -29,7 +29,7 @@ const DPlayerBase = React.memo(
             };
         }, [settings, getInstance]);
 
-        return <Box ref={artRef} {...rest}></Box>;
+        return <Box ref={artRef} {...rest} />;
     },
     () => true,
 );

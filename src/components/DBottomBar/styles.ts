@@ -17,29 +17,27 @@ export const DBottomBarWrapper = styled(Box)<BoxProps>(({ theme }) => ({
     },
 }));
 
-export const BottomNavMenuItem = styled(BottomNavigationAction)<any>(
-    ({ theme }) => ({
-        borderRadius: '10px',
-        padding: '5px 0px',
+export const BottomNavMenuItem = styled(BottomNavigationAction)<any>(({ theme }) => ({
+    borderRadius: '10px',
+    padding: '5px 0px',
+    transition: '0.2s ease-out',
+    '.Dester-BottomNavigationAction-root': {
+        color: theme.palette.text.primary,
+    },
+    '&.Dester-BottomNavigationAction-root div div': {
         transition: '0.2s ease-out',
-        '.Dester-BottomNavigationAction-root': {
-            color: theme.palette.text.primary,
-        },
-        '&.Dester-BottomNavigationAction-root div div': {
-            transition: '0.2s ease-out',
-            backgroundColor: theme.palette.background.paper
-        },
-        '.material-symbols-rounded': {
-            padding: '4px 15px',
-            borderRadius: '25px',
-        },
-        '&.Mui-selected': {
-            color: theme.palette.text.primary
-        },
-        '&.Mui-selected div div': {
-            borderRadius: '25px',
-            opacity: '1',
-            backgroundColor: theme.palette.background.default,
-        }
-    }),
-);
+        backgroundColor: theme.palette.background.paper,
+    },
+    '.material-symbols-rounded': {
+        padding: '4px 15px',
+        borderRadius: '25px',
+    },
+    '&.Mui-selected': {
+        color: theme.palette.text.primary,
+    },
+    '&.Mui-selected div div': {
+        borderRadius: '25px',
+        opacity: '1',
+        backgroundColor: theme.palette.background.default,
+    },
+}));

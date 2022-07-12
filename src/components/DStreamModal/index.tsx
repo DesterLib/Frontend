@@ -4,7 +4,7 @@ import DialogContent from '@mui/material/DialogContent';
 import React from 'react';
 
 import { APP_IS_ELECTRON } from '../../config';
-import WPlayer from '../WPlayer';
+import WPlayer from '../DWebPlayer';
 import { CloseButton, InfoModal } from './styles';
 
 const DStreamModal = ({ videoData, currentState, closeInfoModal }: any) => {

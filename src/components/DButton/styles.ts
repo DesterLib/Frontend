@@ -15,7 +15,7 @@ type DButtonStartIcon = {
 type DButtonEndIcon = {
     color?: string;
     variant?: string;
-}
+};
 
 const ButtonBaseStyles = {
     border: '0px',

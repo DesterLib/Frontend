@@ -7,51 +7,54 @@ import ListItemAvatar from '@mui/material/ListItemAvatar';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import ListSubheader from '@mui/material/ListSubheader';
+import Slide from '@mui/material/Slide';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import React from 'react';
+import guid from '../../utilities/guid';
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const DPlaylist = ({ videoData, playlistData, show, handleClose, handleShitchUrl }: any) => {
+const DPlaylist = ({ open, setIsOpen, videoData, handleShitchUrl }: any) => {
+    const handlePlaylistOpen = () => {
+        setIsOpen(false);
+    };
+
     return (
-        <Box
-            sx={{
-                width: '100%',
-                height: '100%',
-                maxWidth: '600px',
-                float: 'right',
-                backgroundColor: 'rgba(0, 0, 0, 0.8)',
-                display: show ? 'flex' : 'none',
-                flexDirection: 'column',
-                zIndex: show ? '60 !important' : '30 !important',
-            }}
-        >
-            <Box sx={{ display: 'flex', padding: '20px !important' }}>
-                <IconButton
-                    onClick={() => handleClose()}
+        <Slide direction='left' in={open} mountOnEnter unmountOnExit>
+            <Box sx={{ backgroundColor: '#000000', height: 'fit-content', borderRadius: '10px' }}>
+                <Box
                     sx={{
-                        width: '40px',
-                        height: '40px',
-                        backgroundColor: '#ffffff33',
-                        marginRight: '20px !important',
-                        color: '#ffffff',
+                        display: 'flex',
+                        alignItems: 'center',
+                        padding: '5px',
                     }}
-                    color='primary'
-                    aria-label='close'
-                    component='span'
                 >
-                    <i className='ri-close-fill'></i>
-                </IconButton>
-                <Box>
-                    <Typography variant='h5'>{videoData.title}</Typography>
+                    <Box>
+                        <IconButton sx={{ marginRight: '10px' }} onClick={handlePlaylistOpen}>
+                            <span className='material-symbols-rounded'>close</span>
+                        </IconButton>
+                    </Box>
+                    <Typography variant='h6'>{videoData.title}</Typography>
+                    <Stack sx={{ paddingLeft: '15px !important' }} direction='row' spacing={1}>
+                        {videoData && videoData.playlist && videoData.playlist.map((item: any) => (
+                                <Chip
+                                    key={guid()}
+                                    size='small'
+                                    sx={{
+                                        color: '#ffffff',
+                                        backgroundColor: '#ffffff33',
+                                        padding: '0px 10px !important',
+                                        borderRadius: '4px',
+                                    }}
+                                    label={item.season}
+                                />
+                            ))}
+                    </Stack>
                 </Box>
-            </Box>
-            <Box sx={{ overflowY: 'auto' }}>
                 <List sx={{ width: '100%', bgcolor: 'transparent' }}>
                     {videoData &&
                         videoData.playlist &&
-                        videoData.playlist.map((season: any, index: number) => (
-                            <Box key={index}>
+                        videoData.playlist.map((season: any) => (
+                            <Box key={guid()}>
                                 <ListSubheader
                                     sx={{
                                         padding: '0px 10px !important',
@@ -65,7 +68,7 @@ const DPlaylist = ({ videoData, playlistData, show, handleClose, handleShitchUrl
                                 {season &&
                                     season.episodes.map((item: any) => (
                                         <ListItemButton
-                                            key={item.id}
+                                            key={guid()}
                                             onClick={() => handleShitchUrl(item.url, item.title)}
                                             sx={{
                                                 padding: '10px !important',
@@ -93,10 +96,7 @@ const DPlaylist = ({ videoData, playlistData, show, handleClose, handleShitchUrl
                                                     }}
                                                     primary={item.title}
                                                     secondary={
-                                                        'S' +
-                                                        season.season +
-                                                        ' E' +
-                                                        item.episode
+                                                        'S' + season.season + ' E' + item.episode
                                                     }
                                                 />
                                                 <Stack
@@ -106,23 +106,19 @@ const DPlaylist = ({ videoData, playlistData, show, handleClose, handleShitchUrl
                                                 >
                                                     {item &&
                                                         item.resolutions &&
-                                                        item.resolutions.map(
-                                                            (quality: string, index: number) => (
-                                                                <Chip
-                                                                    key={index}
-                                                                    size='small'
-                                                                    sx={{
-                                                                        color: '#ffffff',
-                                                                        backgroundColor:
-                                                                            '#ffffff33',
-                                                                        padding:
-                                                                            '0px 10px !important',
-                                                                        borderRadius: '4px',
-                                                                    }}
-                                                                    label={quality}
-                                                                />
-                                                            ),
-                                                        )}
+                                                        item.resolutions.map((quality: string) => (
+                                                            <Chip
+                                                                key={guid()}
+                                                                size='small'
+                                                                sx={{
+                                                                    color: '#ffffff',
+                                                                    backgroundColor: '#ffffff33',
+                                                                    padding: '0px 10px !important',
+                                                                    borderRadius: '4px',
+                                                                }}
+                                                                label={quality}
+                                                            />
+                                                        ))}
                                                 </Stack>
                                             </Box>
                                         </ListItemButton>
@@ -131,7 +127,7 @@ const DPlaylist = ({ videoData, playlistData, show, handleClose, handleShitchUrl
                         ))}
                 </List>
             </Box>
-        </Box>
+        </Slide>
     );
 };
 

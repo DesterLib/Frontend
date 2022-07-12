@@ -73,7 +73,7 @@ export const ContentWrapper = styled(Box)<BoxProps>(() => ({
     overflow: 'hidden',
     maxHeight: 'auto',
     wordBreak: 'break-all',
-    paddingRight: '20px'
+    paddingRight: '20px',
 }));
 
 export const DateWrapper = styled(Box)<BoxProps>(() => ({

@@ -28,7 +28,7 @@ const DBottomBar = () => {
                             navigate('/settings');
                         }
                     }}
-                    sx={{height: 'fit-content'}}
+                    sx={{ height: 'fit-content' }}
                 >
                     <BottomNavMenuItem
                         centerRipple
