@@ -11,6 +11,8 @@ import Slide from '@mui/material/Slide';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import React from 'react';
+
+import { APP_API_PATH, APP_API_VERSION_PATH, APP_THUMBNAIL_QUALITY } from '../../config';
 import guid from '../../utilities/guid';
 
 const DPlaylist = ({ open, setIsOpen, videoData, handleShitchUrl }: any) => {
@@ -35,7 +37,9 @@ const DPlaylist = ({ open, setIsOpen, videoData, handleShitchUrl }: any) => {
                     </Box>
                     <Typography variant='h6'>{videoData.title}</Typography>
                     <Stack sx={{ paddingLeft: '15px !important' }} direction='row' spacing={1}>
-                        {videoData && videoData.playlist && videoData.playlist.map((item: any) => (
+                        {videoData &&
+                            videoData.playlist &&
+                            videoData.playlist.map((item: any) => (
                                 <Chip
                                     key={guid()}
                                     size='small'
@@ -79,10 +83,16 @@ const DPlaylist = ({ open, setIsOpen, videoData, handleShitchUrl }: any) => {
                                         >
                                             <ListItemAvatar>
                                                 <Avatar
-                                                    variant='rounded'
+                                                    variant='square'
                                                     alt='Remy Sharp'
-                                                    src={item.thumbnail}
-                                                    sx={{ width: 120, height: 80 }}
+                                                    src={
+                                                        APP_API_PATH +
+                                                        APP_API_VERSION_PATH +
+                                                        '/assets/image/' +
+                                                        APP_THUMBNAIL_QUALITY +
+                                                        item.thumbnail_path
+                                                    }
+                                                    sx={{ width: 120, height: 80, borderRadius: '5px', marginRight: '10px' }}
                                                 />
                                             </ListItemAvatar>
                                             <Box>

@@ -91,46 +91,6 @@ const DPlayer = ({ videoData, aspectRatio }: any) => {
                     getInstance={(art: any) => {
                         art.on('ready', () => setArt(art));
                     }}
-                    option={{
-                        url: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
-                        controls: [
-                            {
-                                position: 'right',
-                                html: '<span class="material-symbols-rounded">playlist_play</span>',
-                                tooltip: 'Playlist',
-                                click: function () {
-                                    handlePlaylistOpen();
-                                },
-                            },
-                        ],
-                        icons: {
-                            play: '<span class="material-symbols-rounded">play_arrow</span>',
-                            pause: '<span class="material-symbols-rounded">pause</span>',
-                            volume: '<span class="material-symbols-rounded">volume_up</span>',
-                            volumeClose: '<span class="material-symbols-rounded">volume_off</span>',
-                            fullscreenOn:
-                                '<span class="material-symbols-rounded">fullscreen</span>',
-                            fullscreenOff:
-                                '<span class="material-symbols-rounded">fullscreen_exit</span>',
-                            // loading: '<img src="/assets/img/ploading.gif">',
-                            // state: '<img src="/assets/img/state.png">',
-                            check: '<span class="material-symbols-rounded">closed_caption</span>',
-                            subtitle:
-                                '<span class="material-symbols-rounded">closed_caption</span>',
-                            screenshot:
-                                '<span class="material-symbols-rounded">photo_camera</span>',
-                            setting: '<span class="material-symbols-rounded">settings</span>',
-                            pip: '<i class="ri-picture-in-picture-fill"></i>',
-                            arrowLeft: '<i class="ri-arrow-left-s-line"></i>',
-                            arrowRight: '<i class="ri-arrow-right-s-line"></i>',
-                            playbackRate: '<i class="ri-speed-fill"></i>',
-                            aspectRatio: '<i class="ri-aspect-ratio-fill"></i>',
-                            config: '<i class="ri-sound-module-fill"></i>',
-                            lock: '<i class="ri-lock-fill"></i>',
-                            unlock: '<i class="ri-lock-unlock-fill"></i>',
-                            indicator: '<i class="ri-checkbox-blank-circle-fill"></i>',
-                        },
-                    }}
                 />
                 <Box
                     sx={{
@@ -138,7 +98,8 @@ const DPlayer = ({ videoData, aspectRatio }: any) => {
                         top: '0',
                         right: '0',
                         zIndex: '1000',
-                        pointerEvents: isOpen && breakpoint !== 'xs' && breakpoint !== 'sm' ? 'auto' : 'none',
+                        pointerEvents:
+                            isOpen && breakpoint !== 'xs' && breakpoint !== 'sm' ? 'auto' : 'none',
                         transition: 'all 0.2s ease',
                         maxWidth: '600px',
                         width: '50%',
@@ -167,17 +128,19 @@ const DPlayer = ({ videoData, aspectRatio }: any) => {
                         )}
                 </Box>
             </Box>
-            {(breakpoint === 'xs' || breakpoint === 'sm') && (
-                <Box sx={{ marginBottom: '80px', padding: '10px', paddingTop: '5px' }}>
-                    <DPlaylist
-                        open={isOpen}
-                        setIsOpen={setIsOpen}
-                        handleShitchUrl={handleShitchUrl}
-                        videoData={videoData}
-                        playlistData={videoData && videoData.playlist}
-                    />
-                </Box>
-            )}
+            <Box>
+                {(breakpoint === 'xs' || breakpoint === 'sm') && (
+                    <Box sx={{ marginBottom: '80px', padding: '10px', paddingTop: '5px' }}>
+                        <DPlaylist
+                            open={isOpen}
+                            setIsOpen={setIsOpen}
+                            handleShitchUrl={handleShitchUrl}
+                            videoData={videoData}
+                            playlistData={videoData && videoData.playlist}
+                        />
+                    </Box>
+                )}
+            </Box>
         </Box>
     );
 };

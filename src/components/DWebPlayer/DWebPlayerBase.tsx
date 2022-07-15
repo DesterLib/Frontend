@@ -3,12 +3,11 @@ import Artplayer from 'artplayer';
 import React, { useEffect, useRef } from 'react';
 
 const DPlayerBase = React.memo(
-    function ({ src, subtitle, settings, getInstance, ...rest }: any) {
-        const artRef = useRef();
+    function ({ src, subtitle, settings, getInstance, style }: any) {
+        const artRef = useRef<any>();
 
         useEffect(() => {
             const art = new Artplayer({
-                ...settings,
                 container: artRef.current,
                 url: src || '',
                 subtitle: {
@@ -16,6 +15,7 @@ const DPlayerBase = React.memo(
                     type: 'srt',
                     encoding: 'utf-8',
                 },
+                ...settings,
             });
 
             if (getInstance && typeof getInstance === 'function') {
@@ -29,7 +29,7 @@ const DPlayerBase = React.memo(
             };
         }, [settings, getInstance]);
 
-        return <Box ref={artRef} {...rest} />;
+        return <Box ref={artRef} sx={style} />;
     },
     () => true,
 );

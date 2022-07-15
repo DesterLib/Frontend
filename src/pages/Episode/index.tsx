@@ -2,6 +2,7 @@ import DPlayer from '@desterlib/dplayer';
 import { Box, Toolbar } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
+
 import DLoader from '../../components/DLoader';
 import WPlayer from '../../components/DWebPlayer';
 import { APP_API_PATH, APP_API_VERSION_PATH, APP_IS_ELECTRON } from '../../config';
@@ -29,6 +30,7 @@ const EpisodePage = () => {
                         episode: currEpisode.episode_number,
                         title: currEpisode.name,
                         description: currEpisode.description,
+                        thumbnail_path: currEpisode.thumbnail_path,
                         src: [
                             `${APP_API_PATH}${APP_API_VERSION_PATH}/stream/${seriesData.rclone_index}/${currEpisode.path}`,
                         ],
@@ -41,6 +43,7 @@ const EpisodePage = () => {
                     episodes: episodes,
                 });
             }
+            console.log(playlist);
             const videoData = {
                 id: 1,
                 title: seriesData.title,
