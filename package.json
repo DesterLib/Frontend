@@ -1,76 +1,50 @@
 {
-    "name": "@desterlib/frontend",
-    "version": "0.9.0",
-    "description": "Dester's frontend",
-    "license": "MIT",
-    "scripts": {
-        "start": "react-app-rewired start",
-        "build": "react-app-rewired build",
-        "electron:start": "concurrently -k \"cross-env BROWSER=none npm start\" \"wait-on http://localhost:35510 && cross-env NODE_ENV=development electronmon .\"",
-        "electron:mon": "cross-env NODE_ENV=development electronmon .",
-        "electron:build": "npm run build && rm -rf dist && electron-builder --config electron/electron-builder.json --win --x64",
-        "lint:check": "eslint src/**/*.{js,jsx,ts,tsx} electron/*.{js,jsx,ts,tsx}",
-        "lint:fix": "eslint --fix src/**/*.{js,jsx,ts,tsx} electron/*.{js,jsx,ts,tsx}",
-        "lint:format": "prettier --write src/**/*.{js,jsx,ts,tsx,css,md,json} electron/*.{js,jsx,ts,tsx,css,md,json} .eslintrc.json .prettierrc.json package.json tsconfig.json --config .prettierrc.json"
-    },
+    "name": "frontendnew",
+    "version": "0.1.0",
+    "private": true,
     "dependencies": {
-        "@desterlib/dplayer": "^0.0.21",
-        "@emotion/react": "^11.9.3",
-        "@emotion/styled": "^11.9.3",
-        "@mui/icons-material": "^5.8.4",
-        "@mui/material": "^5.8.5",
-        "@mui/styled-engine": "^5.8.0",
-        "@types/node": "^18.0.0",
-        "@types/react": "^18.0.14",
-        "@types/react-dom": "^18.0.5",
-        "artplayer": "^4.5.2",
-        "buffer": "^6.0.3",
-        "html-react-parser": "^2.0.0",
-        "lodash": "^4.17.21",
-        "path-browserify": "^1.0.1",
+        "@mui/base": "^5.0.0-alpha.93",
+        "@stitches/react": "^1.2.8",
+        "@testing-library/jest-dom": "^5.16.5",
+        "@testing-library/react": "^13.3.0",
+        "@testing-library/user-event": "^13.5.0",
+        "@trivago/prettier-plugin-sort-imports": "^3.3.0",
+        "@types/jest": "^27.5.2",
+        "@types/node": "^16.11.49",
+        "@types/react": "^18.0.17",
+        "@types/react-dom": "^18.0.6",
         "react": "^18.2.0",
-        "react-color": "^2.19.3",
-        "react-colorful": "^5.5.1",
         "react-dom": "^18.2.0",
-        "react-fast-compare": "^3.2.0",
         "react-router-dom": "^6.3.0",
-        "sweetalert2": "^11.4.19",
-        "swiper": "^8.2.4",
+        "react-scripts": "5.0.1",
         "typescript": "^4.7.4",
-        "use-resize-observer": "^9.0.2"
+        "web-vitals": "^2.1.4",
+        "webpack": "^5.74.0"
     },
-    "devDependencies": {
-        "@trivago/prettier-plugin-sort-imports": "^3.2.0",
-        "@types/lodash": "^4.14.182",
-        "@typescript-eslint/eslint-plugin": "^5.29.0",
-        "@typescript-eslint/parser": "^5.29.0",
-        "concurrently": "^7.2.2",
-        "cross-env": "^7.0.3",
-        "electron": "^19.0.6",
-        "electron-builder": "^23.1.0",
-        "electronmon": "^2.0.2",
-        "eslint": "^8.18.0",
-        "eslint-config-prettier": "^8.5.0",
-        "eslint-plugin-prettier": "^4.0.0",
-        "eslint-plugin-react": "^7.30.0",
-        "prettier": "^2.7.1",
-        "react-app-rewired": "^2.2.1",
-        "wait-on": "^6.0.1"
+    "scripts": {
+        "start": "react-scripts start",
+        "build": "react-scripts build",
+        "test": "react-scripts test",
+        "eject": "react-scripts eject",
+        "storybook": "start-storybook -p 6006 -s public",
+        "build-storybook": "build-storybook -s public"
     },
-    "author": "Dester Team",
-    "contributors": [
-        {
-            "name": "Alken D",
-            "email": "desteralken@gmail.com",
-            "url": "https://github.com/AlkenD"
-        },
-        {
-            "name": "Elias Benbourenane",
-            "email": "me@elias.eu.org",
-            "url": "https://elias.eu.org"
-        }
-    ],
-    "main": "./electron/index.ts",
+    "eslintConfig": {
+        "extends": [
+            "react-app",
+            "react-app/jest"
+        ],
+        "overrides": [
+            {
+                "files": [
+                    "**/*.stories.*"
+                ],
+                "rules": {
+                    "import/no-anonymous-default-export": "off"
+                }
+            }
+        ]
+    },
     "browserslist": {
         "production": [
             ">0.2%",
@@ -82,5 +56,19 @@
             "last 1 firefox version",
             "last 1 safari version"
         ]
+    },
+    "devDependencies": {
+        "@storybook/addon-actions": "^6.5.10",
+        "@storybook/addon-essentials": "^6.5.10",
+        "@storybook/addon-interactions": "^6.5.10",
+        "@storybook/addon-links": "^6.5.10",
+        "@storybook/builder-webpack5": "^6.5.10",
+        "@storybook/manager-webpack5": "^6.5.10",
+        "@storybook/node-logger": "^6.5.10",
+        "@storybook/preset-create-react-app": "^4.1.2",
+        "@storybook/react": "^6.5.10",
+        "@storybook/testing-library": "^0.0.13",
+        "babel-plugin-named-exports-order": "^0.0.2",
+        "prop-types": "^15.8.1"
     }
 }
