@@ -3,7 +3,9 @@
     "version": "0.1.0",
     "private": true,
     "dependencies": {
-        "@mui/base": "^5.0.0-alpha.93",
+        "@emotion/react": "^11.10.0",
+        "@emotion/styled": "^11.10.0",
+        "@mui/material": "^5.10.1",
         "@stitches/react": "^1.2.8",
         "@testing-library/jest-dom": "^5.16.5",
         "@testing-library/react": "^13.3.0",
@@ -13,10 +15,12 @@
         "@types/node": "^16.11.49",
         "@types/react": "^18.0.17",
         "@types/react-dom": "^18.0.6",
+        "framer-motion": "^7.2.1",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
         "react-router-dom": "^6.3.0",
         "react-scripts": "5.0.1",
+        "tsconfig-paths-webpack-plugin": "^4.0.0",
         "typescript": "^4.7.4",
         "web-vitals": "^2.1.4",
         "webpack": "^5.74.0"
