@@ -3,7 +3,6 @@ import {
     Box,
     List,
     ListItem,
-    ListItemAvatar,
     ListItemButton,
     ListItemText,
     alpha,
@@ -16,12 +15,17 @@ import guid from 'utils/guid';
 
 import Icon from 'components/icon';
 
-type SideBarProps = {};
+interface StyledSideBarCotainerProps {
+    sideBarLabels: boolean;
+}
 
-const StyledSideBarCotainer = styled(Box)(({ theme }) => ({
+const StyledSideBarCotainer = styled(Box, {
+    shouldForwardProp: (propName: string) => propName !== 'sideBarLabels',
+})<StyledSideBarCotainerProps>(({ theme, sideBarLabels }) => ({
     width: 'fit-content',
-    maxWidth: 'fit-content',
+    minWidth: sideBarLabels ? '200px' : 'fit-content',
     height: '100vh',
+    position: 'absolute',
     backgroundColor: theme.palette.background.paper,
     display: 'flex',
     flexDirection: 'column',
@@ -32,12 +36,11 @@ const StyledSideBarCotainer = styled(Box)(({ theme }) => ({
 
 const StyledList = styled(List)({
     padding: '5px',
-    width: 'fit-content',
 });
 
 const StyledListItem = styled(ListItem)({
     marginBottom: '5px',
-    // width: 'fit-content',
+    width: '100%',
     height: '50px',
     '&:last-child': {
         marginBottom: '0px',
@@ -49,22 +52,27 @@ const StyledNavItem = styled(ListItemButton)(({ theme }) => ({
     alignItems: 'center',
     justifyContent: 'left',
     height: 'fit-content',
-    width: 'fit-content',
-    // maxWidth: '50px',
-    // minWidth: '50px',
+    width: '100%',
     padding: '0px',
     borderRadius: theme.shape.borderRadius,
     color: theme.palette.text.primary,
+    transition: '0.2s ease color',
     '&:hover': {
         backgroundColor: alpha(theme.palette.primary.main, 0.1),
         color: theme.palette.primary.main,
     },
 }));
 
-const SideBar = (props: SideBarProps) => {
+type SideBarProps = {
+    sideBarLabels: boolean;
+    sx: any;
+};
+
+const SideBar = React.forwardRef((props: SideBarProps, ref: any) => {
+    const { sideBarLabels, sx } = props;
     return (
-        <StyledSideBarCotainer>
-            <StyledList>
+        <StyledSideBarCotainer ref={ref} sideBarLabels={sideBarLabels} sx={sx}>
+            <StyledList sx={{ width: sideBarLabels ? '100%' : 'fit-content' }}>
                 {app.navbar.side.items.top.map((item) => (
                     <StyledListItem key={guid()} disablePadding>
                         <StyledNavItem
@@ -86,18 +94,20 @@ const SideBar = (props: SideBarProps) => {
                                 }}
                                 name={item.icon}
                             />
-                            <Box
-                                sx={{
-                                    width: '100%',
-                                    display: 'flex',
-                                    justifyContent: 'left',
-                                    alignItems: 'center',
-                                    minWidth: 'fit-content',
-                                    padding: '0px 15px',
-                                }}
-                            >
-                                {item.label}
-                            </Box>
+                            {sideBarLabels && (
+                                <Box
+                                    sx={{
+                                        width: '100%',
+                                        display: 'flex',
+                                        justifyContent: 'left',
+                                        alignItems: 'center',
+                                        minWidth: 'fit-content',
+                                        padding: '0px 15px',
+                                    }}
+                                >
+                                    {item.label}
+                                </Box>
+                            )}
                         </StyledNavItem>
                     </StyledListItem>
                 ))}
@@ -127,22 +137,38 @@ const SideBar = (props: SideBarProps) => {
                                 />
                             )}
                             {item.authStatus && (
-                                <Box sx={{ display: 'flex' }}>
-                                    <ListItemAvatar>
-                                        <Box
+                                <Box
+                                    sx={{
+                                        display: 'flex',
+                                        justifyContent: 'center',
+                                        alignItems: 'center',
+                                    }}
+                                >
+                                    <Box
+                                        sx={{
+                                            aspectRatio: '1/1',
+                                            height: '50px',
+                                            width: '50px',
+                                            display: 'flex',
+                                            justifyContent: 'center',
+                                            alignItems: 'center',
+                                        }}
+                                    >
+                                        <Avatar src={item.data.image} />
+                                    </Box>
+                                    {sideBarLabels && (
+                                        <ListItemText
                                             sx={{
-                                                aspectRatio: '1/1',
-                                                height: '50px',
-                                                width: '50px',
+                                                width: '100%',
                                                 display: 'flex',
-                                                justifyContent: 'center',
+                                                justifyContent: 'left',
                                                 alignItems: 'center',
+                                                minWidth: 'fit-content',
+                                                padding: '0px 15px',
                                             }}
-                                        >
-                                            <Avatar src={item.data.image} />
-                                        </Box>
-                                    </ListItemAvatar>
-                                    <ListItemText primary='Photos' secondary='Jan 9, 2014' />
+                                            primary='Photos'
+                                        />
+                                    )}
                                 </Box>
                             )}
                         </StyledNavItem>
@@ -151,6 +177,6 @@ const SideBar = (props: SideBarProps) => {
             </StyledList>
         </StyledSideBarCotainer>
     );
-};
+});
 
 export default SideBar;

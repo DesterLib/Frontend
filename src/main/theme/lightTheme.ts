@@ -11,9 +11,9 @@ const lightTheme = createTheme({
             dark: '#0EBD99',
         },
         secondary: {
-            main: '#7154FF',
-            light: '#967EFF',
-            dark: '#553DDB',
+            main: '#161616',
+            light: '#111111',
+            dark: '#0b0b0b',
         },
         background: {
             paper: '#ffffff',

@@ -1,15 +1,15 @@
-import app from 'main/config';
+import { Box } from '@mui/material';
 import React from 'react';
 
-import NavBar from 'components/navbar';
+import CardSlider from 'components/cardslider';
 
 type Props = {};
 
 const HomePage = (props: Props) => {
     return (
-        <div>
-            <NavBar logo={app.logo} />
-        </div>
+        <Box sx={{ height: '100%' }}>
+            <CardSlider title='Popular Movies' />
+        </Box>
     );
 };
 
