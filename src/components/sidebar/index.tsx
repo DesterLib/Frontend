@@ -1,19 +1,11 @@
-import {
-    Avatar,
-    Box,
-    List,
-    ListItem,
-    ListItemButton,
-    ListItemText,
-    alpha,
-    styled,
-} from '@mui/material';
+import { Avatar, Box, List, ListItem, ListItemButton, ListItemText, styled } from '@mui/material';
 import { motion } from 'framer-motion';
 import app from 'main/config';
 import React from 'react';
 import guid from 'utils/guid';
 
 import Icon from 'components/icon';
+import { useDispatch, useSelector } from 'react-redux';
 
 interface StyledSideBarCotainerProps {
     sideBarLabels: boolean;
@@ -56,10 +48,11 @@ const StyledNavItem = styled(ListItemButton)(({ theme }) => ({
     padding: '0px',
     borderRadius: theme.shape.borderRadius,
     color: theme.palette.text.primary,
-    transition: '0.2s ease color',
+    transition: 'all 0.2s ease',
     '&:hover': {
-        backgroundColor: alpha(theme.palette.primary.main, 0.1),
-        color: theme.palette.primary.main,
+        backgroundColor: theme.palette.primary.light,
+        boxShadow: `${theme.palette.primary.light} 0px 8px 24px`,
+        color: theme.palette.common.white,
     },
 }));
 
@@ -70,6 +63,8 @@ type SideBarProps = {
 
 const SideBar = React.forwardRef((props: SideBarProps, ref: any) => {
     const { sideBarLabels, sx } = props;
+    const currentTheme = useSelector((state: any) => state.darkMode.darkMode);
+    const dispatch = useDispatch();
     return (
         <StyledSideBarCotainer ref={ref} sideBarLabels={sideBarLabels} sx={sx}>
             <StyledList sx={{ width: sideBarLabels ? '100%' : 'fit-content' }}>
@@ -113,39 +108,21 @@ const SideBar = React.forwardRef((props: SideBarProps, ref: any) => {
                 ))}
             </StyledList>
             <StyledList>
-                {app.navbar.side.items.bottom.map((item) => (
-                    <ListItem key={guid()} disablePadding>
-                        <StyledNavItem
-                            // @ts-ignore
-                            whileHover={{ scale: 1.02 }}
-                            // @ts-ignore
-                            whileTap={{ scale: 0.98 }}
-                            // @ts-ignore
-                            component={motion.button}
-                        >
-                            {!item.authStatus && (
-                                <Icon
-                                    name='login'
-                                    style={{
-                                        aspectRatio: '1/1',
-                                        height: '50px',
-                                        width: '50px',
-                                        display: 'flex',
-                                        justifyContent: 'center',
-                                        alignItems: 'center',
-                                    }}
-                                />
-                            )}
-                            {item.authStatus && (
-                                <Box
-                                    sx={{
-                                        display: 'flex',
-                                        justifyContent: 'center',
-                                        alignItems: 'center',
-                                    }}
-                                >
-                                    <Box
-                                        sx={{
+                {app.navbar.side.items.bottom.map((item) =>
+                    item.type === 'auth' ? (
+                        <ListItem key={guid()} disablePadding>
+                            <StyledNavItem
+                                // @ts-ignore
+                                whileHover={{ scale: 1.02 }}
+                                // @ts-ignore
+                                whileTap={{ scale: 0.98 }}
+                                // @ts-ignore
+                                component={motion.button}
+                            >
+                                {!item.authStatus && (
+                                    <Icon
+                                        name='logout'
+                                        style={{
                                             aspectRatio: '1/1',
                                             height: '50px',
                                             width: '50px',
@@ -153,27 +130,116 @@ const SideBar = React.forwardRef((props: SideBarProps, ref: any) => {
                                             justifyContent: 'center',
                                             alignItems: 'center',
                                         }}
+                                    />
+                                )}
+                                {item.authStatus && (
+                                    <Box
+                                        sx={{
+                                            display: 'flex',
+                                            justifyContent: 'center',
+                                            alignItems: 'center',
+                                        }}
                                     >
-                                        <Avatar src={item.data.image} />
-                                    </Box>
-                                    {sideBarLabels && (
-                                        <ListItemText
+                                        <Box
                                             sx={{
-                                                width: '100%',
+                                                aspectRatio: '1/1',
+                                                height: '50px',
+                                                width: '50px',
                                                 display: 'flex',
-                                                justifyContent: 'left',
+                                                justifyContent: 'center',
                                                 alignItems: 'center',
-                                                minWidth: 'fit-content',
-                                                padding: '0px 15px',
                                             }}
-                                            primary='Photos'
-                                        />
-                                    )}
-                                </Box>
-                            )}
-                        </StyledNavItem>
-                    </ListItem>
-                ))}
+                                        >
+                                            <Avatar src={item.data.image} />
+                                        </Box>
+                                        {sideBarLabels && (
+                                            <ListItemText
+                                                sx={{
+                                                    width: '100%',
+                                                    display: 'flex',
+                                                    justifyContent: 'left',
+                                                    alignItems: 'center',
+                                                    minWidth: 'fit-content',
+                                                    padding: '0px 15px',
+                                                }}
+                                                primary='Photos'
+                                            />
+                                        )}
+                                    </Box>
+                                )}
+                            </StyledNavItem>
+                        </ListItem>
+                    ) : (
+                        <StyledListItem key={guid()} disablePadding>
+                            <StyledNavItem
+                                // @ts-ignore
+                                whileHover={{ scale: 1.02 }}
+                                // @ts-ignore
+                                whileTap={{ scale: 0.98 }}
+                                // @ts-ignore
+                                component={motion.button}
+                                onClick={item.onClick}
+                            >
+                                {item.type === 'toggle' && (
+                                    <>
+                                        {currentTheme ? (
+                                            <Icon
+                                                style={{
+                                                    aspectRatio: '1/1',
+                                                    height: '50px',
+                                                    width: '50px',
+                                                    display: 'flex',
+                                                    justifyContent: 'center',
+                                                    alignItems: 'center',
+                                                }}
+                                                name='light_mode'
+                                            />
+                                        ) : (
+                                            <Icon
+                                                style={{
+                                                    aspectRatio: '1/1',
+                                                    height: '50px',
+                                                    width: '50px',
+                                                    display: 'flex',
+                                                    justifyContent: 'center',
+                                                    alignItems: 'center',
+                                                }}
+                                                name='nights_stay'
+                                            />
+                                        )}
+                                    </>
+                                )}
+                                {item.type !== 'toggle' && (
+                                    <Icon
+                                        style={{
+                                            aspectRatio: '1/1',
+                                            height: '50px',
+                                            width: '50px',
+                                            display: 'flex',
+                                            justifyContent: 'center',
+                                            alignItems: 'center',
+                                        }}
+                                        name={item.icon || ''}
+                                    />
+                                )}
+                                {sideBarLabels && (
+                                    <Box
+                                        sx={{
+                                            width: '100%',
+                                            display: 'flex',
+                                            justifyContent: 'left',
+                                            alignItems: 'center',
+                                            minWidth: 'fit-content',
+                                            padding: '0px 15px',
+                                        }}
+                                    >
+                                        {item.label}
+                                    </Box>
+                                )}
+                            </StyledNavItem>
+                        </StyledListItem>
+                    ),
+                )}
             </StyledList>
         </StyledSideBarCotainer>
     );
