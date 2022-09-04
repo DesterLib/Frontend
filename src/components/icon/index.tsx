@@ -1,16 +1,18 @@
+import { styled } from '@mui/material';
+import MuiIcon, { IconProps } from '@mui/material/Icon';
 import React from 'react';
 
-type IconProps = {
+interface StyledIconProps extends IconProps {
     name: string;
-    style?: any
-};
+    fontSize?: 'small' | 'inherit' | 'large' | 'medium' | undefined;
+}
 
-const Icon = (props: IconProps) => {
-    const { name, style } = props;
+const Icon = (props: StyledIconProps) => {
+    const { name } = props;
     return (
-        <span style={style} className='material-symbols-rounded'>
+        <MuiIcon baseClassName='material-symbols-rounded' {...props}>
             {name}
-        </span>
+        </MuiIcon>
     );
 };
 

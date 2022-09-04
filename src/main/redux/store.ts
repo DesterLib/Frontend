@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
-import darkModeReducer from './functions/themeSlice';
+import themeReducer from './functions/themeSlice';
+import navbarReducer from './functions/navbarSlice';
 
 const store = configureStore({
     reducer: {
-        darkMode: darkModeReducer,
+        theme: themeReducer,
+        navbar: navbarReducer,
     },
 });
 

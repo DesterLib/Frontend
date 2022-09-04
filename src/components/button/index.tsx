@@ -7,7 +7,8 @@ const StyledButton = styled(MuiButton)<StyledButtonProps>(({ color, theme }) => 
     color: theme.palette.common.white,
     fontWeight: '600',
     fontSize: '14px',
-    padding: '8px 16px !important',
+    paddingLeft: '16px !important',
+    paddingRight: '16px !important',
     '&:hover': {
         boxShadow: `${alpha(theme.palette[color || 'primary'].main, 0.2)} 0px 8px 24px`,
         backgroundColor: theme.palette[color || 'primary'].light,
@@ -20,7 +21,7 @@ interface StyledButtonProps extends ButtonProps {
 }
 
 const Button = (props: ButtonProps) => {
-    const { children } = props;
+    const { children, size = 'large' } = props;
     return (
         <StyledButton
             // @ts-ignore
@@ -28,9 +29,10 @@ const Button = (props: ButtonProps) => {
             // @ts-ignore
             whileTap={{ scale: 0.98 }}
             component={motion.button}
+            size={size}
             {...props}
         >
-            Button
+            {children}
         </StyledButton>
     );
 };

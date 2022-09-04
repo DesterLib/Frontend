@@ -15,9 +15,20 @@ const StyledCard = styled(Box)({
     '&:hover div .actionButtons div .playButton': {
         opacity: '1',
     },
+    '&:hover div .actionButtons .bottomButtons': {
+        opacity: '1',
+        pointerEvents: 'all',
+    },
     '&:hover div .cardImage': {
         opacity: '0.2',
     },
+});
+
+const StyledCardContainer = styled(Box)({
+    position: 'relative',
+    height: 'fit-content',
+    overflow: 'hidden',
+    borderRadius: '10px',
 });
 
 const StyledCardImage = styled('img')({
@@ -27,6 +38,34 @@ const StyledCardImage = styled('img')({
     transition: '0.2s ease',
     opacity: '1',
 });
+
+const StyledCardTop = styled(Box)({
+    display: 'flex',
+    justifyContent: 'space-between',
+    padding: '5px',
+    width: '100%',
+});
+
+const StyledCardCenter = styled(Box)({
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: '10px',
+    width: '100%',
+});
+
+const StyledCardBottom = styled(Box)(({ theme }) => ({
+    display: 'flex',
+    justifyContent: 'space-between',
+    padding: '10px',
+    width: '100%',
+    opacity: '0',
+    pointerEvents: 'none',
+    [theme.breakpoints.down('md')]: {
+        opacity: '1',
+        pointerEvents: 'all',
+    },
+}));
 
 const DataPills = styled(Box)({});
 
@@ -80,60 +119,31 @@ const Card = (props: CardProps) => {
     };
     return (
         <StyledCard color='warning'>
-            <Box
-                sx={{
-                    position: 'relative',
-                    height: 'fit-content',
-                    overflow: 'hidden',
-                    borderRadius: '10px',
-                }}
-            >
+            <StyledCardContainer>
                 <StyledCardImage
                     className='cardImage'
                     src='https://www.themoviedb.org/t/p/w1280/nJUHX3XL1jMkk8honUZnUmudFb9.jpg'
                     alt='green iguana'
                 />
                 <ActionButtons className='actionButtons'>
-                    <Box
-                        sx={{
-                            display: 'flex',
-                            justifyContent: 'space-between',
-                            padding: '5px',
-                            width: '100%',
-                        }}
-                    >
+                    <StyledCardTop>
                         <DataPill className='dataPill' color='warning' label='S1 E1' />
-                    </Box>
-                    <Box
-                        sx={{
-                            display: 'flex',
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            padding: '10px',
-                            width: '100%',
-                        }}
-                    >
+                    </StyledCardTop>
+                    <StyledCardCenter>
                         <PlayButton className='playButton' color='primary'>
                             <Icon name='play_arrow' />
                         </PlayButton>
-                    </Box>
-                    <Box
-                        sx={{
-                            display: 'flex',
-                            justifyContent: 'space-between',
-                            padding: '10px',
-                            width: '100%',
-                        }}
-                    >
+                    </StyledCardCenter>
+                    <StyledCardBottom className='bottomButtons'>
                         <IconButton color='error'>
                             <Icon name='favorite' />
                         </IconButton>
                         <IconButton color='secondary' onClick={handleClickOpenModal}>
                             <Icon name='more_vert' />
                         </IconButton>
-                    </Box>
+                    </StyledCardBottom>
                 </ActionButtons>
-            </Box>
+            </StyledCardContainer>
             <StyledCardTitle variant='body1'>Lizard</StyledCardTitle>
             <Modal openModal={openModal} setOpenModal={setOpenModal} />
         </StyledCard>

@@ -121,7 +121,7 @@ const Modal = (props: Props) => {
                                 }}
                             >
                                 <Button color='primary' variant='contained' disableElevation>
-                                    <Icon style={{ paddingRight: '5px' }} name='play_arrow' />
+                                    <Icon name='play_arrow' />
                                     <span style={{ paddingRight: '5px' }}>Continue Watching</span>
                                 </Button>
                                 <IconButton color='secondary'>

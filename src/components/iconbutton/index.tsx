@@ -17,7 +17,11 @@ const StyledIconButton = styled(MuiIconButton, {
     borderRadius: '10px',
     '&:hover': {
         backgroundColor: theme.palette[color || 'primary'].light,
-        boxShadow: `${theme.palette[color || 'primary'].main} 0px 8px 24px`,
+        // boxShadow:
+        //     color === 'secondary'
+        //         ? `${alpha(theme.palette[color || 'primary'].main, 0.4)} 0px 8px 24px`
+        //         : `${theme.palette[color || 'primary'].main} 0px 8px 24px`,
+        boxShadow: `${alpha(theme.palette[color || 'primary'].main, 0.4)} 0px 8px 24px`,
     },
 }));
 

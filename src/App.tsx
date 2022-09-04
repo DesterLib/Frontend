@@ -10,7 +10,7 @@ import AppShell from './components/appshell';
 import store from 'main/redux/store';
 
 const MainApp = () => {
-    const currentTheme = useSelector((state: any) => state.darkMode.darkMode);
+    const currentTheme = useSelector((state: any) => state.theme.darkMode);
     return (
         <ThemeProvider theme={currentTheme ? lightTheme : darkTheme}>
             <CssBaseline />

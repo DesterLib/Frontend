@@ -1,8 +1,8 @@
 import LogoFullDark from 'main/assets/logo/logo-full-dark.svg';
 import LogoFullLight from 'main/assets/logo/logo-full-light.svg';
-import { useDispatch } from 'react-redux';
 import { asyncToggleTheme } from './redux/functions/themeSlice';
 import store from './redux/store';
+
 const app = {
     logo: {
         dark: LogoFullDark,
@@ -44,6 +44,16 @@ const app = {
                         link: '',
                     },
                     {
+                        label: 'Browse',
+                        icon: 'search',
+                        link: '',
+                    },
+                    {
+                        label: 'Categories',
+                        icon: 'category',
+                        link: '',
+                    },
+                    {
                         label: 'Favorites',
                         icon: 'favorite',
                         link: '',
@@ -58,17 +68,12 @@ const app = {
                         icon: 'update',
                         link: '',
                     },
-                    {
-                        label: '',
-                        icon: 'update',
-                        link: '',
-                    },
                 ],
                 bottom: [
                     {
                         type: 'toggle',
-                        label: '',
                         icon: 'settings',
+                        label: '',
                         link: '',
                         onClick: () => store.dispatch(asyncToggleTheme()),
                     },

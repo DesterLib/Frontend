@@ -1,7 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+const data = localStorage.getItem('darkMode');
+
+const persistedData = data ? JSON.parse(data) : {};
+
 const initialState = {
-    darkMode: JSON.parse(localStorage.getItem('darkMode') || ''),
+    darkMode: persistedData,
 };
 
 export const themeSlice = createSlice({
@@ -15,7 +19,7 @@ export const themeSlice = createSlice({
 });
 
 export const asyncToggleTheme = () => (dispatch: any) => {
-    const isDarkMode = !!JSON.parse(localStorage.getItem('darkMode') || '');
+    const isDarkMode = data ? JSON.parse(data) : {};
     localStorage.setItem('darkMode', JSON.stringify(!isDarkMode));
     dispatch(toggleTheme());
 };

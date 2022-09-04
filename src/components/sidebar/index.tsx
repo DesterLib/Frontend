@@ -1,11 +1,11 @@
-import { Avatar, Box, List, ListItem, ListItemButton, ListItemText, styled } from '@mui/material';
+import { Avatar, Box, List, ListItem, ListItemButton, styled } from '@mui/material';
 import { motion } from 'framer-motion';
 import app from 'main/config';
 import React from 'react';
 import guid from 'utils/guid';
 
 import Icon from 'components/icon';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 interface StyledSideBarCotainerProps {
     sideBarLabels: boolean;
@@ -56,6 +56,24 @@ const StyledNavItem = styled(ListItemButton)(({ theme }) => ({
     },
 }));
 
+const StyledIcon = styled(Icon)({
+    aspectRatio: '1/1',
+    height: '50px',
+    width: '50px',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+});
+
+const StyledItemLabel = styled(Box)({
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'left',
+    alignItems: 'center',
+    minWidth: 'fit-content',
+    padding: '0px 15px',
+});
+
 type SideBarProps = {
     sideBarLabels: boolean;
     sx: any;
@@ -63,11 +81,10 @@ type SideBarProps = {
 
 const SideBar = React.forwardRef((props: SideBarProps, ref: any) => {
     const { sideBarLabels, sx } = props;
-    const currentTheme = useSelector((state: any) => state.darkMode.darkMode);
-    const dispatch = useDispatch();
+    const currentTheme = useSelector((state: any) => state.theme.darkMode);
     return (
         <StyledSideBarCotainer ref={ref} sideBarLabels={sideBarLabels} sx={sx}>
-            <StyledList sx={{ width: sideBarLabels ? '100%' : 'fit-content' }}>
+            <StyledList>
                 {app.navbar.side.items.top.map((item) => (
                     <StyledListItem key={guid()} disablePadding>
                         <StyledNavItem
@@ -78,31 +95,8 @@ const SideBar = React.forwardRef((props: SideBarProps, ref: any) => {
                             // @ts-ignore
                             component={motion.button}
                         >
-                            <Icon
-                                style={{
-                                    aspectRatio: '1/1',
-                                    height: '50px',
-                                    width: '50px',
-                                    display: 'flex',
-                                    justifyContent: 'center',
-                                    alignItems: 'center',
-                                }}
-                                name={item.icon}
-                            />
-                            {sideBarLabels && (
-                                <Box
-                                    sx={{
-                                        width: '100%',
-                                        display: 'flex',
-                                        justifyContent: 'left',
-                                        alignItems: 'center',
-                                        minWidth: 'fit-content',
-                                        padding: '0px 15px',
-                                    }}
-                                >
-                                    {item.label}
-                                </Box>
-                            )}
+                            <StyledIcon name={item.icon} />
+                            {sideBarLabels && <StyledItemLabel>{item.label}</StyledItemLabel>}
                         </StyledNavItem>
                     </StyledListItem>
                 ))}
@@ -119,19 +113,7 @@ const SideBar = React.forwardRef((props: SideBarProps, ref: any) => {
                                 // @ts-ignore
                                 component={motion.button}
                             >
-                                {!item.authStatus && (
-                                    <Icon
-                                        name='logout'
-                                        style={{
-                                            aspectRatio: '1/1',
-                                            height: '50px',
-                                            width: '50px',
-                                            display: 'flex',
-                                            justifyContent: 'center',
-                                            alignItems: 'center',
-                                        }}
-                                    />
-                                )}
+                                {!item.authStatus && <StyledIcon name='logout' />}
                                 {item.authStatus && (
                                     <Box
                                         sx={{
@@ -152,19 +134,7 @@ const SideBar = React.forwardRef((props: SideBarProps, ref: any) => {
                                         >
                                             <Avatar src={item.data.image} />
                                         </Box>
-                                        {sideBarLabels && (
-                                            <ListItemText
-                                                sx={{
-                                                    width: '100%',
-                                                    display: 'flex',
-                                                    justifyContent: 'left',
-                                                    alignItems: 'center',
-                                                    minWidth: 'fit-content',
-                                                    padding: '0px 15px',
-                                                }}
-                                                primary='Photos'
-                                            />
-                                        )}
+                                        {sideBarLabels && <StyledItemLabel>Photos</StyledItemLabel>}
                                     </Box>
                                 )}
                             </StyledNavItem>
@@ -183,58 +153,27 @@ const SideBar = React.forwardRef((props: SideBarProps, ref: any) => {
                                 {item.type === 'toggle' && (
                                     <>
                                         {currentTheme ? (
-                                            <Icon
-                                                style={{
-                                                    aspectRatio: '1/1',
-                                                    height: '50px',
-                                                    width: '50px',
-                                                    display: 'flex',
-                                                    justifyContent: 'center',
-                                                    alignItems: 'center',
-                                                }}
-                                                name='light_mode'
-                                            />
+                                            <>
+                                                <StyledIcon name='nights_stay' />
+                                                {sideBarLabels && (
+                                                    <StyledItemLabel>Dark Mode</StyledItemLabel>
+                                                )}
+                                            </>
                                         ) : (
-                                            <Icon
-                                                style={{
-                                                    aspectRatio: '1/1',
-                                                    height: '50px',
-                                                    width: '50px',
-                                                    display: 'flex',
-                                                    justifyContent: 'center',
-                                                    alignItems: 'center',
-                                                }}
-                                                name='nights_stay'
-                                            />
+                                            <>
+                                                <StyledIcon name='light_mode' />
+                                                {sideBarLabels && (
+                                                    <StyledItemLabel>Light Mode</StyledItemLabel>
+                                                )}
+                                            </>
                                         )}
                                     </>
                                 )}
                                 {item.type !== 'toggle' && (
-                                    <Icon
-                                        style={{
-                                            aspectRatio: '1/1',
-                                            height: '50px',
-                                            width: '50px',
-                                            display: 'flex',
-                                            justifyContent: 'center',
-                                            alignItems: 'center',
-                                        }}
-                                        name={item.icon || ''}
-                                    />
-                                )}
-                                {sideBarLabels && (
-                                    <Box
-                                        sx={{
-                                            width: '100%',
-                                            display: 'flex',
-                                            justifyContent: 'left',
-                                            alignItems: 'center',
-                                            minWidth: 'fit-content',
-                                            padding: '0px 15px',
-                                        }}
-                                    >
-                                        {item.label}
-                                    </Box>
+                                    <>
+                                        <StyledIcon name={item.icon || ''} />
+                                        <StyledItemLabel>{item.label}</StyledItemLabel>
+                                    </>
                                 )}
                             </StyledNavItem>
                         </StyledListItem>
