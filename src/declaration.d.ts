@@ -3,5 +3,4 @@ declare module '*.jpeg';
 declare module '*.jpg';
 declare module '*.png';
 declare module '*.svg';
-declare module 'react-color';
-declare module 'tiny-slider-react';
+declare module 'react-slick';

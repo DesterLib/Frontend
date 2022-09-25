@@ -57,6 +57,7 @@ const AppShell = (props: AppShellProps) => {
                     paddingBottom: '0px',
                     paddingRight: '0px',
                     marginLeft: `${sideBarWidth}px`,
+                    overflow: 'auto',
                 }}
             >
                 {children}

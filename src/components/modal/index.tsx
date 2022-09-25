@@ -62,12 +62,13 @@ const MainContent = styled(Box)(({ theme }) => ({
 }));
 
 type Props = {
+    item: any;
     openModal: boolean;
     setOpenModal: any;
 };
 
 const Modal = (props: Props) => {
-    const { openModal, setOpenModal } = props;
+    const { item, openModal, setOpenModal } = props;
 
     const handleClose = () => {
         setOpenModal(false);
@@ -137,17 +138,26 @@ const Modal = (props: Props) => {
                                     <Icon name='more_vert' />
                                 </IconButton>
                             </Box>
-                            <Typography variant='h5'>The Lost City (2022)</Typography>
-                            <Chip color='info' label='Overview' />
-                            <Typography variant='body1'>
-                                Reclusive author Loretta Sage writes about exotic places in her
-                                popular adventure novels that feature a handsome cover model named
-                                Alan. While on tour promoting her new book with Alan, Loretta gets
-                                kidnapped by an eccentric billionaire who hopes she can lead him to
-                                the ancient city's lost treasure that featured in her latest story.
-                                Alan, determined to prove he can be a hero in real life and not just
-                                on the pages of her books, sets off to rescue her.
-                            </Typography>
+                            <Box>
+                                <Typography variant='h5'>The Lost City (2022)</Typography>
+                            </Box>
+                            <Box>
+                                <Chip color='info' label='Overview' />
+                                <Typography variant='body1'>
+                                    Reclusive author Loretta Sage writes about exotic places in her
+                                    popular adventure novels that feature a handsome cover model
+                                    named Alan. While on tour promoting her new book with Alan,
+                                    Loretta gets kidnapped by an eccentric billionaire who hopes she
+                                    can lead him to the ancient city's lost treasure that featured
+                                    in her latest story. Alan, determined to prove he can be a hero
+                                    in real life and not just on the pages of her books, sets off to
+                                    rescue her.
+                                </Typography>
+                            </Box>
+                            <Box>
+                                <Chip color='secondary' label='Genres' />
+                                <Chip color='secondary' label='Horror' />
+                            </Box>
                         </Box>
                     </MainContent>
                 </Box>

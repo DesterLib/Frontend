@@ -1,43 +1,39 @@
-import { alpha, styled } from '@mui/material';
-import MuiIconButton, { IconButtonProps } from '@mui/material/IconButton';
+import { alpha, styled, ButtonBase } from '@mui/material';
 import { motion } from 'framer-motion';
 import React from 'react';
 
-interface StyledIconButtonProps extends IconButtonProps {
-    color: 'primary' | 'secondary' | 'error' | 'info';
+interface StyledIconButtonProps {
     blackText?: boolean;
+    children: React.ReactNode;
+    color?: 'primary' | 'secondary' | 'success' | 'info' | 'warning' | 'error';
 }
 
-const StyledIconButton = styled(MuiIconButton, {
+const StyledIconButton = styled(ButtonBase, {
     shouldForwardProp: (prop) => prop !== 'blackText',
 })<StyledIconButtonProps>(({ theme, color, blackText }) => ({
-    backgroundColor: theme.palette[color || 'primary'].main,
     color: blackText ? theme.palette.common.black : theme.palette.common.white,
-    transition: 'box-shadow 0.2s ease',
     borderRadius: '10px',
+    padding: '8px',
+    backgroundColor: alpha(theme.palette['secondary'].main, 0.8),
+    backdropFilter: 'blur(10px)',
+    boxShadow: '0 0 0 rgba(0, 0, 0, 0)',
     '&:hover': {
-        backgroundColor: theme.palette[color || 'primary'].light,
-        // boxShadow:
-        //     color === 'secondary'
-        //         ? `${alpha(theme.palette[color || 'primary'].main, 0.4)} 0px 8px 24px`
-        //         : `${theme.palette[color || 'primary'].main} 0px 8px 24px`,
         boxShadow: `${alpha(theme.palette[color || 'primary'].main, 0.4)} 0px 8px 24px`,
+        backgroundColor: alpha(theme.palette[color || 'primary'].light, 1),
     },
-}));
+})) as typeof ButtonBase;
 
 const IconButton = (props: StyledIconButtonProps) => {
     const { color = 'primary', children, blackText = false } = props;
     return (
         <StyledIconButton
-            {...props}
             color={color}
-            // @ts-ignore
             whileHover={{ scale: 1.02 }}
-            // @ts-ignore
             whileTap={{ scale: 0.98 }}
-            component={motion.button}
             centerRipple={false}
             blackText={blackText}
+            component={motion.button}
+            {...props}
         >
             {children}
         </StyledIconButton>

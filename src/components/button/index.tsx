@@ -9,9 +9,12 @@ const StyledButton = styled(MuiButton)<StyledButtonProps>(({ color, theme }) => 
     fontSize: '14px',
     paddingLeft: '16px !important',
     paddingRight: '16px !important',
+    backgroundColor: alpha(theme.palette[color || 'primary'].main, 0.8),
+    backdropFilter: 'blur(10px)',
+    boxShadow: `${alpha(theme.palette[color || 'primary'].main, 0.2)} 0px 8px 24px`,
     '&:hover': {
-        boxShadow: `${alpha(theme.palette[color || 'primary'].main, 0.2)} 0px 8px 24px`,
-        backgroundColor: theme.palette[color || 'primary'].light,
+        boxShadow: `${alpha(theme.palette[color || 'primary'].light, 0.2)} 0px 8px 24px`,
+        backgroundColor: alpha(theme.palette[color || 'primary'].light, 1),
     },
 }));
 

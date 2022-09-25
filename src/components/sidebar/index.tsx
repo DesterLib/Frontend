@@ -1,4 +1,4 @@
-import { Avatar, Box, List, ListItem, ListItemButton, styled } from '@mui/material';
+import { alpha, Avatar, Box, List, ListItem, ListItemButton, styled } from '@mui/material';
 import { motion } from 'framer-motion';
 import app from 'main/config';
 import React from 'react';
@@ -47,7 +47,7 @@ const StyledNavItem = styled(ListItemButton)(({ theme }) => ({
     width: '100%',
     padding: '0px',
     borderRadius: theme.shape.borderRadius,
-    color: theme.palette.text.primary,
+    color: alpha(theme.palette.text.primary, 0.8),
     transition: 'all 0.2s ease',
     '&:hover': {
         backgroundColor: theme.palette.primary.light,

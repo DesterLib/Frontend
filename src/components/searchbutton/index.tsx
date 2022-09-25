@@ -1,50 +1,144 @@
-import { Box, styled, Typography, ButtonBase, alpha } from '@mui/material';
+import { Box, styled, Typography, InputBase, ButtonBase, alpha } from '@mui/material';
 import Icon from 'components/icon';
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion, MotionConfig } from 'framer-motion';
+import { demodata } from '../../../data';
 import React from 'react';
 
-const StyledSearchButton = styled(ButtonBase)(({ theme }) => ({
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: theme.palette.background.default,
-    display: 'flex',
-    alignItems: 'center',
-    padding: '5px',
+const StyledSearchField = styled(InputBase)(({ theme }) => ({
     width: '100%',
-    maxWidth: '400px',
-    justifyContent: 'space-between',
-    marginLeft: '20px',
-    '&:hover': {
-        boxShadow: `${alpha(theme.palette.background.default, 1)} 0px 8px 24px`,
+    marginRight: '80px',
+    '& .MuiInputBase-input': {
+        borderRadius: theme.shape.borderRadius,
+        position: 'relative',
+        backgroundColor: theme.palette.background.default,
+        fontSize: 16,
+        padding: '10px 12px',
+        height: 'fit-content',
+        width: 'inherit',
+        transition: theme.transitions.create(['border-color', 'background-color', 'box-shadow']),
+        '&:hover': {
+            boxShadow: `${alpha(theme.palette.background.default, 1)} 0px 8px 24px`,
+        },
+        '&:focus': {
+            backgroundColor: theme.palette.background.paper,
+            boxShadow: `${alpha(theme.palette.background.default, 1)} 0px 8px 24px`,
+        },
     },
-})) as typeof ButtonBase;
+})) as typeof InputBase;
 
 const StyledSearchButtonBadge = styled(Typography)(({ theme }) => ({
+    position: 'absolute',
     display: 'flex',
     backgroundColor: theme.palette.background.paper,
     padding: '5px 10px',
+    margin: '5px',
+    top: '0',
+    bottom: '0',
+    right: '0',
     borderRadius: theme.shape.borderRadius,
     fontSize: '14px',
+}));
+
+const StyledSearchList = styled(Box)(({ theme }) => ({
+    position: 'absolute',
+    width: '100%',
+    borderRadius: theme.shape.borderRadius,
+    backgroundColor: theme.palette.background.paper,
+    padding: '5px',
+})) as typeof Box;
+
+const StyledSearchListItem = styled(ButtonBase)(({ theme }) => ({
+    display: 'flex',
+    width: '100%',
+    textAlign: 'left',
+    boxSizing: 'border-box',
+    alignItems: 'start',
+    justifyContent: 'flex-start',
+    borderRadius: (theme.shape.borderRadius as number) * 0.5,
+    padding: '5px',
+    '&:hover': {
+        width: '100%',
+        backgroundColor: theme.palette.background.default,
+    },
+})) as typeof ButtonBase;
+
+const StyledSearchListItemPoster = styled('img')(({ theme }) => ({
+    maxWidth: '50px',
+    marginRight: '10px',
+    borderRadius: (theme.shape.borderRadius as number) * 0.5,
+    width: '100%',
 }));
 
 type Props = {};
 
 const SearchButton = (props: Props) => {
+    const [isOpen, setIsOpen] = React.useState(false);
+    const variantsParent = {
+        open: { y: 100, scale: 1.4, transition: { type: 'spring', bounce: 0.5 } },
+        closed: { y: 0, scale: 1, transition: { type: 'spring', bounce: 0.5 } },
+    };
     return (
-        <StyledSearchButton
-            component={motion.button}
-            whileHover={{ scale: 1.011 }}
-            whileTap={{ scale: 0.999 }}
-        >
-            <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                <Icon fontSize='small' sx={{ marginLeft: '10px' }} name='search' />
-                <Typography sx={{ padding: '0px 20px' }}>Search...</Typography>
-            </Box>
-            <StyledSearchButtonBadge
-                sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+        <MotionConfig transition={{ duration: 0.2 }}>
+            <Box
+                component={motion.div}
+                animate={isOpen ? 'open' : 'closed'}
+                variants={variantsParent}
+                onFocus={() => setIsOpen(true)}
+                onBlur={() => setIsOpen(false)}
+                sx={{
+                    zIndex: '1250',
+                    width: '400px',
+                    maxWidth: '450px',
+                    marginLeft: '20px',
+                }}
             >
-                <Icon name='keyboard_command_key' fontSize='inherit' />K
-            </StyledSearchButtonBadge>
-        </StyledSearchButton>
+                <Box sx={{ position: 'relative' }}>
+                    <StyledSearchField id='outlined-basic' autoComplete='off' />
+                    <StyledSearchButtonBadge
+                        sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                    >
+                        {isOpen ? (
+                            <>esc</>
+                        ) : (
+                            <>
+                                <Icon name='keyboard_command_key' fontSize='inherit' />K
+                            </>
+                        )}
+                    </StyledSearchButtonBadge>
+                </Box>
+                <AnimatePresence>
+                    {isOpen && (
+                        <StyledSearchList
+                            component={motion.div}
+                            transition={{ type: 'spring', stiffness: 100 }}
+                            animate={{ y: 10, opacity: 1 }}
+                            exit={{
+                                opacity: 0,
+                                transition: {
+                                    duration: 0.2,
+                                },
+                            }}
+                        >
+                            {demodata.slice(0, 4).map((item) => (
+                                <StyledSearchListItem disableRipple component={motion.button}>
+                                    <StyledSearchListItemPoster
+                                        src={`https://www.themoviedb.org/t/p/w500${item.poster_path}`}
+                                    />
+                                    <Box>
+                                        <Typography variant='body2'>
+                                            {item.name || item.title}
+                                        </Typography>
+                                        <Typography variant='caption'>
+                                            {item.original_name || item.original_title}
+                                        </Typography>
+                                    </Box>
+                                </StyledSearchListItem>
+                            ))}
+                        </StyledSearchList>
+                    )}
+                </AnimatePresence>
+            </Box>
+        </MotionConfig>
     );
 };
 

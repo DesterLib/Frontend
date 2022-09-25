@@ -1,20 +1,20 @@
 import React from 'react';
 import MuiChip, { ChipProps } from '@mui/material/Chip';
-import { alpha, styled } from '@mui/material';
+import { styled } from '@mui/material';
 
 const StyledChip = styled(MuiChip)<StyledChipProps>(({ color, theme }) => ({
     padding: '0px',
     borderRadius: '5px',
     height: 'fit-content',
     margin: '10px 0px',
-    color: theme.palette[color || 'primary'].light,
+    color: theme.palette.common.white,
     fontWeight: '600',
-    backgroundColor: alpha(theme.palette[color || 'primary'].main, 0.2),
+    backgroundColor: theme.palette[color || 'primary'].light,
     textTransform: 'uppercase',
 }));
 
 interface StyledChipProps extends ChipProps {
-    color: 'primary' | 'secondary' | 'info';
+    color: 'primary' | 'secondary' | 'info' | 'error';
 }
 
 const Chip = (props: StyledChipProps) => {

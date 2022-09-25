@@ -111,7 +111,7 @@ const NavBar = React.forwardRef((props: NavBarProps, ref: any) => {
                             display: 'flex',
                             justifyContent: 'space-between',
                             alignItems: 'center',
-                            width: '100%'
+                            width: '100%',
                         }}
                     >
                         <LogoWrapper>

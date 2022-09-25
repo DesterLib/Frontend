@@ -4,6 +4,7 @@ import lightTheme from './main/theme/lightTheme';
 import HomePage from './pages/HomePage';
 import { Provider, useSelector } from 'react-redux';
 import React from 'react';
+import 'swiper/css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import AppShell from './components/appshell';

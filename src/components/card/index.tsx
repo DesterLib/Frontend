@@ -5,7 +5,8 @@ import Icon from 'components/icon';
 import Modal from 'components/modal';
 import IconButton from 'components/iconbutton';
 
-const StyledCard = styled(Box)({
+const StyledCard = styled(Box)(({ theme }) => ({
+    margin: '4px',
     maxWidth: '240px',
     width: 'fit-content',
     height: 'auto',
@@ -19,16 +20,20 @@ const StyledCard = styled(Box)({
         opacity: '1',
         pointerEvents: 'all',
     },
+    '&:hover .cardContainer': {
+        boxShadow: `${alpha(theme.palette.text.primary, 0.1)} 0px 0px 0px 3px`,
+    },
     '&:hover div .cardImage': {
         opacity: '0.2',
     },
-});
+}));
 
 const StyledCardContainer = styled(Box)({
     position: 'relative',
     height: 'fit-content',
     overflow: 'hidden',
     borderRadius: '10px',
+    transition: '0.1s ease',
 });
 
 const StyledCardImage = styled('img')({
@@ -74,12 +79,12 @@ const DataPill = styled(Chip)<{ color: 'primary' | 'secondary' | 'warning' }>(
         transition: '0.1s ease',
         color: theme.palette[color].light,
         fontWeight: '700',
-        backgroundColor: `${alpha(theme.palette[color].dark, 0.2)}`,
+        backgroundColor: `${alpha(theme.palette[color].light, 0.2)}`,
         backdropFilter: 'contrast(90%) brightness(10%)',
     }),
 );
 
-const PlayButton = styled(IconButton)(({ theme }) => ({
+const PlayButton = styled(IconButton)({
     transition: '0.1s ease',
     padding: '10px',
     opacity: '0',
@@ -89,7 +94,7 @@ const PlayButton = styled(IconButton)(({ theme }) => ({
     '& span': {
         fontSize: '40px',
     },
-}));
+});
 
 const ActionButtons = styled(Box)({
     transition: '0.1s ease',
@@ -110,20 +115,23 @@ const StyledCardTitle = styled(Typography)(({ theme }) => ({
     padding: '5px',
 }));
 
-type CardProps = {};
+type CardProps = {
+    item: any;
+};
 
 const Card = (props: CardProps) => {
+    const { item } = props;
     const [openModal, setOpenModal] = React.useState(false);
     const handleClickOpenModal = () => {
         setOpenModal(true);
     };
     return (
         <StyledCard color='warning'>
-            <StyledCardContainer>
+            <StyledCardContainer className='cardContainer'>
                 <StyledCardImage
                     className='cardImage'
-                    src='https://www.themoviedb.org/t/p/w1280/nJUHX3XL1jMkk8honUZnUmudFb9.jpg'
-                    alt='green iguana'
+                    src={`https://www.themoviedb.org/t/p/w500${item.poster_path}`}
+                    alt={item.name || item.title}
                 />
                 <ActionButtons className='actionButtons'>
                     <StyledCardTop>
@@ -138,14 +146,14 @@ const Card = (props: CardProps) => {
                         <IconButton color='error'>
                             <Icon name='favorite' />
                         </IconButton>
-                        <IconButton color='secondary' onClick={handleClickOpenModal}>
+                        <IconButton color='info' onClick={handleClickOpenModal}>
                             <Icon name='more_vert' />
                         </IconButton>
                     </StyledCardBottom>
                 </ActionButtons>
             </StyledCardContainer>
-            <StyledCardTitle variant='body1'>Lizard</StyledCardTitle>
-            <Modal openModal={openModal} setOpenModal={setOpenModal} />
+            <StyledCardTitle variant='body1'>{item.name || item.title}</StyledCardTitle>
+            <Modal item={item} openModal={openModal} setOpenModal={setOpenModal} />
         </StyledCard>
     );
 };
