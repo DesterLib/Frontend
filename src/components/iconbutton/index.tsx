@@ -1,10 +1,10 @@
-import { alpha, styled, ButtonBase } from '@mui/material';
+import { alpha, styled } from '@mui/material';
+import ButtonBase, { ButtonBaseProps } from '@mui/material/ButtonBase';
 import { motion } from 'framer-motion';
 import React from 'react';
 
-interface StyledIconButtonProps {
+interface StyledIconButtonProps extends ButtonBaseProps {
     blackText?: boolean;
-    children: React.ReactNode;
     color?: 'primary' | 'secondary' | 'success' | 'info' | 'warning' | 'error';
 }
 
@@ -23,16 +23,20 @@ const StyledIconButton = styled(ButtonBase, {
     },
 })) as typeof ButtonBase;
 
-const IconButton = (props: StyledIconButtonProps) => {
+const MotionButton = React.forwardRef<HTMLAnchorElement, any>((props, ref) => (
+    <motion.button innerRef={ref as any} {...props} />
+));
+
+const IconButton: React.FC<StyledIconButtonProps> = (props) => {
     const { color = 'primary', children, blackText = false } = props;
     return (
         <StyledIconButton
             color={color}
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
             centerRipple={false}
             blackText={blackText}
-            component={motion.button}
+            component={MotionButton}
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
             {...props}
         >
             {children}
