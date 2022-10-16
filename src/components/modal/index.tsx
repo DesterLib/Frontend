@@ -11,7 +11,9 @@ import Button from 'components/button';
 import Chip from 'components/chip';
 import Icon from 'components/icon';
 import IconButton from 'components/iconbutton';
+import { motion } from 'framer-motion';
 import React from 'react';
+import Genres from './genres';
 
 const ImageGradiant = styled(Box)(({ theme }) => ({
     width: '100%',
@@ -34,6 +36,12 @@ const DialogContent = styled(Box)(({ theme }) => ({
     flexDirection: 'column',
 }));
 
+const BackdropWrapper = styled(Box)(({ theme }) => ({
+    zIndex: '10',
+    position: 'relative',
+    aspectRatio: '16/9',
+}));
+
 const PosterWrapper = styled(Box)(({ theme }) => ({
     width: 'fit-content',
     padding: '3px',
@@ -46,6 +54,11 @@ const PosterWrapper = styled(Box)(({ theme }) => ({
     height: 'fit-content',
     zIndex: '11',
     backgroundColor: alpha(theme.palette.background.default, 0.2),
+}));
+
+const BackdropImage = styled(motion.img)(({ theme }) => ({
+    display: 'block',
+    width: '100%',
 }));
 
 const PosterImage = styled('img')(({ theme }) => ({
@@ -70,8 +83,18 @@ type Props = {
 const Modal = (props: Props) => {
     const { item, openModal, setOpenModal } = props;
 
+    const [imageLoading, setImageLoading] = React.useState(true);
+
+    const imageLoaded = () => {
+        setImageLoading(false);
+    };
+
     const handleClose = () => {
         setOpenModal(false);
+    };
+
+    const getYear = (date: string) => {
+        return date.substring(0, 4);
     };
     return (
         <Dialog open={openModal} onClose={handleClose}>
@@ -82,18 +105,22 @@ const Modal = (props: Props) => {
                     </IconButton>
                 </DialogActions>
                 <Box sx={{ overflowY: 'auto', position: 'relative' }}>
-                    <Box sx={{ zIndex: '10', position: 'relative' }}>
-                        <img
-                            style={{ display: 'block' }}
-                            width='100%'
-                            src='https://www.themoviedb.org/t/p/w1066_and_h600_bestv2/hw7foD5in5YCs7qY3Pap9pdc1Vc.jpg'
+                    <BackdropWrapper>
+                        <BackdropImage
+                            src={'https://www.themoviedb.org/t/p/w1280' + item.backdrop_path}
                             alt=''
+                            initial={{ opacity: 0 }}
+                            animate={{
+                                opacity: imageLoading ? 0 : 1,
+                            }}
+                            transition={{ opacity: { delay: 0.1, duration: 0.2 } }}
+                            onLoad={imageLoaded}
                         />
                         <ImageGradiant />
-                    </Box>
+                    </BackdropWrapper>
                     <PosterWrapper>
                         <PosterImage
-                            src='https://www.themoviedb.org/t/p/w440_and_h660_face/neMZH82Stu91d3iqvLdNQfqPPyl.jpg'
+                            src={'https://www.themoviedb.org/t/p/w500' + item.poster_path}
                             alt=''
                         />
                     </PosterWrapper>
@@ -121,7 +148,7 @@ const Modal = (props: Props) => {
                                     marginBottom: '20px',
                                 }}
                             >
-                                <Button color='primary' variant='contained' disableElevation>
+                                <Button size='large' color='primary' variant='contained' disableElevation>
                                     <Icon name='play_arrow' />
                                     <span style={{ paddingRight: '5px' }}>Continue Watching</span>
                                 </Button>
@@ -139,24 +166,17 @@ const Modal = (props: Props) => {
                                 </IconButton>
                             </Box>
                             <Box>
-                                <Typography variant='h5'>The Lost City (2022)</Typography>
-                            </Box>
-                            <Box>
-                                <Chip color='info' label='Overview' />
-                                <Typography variant='body1'>
-                                    Reclusive author Loretta Sage writes about exotic places in her
-                                    popular adventure novels that feature a handsome cover model
-                                    named Alan. While on tour promoting her new book with Alan,
-                                    Loretta gets kidnapped by an eccentric billionaire who hopes she
-                                    can lead him to the ancient city's lost treasure that featured
-                                    in her latest story. Alan, determined to prove he can be a hero
-                                    in real life and not just on the pages of her books, sets off to
-                                    rescue her.
+                                <Typography variant='h5'>
+                                    {item.name || item.title}{' '}
+                                    {item.release_date && getYear(item.release_date)}
                                 </Typography>
                             </Box>
                             <Box>
-                                <Chip color='secondary' label='Genres' />
-                                <Chip color='secondary' label='Horror' />
+                                <Chip color='info' label='Overview' />
+                                <Typography variant='body1'>{item.overview}</Typography>
+                            </Box>
+                            <Box>
+                                <Genres genres={item.genre_ids}/>
                             </Box>
                         </Box>
                     </MainContent>

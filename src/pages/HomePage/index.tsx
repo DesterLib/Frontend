@@ -8,8 +8,9 @@ import { demodata } from '../../../data';
 type Props = {};
 
 const HomePage = (props: Props) => {
+
     return (
-        <Box sx={{ height: '100%' }}>
+        <Box sx={{ height: '100%', paddingBottom: '50px' }}>
             <MainSlider items={demodata} />
             <CardSlider title='Popular Movies' items={demodata} random />
             <CardSlider title='Popular Movies' items={demodata} random />

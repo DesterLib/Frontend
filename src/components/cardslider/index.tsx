@@ -1,14 +1,10 @@
 import { Box, IconButton, Typography } from '@mui/material';
 import React from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import SwiperCore, { Navigation } from 'swiper';
 import Card from 'components/card';
 import Icon from 'components/icon';
 import shuffle from 'lodash/shuffle';
 import Slider from 'react-slick';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
-import { AnyListenerPredicate } from '@reduxjs/toolkit';
+import { motion } from 'framer-motion';
 
 type Props = {
     title: string;
@@ -17,10 +13,10 @@ type Props = {
 };
 
 let settings = {
-    infinite: true,
+    infinite: false,
     speed: 300,
     slidesToShow: 4,
-    slidesToScroll: 1,
+    slidesToScroll: 3,
     initialSlide: 0,
     swipeToSlide: true,
     arrows: false,
@@ -84,8 +80,15 @@ let settings = {
 
 const CardSlider = (props: Props) => {
     const { title, items, random } = props;
+    const ref = React.useRef<any>(null);
+    const onClickNext = () => {
+        ref.current.slickNext();
+    };
+    const onClickPrevious = () => {
+        ref.current.slickPrev();
+    };
     return (
-        <Box sx={{ padding: '20px' }}>
+        <Box sx={{ padding: '20px', paddingBottom: '0px' }}>
             <Box
                 sx={{
                     display: 'flex',
@@ -96,15 +99,15 @@ const CardSlider = (props: Props) => {
             >
                 <Typography variant='h6'>{title}</Typography>
                 <Box>
-                    <IconButton sx={{ marginRight: '10px' }}>
+                    <IconButton onClick={onClickPrevious} sx={{ marginRight: '10px' }}>
                         <Icon name='chevron_left' />
                     </IconButton>
-                    <IconButton>
+                    <IconButton onClick={onClickNext}>
                         <Icon name='chevron_right' />
                     </IconButton>
                 </Box>
             </Box>
-            <Slider {...settings}>
+            <Slider ref={ref} {...settings}>
                 {random
                     ? shuffle(items).map((item: any) => (
                           <Box key={item.id}>

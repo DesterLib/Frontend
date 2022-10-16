@@ -1,4 +1,5 @@
 import { Box, Chip, Typography, styled, alpha } from '@mui/material';
+import { motion } from 'framer-motion';
 import React from 'react';
 
 import Icon from 'components/icon';
@@ -26,7 +27,7 @@ const StyledCard = styled(Box)(({ theme }) => ({
     '&:hover div .cardImage': {
         opacity: '0.2',
     },
-}));
+})) as typeof Box;
 
 const StyledCardContainer = styled(Box)({
     position: 'relative',
@@ -71,8 +72,6 @@ const StyledCardBottom = styled(Box)(({ theme }) => ({
         pointerEvents: 'all',
     },
 }));
-
-const DataPills = styled(Box)({});
 
 const DataPill = styled(Chip)<{ color: 'primary' | 'secondary' | 'warning' }>(
     ({ theme, color }) => ({
@@ -126,7 +125,17 @@ const Card = (props: CardProps) => {
         setOpenModal(true);
     };
     return (
-        <StyledCard color='warning'>
+        <StyledCard
+            component={motion.div}
+            initial='hidden'
+            whileInView='visible'
+            viewport={{ once: true }}
+            transition={{ duration: 0.3 }}
+            variants={{
+                visible: { opacity: 1 },
+                hidden: { opacity: 0 },
+            }}
+        >
             <StyledCardContainer className='cardContainer'>
                 <StyledCardImage
                     className='cardImage'

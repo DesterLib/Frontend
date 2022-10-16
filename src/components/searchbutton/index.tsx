@@ -1,8 +1,9 @@
 import { Box, styled, Typography, InputBase, ButtonBase, alpha } from '@mui/material';
 import Icon from 'components/icon';
-import { AnimatePresence, motion, MotionConfig } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { demodata } from '../../../data';
 import React from 'react';
+import ReactHotkeys from 'react-hot-keys';
 
 const StyledSearchField = styled(InputBase)(({ theme }) => ({
     width: '100%',
@@ -25,6 +26,13 @@ const StyledSearchField = styled(InputBase)(({ theme }) => ({
         },
     },
 })) as typeof InputBase;
+
+const StyledSearchIcon = styled(Icon)({
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    margin: '10px',
+});
 
 const StyledSearchButtonBadge = styled(Typography)(({ theme }) => ({
     position: 'absolute',
@@ -77,8 +85,11 @@ const SearchButton = (props: Props) => {
         open: { y: 100, scale: 1.4, transition: { type: 'spring', bounce: 0.5 } },
         closed: { y: 0, scale: 1, transition: { type: 'spring', bounce: 0.5 } },
     };
+    const onKeyDown = () => {
+        setIsOpen(true);
+    };
     return (
-        <MotionConfig transition={{ duration: 0.2 }}>
+        <ReactHotkeys keyName='command+k' onKeyDown={onKeyDown}>
             <Box
                 component={motion.div}
                 animate={isOpen ? 'open' : 'closed'}
@@ -93,7 +104,12 @@ const SearchButton = (props: Props) => {
                 }}
             >
                 <Box sx={{ position: 'relative' }}>
-                    <StyledSearchField id='outlined-basic' autoComplete='off' />
+                    <StyledSearchField
+                        placeholder={isOpen ? 'Search...' : ''}
+                        id='outlined-basic'
+                        autoComplete='off'
+                    />
+                    {!isOpen && <StyledSearchIcon name='search' />}
                     <StyledSearchButtonBadge
                         sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
                     >
@@ -138,7 +154,7 @@ const SearchButton = (props: Props) => {
                     )}
                 </AnimatePresence>
             </Box>
-        </MotionConfig>
+        </ReactHotkeys>
     );
 };
 

@@ -4,7 +4,6 @@ import Button from 'components/button';
 import Icon from 'components/icon';
 import IconButton from 'components/iconbutton';
 import React from 'react';
-import { SwiperSlide } from 'swiper/react';
 
 type Props = {
     item: any;
@@ -97,52 +96,47 @@ const SlideThumbnail = (props: Props) => {
 const SlideMain = (props: Props) => {
     const { item } = props;
     return (
-        <SwiperSlide {...props}>
-            <StyledSlideMainContainer>
-                <StyledSlideMainDetails
-                    src={`https://www.themoviedb.org/t/p/w1066_and_h600_bestv2${item.backdrop_path}`}
-                >
-                    <Box sx={{ position: 'absolute', bottom: '0', left: '0', padding: '40px' }}>
-                        <StyledTextDetails>
-                            <Typography
-                                variant='h4'
-                                sx={{ marginBottom: '20px', fontWeight: '700' }}
-                            >
-                                {item.name || item.title}
-                            </Typography>
-                            <Box
-                                sx={{
-                                    display: 'flex',
-                                    marginBottom: '20px',
-                                    '& > *': { marginRight: '10px !important' },
-                                }}
-                            >
-                                <Typography>Action</Typography>
-                                <Typography>Fantasy</Typography>
-                            </Box>
-                        </StyledTextDetails>
-                        <StyledSlideMainActionButtons>
-                            <Button
-                                onClick={() => console.log('pressed')}
-                                size='large'
-                                variant='contained'
-                            >
-                                Play Now
-                            </Button>
-                            <IconButton color='error'>
-                                <Icon name='favorite' />
-                            </IconButton>
-                            <IconButton color='secondary'>
-                                <Icon name='more_vert' />
-                            </IconButton>
-                        </StyledSlideMainActionButtons>
-                    </Box>
-                    <SlidePosterContainer
-                        src={`https://www.themoviedb.org/t/p/w500${item.poster_path}`}
-                    />
-                </StyledSlideMainDetails>
-            </StyledSlideMainContainer>
-        </SwiperSlide>
+        <StyledSlideMainContainer>
+            <StyledSlideMainDetails
+                src={`https://www.themoviedb.org/t/p/w1066_and_h600_bestv2${item.backdrop_path}`}
+            >
+                <Box sx={{ position: 'absolute', bottom: '0', left: '0', padding: '40px' }}>
+                    <StyledTextDetails>
+                        <Typography variant='h4' sx={{ marginBottom: '20px', fontWeight: '700' }}>
+                            {item.name || item.title}
+                        </Typography>
+                        <Box
+                            sx={{
+                                display: 'flex',
+                                marginBottom: '20px',
+                                '& > *': { marginRight: '10px !important' },
+                            }}
+                        >
+                            <Typography>Action</Typography>
+                            <Typography>Fantasy</Typography>
+                        </Box>
+                    </StyledTextDetails>
+                    <StyledSlideMainActionButtons>
+                        <Button
+                            onClick={() => console.log('pressed')}
+                            size='large'
+                            variant='contained'
+                        >
+                            Play Now
+                        </Button>
+                        <IconButton color='error'>
+                            <Icon name='favorite' />
+                        </IconButton>
+                        <IconButton color='secondary'>
+                            <Icon name='more_vert' />
+                        </IconButton>
+                    </StyledSlideMainActionButtons>
+                </Box>
+                <SlidePosterContainer
+                    src={`https://www.themoviedb.org/t/p/w500${item.poster_path}`}
+                />
+            </StyledSlideMainDetails>
+        </StyledSlideMainContainer>
     );
 };
 

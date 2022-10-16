@@ -9,7 +9,7 @@ import {
     styled,
     useTheme,
 } from '@mui/material';
-import app from 'main/config';
+import app from 'app/config';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import guid from 'utils/guid';

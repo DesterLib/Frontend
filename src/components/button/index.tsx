@@ -3,6 +3,10 @@ import MuiButton, { ButtonProps } from '@mui/material/Button';
 import { alpha, styled } from '@mui/material';
 import { motion } from 'framer-motion';
 
+interface StyledButtonProps extends ButtonProps {
+    color?: 'primary' | 'secondary';
+}
+
 const StyledButton = styled(MuiButton)<StyledButtonProps>(({ color, theme }) => ({
     color: theme.palette.common.white,
     fontWeight: '600',
@@ -16,27 +20,20 @@ const StyledButton = styled(MuiButton)<StyledButtonProps>(({ color, theme }) => 
         boxShadow: `${alpha(theme.palette[color || 'primary'].light, 0.2)} 0px 8px 24px`,
         backgroundColor: alpha(theme.palette[color || 'primary'].light, 1),
     },
-}));
+})) as typeof MuiButton;
 
-interface StyledButtonProps extends ButtonProps {
-    color: 'primary' | 'secondary';
-    component: any;
-}
+const MotionButton = React.forwardRef<HTMLAnchorElement, any>((props, ref) => (
+    <motion.button innerRef={ref as any} {...props} />
+));
 
-const Button = (props: ButtonProps) => {
-    const { children, size = 'large' } = props;
+const Button: React.FC<StyledButtonProps> = (props) => {
     return (
         <StyledButton
-            // @ts-ignore
+            component={MotionButton}
             whileHover={{ scale: 1.02 }}
-            // @ts-ignore
             whileTap={{ scale: 0.98 }}
-            component={motion.button}
-            size={size}
             {...props}
-        >
-            {children}
-        </StyledButton>
+        />
     );
 };
 

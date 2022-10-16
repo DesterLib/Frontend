@@ -1,5 +1,8 @@
-import LogoFullDark from 'main/assets/logo/logo-full-dark.svg';
-import LogoFullLight from 'main/assets/logo/logo-full-light.svg';
+import LogoFullDark from 'app/assets/logo/logo-full-dark.svg';
+import LogoFullLight from 'app/assets/logo/logo-full-light.svg';
+import HomePage from 'pages/HomePage';
+import MoviePage from 'pages/MoviePage';
+import PlaygroundPage from 'pages/Playground';
 import { asyncToggleTheme } from './redux/functions/themeSlice';
 import store from './redux/store';
 
@@ -8,6 +11,11 @@ const app = {
         dark: LogoFullDark,
         light: LogoFullLight,
     },
+    routes: [
+        { name: 'Home', path: '/', element: HomePage },
+        { name: 'Movie', path: '/movie/:id', element: MoviePage },
+        { name: 'Playground', path: '/playground', element: PlaygroundPage },
+    ],
     navbar: {
         main: {
             items: [

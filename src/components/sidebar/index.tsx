@@ -1,6 +1,6 @@
 import { alpha, Avatar, Box, List, ListItem, ListItemButton, styled } from '@mui/material';
 import { motion } from 'framer-motion';
-import app from 'main/config';
+import app from 'app/config';
 import React from 'react';
 import guid from 'utils/guid';
 

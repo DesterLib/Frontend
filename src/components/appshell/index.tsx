@@ -1,5 +1,5 @@
 import { Box, useTheme } from '@mui/material';
-import app from '../../main/config';
+import app from '../../app/config';
 import React from 'react';
 
 import NavBar from '../../components/navbar';
@@ -41,8 +41,8 @@ const AppShell = (props: AppShellProps) => {
             <SideBar
                 sideBarLabels={openSideBar}
                 sx={{
-                    height: 'calc(100vh - 75px)',
                     marginTop: '5px',
+                    height: 'calc(100vh - 75px)',
                     [theme.breakpoints.down('md')]: {
                         display: 'none',
                     },
@@ -53,11 +53,14 @@ const AppShell = (props: AppShellProps) => {
                 sx={{
                     width: `calc(100% - ${sideBarWidth}px)`,
                     height: `calc(100vh - ${navBarWidth}px - 10px)`,
-                    padding: '5px',
-                    paddingBottom: '0px',
-                    paddingRight: '0px',
-                    marginLeft: `${sideBarWidth}px`,
+                    marginLeft: `calc(${sideBarWidth}px)`,
+                    paddingTop: '5px',
+                    paddingLeft: '5px',
+                    boxSizing: 'border-box',
                     overflow: 'auto',
+                    [theme.breakpoints.down('md')]: {
+                        paddingLeft: '0px',
+                    },
                 }}
             >
                 {children}

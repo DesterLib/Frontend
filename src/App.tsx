@@ -1,14 +1,13 @@
 import { CssBaseline, ThemeProvider } from '@mui/material';
-import darkTheme from './main/theme/darkTheme';
-import lightTheme from './main/theme/lightTheme';
-import HomePage from './pages/HomePage';
+import darkTheme from './app/theme/darkTheme';
+import lightTheme from './app/theme/lightTheme';
 import { Provider, useSelector } from 'react-redux';
 import React from 'react';
-import 'swiper/css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import AppShell from './components/appshell';
-import store from 'main/redux/store';
+import store from 'app/redux/store';
+import app from 'app/config';
 
 const MainApp = () => {
     const currentTheme = useSelector((state: any) => state.theme.darkMode);
@@ -18,7 +17,11 @@ const MainApp = () => {
             <BrowserRouter>
                 <AppShell>
                     <Routes>
-                        <Route path='/' element={<HomePage />} />
+                        {app &&
+                            app.routes &&
+                            app.routes.map((route, key) => (
+                                <Route key={key} path={route.path} element={<route.element />} />
+                            ))}
                     </Routes>
                 </AppShell>
             </BrowserRouter>
