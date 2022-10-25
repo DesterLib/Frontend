@@ -5,11 +5,10 @@ import React, { useState } from 'react';
 import guid from '../../../../utilities/guid';
 
 const GDriveTokenGenerator = (props: any) => {
-    const { config } = props;
+    const { config, updateConfig } = props;
     const theme = useTheme();
 
-    const [clientId, setClientId] = useState<string>(config.gdrive.client_id || '');
-    const [clientSecret, setClientSecret] = useState<string>(config.gdrive.client_secret || '');
+    const [refresh, setRefresh] = useState<number>(0);
 
     const objToFormEncoded = (object: object) => {
         return Object.entries(object)
@@ -27,7 +26,7 @@ const GDriveTokenGenerator = (props: any) => {
         const query = objToFormEncoded({
             response_type: 'code',
             redirect_uri: `${window.location.origin}/callback`,
-            client_id: clientId,
+            client_id: config.gdrive.client_id,
             scope: 'https://www.googleapis.com/auth/drive',
             access_type: 'offline',
             prompt: 'consent',
@@ -38,11 +37,18 @@ const GDriveTokenGenerator = (props: any) => {
     };
 
     const handleChangeClientId = (event: any) => {
-        setClientId(event.target.value);
+        const tempConfig = config;
+        tempConfig.gdrive.client_id = event.target.value;
+        updateConfig(tempConfig);
+        setRefresh(refresh + 1);
     };
 
     const handleChangeClientSecret = (event: any) => {
-        setClientSecret(event.target.value);
+        const tempConfig = config;
+        console.log(tempConfig);
+        tempConfig.gdrive.client_secret = event.target.value;
+        updateConfig(tempConfig);
+        setRefresh(refresh + 1);
     };
 
     const boxContainer = {
@@ -69,7 +75,7 @@ const GDriveTokenGenerator = (props: any) => {
                         fullWidth
                         label='Client Id'
                         variant='outlined'
-                        value={clientId}
+                        value={config.gdrive.client_id}
                         onChange={handleChangeClientId}
                     />
                     <TextField
@@ -77,7 +83,7 @@ const GDriveTokenGenerator = (props: any) => {
                         fullWidth
                         label='Client Secret'
                         variant='outlined'
-                        value={clientSecret}
+                        value={config.gdrive.client_secret}
                         onChange={handleChangeClientSecret}
                     />
                     <TextField

@@ -17,6 +17,7 @@ const GDriveToken = async (
         code: authCode,
     };
     const requestTokens = async (body: any) => {
+        console.log(`${client_id}:${client_secret}`);
         const response = await fetch('https://accounts.google.com/o/oauth2/token', {
             method: 'POST',
             headers: {

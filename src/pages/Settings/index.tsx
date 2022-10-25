@@ -202,7 +202,9 @@ const Settings = (props: any) => {
                     />
                     <Route
                         path='/providers/gdrive'
-                        element={<GDriveTokenGeneratorPage config={config} />}
+                        element={
+                            <GDriveTokenGeneratorPage config={config} updateConfig={setConfig} />
+                        }
                     />
                     <Route
                         path='/providers/onedrive'
